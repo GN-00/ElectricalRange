@@ -1,0 +1,238 @@
+﻿<p:PageBase x:Class="ProjectsNow.Printing.JobOrderPages.WarrantyCertificateDetailsForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:ProjectsNow.Printing" 
+             mc:Ignorable="d" 
+             FontFamily="Calibri (Body)"
+             Height="29.7cm" 
+             Width="21cm">
+    <Grid Margin="25"
+          Background="White">
+        <Grid Margin="40,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="240"/>
+                <RowDefinition Height="190"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition />
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="20,0"
+                       Grid.Row="1"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="Red"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+                <Run Text="{Binding Data.DurationText, Mode=OneWay}"/>
+                <Run Text="("/><Run Text="{Binding Data.Duration, Mode=OneWay}"/><Run Text=")"/>
+                <Run Text="{Binding Data.DurationUnitInfo, Mode=OneWay}"/>
+                <Run Text="WARRANTY"/>
+            </TextBlock>
+
+            <TextBlock Margin="20,0"
+                       Grid.Row="2"
+                       FontSize="16"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center">
+                <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="lectrical Range (PCAPS)" FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+                <Run Text="warrants to the customer of our panels for a prorated period of "/>
+                <Run Text="{Binding Data.DurationText, Mode=OneWay}"/>
+                <Run Text="("/><Run Text="{Binding Data.Duration}"/><Run Text=")"/>
+                <Run Text="{Binding Data.DurationUnitInfo, Mode=OneWay}"/>
+                <Run Text="Dated:"/>
+                <Run Text="{Binding Data.EndDate,StringFormat=dd/MM/yyyy , Mode=OneWay}" Foreground="Red" FontWeight="Bold"/>
+                <Run Text="from the date of"/>
+                <Run Text="{Binding Data.StartFrom, Mode=OneWay}"/>
+                <Run Text="against defects in material and workmanship on the following noted project."/>
+            </TextBlock>
+
+            <TextBlock Margin="20,0"
+                       Grid.Row="3"
+                       FontSize="16"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center">
+                <Run Text="Project Name: “" Foreground="{StaticResource Blue}" FontWeight="Bold"/><Run Text="{Binding Data.Project}" FontWeight="Bold" Foreground="{StaticResource Blue}"/><Run Text="”" Foreground="{StaticResource Blue}" FontWeight="Bold"/>
+                <LineBreak/>
+                <Run Text="This warranty is limited to product that has been installed and maintained in accordance with customer recommendations. During warranty period as specified above"/>
+                <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="R-PCAPS" FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+                <Run Text="will replace any defective system or component but the customer shall be responsible for the difference between the cost of a new system or component and the prorated value of the defective system or component prior to making any repairs "/>
+                <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="R-PCAPS" FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+                <Run Text="will advise the customer of the nature of the problem and the cost to the customer based on the proration of the defective system or component."/>
+                <LineBreak/>
+                <Run Text="A claim under this warranty for defects in material or workmanship is limited to the product being properly stored, handled and installed. All claims against this warranty shall be submitted in writing to"/>
+                <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="R-PCAPS." FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+            </TextBlock>
+
+            <Grid Grid.Row="4"
+                  Margin="20,0"
+                  VerticalAlignment="Center">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                    <RowDefinition MinHeight="25" Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.ColumnSpan="2" 
+                           Text="There are no warranties, expressed or implied, which extend beyond those described herein."
+                           FontSize="16">
+                </TextBlock>
+                
+                <TextBlock Grid.Row="1"
+                           Text="i."
+                           Margin="10,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right">
+                </TextBlock>
+                
+                <TextBlock Grid.Row="2"
+                           Text="ii."
+                           Margin="10,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right">
+                </TextBlock>
+                
+                <TextBlock Grid.Row="3"
+                           Text="iii."
+                           Margin="10,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right">
+                </TextBlock>
+                 
+                <TextBlock Grid.Row="4"
+                           Text="iv."
+                           Margin="10,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right">
+                </TextBlock>
+                 
+                <TextBlock Grid.Row="10"
+                           Text="v."
+                           Margin="10,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right">
+                </TextBlock>
+                
+                
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Text="Above warranty is void if the product is exposed to extremes of weather and atmospheric conditions, accidents, fire, flood, harmful fumes, cleaning solutions and/or other corrosive chemicals."
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left">
+                    <Run Text="Any damage caused by the failure of any supporting hardware not supplied by"/>
+                    <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="R-PCAPS." FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+                </TextBlock>
+                
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           Text="Any parts affected by discoloration."
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                 
+                <TextBlock Grid.Row="4"
+                           Grid.Column="1"
+                           Text="Any labor charges, travel time charges, or mileage charges associated with a warranty item."
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                 
+                <TextBlock Grid.Row="5"
+                           Grid.Column="1"
+                           Text="Any failure to the external voltage or timing system."
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+            </Grid>
+
+            <TextBlock Margin="20,0"
+                       Text="NOTE: WE DO NOT ACCEPT RESPONSIBILITY FOR ANY LOSS OR INJURY CAUSED BY THE USE OF THE PRODUCT. IT IS THE USER'S RESPONSIBILITY TO ENSURE THAT THE PRODUCT IS SUITABLE FOR THE USER'S APPLICATION."
+                       Grid.Row="5"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="Red"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center">
+            </TextBlock>
+            
+            <Grid Grid.Row="6"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Margin="20,0"
+                           Grid.Row="0"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center">
+                    <Run Text="E" Foreground="Red" FontWeight="Bold"/><Run Text="lectrical Range (PCAPS)" FontWeight="Bold" Foreground="{StaticResource Blue}"/>
+                </TextBlock>
+                <TextBlock Margin="20,0"
+                           Grid.Row="1"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center">
+                    <Run Text="Contact Person: "/>
+                    <Run Text="{Binding Data.IssuedBy, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Margin="20,0"
+                           Grid.Row="2"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center">
+                    <Run Text="Mobile No."/>
+                    <Run Text="{Binding Data.Mobile, Mode=OneWay}"/>
+                </TextBlock>
+            </Grid>
+
+            <TextBlock Margin="50,20"
+                       Text="Stamp"
+                       Grid.Row="6"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+            
+            <TextBlock Margin="20,0"
+                       Grid.Row="7"
+                       FontSize="14"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right">
+                <Run Text="Page"/>
+                <Run Text="{Binding PageNumber}"/>
+                <Run Text="|"/>
+                <Run Text="{Binding TotalPages}"/>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</p:PageBase>

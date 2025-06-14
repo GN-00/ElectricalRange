@@ -1,0 +1,188 @@
+﻿<Window x:Class="ProjectsNow.Windows.PrintWindows.PrintWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Printing"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        WindowStyle="None"
+        WindowState="Maximized"
+        ResizeMode="CanMinimize"
+        FontFamily="Times New Roman"
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="800"
+        KeyDown="Window_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="Transparent" MouseDown="Grid_MouseDown"/>
+        <!--<StackPanel Grid.Row="0" Background="White" HorizontalAlignment="Left">
+
+            <Button x:Name="Panel"
+                    Click="Print_Click"
+                    Height="40"
+                    Width="40"
+                    Margin="10,5,0,5">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Content" Value="Panels"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <Grid>
+                                            <Image Source="/GN.Base;component/Images/Icons/printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2"/>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+            <Button x:Name="Minimize"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0"
+                    Height="20"
+                    Width="30"
+                    Click="Minimize_Click" >
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <Image Margin="4" Source="/Images/Icons\Minimize.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="Maximize"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0"
+                    Height="20"
+                    Width="30"
+                    Click="Maximize_Click" >
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <Image Margin="4" Source="/Images\Icons\Maximize.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="CloseWindow"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Click="CloseWindow_Click"
+                Height="20"
+                Width="30" Margin="0">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0">
+                                        <Image Margin="5" Source="/Images/Icons/close.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+        <DocumentViewer Name="PrintView" ShowPageBorders="False" VerticalPageSpacing="50" HorizontalPageSpacing="50" Grid.Row="1">
+            <DocumentViewer.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </DocumentViewer.Effect>
+            <DocumentViewer.Resources>
+                <!--<Style TargetType="ToolBar">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>-->
+
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <Trigger Property="Name" Value="PART_ContentHost">
+                            <Setter Property="DocumentPageView.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <Trigger Property="Name" Value="PART_FindToolBarHost">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DocumentViewer.Resources>
+            <DocumentViewer.CommandBindings>
+                <CommandBinding Command="ApplicationCommands.Print" Executed="CommandBinding_Executed" />
+            </DocumentViewer.CommandBindings>
+        </DocumentViewer>
+
+    </Grid>
+</Window>

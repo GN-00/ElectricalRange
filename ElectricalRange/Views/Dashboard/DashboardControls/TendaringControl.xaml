@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="ProjectsNow.Views.Dashboard.DashboardControls.TendaringControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Width="1298">
+    <WrapPanel x:Name="ResourcesArea"
+               Width="Auto"
+               MaxWidth="{Binding MaxWidth}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+
+        <Button ToolTip="Inquiries" 
+                Command="{Binding InquiriesCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Receive.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="New Projects" 
+                Command="{Binding QuoteCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/NewProject.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Quotations" 
+                Command="{Binding QuotationsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Quote.png</ImageSource>
+        </Button>
+
+    </WrapPanel>
+</UserControl>

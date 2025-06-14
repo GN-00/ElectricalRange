@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="ProjectsNow.Views.FinanceView.ReceiptPanelsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:ProjectsNow.Controls"
+             mc:Ignorable="d" 
+             BorderBrush="{StaticResource Blue}"
+             BorderThickness="1"
+             Height="650"
+             Width="651"
+             Style="{StaticResource ViewStyle}">
+    <UserControl.Resources>
+
+        <ContextMenu x:Key="ItemsContextMenu">
+            <MenuItem Command="{Binding 
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.AddCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Add"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Download1.png" 
+                           SnapsToDevicePixels="True" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <c:PopupControls/>
+
+        <Grid Background="{StaticResource LinearGradientGray}">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Receipt Panels"
+                           Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10,10,10,25">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <Grid Grid.Row="1"
+                  Background="LightGray">
+                <StackPanel Orientation="Horizontal"
+                            Margin="20,0"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Panel: " Style="{StaticResource IndicationStyle}"/>
+                    <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                </StackPanel>
+            </Grid>
+            <DataGrid ItemsSource="{Binding ItemsCollection}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      Style="{StaticResource ViewDataGridStyle}">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding AddCommand}"
+                                  CommandParameter="{Binding SelectedItem}">
+                    </MouseBinding>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource ViewRowsStyle}">
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemsContextMenu}"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="80" 
+                                        Header="SN" 
+                                        Binding="{Binding SN}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="300" 
+                                        Header="Panel" 
+                                        Binding="{Binding Name}"
+                                        ElementStyle="{StaticResource LeftColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="100" 
+                                        Header="Qty" 
+                                        Binding="{Binding Qty}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="130" 
+                                        Header="Final Price" 
+                                        Binding="{Binding TotalFinalPrice, StringFormat=N2}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <StackPanel Margin="20,10" Orientation="Horizontal"
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right">
+
+            <Button Command="{Binding SaveCommand}" 
+                    Style="{StaticResource OkViewButton}">
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

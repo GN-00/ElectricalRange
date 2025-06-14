@@ -1,0 +1,103 @@
+﻿<ResourceDictionary x:Class="ProjectsNow.ViewStyles.TextBoxesDictionary"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style x:Key="TitleStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10,7.5" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontFamily" Value="Times New Roman" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="FilterInputStyle"
+           BasedOn="{StaticResource FiltersStyle}"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="Margin" Value="1,5" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontFamily" Value="Times New Roman" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="{StaticResource ViewsForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{StaticResource ViewsSecondaryBackground}" />
+        <Setter Property="FontSize" Value="{StaticResource ViewsFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource ViewsFont}" />
+        <EventSetter Event="GotKeyboardFocus" Handler="TextBox_GotKeyboardFocus" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border Name="border"
+                            Padding="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{StaticResource ViewsNormalBorder}"
+                            BorderThickness="{StaticResource ViewsThickness}"
+                            CornerRadius="{StaticResource ViewsRadius}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="TextElement.Foreground" Value="{StaticResource ViewsForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ViewsSelectedBorder}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ViewsMouseOverBorder}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GridTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="{StaticResource ViewsForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{StaticResource ViewsSecondaryBackground}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="{StaticResource ViewsFont}" />
+        <EventSetter Event="GotKeyboardFocus" Handler="TextBox_GotKeyboardFocus" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border Name="border"
+                            Padding="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{StaticResource ViewsNormalBorder}"
+                            BorderThickness="0.75"
+                            CornerRadius="0">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="TextElement.Foreground" Value="{StaticResource ViewsForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ViewsSelectedBorder}" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ViewsMouseOverBorder}" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

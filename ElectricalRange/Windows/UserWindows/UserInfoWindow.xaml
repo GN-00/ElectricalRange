@@ -1,0 +1,165 @@
+﻿<Window x:Class="ProjectsNow.Windows.UserWindows.UserInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:CN="clr-namespace:ProjectsNow.Controls"
+        mc:Ignorable="d"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        Title="User Information"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
+        FontFamily="Times New Roman"
+        WindowStartupLocation="CenterScreen"
+        Height="480"
+        Width="720">
+    <Window.Resources>
+
+        <Style x:Key="InputStyle" BasedOn="{StaticResource TextBoxFlatStyle}" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="{StaticResource MyBlue}"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="LightGray">
+        <Grid Margin="0,0,0,60" Background="#FFF1F1F1" >
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+        
+        <CN:WindowControls/>
+
+        <Grid Background="White" Margin="0,0,0,60">
+
+            <TextBlock Text="User Information"
+                       FontSize="35"
+                       Foreground="{StaticResource MyPurple}"
+                       Margin="15"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+            
+            <Grid Margin="0,80,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Name"
+                       Grid.Row="0"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Code"
+                       Grid.Row="1"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="User Name"
+                       Grid.Row="2"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Password"
+                       Grid.Row="3"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Confirm Password"
+                       Grid.Row="4"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Estimation"
+                       Grid.Row="5"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Salesman"
+                       Grid.Row="6"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+                <Label Content="Administrator"
+                       Grid.Row="7"
+                       Style="{StaticResource LabelStyle}">
+                </Label>
+
+                <TextBox Text="{Binding NewUser.Name}" 
+                         Width="500" 
+                         Grid.Row="0"
+                         Style="{StaticResource InputStyle}">
+                </TextBox>
+                <TextBox Text="{Binding NewUser.Code}" 
+                         Width="100" 
+                         Grid.Row="1"
+                         Style="{StaticResource InputStyle}">
+                </TextBox>
+                <TextBox Text="{Binding NewUser.Username}" 
+                         Width="300" 
+                         Grid.Row="2"
+                         Style="{StaticResource InputStyle}">
+                </TextBox>
+                <TextBox Text="{Binding NewUser.Password}" 
+                         Width="300" 
+                         Grid.Row="3"
+                         Style="{StaticResource InputStyle}">
+                </TextBox>
+                <TextBox Text="{Binding ConfirmPassword}" 
+                         Width="300" 
+                         Grid.Row="4"
+                         Style="{StaticResource InputStyle}">
+                </TextBox>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="5"
+                            Grid.Column="1">
+                    <ToggleButton IsChecked="{Binding NewUser.IsEstimation}" Margin="10,0,20,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="6"
+                            Grid.Column="1">
+                    <ToggleButton IsChecked="{Binding NewUser.IsSalesman}" Margin="10,0,20,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="7"
+                            Grid.Column="1">
+                    <ToggleButton IsChecked="{Binding NewUser.Administrator}" Margin="10,0,20,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,20,10">
+            <Button Style="{StaticResource OkButton}"
+                    Command="{Binding SaveCommand}">
+            </Button>
+            <Button Style="{StaticResource CancelButton}"
+                    Command="{Binding CloseCommand}">
+            </Button>
+        </StackPanel>
+
+        <Grid x:Name="LoadingControl" Background="Black" Opacity="0.75" Visibility="Collapsed" Panel.ZIndex="10000"/>
+
+    </Grid>
+</Window>

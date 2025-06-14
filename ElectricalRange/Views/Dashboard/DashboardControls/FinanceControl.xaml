@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="ProjectsNow.Views.Dashboard.DashboardControls.FinanceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Width="1298">
+    <WrapPanel x:Name="ResourcesArea"
+               Width="Auto"
+               MaxWidth="{Binding MaxWidth}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+
+        <Button ToolTip="Accounts" 
+                Command="{Binding AccountsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Accounts.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Receipts" 
+                Command="{Binding ReceiptsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Plus.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Payments" 
+                Command="{Binding PaymentsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Minus.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Job Orders" 
+                Command="{Binding JobOrdersCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Order.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Customers" 
+                Command="{Binding CustomersCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Customer.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Suppliers" 
+                Command="{Binding SuppliersCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Suppliers.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Purchase Orders" 
+                Command="{Binding PurchaseOrdersCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Purchase.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Delivery Notes" 
+                Command="{Binding DeliveryNotesCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Store.png</ImageSource>
+        </Button>
+
+
+        <!--<Button ToolTip="Job Orders Invoices" 
+                Command="{Binding JobOrdersInvoicesCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/History2.png</ImageSource>
+        </Button>-->
+
+        <!--<Button ToolTip="Receipts" 
+                Command="{Binding ReceiptsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Receipt.png</ImageSource>
+        </Button>-->
+        
+        <!--<Button ToolTip="Statements" 
+                Command="{Binding StatementsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Statement.png</ImageSource>
+        </Button>-->
+
+        <!--<Button ToolTip="Purchase Orders" 
+                Command="{Binding PurchaseOrdersCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Purchase.png</ImageSource>
+        </Button>-->
+
+
+        <!--<Button ToolTip="Suppliers Invoices" 
+                Command="{Binding SuppliersInvoicesCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Invoice.png</ImageSource>
+        </Button>-->
+
+        <!--<Button ToolTip="Expense" 
+                Command="{Binding ExpenseCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Expense.png</ImageSource>
+        </Button>-->
+
+        <!--<Button ToolTip="Transportation" 
+                Command="{Binding TransportationCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/Transportation.png</ImageSource>
+        </Button>-->
+
+    </WrapPanel>
+</UserControl>

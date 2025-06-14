@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.PanelsItems"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             Background="White"
+             FontSize="16"
+             FontFamily="Times New Roman"
+             Height="29.7cm" 
+             Width="21cm">
+    <UserControl.Resources>
+        <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Time"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="25" >
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="Q.Code " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black">
+                    <TextBlock Text="Custmer" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black">
+                    <TextBlock Text="Project" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black">
+                    <TextBlock Text="Panel" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+
+                <Border DataContext="{Binding QuotationData}" Grid.Row="0" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="{Binding QuotationCode}" Margin="5,0" />
+                </Border>
+                <Border DataContext="{Binding QuotationData}" Grid.Row="1" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                    <TextBlock Text="{Binding CustomerName}" Margin="5,0"/>
+                </Border>
+                <Border DataContext="{Binding QuotationData}" Grid.Row="2" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                    <TextBlock Text="{Binding ProjectName}" Margin="5,0"/>
+                </Border>
+                <Border DataContext="{Binding PanelData}" Grid.Row="3" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding PanelSN}" Margin="5,0"/>
+                        <TextBlock Text=" ) "/>
+                        <TextBlock Text="{Binding PanelName}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="ItemsList" Margin="0,10,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="12*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="SN " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="Reference" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="Description" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="3" BorderThickness="0,1,1,1" BorderBrush="Black">
+                    <TextBlock Text="Qty" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+            <TextBlock Text="Page: "/>
+            <TextBlock x:Name="PageView"/>
+            <TextBlock Text=" / "/>
+            <TextBlock x:Name="PagesView"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

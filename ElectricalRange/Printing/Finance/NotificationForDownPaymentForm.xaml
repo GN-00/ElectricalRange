@@ -1,0 +1,298 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.Finance.NotificationForDownPaymentForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             FontFamily="Calibri (Body)"
+             Height="29.7cm" 
+             Width="21cm">
+    <Grid Background="White">
+        <Grid Margin="2cm,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3cm"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="NOTIFICATION FOR DOWN PAYMENT"
+                       Grid.Row="1"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource MyBlue}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+
+            <StackPanel Grid.Row="2"
+                        Margin="20,0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="Date:"
+                           FontSize="18">
+                </TextBlock>
+                <TextBlock Text="{Binding Date, StringFormat=dd/MM/yyyy}"
+                           FontSize="18">
+                </TextBlock>
+            </StackPanel>
+
+            <Grid Grid.Row="3"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="M/S"
+                           Margin="5,0"
+                           Grid.Row="0"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Text="Attention"
+                           Margin="5,0"
+                           Grid.Row="1"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Text="Quotation No."
+                           Margin="5,0"
+                           Grid.Row="2"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Text="PO Date"
+                           Margin="5,0"
+                           Grid.Row="3"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Text="PO No."
+                           Margin="5,0"
+                           Grid.Row="4"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Text="Job Order No."
+                           Margin="5,0"
+                           Grid.Row="5"
+                           FontSize="18"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+
+                <Border BorderBrush="Black"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BorderThickness="1,1,1,1">
+                    <TextBlock Text="{Binding CustomerName}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,1" Height="23" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Attention}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,1" Height="23" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding QuotationCode}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,1" Height="23" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding PurchaseOrderDate, StringFormat=dd/MM/yyyy}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,1" Height="23" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding PurchaseOrderNumber}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Black"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,1" Height="23" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding JobOrderCode}"
+                               Margin="5,0,20,0"
+                               FontSize="18"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="4"
+                  VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Gentlemen,"
+                           Grid.Row="0"
+                           FontSize="18"
+                           VerticalAlignment="top"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           FontSize="18"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                    <Span Foreground="Transparent">-----</Span>
+                    <Span Foreground="Red" FontWeight="Bold">E</Span><Span Foreground="{StaticResource MyBlue}" FontWeight="Bold">R-PCAPS</Span>
+                    <Span>appreciates your recent order for the</Span>
+                    <Run FontWeight="Bold" Text="{Binding ProjectName}"></Run>
+                    <Run Text="And regarding above-mentioned information, we would appreciate it if"></Run>
+                    <Span Foreground="Red" FontWeight="Bold">E</Span><Span Foreground="{StaticResource MyBlue}" FontWeight="Bold">R-PCAPS</Span>
+                    <Run Text="receive the down payment to Start work on the shop drawings."></Run>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="70"/>
+                    <RowDefinition MaxHeight="25"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition MaxHeight="25"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition MaxHeight="25"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="PAYMENT DETAILS:"
+                           Grid.Row="0"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           TextDecorations="Underline"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           Margin="30,0,0,0"
+                           FontSize="18"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                    <Run FontWeight="Bold" Text="● Total Amount              "/>
+                    <Run FontWeight="Bold" Text=":"/>
+                    <Run Text="{Binding TotalAmount, StringFormat=N2}"/>
+                </TextBlock>
+                <TextBlock Text="{Binding TotalAmountText}"
+                           Margin="45,0,0,0"
+                           Grid.Row="2"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Grid.Row="3"
+                           Margin="30,0,0,0"
+                           FontSize="18"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                    <Run FontWeight="Bold" Text="● Down Payment           "/>
+                    <Run FontWeight="Bold" Text=":"/>
+                    <Run Text="{Binding DownPaymentAmount, StringFormat=N2}"/>
+                </TextBlock>
+                <TextBlock Text="{Binding DownPaymentAmountText}"
+                           Margin="45,0,0,0"
+                           Grid.Row="4"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <TextBlock Grid.Row="5"
+                           Margin="30,0,0,0"
+                           FontSize="18"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                    <Run FontWeight="Bold" Text="● Outstanding Amount"/>
+                    <Run FontWeight="Bold" Text=":"/>
+                    <Run Text="{Binding OutstandingAmount, StringFormat=N2}"/>
+                </TextBlock>
+                <TextBlock Text="{Binding OutstandingAmountText}"
+                           Margin="45,0,0,0"
+                           Grid.Row="6"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+            </Grid>
+
+            <TextBlock Grid.Row="6"
+                       FontSize="18"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+                    <Run Text="The receipt voucher will be sent it to you as soon as we receive the payment. We value your trust in "/>
+                    <Span Foreground="Red" FontWeight="Bold">E</Span><Span Foreground="{StaticResource MyBlue}" FontWeight="Bold">R-PCAPS</Span>
+                    <Run Text="and we will do our best to meet your expectations."/>
+            </TextBlock>
+
+            <TextBlock Text="Thanks again, for your order and if you have any queries please contact and do not hesitate to call us ." 
+                       Grid.Row="7"
+                       FontSize="18"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+
+            <TextBlock Text="Regards;" 
+                       Grid.Row="8"
+                       FontSize="18"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+
+            <TextBlock Text="Account Department" 
+                       Margin="45,0"
+                       Grid.Row="9"
+                       FontSize="18"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right">
+            </TextBlock>
+
+        </Grid>
+    </Grid>
+</UserControl>

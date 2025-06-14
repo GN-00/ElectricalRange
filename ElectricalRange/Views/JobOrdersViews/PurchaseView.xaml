@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ProjectsNow.Views.JobOrdersViews.PurchaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="200"
+             Height="170"
+             BorderBrush="{StaticResource Blue}"
+             BorderThickness="1"
+             mc:Ignorable="d">
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Panel.ZIndex="1000"
+              Background="{StaticResource LinearGradientGray}">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}"
+                           Text="Items" />
+            </StackPanel>
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.3"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+
+            <Button Margin="0,5,0,0"
+                    Padding="0,5,0,-5"
+                    Command="{Binding QuotationsCommand}"
+                    Style="{StaticResource TextWhiteButtons}"
+                    Tag="Request Quotations" />
+
+            <Button Grid.Row="1"
+                    Margin="0,0,0,5"
+                    Command="{Binding OrdersCommand}"
+                    Style="{StaticResource TextWhiteButtons}"
+                    Tag="Purchase Orders" />
+        </Grid>
+    </Grid>
+</UserControl>

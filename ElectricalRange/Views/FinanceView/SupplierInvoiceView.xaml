@@ -1,0 +1,284 @@
+﻿<UserControl x:Class="ProjectsNow.Views.FinanceView.SupplierInvoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Style="{StaticResource ViewStyle}">
+    <UserControl.Resources>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource Blue}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputStyle" 
+               BasedOn="{StaticResource TextBoxStyle}"
+               TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="350"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputStyleDatePicker" 
+               BasedOn="{StaticResource DatePickerStyle}"
+               TargetType="{x:Type DatePicker}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputComboBoxStyle"
+               BasedOn="{StaticResource ComboBoxStyle}" 
+               TargetType="{x:Type ComboBox}">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Height="139" 
+              Background="{StaticResource LinearGradientGray}" 
+              VerticalAlignment="Top">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Invoice "
+                           Margin="10,7.5,0,0"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <TabControl Style="{StaticResource ViewsTabControlStyle}">
+            <TabControl.Resources>
+                <Style TargetType="TabItem" BasedOn="{StaticResource TextItemStyle}"/>
+            </TabControl.Resources>
+
+            <TabItem Header="TabItem" Width="20" Visibility="Hidden"/>
+
+            <TabItem Header="Tool" IsSelected="True">
+            </TabItem>
+
+        </TabControl>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="430"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Margin="10" Background="White">
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                </Grid.Effect>
+
+                <Grid Margin="10"
+                      TextBlock.FontSize="14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number" 
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.Number, Mode=OneWay}"
+                             IsEnabled="False"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Width="175"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Date" 
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <DatePicker SelectedDate="{Binding InvoiceData.Date, StringFormat=dd/MM/yyyy}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Width="175"
+                                IsEnabled="False"
+                                DisplayDate="{Binding InvoiceData.Date, StringFormat=dd/MM/yyyy}"
+                                Style="{StaticResource InputStyleDatePicker}">
+                    </DatePicker>
+
+                    <TextBlock Text="Supplier" 
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.SupplierName, Mode=OneWay}"
+                             Grid.Row="2"
+                             Grid.Column="1"
+                             Width="280"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+
+                    <TextBlock Text="Price Details" 
+                               Grid.Row="5"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+
+                    <TextBlock Text="Net" 
+                               Grid.Row="6"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.NetPrice, Mode=OneWay, StringFormat=N2}"
+                             Grid.Row="6"
+                             Grid.Column="1"
+                             Width="150"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Grid.Row="7"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                        <Run Text="VAT"/>
+                        <Run Text="{Binding InvoiceData.VATPercentage, Mode=OneWay, StringFormat=N0}"/>
+                        <Run Text="%"/>
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.VATValue, Mode=OneWay, StringFormat=N2}"
+                             Grid.Row="7"
+                             Grid.Column="1"
+                             Width="150"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Gross" 
+                               Grid.Row="8"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.GrossPrice, Mode=OneWay, StringFormat=N2}"
+                             Grid.Row="8"
+                             Grid.Column="1"
+                             Width="150"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Paid" 
+                               Grid.Row="9"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.Paid, Mode=OneWay, StringFormat=N2}"
+                             Grid.Row="9"
+                             Grid.Column="1"
+                             Width="150"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Balance" 
+                               Grid.Row="10"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding InvoiceData.Balance, Mode=OneWay, StringFormat=N2}"
+                             Grid.Row="10"
+                             Grid.Column="1"
+                             Width="150"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                </Grid>
+            </Grid>
+
+            <Grid Margin="0,10,10,10"
+                  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                </Grid.Effect>
+                <Grid Grid.Row="1"
+                      Background="LightGray">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="20,0"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Item: " Style="{StaticResource IndicationStyle}"/>
+                        <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid ItemsSource="{Binding ItemsCollection}"
+                          SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          ContextMenu="{x:Null}"
+                          Style="{StaticResource ViewDataGridStyle}">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}"
+                               BasedOn="{StaticResource ViewRowsStyle}">
+                            <Setter Property="ContextMenu" Value="{x:Null}"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Width="260" 
+                                            Header="Code" 
+                                            Binding="{Binding Code}"
+                                            ElementStyle="{StaticResource LeftColumnView}">
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="300" 
+                                            Header="Description" 
+                                            Binding="{Binding Description}"
+                                            ElementStyle="{StaticResource LeftColumnView}">
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="80" 
+                                            Header="Qty"
+                                            Binding="{Binding Qty}"
+                                            ElementStyle="{StaticResource CenterColumnView}">
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="200" 
+                                            Header="Gross Price" 
+                                            Binding="{Binding GrossPrice, StringFormat=N2}"
+                                            ElementStyle="{StaticResource CenterColumnView}">
+                        </DataGridTextColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

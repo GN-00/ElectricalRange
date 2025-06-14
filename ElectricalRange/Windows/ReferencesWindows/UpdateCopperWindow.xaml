@@ -1,0 +1,68 @@
+﻿<Window x:Class="ProjectsNow.Windows.ReferencesWindows.UpdateCopperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:ProjectsNow.Controls"
+        mc:Ignorable="d"
+        Title="Copper Price"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="CanMinimize"
+        FontFamily="Times New Roman"
+        WindowStartupLocation="CenterScreen"
+        Height="150"
+        Width="380">
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Controls:WindowControls/>
+
+        <Grid Background="White">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,20,0,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Price / Kg"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource Blue}"
+                       VerticalAlignment="Center">
+            </TextBlock>
+
+            <TextBox Text="{Binding NewData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="10,0"
+                     Height="30"
+                     Width="200"
+                     FontSize="18"
+                     Style="{StaticResource TextBoxStyle}"
+                     TextAlignment="Center"
+                     VerticalAlignment="Center"
+                     PreviewKeyDown="TextBox_PreviewKeyDown">
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+
+            <Button Style="{StaticResource SaveViewButton}"
+                    Command="{Binding SaveCommand}">
+            </Button>
+
+            <Button Style="{StaticResource CancelViewButton}"
+                    Command="{Binding CancelCommand}">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

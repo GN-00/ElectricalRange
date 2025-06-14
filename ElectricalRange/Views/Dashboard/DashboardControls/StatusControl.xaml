@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="ProjectsNow.Views.Dashboard.DashboardControls.StatusControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Width="1298">
+    <WrapPanel x:Name="ResourcesArea"
+               Width="Auto"
+               MaxWidth="{Binding MaxWidth}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+
+        <Button ToolTip="Projects Information" 
+                Command="{Binding ProjectsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/MoneyReports.png</ImageSource>
+        </Button>
+
+        <Button ToolTip="Quotations Status" 
+                Command="{Binding QuotationsCommand}"
+                Style="{StaticResource DashboardControlsButtons}">
+            <ImageSource>/Images/Icons/QuotationsStatus1.png</ImageSource>
+        </Button>
+
+    </WrapPanel>
+</UserControl>

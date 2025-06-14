@@ -1,0 +1,321 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Electrical Range</AssemblyName>
+    <RootNamespace>ProjectsNow</RootNamespace>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<StartupObject>ProjectsNow.Program</StartupObject>
+		<ApplicationIcon>ER.ico</ApplicationIcon>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Estimator\Images\Gray.png" />
+	  <None Remove="Estimator\Images\Green.png" />
+	  <None Remove="Estimator\Images\GroupIcons\BreakerNS.png" />
+	  <None Remove="Estimator\Images\GroupIcons\BreakerNSX.png" />
+	  <None Remove="Estimator\Images\GroupIcons\BreakerNW.png" />
+	  <None Remove="Estimator\Images\GroupIcons\Motor.png" />
+	  <None Remove="Estimator\Images\GroupIcons\SetlakEnclosure.png" />
+	  <None Remove="Images\Icons\DigitalLibrary.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="ER.ico" />
+	</ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="FastMember" Version="1.5.0" />
+	  <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9">
+		  <NoWarn>NU1701</NoWarn>
+	  </PackageReference>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+    <PackageReference Include="System.Data.OleDb" Version="9.0.4" />
+    <PackageReference Include="Velopack" Version="0.0.1053" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Estimator\Images\Gray.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Estimator\Images\Green.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Estimator\Images\GroupIcons\BreakerNS.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Estimator\Images\GroupIcons\BreakerNSX.png" />
+    <Resource Include="Estimator\Images\GroupIcons\BreakerNW.png" />
+    <Resource Include="Estimator\Images\GroupIcons\Motor.png" />
+    <Resource Include="Estimator\Images\GroupIcons\SetlakEnclosure.png" />
+    <Resource Include="Images\Icons\AbdulRahimSignature.png" />
+    <Resource Include="Images\Icons\Accept.png" />
+    <Resource Include="Images\Icons\Accessories.png" />
+    <Resource Include="Images\Icons\Accomplished.png" />
+    <Resource Include="Images\Icons\Accountant.png" />
+    <Resource Include="Images\Icons\Accountant1.png" />
+    <Resource Include="Images\Icons\Accountant2.png" />
+    <Resource Include="Images\Icons\Accounts.png" />
+    <Resource Include="Images\Icons\Acknowledgement.png" />
+    <Resource Include="Images\Icons\Add.png" />
+    <Resource Include="Images\Icons\Add2.png" />
+    <Resource Include="Images\Icons\Add3.png" />
+    <Resource Include="Images\Icons\AddCompanies.png" />
+    <Resource Include="Images\Icons\AddForm.png" />
+    <Resource Include="Images\Icons\AddItem.png" />
+    <Resource Include="Images\Icons\AddItems.png" />
+    <Resource Include="Images\Icons\AddToGreen.png" />
+    <Resource Include="Images\Icons\AddToRed.png" />
+    <Resource Include="Images\Icons\AddToYellow.png" />
+    <Resource Include="Images\Icons\AllFiles.png" />
+    <Resource Include="Images\Icons\AllTables.png" />
+    <Resource Include="Images\Icons\Arabic.png" />
+    <Resource Include="Images\Icons\AsBuilt.png" />
+    <Resource Include="Images\Icons\Assign.png" />
+    <Resource Include="Images\Icons\Attach.png" />
+    <Resource Include="Images\Icons\Attention.png" />
+    <Resource Include="Images\Icons\Back.png" />
+    <Resource Include="Images\Icons\BackAsBuilt.png" />
+    <Resource Include="Images\Icons\Bank.png" />
+    <Resource Include="Images\Icons\BarCode.png" />
+    <Resource Include="Images\Icons\BlueFolder.png" />
+    <Resource Include="Images\Icons\BlueFolderSearch.png" />
+    <Resource Include="Images\Icons\BlueUser.png" />
+    <Resource Include="Images\Icons\Calculator.png" />
+    <Resource Include="Images\Icons\Cancel.png" />
+    <Resource Include="Images\Icons\Cancel2.png" />
+    <Resource Include="Images\Icons\Change.png" />
+    <Resource Include="Images\Icons\Change1.png" />
+    <Resource Include="Images\Icons\checklist.png" />
+    <Resource Include="Images\Icons\checklist1.png" />
+    <Resource Include="Images\Icons\Close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\Close1.png" />
+    <Resource Include="Images\Icons\ClosedPanel.png" />
+    <Resource Include="Images\Icons\CloseJob.png" />
+    <Resource Include="Images\Icons\Closing.png" />
+    <Resource Include="Images\Icons\Communication.png" />
+    <Resource Include="Images\Icons\Companies.png" />
+    <Resource Include="Images\Icons\Consultants.png" />
+    <Resource Include="Images\Icons\Contacts.png" />
+    <Resource Include="Images\Icons\Copper.png" />
+    <Resource Include="Images\Icons\Copy.png" />
+    <Resource Include="Images\Icons\CopyRow.png" />
+    <Resource Include="Images\Icons\CostSheet.png" />
+    <Resource Include="Images\Icons\Customer.png" />
+    <Resource Include="Images\Icons\Datetime.png" />
+    <Resource Include="Images\Icons\Default.png" />
+    <Resource Include="Images\Icons\DeleteEnclosure.png" />
+    <Resource Include="Images\Icons\DeleteFilter.png" />
+    <Resource Include="Images\Icons\DeleteItem.png" />
+    <Resource Include="Images\Icons\DeleteRecord.png" />
+    <Resource Include="Images\Icons\Deliver.png" />
+    <Resource Include="Images\Icons\Design.png" />
+    <Resource Include="Images\Icons\DigitalLibrary.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\Disbo.png" />
+    <Resource Include="Images\Icons\DiscountUpdate.png" />
+    <Resource Include="Images\Icons\Down.png" />
+    <Resource Include="Images\Icons\Download.png" />
+    <Resource Include="Images\Icons\Download1.png" />
+    <Resource Include="Images\Icons\DownloadBox.png" />
+    <Resource Include="Images\Icons\DownPayment.png" />
+    <Resource Include="Images\Icons\DWNoReports.png" />
+    <Resource Include="Images\Icons\Edit.png" />
+    <Resource Include="Images\Icons\Edit1.png" />
+    <Resource Include="Images\Icons\Edit2.png" />
+    <Resource Include="Images\Icons\EditEnclosure.png" />
+    <Resource Include="Images\Icons\EditRow.png" />
+    <Resource Include="Images\Icons\Enclosure.png" />
+    <Resource Include="Images\Icons\English.png" />
+    <Resource Include="Images\Icons\ER.png" />
+    <Resource Include="Images\Icons\Error.png" />
+    <Resource Include="Images\Icons\Estimate.png" />
+    <Resource Include="Images\Icons\Excel.png" />
+    <Resource Include="Images\Icons\Expense.png" />
+    <Resource Include="Images\Icons\Fill.png" />
+    <Resource Include="Images\Icons\Finance.png" />
+    <Resource Include="Images\Icons\Gray.png" />
+    <Resource Include="Images\Icons\GrayFolder.png" />
+    <Resource Include="Images\Icons\GrayUser.png" />
+    <Resource Include="Images\Icons\Green.png" />
+    <Resource Include="Images\Icons\GreenFolder.png" />
+    <Resource Include="Images\Icons\GroupDown.png" />
+    <Resource Include="Images\Icons\GroupUp.png" />
+    <Resource Include="Images\Icons\Guide1.png" />
+    <Resource Include="Images\Icons\History.png" />
+    <Resource Include="Images\Icons\History2.png" />
+    <Resource Include="Images\Icons\Home.png" />
+    <Resource Include="Images\Icons\ID.png" />
+    <Resource Include="Images\Icons\IdetifyOrder.png" />
+    <Resource Include="Images\Icons\IdetifyOrder1.png" />
+    <Resource Include="Images\Icons\Import.png" />
+    <Resource Include="Images\Icons\ImportAll.png" />
+    <Resource Include="Images\Icons\ImportData.png" />
+    <Resource Include="Images\Icons\info.png" />
+    <Resource Include="Images\Icons\Information.png" />
+    <Resource Include="Images\Icons\InsertDown.png" />
+    <Resource Include="Images\Icons\InsertUp.png" />
+    <Resource Include="Images\Icons\Inspection.png" />
+    <Resource Include="Images\Icons\Invoice.png" />
+    <Resource Include="Images\Icons\Invoices.png" />
+    <Resource Include="Images\Icons\Invoicing.png" />
+    <Resource Include="Images\Icons\Item!.png" />
+    <Resource Include="Images\Icons\ItemChange.png" />
+    <Resource Include="Images\Icons\ItemsList.png" />
+    <Resource Include="Images\Icons\ItemsStatus.png" />
+    <Resource Include="Images\Icons\Key1.png" />
+    <Resource Include="Images\Icons\LeftGreen.png" />
+    <Resource Include="Images\Icons\Library.png" />
+    <Resource Include="Images\Icons\LightGrayUser.png" />
+    <Resource Include="Images\Icons\List.png" />
+    <Resource Include="Images\Icons\load.png" />
+    <Resource Include="Images\Icons\Login.png" />
+    <Resource Include="Images\Icons\Logo.png" />
+    <Resource Include="Images\Icons\Logo1.png" />
+    <Resource Include="Images\Icons\Logo2.png" />
+    <Resource Include="Images\Icons\Logout.png" />
+    <Resource Include="Images\Icons\Lost.png" />
+    <Resource Include="Images\Icons\Materials.png" />
+    <Resource Include="Images\Icons\Maximize.png" />
+    <Resource Include="Images\Icons\Minimize.png" />
+    <Resource Include="Images\Icons\Minus.png" />
+    <Resource Include="Images\Icons\MoneyReports.png" />
+    <Resource Include="Images\Icons\MoneyTransactions.png" />
+    <Resource Include="Images\Icons\MoveDown.png" />
+    <Resource Include="Images\Icons\MoveUp.png" />
+    <Resource Include="Images\Icons\MyData.png" />
+    <Resource Include="Images\Icons\New.png" />
+    <Resource Include="Images\Icons\New1.png" />
+    <Resource Include="Images\Icons\NewFile.png" />
+    <Resource Include="Images\Icons\NewFile1.png" />
+    <Resource Include="Images\Icons\NewItem.png" />
+    <Resource Include="Images\Icons\NewJobFile.png" />
+    <Resource Include="Images\Icons\NewPanels.png" />
+    <Resource Include="Images\Icons\NewProject.png" />
+    <Resource Include="Images\Icons\NewRow.png" />
+    <Resource Include="Images\Icons\NewRowSpecial.png" />
+    <Resource Include="Images\Icons\Note.png" />
+    <Resource Include="Images\Icons\NotifyForReceipt.png" />
+    <Resource Include="Images\Icons\Now.png" />
+    <Resource Include="Images\Icons\NSYCRN.png" />
+    <Resource Include="Images\Icons\NSYSF.png" />
+    <Resource Include="Images\Icons\NSYSM.png" />
+    <Resource Include="Images\Icons\Old.png" />
+    <Resource Include="Images\Icons\OnPipe.png" />
+    <Resource Include="Images\Icons\OpenDoor.png" />
+    <Resource Include="Images\Icons\Option.png" />
+    <Resource Include="Images\Icons\Options.png" />
+    <Resource Include="Images\Icons\Order.png" />
+    <Resource Include="Images\Icons\Pages.png" />
+    <Resource Include="Images\Icons\Paid.png" />
+    <Resource Include="Images\Icons\PanelItems.png" />
+    <Resource Include="Images\Icons\panelsItems.png" />
+    <Resource Include="Images\Icons\Partial.png" />
+    <Resource Include="Images\Icons\Partner.png" />
+    <Resource Include="Images\Icons\Partnership.png" />
+    <Resource Include="Images\Icons\Paste.png" />
+    <Resource Include="Images\Icons\Payment.png" />
+    <Resource Include="Images\Icons\Payments.png" />
+    <Resource Include="Images\Icons\Plus.png" />
+    <Resource Include="Images\Icons\PN.png" />
+    <Resource Include="Images\Icons\Post1.png" />
+    <Resource Include="Images\Icons\PostItems.png" />
+    <Resource Include="Images\Icons\PostItems1.png" />
+    <Resource Include="Images\Icons\PreviousYears.png" />
+    <Resource Include="Images\Icons\Price.png" />
+    <Resource Include="Images\Icons\PrintAll.png" />
+    <Resource Include="Images\Icons\printer.png" />
+    <Resource Include="Images\Icons\Product.png" />
+    <Resource Include="Images\Icons\Proforma.png" />
+    <Resource Include="Images\Icons\Progression.png" />
+    <Resource Include="Images\Icons\purchase-orders.png" />
+    <Resource Include="Images\Icons\Purchase.png" />
+    <Resource Include="Images\Icons\Quality.png" />
+    <Resource Include="Images\Icons\QualityControl.png" />
+    <Resource Include="Images\Icons\Question.png" />
+    <Resource Include="Images\Icons\Queue.png" />
+    <Resource Include="Images\Icons\Quotation.png" />
+    <Resource Include="Images\Icons\Quotation1.png" />
+    <Resource Include="Images\Icons\QuotationsStatus.png" />
+    <Resource Include="Images\Icons\QuotationsStatus1.png" />
+    <Resource Include="Images\Icons\Quote.png" />
+    <Resource Include="Images\Icons\Read.png" />
+    <Resource Include="Images\Icons\Receipt.png" />
+    <Resource Include="Images\Icons\Receipts.png" />
+    <Resource Include="Images\Icons\Receive.png" />
+    <Resource Include="Images\Icons\RedFolder.png" />
+    <Resource Include="Images\Icons\Reference.png" />
+    <Resource Include="Images\Icons\Reload.png" />
+    <Resource Include="Images\Icons\Remove2.png" />
+    <Resource Include="Images\Icons\Remove3.png" />
+    <Resource Include="Images\Icons\RemoveAttachment.png" />
+    <Resource Include="Images\Icons\ReturnInvoice.png" />
+    <Resource Include="Images\Icons\ReturnMaterials.png" />
+    <Resource Include="Images\Icons\RightGreen.png" />
+    <Resource Include="Images\Icons\Running.png" />
+    <Resource Include="Images\Icons\RunningFolder.png" />
+    <Resource Include="Images\Icons\Save.png" />
+    <Resource Include="Images\Icons\Save1.png" />
+    <Resource Include="Images\Icons\SelectAll.png" />
+    <Resource Include="Images\Icons\SendJobFile.png" />
+    <Resource Include="Images\Icons\Sheets.png" />
+    <Resource Include="Images\Icons\Statement.png" />
+    <Resource Include="Images\Icons\Status2.png" />
+    <Resource Include="Images\Icons\Stock.png" />
+    <Resource Include="Images\Icons\Store.png" />
+    <Resource Include="Images\Icons\Store1.png" />
+    <Resource Include="Images\Icons\Submit.png" />
+    <Resource Include="Images\Icons\Submit1.png" />
+    <Resource Include="Images\Icons\Suppliers.png" />
+    <Resource Include="Images\Icons\TargetPrice.png" />
+    <Resource Include="Images\Icons\TC.png" />
+    <Resource Include="Images\Icons\Technical.png" />
+    <Resource Include="Images\Icons\Tendaring.png" />
+    <Resource Include="Images\Icons\ThisYear.png" />
+    <Resource Include="Images\Icons\Transactions.png" />
+    <Resource Include="Images\Icons\Transportation.png" />
+    <Resource Include="Images\Icons\UnderWork.png" />
+    <Resource Include="Images\Icons\Undo.png" />
+    <Resource Include="Images\Icons\Up.png" />
+    <Resource Include="Images\Icons\UpdateCost.png" />
+    <Resource Include="Images\Icons\UserInfo.png" />
+    <Resource Include="Images\Icons\WaitingApproval.png" />
+    <Resource Include="Images\Icons\Wallet.png" />
+    <Resource Include="Images\Icons\Warning.png" />
+    <Resource Include="Images\Icons\Warranties.png" />
+    <Resource Include="Images\Icons\WARRANTY.png" />
+    <Resource Include="Images\Icons\WaterMark.png" />
+    <Resource Include="Images\Icons\YellowFolder.png" />
+    <Resource Include="Images\Icons\Zoom.png" />
+    <Resource Include="Images\Manager\Accounts.png" />
+    <Resource Include="Images\Manager\Buy.png" />
+    <Resource Include="Images\Manager\Customers.png" />
+    <Resource Include="Images\Manager\Expense.png" />
+    <Resource Include="Images\Manager\Invoices.png" />
+    <Resource Include="Images\Manager\Invoices2.png" />
+    <Resource Include="Images\Manager\Projects.png" />
+    <Resource Include="Images\Vectors\Login.png" />
+    <Resource Include="Images\Vectors\Working.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Estimator\ExcelFiles\" />
+  </ItemGroup>
+
+</Project>

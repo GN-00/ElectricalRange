@@ -1,0 +1,1097 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.JobOrderPages.NotificationForInspection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="21cm"
+             Height="29.7cm"
+             FontFamily="Times New Roman"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d">
+    <Grid Margin="20" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Foreground="#4f81bd"
+                   Text="NOIFICATION FOR INSPECTION" />
+
+        <Grid Grid.Row="2"
+              Margin="0,0,20,0"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style x:Key="gridLabels" TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="10,0" />
+                    <Setter Property="FontSize" Value="18" />
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                </Style>
+            </Grid.Resources>
+
+
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="Date" />
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    MaxWidth="550"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,0">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.Date, StringFormat='dd-MM-yyyy'}" />
+            </Border>
+
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="Project" />
+            <Border Grid.Row="2"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,0">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.ProjectName}" />
+            </Border>
+
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="Company Name" />
+            <Border Grid.Row="3"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,0">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.CustomerName}" />
+            </Border>
+
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="Attention" />
+            <Border Grid.Row="4"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,0">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.ContactName}" />
+            </Border>
+
+            <TextBlock Grid.Row="5"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="PO No." />
+            <Border Grid.Row="5"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,0">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.PO}" />
+            </Border>
+
+            <TextBlock Grid.Row="6"
+                       Grid.Column="0"
+                       Style="{StaticResource gridLabels}"
+                       Text="JOb Order No." />
+            <Border Grid.Row="6"
+                    Grid.Column="1"
+                    MinWidth="220"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,1">
+                <TextBlock Margin="5,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{Binding RequestData.JobOrderCode}" />
+            </Border>
+
+        </Grid>
+
+        <TextBlock Grid.Row="3"
+                   Margin="40,5"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   FontSize="18"
+                   TextWrapping="Wrap">
+            <Run Text="Gentlemen," />
+            <LineBreak />
+            <Run Text="     Regarding the information mentioned above " />
+            <Run Foreground="Red" Text="E" /><Run Foreground="{StaticResource Blue}" Text="R-PCAPS" />
+            <Run Text="would like to inform you that your following panels is be ready for inspection &amp; shipping So, please accept our invitation for inspection with thanks." />
+        </TextBlock>
+
+        <Grid x:Name="PanelsTable"
+              Grid.Row="4"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2cm" />
+                <ColumnDefinition Width="12.5cm" />
+                <ColumnDefinition Width="3.5cm" />
+                <ColumnDefinition Width="0cm" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    Background="#4f81bd"
+                    BorderBrush="Black"
+                    BorderThickness="1,1,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Text="S.No" />
+            </Border>
+
+            <Border Grid.Row="0"
+                    Grid.Column="1"
+                    Background="#4f81bd"
+                    BorderBrush="Black"
+                    BorderThickness="0,1,1,1">
+                <TextBlock Margin="5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Text="Panel Name" />
+            </Border>
+
+            <Border Grid.Row="0"
+                    Grid.Column="2"
+                    Background="#4f81bd"
+                    BorderBrush="Black"
+                    BorderThickness="0,1,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Text="Quantity" />
+            </Border>
+
+            <Border Grid.Row="0"
+                    Grid.Column="3"
+                    Background="#4f81bd"
+                    BorderBrush="Black"
+                    BorderThickness="0,1,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Text="Date" />
+            </Border>
+
+
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[0].PanelSN}" />
+            </Border>
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[0].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="1"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[0].PanelQty}" />
+            </Border>
+            <Border Grid.Row="1"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[0].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="2"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[1].PanelSN}" />
+            </Border>
+            <Border Grid.Row="2"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[1].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="2"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[1].PanelQty}" />
+            </Border>
+            <Border Grid.Row="2"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[1].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="3"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[2].PanelSN}" />
+            </Border>
+            <Border Grid.Row="3"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[2].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="3"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[2].PanelQty}" />
+            </Border>
+            <Border Grid.Row="3"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[2].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="4"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[3].PanelSN}" />
+            </Border>
+            <Border Grid.Row="4"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[3].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="4"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[3].PanelQty}" />
+            </Border>
+            <Border Grid.Row="4"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[3].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="5"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[4].PanelSN}" />
+            </Border>
+            <Border Grid.Row="5"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[4].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="5"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[4].PanelQty}" />
+            </Border>
+            <Border Grid.Row="5"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[4].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="6"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[5].PanelSN}" />
+            </Border>
+            <Border Grid.Row="6"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[5].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="6"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[5].PanelQty}" />
+            </Border>
+            <Border Grid.Row="6"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[5].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="7"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[6].PanelSN}" />
+            </Border>
+            <Border Grid.Row="7"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[6].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="7"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[6].PanelQty}" />
+            </Border>
+            <Border Grid.Row="7"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[6].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="8"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[7].PanelSN}" />
+            </Border>
+            <Border Grid.Row="8"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[7].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="8"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[7].PanelQty}" />
+            </Border>
+            <Border Grid.Row="8"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[7].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="9"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[8].PanelSN}" />
+            </Border>
+            <Border Grid.Row="9"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[8].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="9"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[8].PanelQty}" />
+            </Border>
+            <Border Grid.Row="9"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[8].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="10"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[9].PanelSN}" />
+            </Border>
+            <Border Grid.Row="10"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[9].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="10"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[9].PanelQty}" />
+            </Border>
+            <Border Grid.Row="10"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[9].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="11"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[10].PanelSN}" />
+            </Border>
+            <Border Grid.Row="11"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[10].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="11"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[10].PanelQty}" />
+            </Border>
+            <Border Grid.Row="11"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[10].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="12"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[11].PanelSN}" />
+            </Border>
+            <Border Grid.Row="12"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[11].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="12"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[11].PanelQty}" />
+            </Border>
+            <Border Grid.Row="12"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[11].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="13"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[12].PanelSN}" />
+            </Border>
+            <Border Grid.Row="13"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[12].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="13"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[12].PanelQty}" />
+            </Border>
+            <Border Grid.Row="13"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[12].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="14"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[13].PanelSN}" />
+            </Border>
+            <Border Grid.Row="14"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[13].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="14"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[13].PanelQty}" />
+            </Border>
+            <Border Grid.Row="14"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[13].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="15"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[14].PanelSN}" />
+            </Border>
+            <Border Grid.Row="15"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[14].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="15"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[14].PanelQty}" />
+            </Border>
+            <Border Grid.Row="15"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[14].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="16"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[15].PanelSN}" />
+            </Border>
+            <Border Grid.Row="16"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[15].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="16"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[15].PanelQty}" />
+            </Border>
+            <Border Grid.Row="16"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[15].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="17"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[16].PanelSN}" />
+            </Border>
+            <Border Grid.Row="17"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[16].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="17"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[16].PanelQty}" />
+            </Border>
+            <Border Grid.Row="17"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[16].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="18"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[17].PanelSN}" />
+            </Border>
+            <Border Grid.Row="18"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[17].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="18"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[17].PanelQty}" />
+            </Border>
+            <Border Grid.Row="18"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[17].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="19"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[18].PanelSN}" />
+            </Border>
+            <Border Grid.Row="19"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[18].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="19"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[18].PanelQty}" />
+            </Border>
+            <Border Grid.Row="19"
+                    Grid.Column="23"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[18].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+
+            <Border Grid.Row="20"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,1,1">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[19].PanelSN}" />
+            </Border>
+            <Border Grid.Row="20"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[19].PanelNameInfo}" />
+            </Border>
+            <Border Grid.Row="20"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[19].PanelQty}" />
+            </Border>
+            <Border Grid.Row="20"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,1,1">
+                <TextBlock Margin="5,0,5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding PanelsData[19].DateOfProduction, StringFormat=dd/MM/yyyy}" />
+            </Border>
+        </Grid>
+
+        <TextBlock x:Name="PagesGrid"
+                   Grid.Row="6"
+                   Margin="40,5"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="18"
+                   TextWrapping="Wrap">
+            <Run Foreground="Red" Text="E" /><Run Foreground="{StaticResource Blue}" Text="R-PCAPS" />
+            <Run Text="look forward to a successful working relationship in the future." />
+            <LineBreak />
+            <LineBreak />
+            <LineBreak />
+            <Run Text="Regards." />
+            <LineBreak />
+            <LineBreak />
+            <Run Text="Projects Manager " />
+        </TextBlock>
+
+
+        <StackPanel Grid.Row="8"
+                    Margin="100,20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="10"
+                       Text="Page " />
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="10"
+                       Text="{Binding Page}" />
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="10"
+                       Text=" of " />
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="10"
+                       Text="{Binding Pages}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
+

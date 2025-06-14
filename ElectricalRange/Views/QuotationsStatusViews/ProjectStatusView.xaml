@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsStatusViews.ProjectStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             FontFamily="Times New Roman"
+             Height="80"
+             Width="500">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"/>
+    </UserControl.InputBindings>
+
+    <Grid Background="White" Margin="0,0,0,0">
+        <StackPanel Orientation="Horizontal" 
+                    Margin="-20,0,0,0"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Project Status" FontWeight="Bold" Margin="10,0" FontSize="24" Foreground="{StaticResource Blue}" VerticalAlignment="Center" TextAlignment="Right"/>
+            <ComboBox Width="230"
+                      SelectedValuePath="Content"
+                      SelectedValue="{Binding newInquiry.ProjectStatus}"
+                      Style="{StaticResource ComboBoxStyle}">
+                <ComboBoxItem>On Hand</ComboBoxItem>
+                <ComboBoxItem>Bidding</ComboBoxItem>
+            </ComboBox>
+
+            <Button VerticalAlignment="Center"
+                    Command="{Binding SaveCommand}"
+                    Height="40"
+                    Margin="15,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Content" Value="Select"/>
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" Background="White" CornerRadius="5"  BorderBrush="Gray" >
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Image Source="/GN.Base;component/Images/Icons/Accept.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="BorderBrush" Value="DarkGray" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="Button.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

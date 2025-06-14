@@ -1,0 +1,829 @@
+﻿<Window x:Class="ProjectsNow.Windows.JobOrderWindows.PanelItemsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Panel Items"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Height="700"
+        Width="1300">
+    <Window.Resources>
+
+        <ContextMenu x:Key="GridContextMenu" FontFamily="Times New Roman">
+            <MenuItem Click="Details_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Details" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="Enclosure_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Enclosure" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Click="Modification_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Modification" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <ContextMenu x:Key="RowsContextMenu" FontFamily="Times New Roman">
+            <MenuItem Click="MoveUp_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Move Item Up" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/MoveUp.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="MoveDown_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Move Item Down" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/MoveDown.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Click="TableChange_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Change Table" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Change.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Click="Details_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Details" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="Enclosure_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Enclosure" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Click="Modification_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Modification" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <Style x:Key="NavigationStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="Foreground" Value="{StaticResource MyBlue}"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+
+        <Style x:Key="ItemTypeStyle" BasedOn="{StaticResource ComboBoxFlatStyle}" TargetType="{x:Type ComboBox}">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="1,0"/>
+            <Setter Property="Background" Value="Black"/>
+        </Style>
+
+        <Style x:Key="FilterInput" BasedOn="{StaticResource TextBoxFlatStyle}" TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="1,0"/>
+            <EventSetter Event="KeyUp" Handler="ApplyFilter"/>
+        </Style>
+
+        <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}"/>
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray"/>
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="False"/>
+                        <Condition Binding="{Binding ItemType}" Value="NewItem"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="Red"/>
+                </MultiDataTrigger>
+
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="False"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="False"/>
+                        <Condition Binding="{Binding ItemType}" Value="NewItem"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="Yellow"/>
+                </MultiDataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid Height="109" Background="White" MouseDown="Grid_MouseDown" VerticalAlignment="Top" Margin="0,0,0,0">
+            <Grid Background="LightGray" Margin="0,0,0.6,30"/>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <Image Width="65"
+               Height="65"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Panel.ZIndex="1000"
+               Source="/Images/Icons/PN.png"
+               RenderOptions.BitmapScalingMode="HighQuality"
+               Margin="10,5,0,0">
+        </Image>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+            <Button x:Name="Minimize"
+                    Height="20"
+                    Width="30"
+                    Click="Minimize_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <Image Margin="4" Source="/Images/Icons\Minimize.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="CloseWindow"
+                    Click="CloseWindow_Click"
+                    Height="20"
+                    Width="30">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0">
+                                        <Image Margin="5" Source="/Images/Icons/close.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+
+        <TabControl Height="90"
+                    Background="#FFF1F1F1"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    VerticalAlignment="Top" Margin="0,20,0,0">
+
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="White" CornerRadius="2.5,2.5,0,0" Margin="0,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,0,10,0"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#FFF1F1F1" />
+                                        <Setter TargetName="Border" Property="TextElement.Foreground" Value="Red" />
+                                        <Setter TargetName="Border" Property="TextElement.FontSize" Value="16" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="Border" Property="TextElement.Foreground" Value="Black" />
+                                        <Setter TargetName="Border" Property="TextElement.FontSize" Value="12" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="TabItem" Width="100" Visibility="Hidden"/>
+
+            <TabItem Header="Home" IsSelected="True">
+                <Grid>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,25,0">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="QTY: " Style="{StaticResource NavigationStyle}"/>
+                            <TextBlock Text="{Binding PanelData.PanelQty}" Style="{StaticResource NavigationStyle}" Foreground="Black"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                            <TextBlock Text="" Style="{StaticResource NavigationStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Height="65" Margin="75,0,0,0">
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,25,0">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Job Order: " Style="{StaticResource NavigationStyle}"/>
+                                <TextBlock Text="{Binding JobOrderData.Code}" Style="{StaticResource NavigationStyle}" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="37,0,0,0">
+                                <TextBlock Text="Panel: " Style="{StaticResource NavigationStyle}"/>
+                                <TextBlock Text="{Binding PanelData.PanelName}" Style="{StaticResource NavigationStyle}" Width="300" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,25,0">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="" Style="{StaticResource NavigationStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                <TextBlock Text="Customer: " Style="{StaticResource NavigationStyle}"/>
+                                <TextBlock Text="{Binding JobOrderData.CustomerName}" Style="{StaticResource NavigationStyle}" Width="300" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,25,0">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="" Style="{StaticResource NavigationStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Project: " Style="{StaticResource NavigationStyle}"/>
+                                <TextBlock Text="{Binding JobOrderData.ProjectName}" Style="{StaticResource NavigationStyle}" Width="300" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="ToolTab" Header="Tool">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            DataContext="{Binding UserData}"
+                            Height="65" Margin="75,0,0,0">
+
+                    <TextBlock Text="Select Table" Width="50" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="14" Foreground="Blue" FontFamily="Times New Roman" TextAlignment="Center"/>
+
+                    <Button Margin="2.5,0">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Details"/>
+                                <EventSetter Event="Click" Handler="Details_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/PostItems.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Margin="2.5,0">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Enclosure Items"/>
+                                <EventSetter Event="Click" Handler="Enclosure_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <GridSplitter Width="2" Margin="10,5" Background="LightGray" />
+
+                    <Button>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Items Modification"/>
+                                <EventSetter Event="Click" Handler="Modification_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Modifications History"/>
+                                <EventSetter Event="Click" Handler="ModificationsHistory_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/History.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <GridSplitter Width="2" Margin="10,5" Background="LightGray" />
+
+                    <Button>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Move Item Up"/>
+                                <EventSetter Event="Click" Handler="MoveUp_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/MoveUp.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Move Item Down"/>
+                                <EventSetter Event="Click" Handler="MoveDown_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/MoveDown.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Filters" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            DataContext="{Binding UserData}"
+                            Height="65" Margin="15,0,0,0">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="Code"
+                                 Width="198" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="Description" 
+                                 Width="298" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemQty" 
+                                 Width="58" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="Brand"
+                                 Width="198" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemDiscount" 
+                                 Width="78" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemCost" 
+                                 Width="98" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemPrice" 
+                                 Width="98" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemTotalCost" 
+                                 Width="98" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <TextBox x:Name="ItemTotalPrice" 
+                                 Width="95" 
+                                 Style="{StaticResource FilterInput}">
+                        </TextBox>
+                    </StackPanel>
+
+                    <Button Margin="2.55,0,0,5">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Width" Value="30"/>
+                                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="ToolTip" Value="Remove Filters"/>
+                                <EventSetter Event="Click" Handler="DeleteFilter_Click"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                                <Image Source="/GN.Base;component/Images/Icons/DeleteFilter.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Help" HorizontalAlignment="Right" Margin="0" Width="53">
+
+            </TabItem>
+
+        </TabControl>
+
+        <Grid  Margin="0,110,0,25">
+            <TextBlock x:Name="TableName"
+                       Text="Details"
+                       FontSize="32"
+                       FontWeight="Light"
+                       FontStyle="Italic"
+                       FontFamily="Times New Roman"
+                       Foreground="#FF9211E8"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Margin="20,10,0,0">
+            </TextBlock>
+
+            <Grid Margin="15,55,15,20" Grid.ColumnSpan="2" >
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                </Grid.Effect>
+
+                <Border Background="LightGray" CornerRadius="5">
+                    <Grid Margin="0,430,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <TextBlock Width="80" Text="Unit Cost:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding PanelData.PanelDesignCost, StringFormat=N2}" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="80" Text="Total Cost:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding PanelData.PanelsDesignCost, StringFormat=N2}" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <TextBlock Width="125" Text="Unit Price:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding PanelData.PanelDesignPrice, StringFormat=N2}" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="125" Text="Total Price:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding PanelData.PanelsDesignPrice, StringFormat=N2}" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <TextBlock Width="125" Text="Details Cost:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock x:Name="DetailsCost" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="125" Text="Enclosure Cost:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock x:Name="EnclosureCost" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <TextBlock Width="125" Text="Copper Cost:" Style="{StaticResource NavigationStyle}" TextAlignment="Right"/>
+                                <TextBlock x:Name="CopperCost" Style="{StaticResource NavigationStyle}" Margin="5,0" Foreground="Black"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <DataGrid x:Name="ItemsList"
+                      FontSize="12" 
+                      FontWeight="Bold" 
+                      FontFamily="Times New Roman"
+                      BorderThickness="0"
+                      IsReadOnly="True"
+                      RowHeaderWidth="0"
+                      Margin="20,60,20,80"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserResizeRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserSortColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserReorderColumns="False"
+                      ContextMenu="{StaticResource GridContextMenu}"
+                      HorizontalGridLinesBrush="LightGray"
+                      VerticalGridLinesBrush="Transparent"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Visible"
+                      RowStyle="{StaticResource RowStyle}">
+
+                <DataGrid.Resources>
+
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Foreground" Value="{StaticResource MyBlue}"/>
+                        <Setter Property="FontStyle" Value="Italic"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="MaxHeight" Value="30"/>
+                        <Setter Property="MinHeight" Value="30"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="200" Header="Part Number" Binding="{Binding Code}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="300" Header="Description" Binding="{Binding Description}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="60" Header="Qty" Binding="{Binding ItemQty}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="BrandColumn" Width="200" Header="Brand" Binding="{Binding Brand}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="DiscountColumn" Width="80" Header="Discount" Binding="{Binding ItemDiscount, StringFormat=N2}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="UnitCostColumn" Width="100" Header="Uint Cost" Binding="{Binding ItemCost, StringFormat=N2}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="UnitPriceColumn" Visibility="Visible" Width="100" Header="Unit Price" Binding="{Binding ItemPrice, StringFormat=N2}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="TotalCostColumn" Visibility="Visible" Width="100" Header="Total Cost" Binding="{Binding ItemTotalCost, StringFormat=N2}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="TotalPriceColumn" Width="100" Header="Total Price" Binding="{Binding ItemTotalPrice, StringFormat=N2}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+        <Grid Background="LightGray" Height="25" VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding UserData.Name}" FontFamily="Times New Roman" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dddd - dd / MM / yyyy'}" FontFamily="Times New Roman" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+        </Grid>
+
+        <Grid x:Name="LoadingControl" Background="Black" Opacity="0.75" Visibility="Collapsed" Panel.ZIndex="10000"/>
+
+    </Grid>
+</Window>

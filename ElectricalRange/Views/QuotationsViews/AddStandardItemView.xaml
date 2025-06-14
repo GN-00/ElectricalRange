@@ -1,0 +1,326 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsViews.AddStandardItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:ProjectsNow.Controls" 
+             mc:Ignorable="d" 
+             BorderThickness="1"
+             BorderBrush="{StaticResource Blue}"
+             FontFamily="Times New Roman"
+             Height="430" 
+             Width="1020">
+    <UserControl.Resources>
+
+        <Style x:Key="InputStyle" BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource Blue}"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+        </Style>
+
+        <Style x:Key="InputComboBoxStyle" BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Grid Panel.ZIndex="1000" 
+              Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Items"
+                           Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+
+            <c:PopupControls/>
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,20,30,0" 
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Right">
+                <ToggleButton Margin="5,0,5,0" 
+                              Width="38" 
+                              Height="20" 
+                              Style="{StaticResource SwitchTypeToggleButton}" 
+                              Command="{Binding CustomCommand}">
+                </ToggleButton>
+                <TextBlock Text="New Item." 
+                           Style="{StaticResource LabelStyle}" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical" 
+                        HorizontalAlignment="Center">
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Text="Key " 
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <ComboBox ItemsSource="{Binding SearchKeysData}"
+                              SelectedItem="{Binding SelectedKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Width="250" 
+                              IsEditable="True"
+                              DisplayMemberPath="Key"
+                              Style="{StaticResource InputComboBoxStyle}">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel Margin="0,15,0,0" 
+                            Orientation="Horizontal">
+                    <TextBlock Text="Part Number "
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <ComboBox ItemsSource="{Binding ReferencesCollection}"
+                              SelectedItem="{Binding SelectedReference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Width="250" 
+                              IsEditable="True"
+                              DisplayMemberPath="Code"
+                              SelectedValuePath="Code"
+                              SelectedValue="{Binding NewData.Code}"
+                              Text="{Binding NewData.Code}"
+                              Style="{StaticResource InputComboBoxStyle}">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <TextBlock Text="Description " 
+                               Width="100"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Width="500" 
+                             IsReadOnly="True"
+                             Text="{Binding NewData.Description, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" 
+                            Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden"/>
+                    <TextBlock Text="Article"
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <ComboBox ItemsSource="{Binding Articles1Data}"
+                              SelectedItem="{Binding SelectedArticle1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Text="{Binding NewData.Article1}"
+                              Width="240" 
+                              IsEditable="True"
+                              Style="{StaticResource InputComboBoxStyle}">
+                    </ComboBox>
+                    <TextBlock Width="20" Visibility="Hidden"/>
+                    <ComboBox ItemsSource="{Binding Articles2Data}"
+                              SelectedItem="{Binding SelectedArticle2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Text="{Binding NewData.Article2}"
+                              Width="240" 
+                              IsEditable="True"
+                              Style="{StaticResource InputComboBoxStyle}">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" 
+                            Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden"/>
+                    <TextBlock Text="Brand " 
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.Brand, Mode=OneWay}"
+                             Width="320" 
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+                    <TextBlock Text="Table " 
+                               Width="70" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.ItemTable, Mode=OneWay}"
+                             Width="105" 
+                             IsReadOnly="True"
+                             TextAlignment="Center"  
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" 
+                            Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden"/>
+                    <TextBlock Text="Remarks " 
+                               Width="100"
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <!--<TextBox Text="{Binding NewData.Remarks, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="500" 
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>-->
+                    <ComboBox ItemsSource="{Binding RemarksData}"
+                              SelectedItem="{Binding SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Text="{Binding NewData.Remarks}"
+                              Width="500" 
+                              IsEditable="True"
+                              Style="{StaticResource InputComboBoxStyle}">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden"/>
+
+                    <TextBlock Text="Discount " 
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.ItemDiscount, Mode=OneWay, StringFormat=N2}" 
+                             Width="100" 
+                             IsReadOnly="True"
+                             TextAlignment="Center" 
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+                    <TextBlock Text="  % " 
+                               Width="45" 
+                               TextAlignment="Left"
+                               Style="{StaticResource LabelStyle}" >
+                    </TextBlock>
+
+                    <TextBlock Text="Unit " 
+                               Width="45" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.Unit, Mode=OneWay}" 
+                             Width="100"
+                             IsReadOnly="True"
+                             TextAlignment="Center" 
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Qty " 
+                               Width="95" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding ItemQty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
+                             Width="100" 
+                             TextAlignment="Center"
+                             Style="{StaticResource InputStyle}"
+                             PreviewKeyDown="QtyCost_PreviewKeyDown">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden"/>
+                    <TextBlock Text="Unit Cost " 
+                               Width="100" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding ItemCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+                             Width="100" 
+                             IsReadOnly="{Binding EditableCost}" 
+                             TextAlignment="Center" 
+                             Style="{StaticResource InputStyle}"
+                             PreviewKeyDown="QtyCost_PreviewKeyDown">
+                    </TextBox>
+
+                    <TextBlock Text="Total Cost" 
+                               Width="95" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.ItemTotalCost, Mode=OneWay, StringFormat=N2}" 
+                             Width="100" 
+                             IsReadOnly="True"
+                             TextAlignment="Center" 
+                             Style="{StaticResource InputStyle}">
+                    </TextBox>
+
+                    <TextBlock Text="Total Price " 
+                               Width="95" 
+                               Style="{StaticResource LabelStyle}">
+                    </TextBlock>
+                    <TextBox Text="{Binding NewData.ItemTotalPrice, Mode=OneWay, StringFormat=N2}" 
+                             Width="100" 
+                             IsReadOnly="True"
+                             TextAlignment="Center"
+                             Style="{StaticResource InputStyle}" >
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2" 
+                    Margin="20,10" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding SaveCommand}"
+                    Style="{StaticResource SaveViewButton}">
+            </Button>
+            <Button Command="{Binding CancelCommand}"
+                    Style="{StaticResource CancelViewButton}">
+            </Button>
+        </StackPanel>
+
+        <Button Command="{Binding UpdateCommand}"
+                Grid.Row="2"
+                Width="170"
+                Padding="5"
+                Tag="Update References"
+                HorizontalAlignment="Left"
+                Style="{StaticResource SmallViewButton}">
+            <ImageSource>/Images/Icons/Reload.png</ImageSource>
+        </Button>
+
+        <Border  Grid.Row="2"
+                 Height="35"
+                 Width="130"
+                 CornerRadius="5" 
+                 Background="{StaticResource Blue}" 
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="5" 
+                       Source="/Images/Icons/PostItems.png" 
+                       RenderOptions.BitmapScalingMode="HighQuality">
+                </Image>
+                <TextBlock Grid.Column="1" 
+                           Foreground="White"
+                           Text="{Binding Stock}"
+                           FontSize="16"
+                           TextAlignment="Center"
+                           FontWeight="Medium"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center">
+                </TextBlock>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+﻿<Window x:Class="ProjectsNow.Windows.JobOrderWindows.PanelProgressionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Panel Progression" Height="250" Width="500">
+    <Grid>
+        <Grid x:Name="LoadingControl" Background="Black" Opacity="0.75">
+            <TextBlock Text="Sorry, Under Working....." FontSize="40" Foreground="White" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

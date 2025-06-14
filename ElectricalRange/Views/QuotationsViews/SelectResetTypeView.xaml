@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsViews.SelectResetTypeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             BorderThickness="1"
+             BorderBrush="{StaticResource Blue}"
+             Height="150" Width="300">
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Panel.ZIndex="1000" 
+              Background="{StaticResource LinearGradientGray}">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Reset"
+                           Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+
+            <Button Command="{Binding AllCommand}"
+                    Tag="All"
+                    Padding="0,0,0,-8"
+                    Style="{StaticResource ManagerSubTapsButtons}">
+                <ImageSource>/Images/Icons/AllTables.png</ImageSource>
+            </Button>
+
+            <Button Grid.Column="1"
+                    Command="{Binding DetailsCommand}"
+                    Tag="Details"
+                    Padding="0,5,0,-5"
+                    Style="{StaticResource ManagerSubTapsButtons}">
+                <ImageSource>/Images/Icons/PostItems.png</ImageSource>
+            </Button>
+
+            <Button Grid.Column="2"
+                    Command="{Binding EnclosureCommand}"
+                    Tag="Enclosure"
+                    Padding="0,5,0,-5"
+                    Style="{StaticResource ManagerSubTapsButtons}">
+                <ImageSource>/Images/Icons/Enclosure.png</ImageSource>
+            </Button>
+
+            <Button Grid.Column="3"
+                    Command="{Binding AccessoriesCommand}"
+                    Tag="Accessories"
+                    Padding="0,5,0,-5"
+                    Style="{StaticResource ManagerSubTapsButtons}">
+                <ImageSource>/Images/Icons/Accessories.png</ImageSource>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

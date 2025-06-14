@@ -1,0 +1,274 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsViews.TermsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Style="{StaticResource ViewStyle}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <Style x:Key="SubTitleStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="15,15,0,15" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="Foreground" Value="{StaticResource Blue}" />
+        </Style>
+
+        <ContextMenu x:Key="GridContextMenu"
+                     FontFamily="Times New Roman">
+            <MenuItem Command="{Binding AddCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Add Term" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Add.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <ContextMenu x:Key="RowsContextMenu"
+                     FontFamily="Times New Roman">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.AddCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Add Term" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Add.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.EditCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Edit Term" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Edit1.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.CopyCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Copy" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Copy.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.UpCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Move Up" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/MoveUp.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.DownCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Move Down" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/MoveDown.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.DeleteCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Foreground="Red"
+                               Text="Delete Term" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Error.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="55" />
+        </Grid.RowDefinitions>
+
+        <Grid Panel.ZIndex="1000"
+              Background="{StaticResource LinearGradientGray}">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}"
+                           Text="Sales Invoices" />
+            </StackPanel>
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+        </Grid>
+
+        <TabControl Grid.Row="1"
+                    Width="160"
+                    Height="548"
+                    Margin="20,20,0,0"
+                    HorizontalAlignment="Left"
+                    Panel.ZIndex="1000"
+                    Background="White"
+                    Style="{StaticResource TabControlStyle}"
+                    TabStripPlacement="Left">
+
+            <TabControl.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </TabControl.Effect>
+
+            <TabItem x:Name="ScopeOfSupplyTab"
+                     Header="Scope Of Supply"
+                     IsSelected="{Binding IsScope, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="TotalPriceTab"
+                     Header="Total Price"
+                     IsSelected="{Binding IsPrice, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="PaymentConditionsTab"
+                     Header="Payment  Conditions"
+                     IsSelected="{Binding IsPayment, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="ValidityPeriodTab"
+                     Header="Validity Period"
+                     IsSelected="{Binding IsValidity, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="ShopDrawingSubmittalsTab"
+                     Header="Shop Drawing Submittals"
+                     IsSelected="{Binding IsShopDrawing, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="DeliveryTab"
+                     Header="Delivery"
+                     IsSelected="{Binding IsDelivery, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="GuaranteeTab"
+                     Header="Guarantee"
+                     IsSelected="{Binding IsGuarantee, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+            <TabItem x:Name="RemarksTab"
+                     Header="Remarks"
+                     IsSelected="{Binding IsRemarks, Mode=TwoWay}"
+                     Style="{StaticResource LeftTabItemStyle}" />
+
+        </TabControl>
+
+        <Grid Grid.Row="1"
+              Margin="150,10,0,0">
+            <Border Grid.Row="1"
+                    Margin="20,0"
+                    Background="White"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5"
+                                      Direction="-90"
+                                      Opacity="0.3"
+                                      RenderingBias="Quality"
+                                      ShadowDepth="2" />
+                </Border.Effect>
+                <Grid Margin="20,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource SubTitleStyle}"
+                               Text="{Binding Title}" />
+
+                    <ListBox Grid.Row="1"
+                             Margin="15"
+                             Padding="0"
+                             BorderBrush="Transparent"
+                             ContextMenu="{StaticResource GridContextMenu}"
+                             FontFamily="Times New Roman"
+                             FontSize="24"
+                             ItemsSource="{Binding TermsCollection}"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             SelectedItem="{Binding SelectedTerm, Mode=TwoWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Name="grid"
+                                      Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0"
+                                              HorizontalAlignment="Center"
+                                              IsChecked="{Binding IsUsed}"
+                                              IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.IsEditable}"
+                                              Style="{StaticResource CheckBoxStyle}" />
+                                    <TextBlock x:Name="Condition"
+                                               Grid.Column="1"
+                                               Width="980"
+                                               HorizontalAlignment="Left"
+                                               Focusable="True"
+                                               Text="{Binding Condition}"
+                                               TextWrapping="Wrap" />
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsDefault}"
+                                                 Value="true">
+                                        <Setter TargetName="Condition" Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}" />
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightSkyBlue" />
+                                </Style.Resources>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="2"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Button Command="{Binding SaveCommand}"
+                    Style="{StaticResource SaveViewButton}" />
+
+            <Button Command="{Binding CancelCommand}"
+                    Style="{StaticResource CancelViewButton}" />
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

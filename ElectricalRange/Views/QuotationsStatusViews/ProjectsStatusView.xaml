@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsStatusViews.ProjectsStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Style="{StaticResource ViewStyle}">
+    <UserControl.Resources>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="Foreground" Value="{StaticResource Blue}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <TextBlock Text="Projects Status"
+                   FontSize="32"
+                   FontWeight="Light"
+                   FontFamily="Times New Roman"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Margin="10,7.5,0,0">
+        </TextBlock>
+
+        <TextBlock Text="{Binding Status}"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   FontFamily="Times New Roman"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0,30,0,0">
+        </TextBlock>
+
+        <TabControl Height="105"
+                    Style="{StaticResource ViewsTabControlStyle}">
+            <TabControl.Resources>
+                <Style TargetType="TabItem" BasedOn="{StaticResource TextItemStyle}"/>
+            </TabControl.Resources>
+
+            <TabItem Header="TabItem" Width="20" Visibility="Hidden"/>
+
+            <TabItem IsSelected="True" Header="Data" HorizontalAlignment="Right">
+                <StackPanel Margin="5,0,0,0" 
+                            Orientation="Horizontal">
+
+                    <Grid Margin="0,4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Start" 
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   Style="{StaticResource LabelStyle}">
+                        </TextBlock>
+
+                        <TextBlock Text="End" 
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   Style="{StaticResource LabelStyle}">
+                        </TextBlock>
+
+                        <DatePicker SelectedDate="{Binding StartDate}"
+                                    Grid.Column="1"
+                                    FontSize="14"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource DatePickerStyle}">
+                        </DatePicker>
+
+                        <DatePicker SelectedDate="{Binding EndDate}" 
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontSize="14"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource DatePickerStyle}">
+                        </DatePicker>
+
+                        <Button Tag="Load" 
+                                Margin="15,0,5,0"
+                                Grid.Column="2"
+                                Grid.RowSpan="2"
+                                FontSize="12"
+                                Padding="0,5,0,0"
+                                Command="{Binding LoadCommand}"
+                                Style="{StaticResource ManagerSubTapsButtons}">
+                            <ImageSource>/Images/Icons/Reload.png</ImageSource>
+                        </Button>
+                    </Grid>
+
+                    <GridSplitter Margin="5,5" Width="2" Background="Gray"/>
+
+                    <Button Tag="On Pipe" 
+                            Padding="0,5,0,0"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Command="{Binding OnPipeCommand}">
+                        <ImageSource>/Images/Icons/OnPipe.png</ImageSource>
+                    </Button>
+
+                    <Border BorderBrush="DarkGray"
+                            BorderThickness="1"
+                            Margin="5,2"
+                            CornerRadius="5">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Tag="Quotations" 
+                                    Padding="0,5,0,0"
+                                    FontSize="11"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding QuotationsCommand}">
+                                <ImageSource>/Images/Icons/Quotation1.png</ImageSource>
+                            </Button>
+
+                            <Button Tag="Win" 
+                                    Padding="0,5,0,0"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding WinCommand}">
+                                <ImageSource>/Images/Icons/GreenFolder.png</ImageSource>
+                            </Button>
+
+                            <Button Tag="On Going" 
+                                    Padding="0,5,0,0"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding OnGoingCommand}">
+                                <ImageSource>/Images/Icons/BlueFolder.png</ImageSource>
+                            </Button>
+
+                            <Button Tag="Hold" 
+                                    Padding="0,5,0,0"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding HoldCommand}">
+                                <ImageSource>/Images/Icons/YellowFolder.png</ImageSource>
+                            </Button>
+
+                            <Button Tag="Cancel" 
+                                    Padding="0,5,0,0"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding CancelCommand}">
+                                <ImageSource>/Images/Icons/RedFolder.png</ImageSource>
+                            </Button>
+
+                            <Button Tag="Lost" 
+                                    Padding="0,5,0,-5"
+                                    Style="{StaticResource ManagerSubTapsButtons}"
+                                    Command="{Binding LostCommand}">
+                                <ImageSource>/Images/Icons/Lost.png</ImageSource>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Tag="Estimator" 
+                            Padding="0,5,0,0"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Command="{Binding EstimatorCommand}">
+                        <ImageSource>/Images/Icons/Estimate.png</ImageSource>
+                    </Button>
+
+                    <Button Tag="Salesman" 
+                            Padding="0,5,0,0"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Command="{Binding SalesmanCommand}">
+                        <ImageSource>/Images/Icons/MyData.png</ImageSource>
+                    </Button>
+
+
+                    <Button Tag="Project Status" 
+                            Padding="0,5,0,0"
+                            Command="{Binding StatusCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}">
+                        <ImageSource>/Images/Icons/Progression.png</ImageSource>
+                    </Button>
+
+
+                    <Button Tag="Updates" 
+                            Padding="0,5,0,0"
+                            Command="{Binding UpdatesCommand}"
+                            CommandParameter="{Binding SelectedQuotation}"
+                            Style="{StaticResource ManagerSubTapsButtons}">
+                        <ImageSource>/Images/Icons/Communication.png</ImageSource>
+                    </Button>
+
+
+                    <Button Tag="Export" 
+                            Padding="0,5,0,0"
+                            Command="{Binding ExportCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}">
+                        <ImageSource>/Images/Icons/Excel.png</ImageSource>
+                    </Button>
+
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+
+        <ContentControl Grid.Row="1"
+                        Focusable="False"
+                        DataContext="{Binding}"
+                        Content="{Binding CurrentView}">
+        </ContentControl>
+
+    </Grid>
+</UserControl>

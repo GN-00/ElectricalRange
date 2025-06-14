@@ -1,0 +1,1842 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.Finance.PanelsInvoicePercentageForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="21cm"
+             Height="29.7cm"
+             FontFamily="Calibri (Body)"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d">
+    <Grid Margin="20"
+          Background="White">
+        <Image x:Name="BackgroundImage"
+               Margin="-20"
+               RenderOptions.BitmapScalingMode="HighQuality"
+               Visibility="Collapsed" />
+
+        <StackPanel Orientation="Vertical">
+            <Grid Height="21"
+                  Margin="15,80,15,0"
+                  DataContext="{Binding InvoiceData}">
+                <StackPanel HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock FontSize="14"
+                               Foreground="#4f81bd"
+                               Text="" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock FontSize="14"
+                               Foreground="#4f81bd"
+                               Text="" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="0,10,0,0"
+                  DataContext="{Binding InvoiceData}">
+                <TextBlock x:Name="FormName"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="26"
+                           Foreground="#4f81bd"
+                           Text="VAT INVOICE" />
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="26"
+                           Foreground="Black"
+                           Text="{Binding InvoiceNumber}" />
+                <TextBlock x:Name="FormArabicName"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontSize="26"
+                           Foreground="#4f81bd"
+                           Text="فاتورة ضريبية" />
+            </Grid>
+            <StackPanel x:Name="DetailsArea"
+                        Orientation="Vertical"
+                        Visibility="Collapsed">
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="Date" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding Date, StringFormat=yyyy-MM-dd}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="التاريخ" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="J.O#" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding JobOrderCode}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="رقم أمر العمل" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="P.O #" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding PurchaseOrderNumber}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="رقم أمر الشراء" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,10,0,0">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#4f81bd"
+                               Text="BILL TO " />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#4f81bd"
+                               Text="فاتورة الى" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="M/s" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding CustomerNameInfo}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="السادة" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="Attention" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding Attention}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="عناية" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="Project " />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding ProjectName}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="مشروع" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="Address" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding Address}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="العنون" />
+                </Grid>
+                <Grid Height="20"
+                      Margin="0,0,0,0"
+                      DataContext="{Binding InvoiceData}">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="VAT #" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding CustomerVAT}" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="الضريبي الرقم" />
+                </Grid>
+
+            </StackPanel>
+
+            <Grid Height="20"
+                  Margin="0,10,0,0">
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#4f81bd"
+                           Text="INVOICE DETAILS"
+                           TextDecorations="UnderLine" />
+            </Grid>
+
+            <Grid x:Name="InvoiceTable"
+                  Margin="0,5,0,0"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="320" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="140" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="0" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,1,1,1">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="S.No." />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="رقم التسلسلي" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0"
+                        Grid.Column="1"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="Description" />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="البيان" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0"
+                        Grid.Column="2"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="Qty" />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="الكمية" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0"
+                        Grid.Column="3"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="U/Price" />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="سعر الوحدة" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0"
+                        Grid.Column="4"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="Due Amount" />
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="المبلغ المستحق" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+
+
+                <Border Grid.Row="1"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[0]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[0]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[0]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="1"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[0]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="1"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[0]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="2"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[1]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[1]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[1]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="2"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[1]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="2"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[1]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="3"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[2]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="3"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[2]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="3"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[2]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="3"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[2]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="3"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[2]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="4"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[3]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="4"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[3]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="4"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[3]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="4"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[3]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="4"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[3]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="5"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[4]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[4]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[4]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[4]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[4]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="6"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[5]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="6"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[5]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="6"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[5]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="6"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[5]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="6"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[5]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="7"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[6]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="7"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[6]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="7"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[6]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="7"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[6]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="7"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[6]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="8"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[7]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="8"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[7]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="8"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[7]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="8"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[7]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="8"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[7]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="9"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[8]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="9"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[8]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="9"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[8]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="9"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[8]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="9"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[8]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="10"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[9]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="10"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[9]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="10"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[9]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="10"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[9]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="10"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[9]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="11"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[10]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="11"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[10]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="11"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[10]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="11"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[10]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="11"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[10]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="12"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[11]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="12"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[11]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="12"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[11]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="12"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[11]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="12"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[11]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="13"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[12]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="13"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[12]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="13"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[12]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="13"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[12]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="13"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[12]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+                <Border Grid.Row="14"
+                        Grid.Column="0"
+                        Background="#4f81bd"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1"
+                        DataContext="{Binding PanelsData[13]}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding SN}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="14"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[13]}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Row="1"
+                                   Margin="5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding ArabicDescription}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="14"
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[13]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding Qty}" />
+                </Border>
+                <Border Grid.Row="14"
+                        Grid.Column="3"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[13]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding UnitOriginalPrice, StringFormat=N2}" />
+                </Border>
+                <Border Grid.Row="14"
+                        Grid.Column="4"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1"
+                        DataContext="{Binding PanelsData[13]}">
+                    <TextBlock Grid.Row="0"
+                               Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+
+                <Border Grid.Row="17"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="الإجمالي" />
+                </Border>
+
+                <Border Grid.Row="17"
+                        Grid.Column="6"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding NetPrice, StringFormat=N2}" />
+                </Border>
+
+                <Border Grid.Row="18"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="ضريبة القيمة المضافة %15" />
+                </Border>
+
+                <Border Grid.Row="18"
+                        Grid.Column="6"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding VATValue, StringFormat=N2}" />
+                </Border>
+
+                <Border Grid.Row="19"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BorderBrush="Black"
+                        BorderThickness="1,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="الإجمالي شامل قيمة الضريبة المضافة" />
+                </Border>
+
+                <Border Grid.Row="19"
+                        Grid.Column="6"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,1">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Text="{Binding GrossPrice, StringFormat=N2}" />
+                </Border>
+
+            </Grid>
+
+            <Grid x:Name="Total1"
+                  Height="20"
+                  Margin="0,15,0,0">
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="Amount Before VAT" />
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="{Binding NetPrice, StringFormat=N2}" />
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="الإجمالي" />
+            </Grid>
+            <Grid x:Name="Total2"
+                  Height="20"
+                  Margin="0,0,0,0">
+                <StackPanel HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock FontSize="14"
+                               Foreground="Black"
+                               Text="VAT " />
+                    <TextBlock FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding VATPercentage, StringFormat=N0}" />
+                    <TextBlock FontSize="14"
+                               Foreground="Black"
+                               Text="%" />
+                </StackPanel>
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="{Binding VATValue, StringFormat=N2}" />
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="٪" />
+                    <TextBlock VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="{Binding ArabicVAT}" />
+                    <TextBlock VerticalAlignment="Center"
+                               FontSize="14"
+                               Foreground="Black"
+                               Text="  ضريبة القيمة المضافة" />
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="Total3"
+                  Height="20"
+                  Margin="0,0,0,0">
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="Net Amount" />
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="{Binding GrossPrice, StringFormat=N2}" />
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Black"
+                           Text="الإجمالي شامل قيمة الضريبة المضاف" />
+            </Grid>
+
+            <Grid x:Name="Total4"
+                  Height="20"
+                  Margin="0,10,0,0">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Text="{Binding textPrice}" />
+            </Grid>
+            <Grid x:Name="Total5"
+                  Height="20"
+                  Margin="0,0,0,0">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Text="{Binding textPriceArabic}" />
+            </Grid>
+        </StackPanel>
+
+        <Grid x:Name="Total6"
+              Margin="0,0,0,80"
+              VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Times New Roman" />
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Text="Signature" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Text="Stamp" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Text="QR" />
+            <Image x:Name="QR"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   Width="140"
+                   Height="140"
+                   Margin="0,0,0,20"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
+        </Grid>
+
+        <Grid Height="20"
+              Margin="0,0,0,50"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom">
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <TextBlock FontSize="14"
+                           FontWeight="Bold"
+                           Text="Page: " />
+                <TextBlock FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding Page}" />
+                <TextBlock FontSize="14"
+                           Text=" / " />
+                <TextBlock FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding Pages}" />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

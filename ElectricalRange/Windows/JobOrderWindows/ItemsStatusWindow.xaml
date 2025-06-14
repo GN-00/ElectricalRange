@@ -1,0 +1,312 @@
+﻿<Window x:Class="ProjectsNow.Windows.JobOrderWindows.ItemsStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:CN="clr-namespace:ProjectsNow.Controls"
+        mc:Ignorable="d"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        Loaded="Window_Loaded"
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="Items Status" Height="588" Width="1159">
+    <Window.Resources>
+        <ContextMenu x:Key="ItemsContextMenu"
+                     FontWeight="Bold">
+            <MenuItem>
+                <MenuItem.Header>
+                    <TextBlock Text="Export" Margin="5,0" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Height="20" Width="20"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Excel.png">
+                    </Image>
+                </MenuItem.Icon>
+                <MenuItem Click="ExportItems_Click">
+                    <MenuItem.Header>
+                        <TextBlock Text="Items" Margin="5,0" VerticalAlignment="Center"/>
+                    </MenuItem.Header>
+                    <MenuItem.Icon>
+                        <Image Height="20" Width="20"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/Images/Icons/Product.png">
+                        </Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="ExportMissing_Click">
+                    <MenuItem.Header>
+                        <TextBlock Text="Missing" Margin="5,0" VerticalAlignment="Center"/>
+                    </MenuItem.Header>
+                    <MenuItem.Icon>
+                        <Image Height="20" Width="20"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/Images/Icons/Item!.png">
+                        </Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid Height="120"
+              VerticalAlignment="Top"
+              Background="{StaticResource LinearGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="-90" Color="Gray"/>
+            </Grid.Effect>
+        </Grid>
+        
+        <CN:IconControl/>
+        <CN:WindowControls/>
+        
+        <TabControl Height="100" Style="{StaticResource TabControlTab}">
+
+            <TabItem Header="TabItem" Width="100" Visibility="Hidden"/>
+
+            <TabItem Header="Home" 
+                     IsSelected="True" 
+                     Style="{StaticResource TabItemStyle}">
+
+                <Grid VerticalAlignment="Center"
+                      TextBlock.FontSize="18"
+                      Height="60" Margin="90,0,0,0">
+                    
+                    <Grid DataContext="{Binding JobOrderData}"
+                          HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Job Order No.: " Foreground="{StaticResource MyBlue}"/>
+                            <TextBlock Text="{Binding Code}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="1"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Customer: " Foreground="{StaticResource MyBlue}"/>
+                            <TextBlock Text="{Binding CustomerName}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button x:Name="ExportButton"
+                            Margin="0,0,20,0"
+                            ToolTip="Export"
+                            Click="Export_Click"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource TabButton}">
+                        <ImageSource>/Images/Icons/Excel.png</ImageSource>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Help" 
+                     Style="{StaticResource TabItemStyle}">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Height="90" Margin="75,0,0,0">
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+        <Border Margin="10,130,10,20" CornerRadius="5,5,10,10" Background="LightGray">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="RecordsList"
+                          Margin="5,5,5,0"
+                          ItemsSource="{Binding ItemsView}"
+                          ContextMenu="{StaticResource ItemsContextMenu}"
+                          Style="{StaticResource DataGridStyle}"
+                          SelectedCellsChanged="SelectedChanged">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Margin" Value="0,0,0,0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                <Expander IsExpanded="True" Background="DarkGray" Foreground="Black">
+                                                    <Expander.Header>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,5,0" />
+                                                            <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount, StringFormat='({0})'}" HorizontalAlignment="Right"/>
+                                                        </StackPanel>
+                                                    </Expander.Header>
+                                                    <Expander.Content>
+                                                        <ItemsPresenter/>
+                                                    </Expander.Content>
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}"
+                               BasedOn="{StaticResource RowsStyle}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ItemsContextMenu}"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="220" Header="Reference" Binding="{Binding Code}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="Margin" Value="5,0"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="310" Header="Description" Binding="{Binding Description}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="Margin" Value="5,0"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="80" Header="Unit" Binding="{Binding Unit}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="100" Header="Qty" Binding="{Binding Qty}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="100" Header="In Order" Binding="{Binding InOrderQty}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="100" Header="Have" Binding="{Binding PurchasedQty}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="100" Header="Damaged" Binding="{Binding DamagedQty}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="100" Header="Remaining" Binding="{Binding RemainingQty}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="20,0"
+                            Grid.Row="1"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Item: " Style="{StaticResource NavigationStyle}"/>
+                    <TextBlock x:Name="Navigation" Text="-" Foreground="Black" Style="{StaticResource NavigationStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <Grid Height="10" 
+              VerticalAlignment="Bottom"
+              Background="{StaticResource LinearGray}">
+        </Grid>
+        
+        <Popup x:Name="ExportPopup"
+               AllowsTransparency="True"
+               PopupAnimation="Fade"
+               PlacementTarget="{Binding ElementName=ExportButton}"
+               Placement="Bottom" StaysOpen="False">
+            <Popup.Resources>
+                <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="Width" Value="90"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Content" Value="Materials"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontFamily" Value="Times New Roman"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Popup.Resources>
+
+            <Grid>
+                <Border BorderBrush="LightGray"
+                        Background="Black"
+                        Opacity="0.9"
+                        Padding="0"
+                        HorizontalAlignment="Center"
+                        BorderThickness="0"
+                        CornerRadius="10"
+                        Width="110"
+                        Height="95">
+                    <Grid>
+                        <StackPanel Orientation="Vertical">
+                            <Button Content="Items"  
+                                    Click="ExportItems_Click" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Margin="0,15,0,0">
+                            </Button>
+                            <Button Content="Missing"  
+                                    Click="ExportMissing_Click" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Margin="0,15,0,0">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Popup>
+    </Grid>
+</Window>

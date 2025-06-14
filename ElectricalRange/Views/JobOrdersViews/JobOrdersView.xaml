@@ -1,0 +1,579 @@
+﻿<UserControl x:Class="ProjectsNow.Views.JobOrdersViews.JobOrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Style="{StaticResource ViewStyle}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <ContextMenu x:Key="GridContextMenu"
+                     FontFamily="Times New Roman">
+
+            <MenuItem Command="{Binding NewOrdersCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="New Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Partnership.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding AllCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="All Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/AllFiles.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RunningCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Running Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/GreenFolder.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding ClosedCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Closed Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/BlueFolder.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding ExportCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Export" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Excel.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+        </ContextMenu>
+
+        <ContextMenu x:Key="RowsContextMenu"
+                     FontFamily="Times New Roman">
+
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.InfoCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Info" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Information.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AcknowledgmentCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Acknowledgment" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Acknowledgement.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PurchaseOrderCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Purchase Order" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/purchase-orders.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PanelsCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Panels" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Enclosure.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ItemsStatusCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Items Status" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/ItemsStatus.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PurchaseCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Purchase" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Purchase.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PostingItemsCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Posting Items" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/PostItems.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.WarrantiesCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Warranties" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Warranties.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.NewOrdersCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="New Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Partnership.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AllCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="All Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/AllFiles.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.RunningCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Running Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/GreenFolder.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ClosedCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Closed Orders" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/BlueFolder.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ExportCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Export" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Excel.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+        </ContextMenu>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.3"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+        </Grid>
+
+        <TextBlock Style="{StaticResource TitleStyle}"
+                   Text="Job Orders" />
+
+        <TabControl Style="{StaticResource ViewsTabControlStyle}">
+            <TabControl.Resources>
+                <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
+            </TabControl.Resources>
+
+            <TabItem Width="20"
+                     Header="TabItem"
+                     Visibility="Hidden" />
+
+            <TabItem x:Name="Tool"
+                     Header="Tool"
+                     IsSelected="True">
+                <StackPanel Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                    <Button Padding="0,0,0,-10"
+                            Command="{Binding NewOrdersCommand}"
+                            FontSize="11"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="New Orders">
+                        <ImageSource>/Images/Icons/Partnership.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding InfoCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Info">
+                        <ImageSource>/Images/Icons/Info.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-5"
+                            Command="{Binding AcknowledgmentCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            FontSize="10"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Acknowledg-ment">
+                        <ImageSource>/Images/Icons/Acknowledgement.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-5"
+                            Command="{Binding PurchaseOrderCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            FontSize="10"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Purchase Order">
+                        <ImageSource>/Images/Icons/purchase-orders.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding PanelsCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Panels">
+                        <ImageSource>/Images/Icons/Enclosure.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-2"
+                            Command="{Binding ItemsStatusCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            FontSize="11"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Items   Status">
+                        <ImageSource>/Images/Icons/ItemsStatus.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding PurchaseCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Purchase">
+                        <ImageSource>/Images/Icons/Purchase.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-5"
+                            Command="{Binding PostingItemsCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            FontSize="11"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Posting Items">
+                        <ImageSource>/Images/Icons/PostItems.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding ApprovalCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Approvals">
+                        <ImageSource>/Images/Icons/WaitingApproval.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding ProductionCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Production">
+                        <ImageSource>/Images/Icons/UnderWork.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding InspectionCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Inspection">
+                        <ImageSource>/Images/Icons/Inspection.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding ClosingCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Closing">
+                        <ImageSource>/Images/Icons/Closing.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding DeliveryCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Delivery">
+                        <ImageSource>/Images/Icons/Store.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Cancel">
+                        <ImageSource>/Images/Icons/Cancel2.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding WarrantiesCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Warranties">
+                        <ImageSource>/Images/Icons/Warranties.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding QualityCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Quality">
+                        <ImageSource>/Images/Icons/Quality.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding ExportCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Export">
+                        <ImageSource>/Images/Icons/Excel.png</ImageSource>
+                    </Button>
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem HorizontalAlignment="Right"
+                     Header="Data">
+                <StackPanel Margin="10,0,0,0"
+                            Orientation="Horizontal">
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding AllCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="All">
+                        <ImageSource>/Images/Icons/AllFiles.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding RunningCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Running">
+                        <ImageSource>/Images/Icons/GreenFolder.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding ClosedCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Closed">
+                        <ImageSource>/Images/Icons/BlueFolder.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-8"
+                            Command="{Binding CanceledCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Canceled">
+                        <ImageSource>/Images/Icons/RedFolder.png</ImageSource>
+                    </Button>
+
+                    <StackPanel Margin="0,0,10,0"
+                                Orientation="Horizontal">
+                        <Image Width="30"
+                               Height="30"
+                               Margin="5,-2.5,5,5"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/Images/Icons/Datetime.png"
+                               Stretch="Uniform" />
+                        <ComboBox Width="65"
+                                  ItemsSource="{Binding Years}"
+                                  SelectedItem="{Binding SelectedYear}"
+                                  Style="{StaticResource YearsComboStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem HorizontalAlignment="Right"
+                     Header="Filters">
+                <StackPanel Margin="7,0,0,0"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal">
+
+                    <TextBox Width="118"
+                             Style="{StaticResource FilterInputStyle}"
+                             Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Width="178"
+                             Style="{StaticResource FilterInputStyle}"
+                             Text="{Binding QuotationCode, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Width="358"
+                             Style="{StaticResource FilterInputStyle}"
+                             Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Width="358"
+                             Style="{StaticResource FilterInputStyle}"
+                             Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Width="218"
+                             Style="{StaticResource FilterInputStyle}"
+                             Text="{Binding EstimationName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button Command="{Binding DeleteFilterCommand}"
+                            Style="{StaticResource FilterButtonStyle}" />
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+
+        <Grid Grid.Row="1"
+              Margin="0,5,0,0"
+              VerticalAlignment="Top">
+
+            <TextBlock Margin="20,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontFamily="Times New Roman"
+                       FontSize="32"
+                       FontWeight="Light"
+                       Foreground="{Binding StatusColor}"
+                       Text="{Binding Status}" />
+
+            <TextBlock Margin="0,10,20,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontFamily="Times New Roman"
+                       FontSize="32"
+                       FontWeight="Light"
+                       Foreground="{Binding StatusColor}"
+                       Text="{Binding YearInfo}" />
+
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Margin="10,60,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+            <Grid Grid.Row="1"
+                  Background="LightGray">
+                <StackPanel Margin="20,0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndicationStyle}"
+                               Text="Job Order: " />
+                    <TextBlock Foreground="Black"
+                               Style="{StaticResource IndicationStyle}"
+                               Text="{Binding Indicator}" />
+                </StackPanel>
+            </Grid>
+
+            <DataGrid ContextMenu="{StaticResource GridContextMenu}"
+                      ItemsSource="{Binding ItemsCollection}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      Style="{StaticResource ViewDataGridStyle}">
+                <DataGrid.InputBindings>
+                    <MouseBinding Command="{Binding PanelsCommand}"
+                                  CommandParameter="{Binding SelectedItem}"
+                                  Gesture="LeftDoubleClick" />
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
+                        <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="120"
+                                        Binding="{Binding Code}"
+                                        Header="Job Order Code">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Canceled}"
+                                                 Value="True">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="180"
+                                        Binding="{Binding QuotationCode}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Quotation Code" />
+
+                    <DataGridTextColumn Width="360"
+                                        Binding="{Binding CustomerName}"
+                                        ElementStyle="{StaticResource LeftColumnView}"
+                                        Header="Customer Name" />
+
+                    <DataGridTextColumn Width="360"
+                                        Binding="{Binding ProjectName}"
+                                        ElementStyle="{StaticResource LeftColumnView}"
+                                        Header="Project Name" />
+
+                    <DataGridTextColumn Width="240"
+                                        Binding="{Binding EstimationName}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Estimation Eng" />
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

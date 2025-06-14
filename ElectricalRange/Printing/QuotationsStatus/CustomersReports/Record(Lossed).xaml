@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.QuotationsStatus.CustomersReports.Record_Lossed"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             FontFamily="Calibri (Body)"
+             Height="30" 
+             Width="21cm">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="Black"
+                BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left" Margin="5,0">
+                <TextBlock Text="{Binding Project}"/>
+            </StackPanel>
+        </Border>
+
+        <Border BorderBrush="Black"
+                BorderThickness="0,0,0,1"
+                Grid.Column="1">
+            <TextBlock Text="{Binding Total, StringFormat=N2}"/>
+        </Border>
+
+        <Border BorderBrush="Black"
+                BorderThickness="0,0,0,1"
+                Grid.Column="3">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left" Margin="5,0">
+                <TextBlock Text="{Binding Note}"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

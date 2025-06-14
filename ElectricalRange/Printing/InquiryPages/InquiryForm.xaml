@@ -1,0 +1,342 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.InquiryPages.InquiryForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             FontFamily="Calibri (Body)"
+             Height="29.7cm" 
+             Width="21cm">
+    <UserControl.Resources>
+        <Style x:Key="LableStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="DataStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="20"
+          Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Inquiry Information"
+                   Margin="10"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center">
+        </TextBlock>
+
+        <Grid Grid.Row="1"
+              Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,1"
+                    BorderBrush="Black" 
+                    Grid.ColumnSpan="4">
+                <TextBlock Text="General Information" 
+                           Margin="5,0"
+                           FontSize="18" 
+                           FontWeight="Bold">
+                </TextBlock>
+            </Border>
+
+            <TextBlock Grid.Row="1" 
+                       Text="Register Code:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.RegisterCode}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" 
+                       Text="Customer Name:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="2" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.Customer}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" 
+                       Text="Project:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="3" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.Project}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="4" 
+                       Text="Register Date:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="4" 
+                       Grid.Column="1"  
+                       Text="{Binding Data.RegisterDateInfo}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="4" 
+                       Grid.Column="2"
+                       Text="Duo Date:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="4" 
+                       Grid.Column="3"  
+                       Text="{Binding Data.DuoDateInfo}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="5" 
+                       Text="Salesman:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="5" 
+                       Grid.Column="1"  
+                       Text="{Binding Data.Salesman}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="5" 
+                       Grid.Column="2"
+                       Text="Estimation Eng.:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="5" 
+                       Grid.Column="3"  
+                       Text="{Binding Data.Estimator}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="6" 
+                       Text="Scope:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="6" 
+                       Grid.Column="1"  
+                       Text="{Binding Data.Scope}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="6" 
+                       Grid.Column="2"
+                       Text="Project Status:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="6" 
+                       Grid.Column="3"  
+                       Text="{Binding Data.ProjectStatus}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,1"
+                    BorderBrush="Black" 
+                    Grid.ColumnSpan="4">
+                <TextBlock Text="Contact" 
+                           Margin="5,0"
+                           FontSize="18" 
+                           FontWeight="Bold">
+                </TextBlock>
+            </Border>
+
+            <TextBlock Grid.Row="1" 
+                       Text="Name:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.Contact}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" 
+                       Text="Mobile:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="2" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.ContactNumber}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+        </Grid>
+
+        <Grid Grid.Row="3"
+              Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,1"
+                    BorderBrush="Black" 
+                    Grid.ColumnSpan="4">
+                <TextBlock Text="Quotation" 
+                           Margin="5,0"
+                           FontSize="18" 
+                           FontWeight="Bold">
+                </TextBlock>
+            </Border>
+
+            <TextBlock Grid.Row="1" 
+                       Text="Code:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.QuotationCode}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" 
+                       Text="Gross Price:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="2" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.QuotationGrossPrice}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+        </Grid>
+
+        <Grid Grid.Row="4"
+              Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,1"
+                    BorderBrush="Black" 
+                    Grid.ColumnSpan="4">
+                <TextBlock Text="Job Order" 
+                           Margin="5,0"
+                           FontSize="18" 
+                           FontWeight="Bold">
+                </TextBlock>
+            </Border>
+
+            <TextBlock Grid.Row="1" 
+                       Text="Code:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.JobOrderCode}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" 
+                       Text="PO:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="2" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.PurchaseOrder}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+
+            <TextBlock Grid.Row="3" 
+                       Text="Total Panels:"
+                       Style="{StaticResource LableStyle}">
+            </TextBlock>
+            <TextBlock Grid.Row="3" 
+                       Grid.Column="1"  
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Data.TotalPanels}"
+                       Style="{StaticResource DataStyle}">
+            </TextBlock>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

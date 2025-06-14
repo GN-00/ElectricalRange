@@ -1,0 +1,737 @@
+﻿<Window x:Class="ProjectsNow.Windows.JobOrderWindows.AcknowledgementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        Title="Terms &amp; Conditions"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        FontFamily="Times New Roman"
+        WindowStartupLocation="CenterScreen"
+        Height="460"
+        Width="970">
+    <Window.Resources>
+
+        <Style x:Key="TabStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputStyle" BasedOn="{StaticResource TextBoxFlatStyle}" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputComboBoxStyle" BasedOn="{StaticResource ComboBoxFlatStyle}" TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InputStyleDatePicker" BasedOn="{StaticResource DatePickerFlatStyle}" TargetType="{x:Type DatePicker}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="#FFF1F1F1">
+
+        <Image Width="80"
+               Height="80"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Panel.ZIndex="1000"
+               Source="/Images/Icons/PN.png"
+               RenderOptions.BitmapScalingMode="HighQuality" 
+               Margin="40,5,0,0">
+        </Image>
+
+        <Grid Height="50" Background="#FFF1F1F1" MouseDown="Grid_MouseDown" VerticalAlignment="Top" Margin="0,0,0,0"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+            <Button x:Name="Minimize"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0"
+                    Height="20"
+                    Width="30"
+                    Click="Minimize_Click" >
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FFF1F1F1"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <Image Margin="4" Source="pack://application:,,,/Images/Icons/Minimize.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="CloseWindow"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Click="CloseWindow_Click"
+                Height="20"
+                Width="30" Margin="0">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0">
+                                        <Image Margin="5" Source="pack://application:,,,/Images/Icons/close.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+
+
+        <Grid Height="350" Background="#FFF1F1F1" VerticalAlignment="Top" Margin="136,50,0,0">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <TabControl x:Name="Tabs"
+                    Height="350"
+                    Background="White"
+                    BorderThickness="0"
+                    BorderBrush="Transparent"
+                    TabStripPlacement="Left"
+                    VerticalAlignment="Top"
+                    Margin="5,50,0,0">
+
+            <TabItem Header="TabItem" Height="40" Visibility="Hidden"/>
+
+            <TabItem x:Name="PaymentTermsTab" Height="50" Selector.IsSelected="True" VerticalAlignment="Top">
+                <TabItem.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="White" CornerRadius="5,0,0,5">
+                                        <TextBlock x:Name="TB" Text="Payment Terms" Style="{StaticResource TabStyle}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                            <Setter TargetName="TB" Property="TextBlock.Foreground" Value="Red"/>
+                                            <Setter TargetName="Border" Property="Border.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+
+                <Border Margin="10" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" >
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <TextBlock Text="Payment Terms:" FontSize="24" FontStyle="Italic" Foreground="#FF9211E8"  VerticalAlignment="Top" />
+
+                        <TabControl Margin="0,10,0,10"
+                                    Width="780"
+                                    Height="260"
+                                    BorderBrush="Gray"
+                                    BorderThickness="1"
+                                    Background="White"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource TabControlTab}">
+
+                            <TabItem Header="Standard Terms." 
+                                     IsSelected="True" 
+                                     Style="{StaticResource TabItemStyle}">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+                                        <ToggleButton x:Name="PaymentToggle1" IsChecked="{Binding PaymentToggle1}"  Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="PaymentToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                        <TextBlock Text="Standard Terms. " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <Border Margin="10" BorderBrush="Gray" BorderThickness="2" CornerRadius="5">
+                                        <StackPanel Orientation="Vertical" Margin="10">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <TextBlock Text="Down Payment " Width="205" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="DownPayment" Text ="{Binding DownPayment}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Payment_PreviewKeyDown" LostFocus="Payment_LostFocus"/>
+                                                <TextBlock Text=" %" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+
+                                                <ToggleButton x:Name="InAdvanceToggle" IsChecked="{Binding InAdvanceToggle}"  Margin="20,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center"/>
+
+                                                <TextBlock Text="In  Advance" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                            
+                                            
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock Text="Before Delivery " Width="205" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="BeforeDelivery" Text ="{Binding BeforeDelivery}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Payment_PreviewKeyDown" LostFocus="Payment_LostFocus"/>
+                                                <TextBlock Text=" %" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock Text="After Delivery " Width="205" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="AfterDelivery" Text ="{Binding AfterDelivery}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Payment_PreviewKeyDown" LostFocus="Payment_LostFocus"/>
+                                                <TextBlock Text=" %" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock Text="Testing &amp; Commissioning " Width="205" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="Testing" Text ="{Binding Testing}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Payment_PreviewKeyDown" LostFocus="Payment_LostFocus"/>
+                                                <TextBlock Text=" %" Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+
+                                </StackPanel>
+                            </TabItem>
+
+                            <TabItem Header="Other Terms:" Style="{StaticResource TabItemStyle}">
+                                <StackPanel Orientation="Vertical"
+                                            Margin="0,0,0,0">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+                                        <ToggleButton x:Name="PaymentToggle2" IsChecked="{Binding PaymentToggle2}"  Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="PaymentToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                        <TextBlock Text="Other Terms: " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <TextBox x:Name="PaymentOther" 
+                                             Text="{Binding PaymentOther}" 
+                                             Margin="10,10"
+                                             Width="750" 
+                                             MinHeight="30"
+                                             MaxHeight="180"
+                                             TextAlignment="Left"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Style="{StaticResource InputStyle}"
+                                             VerticalContentAlignment="Top">
+                                    </TextBox>
+                                </StackPanel>
+                            </TabItem>
+                        </TabControl>
+
+
+
+                    </StackPanel>
+                </Border>
+
+            </TabItem>
+
+            <TabItem x:Name="ShopDrawingTab" Height="50">
+                <TabItem.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="White" CornerRadius="5,0,0,5">
+                                        <TextBlock x:Name="TB" Text="Shop Drawing" Style="{StaticResource TabStyle}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                            <Setter TargetName="TB" Property="TextBlock.Foreground" Value="Red"/>
+                                            <Setter TargetName="Border" Property="Border.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+
+                        <Border Margin="10" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Height="320">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Will Be Ready: " HorizontalAlignment="Left" FontSize="18" Foreground="Blue" VerticalAlignment="Center" Margin="10,10,0,0"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                    <ToggleButton x:Name="DrawingToggle1" IsChecked="{Binding DrawingToggle1}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="DrawingToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                    <DatePicker x:Name="DrawingDate"
+                                                Width="155"
+                                                IsEnabled="False"
+                                                SelectedDate="{Binding DrawingDate}"
+                                                VerticalAlignment="Center"
+                                                Style="{StaticResource InputStyleDatePicker}" FontSize="18">
+                                    </DatePicker>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                    <ToggleButton x:Name="DrawingToggle2" IsChecked="{Binding DrawingToggle2}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="DrawingToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                    <TextBlock Text="As Soon As Possible. " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                    <ToggleButton x:Name="DrawingToggle3" IsChecked="{Binding DrawingToggle3}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="DrawingToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                    <TextBlock Text="In  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="DrawingPeriod" IsEnabled="False" Text="{Binding DrawingPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Unit  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="DrawingUnit1"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Margin="0,0,10,0"
+                                              Text="{Binding DrawingUnit1}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                        <ComboBoxItem>Day</ComboBoxItem>
+                                        <ComboBoxItem>Week</ComboBoxItem>
+                                        <ComboBoxItem>Month</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBlock Text="After  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="DrawingCondition1"
+                                              Width="180"
+                                              Text="{Binding DrawingCondition1}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                        <ComboBoxItem>Advance Payment</ComboBoxItem>
+                                        <ComboBoxItem>Purchase Order</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                    <ToggleButton x:Name="DrawingToggle4" IsChecked="{Binding DrawingToggle4}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="DrawingToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                    <TextBlock Text="In  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="DrawingStartPeriod" Text="{Binding DrawingStartPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                    <TextBlock Text="to  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="DrawingEndPeriod" Text="{Binding DrawingEndPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Unit  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="DrawingUnit2"
+                                              Width="80"
+                                              Margin="0,0,10,0"
+                                              Text="{Binding DrawingUnit2}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                        <ComboBoxItem>Day</ComboBoxItem>
+                                        <ComboBoxItem>Week</ComboBoxItem>
+                                        <ComboBoxItem>Month</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBlock Text="After  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="DrawingCondition2"
+                                              Width="180"
+                                              Text="{Binding DrawingCondition2}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                        <ComboBoxItem>Advance Payment</ComboBoxItem>
+                                        <ComboBoxItem>Purchase Order</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                    <ToggleButton x:Name="DrawingToggle5" IsChecked="{Binding DrawingToggle5}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="DrawingToggle_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                    <TextBox x:Name="DrawingOther" Text="{Binding DrawingOther}" Width="545" TextAlignment="Center" Style="{StaticResource InputStyle}" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem x:Name="DeliveryTab" Height="50">
+                <TabItem.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="White" CornerRadius="5,0,0,5">
+                                        <TextBlock x:Name="TB" Text="Delivery &amp; Warranty" Style="{StaticResource TabStyle}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                            <Setter TargetName="TB" Property="TextBlock.Foreground" Value="Red"/>
+                                            <Setter TargetName="Border" Property="Border.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+
+                <StackPanel Orientation="Vertical">
+
+                    <Border Margin="10" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Height="320">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Will Be Ready: " HorizontalAlignment="Left" FontSize="18" Foreground="Blue" VerticalAlignment="Center" Margin="10,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                <ToggleButton x:Name="DeliveryToggle1" IsChecked="{Binding DeliveryToggle1}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="Delivery_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <DatePicker x:Name="DeliveryDate"
+                                            Width="155" 
+                                            SelectedDate="{Binding DeliveryDate}"
+                                            VerticalAlignment="Center"
+                                            Style="{StaticResource InputStyleDatePicker}" FontSize="18">
+                                </DatePicker>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                <ToggleButton x:Name="DeliveryToggle2" IsChecked="{Binding DeliveryToggle2}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="Delivery_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <TextBlock Text="As Soon As Possible. " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                <ToggleButton x:Name="DeliveryToggle3" IsChecked="{Binding DeliveryToggle3}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="Delivery_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <TextBlock Text="In  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <TextBox x:Name="DeliveryPeriod" Text="{Binding DeliveryPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                <TextBlock Text="Unit  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="DeliveryUnit1"
+                                              Width="80"
+                                              Margin="0,0,10,0"
+                                              Text="{Binding DeliveryUnit1}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Day</ComboBoxItem>
+                                    <ComboBoxItem>Week</ComboBoxItem>
+                                    <ComboBoxItem>Month</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Text="After  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="DeliveryCondition1"
+                                              Width="320"
+                                              Text="{Binding DeliveryCondition1}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Advance Payment</ComboBoxItem>
+                                    <ComboBoxItem>Full Payment</ComboBoxItem>
+                                    <ComboBoxItem>Drawing Approval</ComboBoxItem>
+                                    <ComboBoxItem>Advance Payment &amp; Drawing Approval</ComboBoxItem>
+                                    <ComboBoxItem>Purchase Order</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                <ToggleButton x:Name="DeliveryToggle4" IsChecked="{Binding DeliveryToggle4}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="Delivery_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <TextBlock Text="In  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <TextBox x:Name="DeliveryStartPeriod" Text="{Binding DeliveryStartPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                <TextBlock Text="to  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <TextBox x:Name="DeliveryEndPeriod" Text="{Binding DeliveryEndPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                <TextBlock Text="Unit  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="DeliveryUnit2"
+                                              Width="80"
+                                              Margin="0,0,10,0"
+                                              Text="{Binding DeliveryUnit2}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Day</ComboBoxItem>
+                                    <ComboBoxItem>Week</ComboBoxItem>
+                                    <ComboBoxItem>Month</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Text="After  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="DeliveryCondition2"
+                                              Width="320"
+                                              Text="{Binding DeliveryCondition2}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Advance Payment</ComboBoxItem>
+                                    <ComboBoxItem>Full Payment</ComboBoxItem>
+                                    <ComboBoxItem>Drawing Approval</ComboBoxItem>
+                                    <ComboBoxItem>Advance Payment &amp; Drawing Approval</ComboBoxItem>
+                                    <ComboBoxItem>Purchase Order</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0">
+                                <ToggleButton x:Name="DeliveryToggle5" IsChecked="{Binding DeliveryToggle5}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center" Checked="Delivery_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <TextBox x:Name="DeliveryOther" Text="{Binding DeliveryOther}" Width="685" TextAlignment="Center" Style="{StaticResource InputStyle}" Margin="0,0,10,0" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                <TextBlock Text="Delivery: " HorizontalAlignment="Left" FontSize="18" Foreground="Blue" VerticalAlignment="Center" />
+                                <ComboBox x:Name="DeliveryPlace"
+                                          Width="120"
+                                          Text="{Binding DeliveryPlace}"
+                                          Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Ex-Factory</ComboBoxItem>
+                                    <ComboBoxItem>Site</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                <TextBlock Text="Warranty: " HorizontalAlignment="Left" FontSize="18" Foreground="Blue" VerticalAlignment="Center" />
+                                <TextBox x:Name="WarrantyPeriod" Text="{Binding WarrantyPeriod}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Period_PreviewKeyDown" Margin="0,0,10,0"/>
+                                <TextBlock Text="Unit  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="WarrantyUnit"
+                                              Width="80"
+                                              Margin="0,0,10,0"
+                                              Text="{Binding WarrantyUnit}"
+                                              Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Day</ComboBoxItem>
+                                    <ComboBoxItem>Week</ComboBoxItem>
+                                    <ComboBoxItem>Month</ComboBoxItem>
+                                    <ComboBoxItem>Year</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Text="After  " HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="WarrantyCondition"
+                                          Width="100"
+                                          Text="{Binding WarrantyCondition}"
+                                          Style="{StaticResource InputComboBoxStyle}">
+                                    <ComboBoxItem>Delivery</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+
+            </TabItem>
+
+            <TabItem x:Name="CancellationPolicyTab" Height="50">
+                <TabItem.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="White" CornerRadius="5,0,0,5">
+                                        <TextBlock x:Name="TB" Text="Cancellation Policy" Style="{StaticResource TabStyle}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                            <Setter TargetName="TB" Property="TextBlock.Foreground" Value="Red"/>
+                                            <Setter TargetName="Border" Property="Border.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+
+                <StackPanel Orientation="Vertical">
+                    <Border Margin="10" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Height="320">
+                        <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton x:Name="CancelationToggle" IsChecked="{Binding CancelationToggle, Mode=TwoWay}" Margin="0,0,10,0" Width="38" Height="20" Style="{StaticResource SwitchTypeToggleButton}" VerticalAlignment="Center"/>
+                                <TextBlock Text="Cancellation Policy:" FontSize="24" FontStyle="Italic" Foreground="#FF9211E8"  VerticalAlignment="Top" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="• After PO direct before start shop drawing deduction will be: " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="Cancellation1" Text="{Binding Cancellation1}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Cancellation_PreviewKeyDown" LostFocus="Cancellation1_LostFocus" Margin="10,0,5,0"/>
+                                <TextBlock Text="% of the total amount of PO (with VAT)." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="• After shop drawing approval before start fabrication deduction will be: " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="Cancellation2" Text="{Binding Cancellation2}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Cancellation_PreviewKeyDown" LostFocus="Cancellation2_LostFocus" Margin="10,0,5,0"/>
+                                <TextBlock Text="% of the total amount of PO (with VAT)." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="• During fabrication panels (less than 50% job done), the deduction will be: " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="Cancellation3" Text="{Binding Cancellation3}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Cancellation_PreviewKeyDown" LostFocus="Cancellation3_LostFocus" Margin="10,0,5,0"/>
+                                <TextBlock Text="% of the total amount of PO (with VAT)." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="• During fabrication panels (more than 50% job done), the deduction will be: " Foreground="Blue" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="Cancellation4" Text="{Binding Cancellation4}" Width="60" TextAlignment="Center" Style="{StaticResource InputStyle}" PreviewKeyDown="Cancellation_PreviewKeyDown" LostFocus="Cancellation4_LostFocus" Margin="10,0,5,0"/>
+                                <TextBlock Text="% of the total amount of PO (with VAT)." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+
+            </TabItem>
+
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,20,10">
+
+            <Button x:Name="Save"
+                    Height="35" 
+                    Width="100"
+                    Margin="5,0"
+                    Click="Save_Click">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Content" Value="Save"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image x:Name="ButtonImage" Margin="10,5,5,5" Source="/Images/Icons/Save.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+
+                                            </ContentPresenter>
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="Cancel"
+                    Height="35" 
+                    Width="100"
+                    Margin="5,0"
+                    Click="Cancel_Click">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Content" Value="Cancel"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image x:Name="ButtonImage" Margin="5" Source="/Images/Icons/Error.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                                            </ContentPresenter>
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+
+        <Grid x:Name="LoadingControl" Background="Black" Opacity="0.75" Visibility="Collapsed" Panel.ZIndex="10000"/>
+
+    </Grid>
+</Window>

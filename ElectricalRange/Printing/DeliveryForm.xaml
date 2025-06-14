@@ -1,0 +1,527 @@
+﻿<UserControl x:Class="ProjectsNow.Printing.DeliveryForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             FontFamily="Calibri (Body)"
+             Height="29.7cm" 
+             Width="21cm">
+    <Grid Background="White">
+        <Image x:Name="BackgroundImage" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
+
+        <Grid Margin="20,20,20,1.5cm">
+
+            <Grid Margin="0,100,1.5cm,0"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Right"
+                  DataContext="{Binding DeliveryInfromation}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.6cm"/>
+                    <ColumnDefinition MinWidth="4.5cm" />
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Row="0"
+                         Grid.Column="1"
+                         Margin="5"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center">
+                    <TextBlock Text="DELIVERY NOTE" FontSize="26" TextDecorations="UnderLine" FontStretch="Expanded" Foreground="#4f81bd" FontWeight="Bold" />
+                </Viewbox>
+
+                <TextBlock Text="Date" 
+                           Grid.Row="1"
+                           FontSize="16" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Job Order No." 
+                           Grid.Row="2"
+                           FontSize="16" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Purchase Order No." 
+                           Grid.Row="3"
+                           FontSize="16" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Delivery Note No." 
+                           Grid.Row="4"
+                           FontSize="16" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Shipment No." 
+                           Grid.Row="5"
+                           FontSize="16" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                
+                <Border Grid.Row="1"
+                        Grid.Column="1" 
+                        BorderBrush="Black" 
+                        BorderThickness="1,1,1,0">
+                    <TextBlock Text="{Binding Date, StringFormat='dd-MM-yyyy'}" FontSize="16" VerticalAlignment="Center" Margin="5,0"/>
+                </Border>
+                <Border Grid.Row="2"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="1,1,1,0">
+                    <TextBlock Text="{Binding JobOrderCode}" FontSize="16" VerticalAlignment="Center" Margin="5,0"/>
+                </Border>
+                <Border Grid.Row="3"
+                        Grid.Column="1"
+                        BorderBrush="Black" 
+                        BorderThickness="1,1,1,0">
+                    <TextBlock Text="{Binding PurchaseOrderNumber}" FontSize="16" VerticalAlignment="Center" Margin="5,0"/>
+                </Border>
+                <Border Grid.Row="4"
+                        Grid.Column="1"
+                        BorderBrush="Black" 
+                        BorderThickness="1,1,1,0">
+                    <TextBlock Text="{Binding DeliveryNumber}" FontSize="16" VerticalAlignment="Center" Margin="5,0"/>
+                </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="1"
+                        BorderBrush="Black" 
+                        BorderThickness="1,1,1,1">
+                    <TextBlock Text="{Binding ShipmentNo}" FontSize="16" VerticalAlignment="Center" Margin="5,0"/>
+                </Border>
+            </Grid>
+
+            <StackPanel DataContext="{Binding DeliveryInfromation}" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2cm,7.25cm,0,0">
+                <TextBlock Text="   SHIPPING / DELIVER TO " Background="#4f81bd" Foreground="White" Width="7.5cm" FontSize="16" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="M/s " Width="2.5cm" FontSize="16"/>
+                    <TextBlock Text=": " FontSize="16"/>
+                    <TextBlock Text="{Binding CustomerName}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Attention " Width="2.5cm" FontSize="16"/>
+                    <TextBlock Text=": " FontSize="16"/>
+                    <TextBlock Text="{Binding Attention}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Project Name " Width="2.5cm" FontSize="16"/>
+                    <TextBlock Text=": " FontSize="16"/>
+                    <TextBlock Text="{Binding ProjectName}" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" 
+                        Margin="2cm,9.75cm,1.5cm,0"
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left"
+                        >
+                <TextBlock Text="DILEVER DETAILS " FontWeight="Bold" HorizontalAlignment="Left" Width="3.5cm" FontSize="16"/>
+
+                <Grid x:Name="DeliveryTable">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6cm"/>
+                        <ColumnDefinition Width="6cm"/>
+                        <ColumnDefinition Width="1.9cm"/>
+                        <ColumnDefinition Width="2.8cm"/>
+                        <ColumnDefinition Width="2.3cm"/>
+                        <ColumnDefinition Width="2.8cm"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0" Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="#" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="Description" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="Ordered" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="3" BorderThickness="0,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="Previous" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="4" BorderThickness="0,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="Delivered" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="5" BorderThickness="0,1,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="Outstanding" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[0].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[0].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[0].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[0].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[0].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[0].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="2" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[1].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[1].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[1].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[1].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[1].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[1].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="3" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[2].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[2].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[2].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[2].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[2].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[2].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="4" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[3].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[3].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[3].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[3].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[3].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[3].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="5" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[4].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[4].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[4].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[4].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[4].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[4].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="6" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[5].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[5].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[5].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[5].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[5].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[5].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="7" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[6].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[6].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[6].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[6].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[6].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[6].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="8" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[7].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="8" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[7].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="8" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[7].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="8" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[7].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="8" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[7].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="8" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[7].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="9" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[8].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="9" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[8].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="9" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[8].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="9" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[8].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="9" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[8].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="9" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[8].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="10" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[9].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="10" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[9].PanelName}" TextWrapping="Wrap" Margin="10,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="10" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[9].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="10" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[9].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="10" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[9].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="10" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[9].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="11" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[10].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="11" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[10].PanelName}" TextWrapping="Wrap" Margin="11,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="11" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[10].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="11" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[10].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="11" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[10].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="11" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[10].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="12" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[11].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="12" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[11].PanelName}" TextWrapping="Wrap" Margin="12,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="12" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[11].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="12" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[11].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="12" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[11].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="12" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[11].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="13" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[12].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="13" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[12].PanelName}" TextWrapping="Wrap" Margin="13,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="13" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[12].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="13" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[12].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="13" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[12].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="13" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[12].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="14" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[13].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="14" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[13].PanelName}" TextWrapping="Wrap" Margin="14,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="14" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[13].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="14" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[13].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="14" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[13].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="14" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[13].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+
+                    <Border Grid.Row="15" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[14].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="15" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[14].PanelName}" TextWrapping="Wrap" Margin="14,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="15" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[14].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="15" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[14].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="15" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[14].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="15" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[14].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                    <Border Grid.Row="16" Grid.Column="0" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#4f81bd">
+                        <TextBlock Text="{Binding PanelsData[15].PanelSN}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <Border Grid.Row="16" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[15].PanelName}" TextWrapping="Wrap" Margin="14,0,0,0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
+                    </Border>
+                    <Border Grid.Row="16" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[15].PanelQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="16" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[15].PreviousQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="16" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[15].DeliveredQty}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+                    <Border Grid.Row="16" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                        <TextBlock Text="{Binding PanelsData[15].Outstanding}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Border>
+
+                </Grid>
+
+                <TextBlock Text="Notice must be given us of any goods not received/shortage or damage immediately or with in" HorizontalAlignment="Left"  FontSize="16" Margin="0,0.5cm,0,0"/>
+                <TextBlock Text="24 hours from the dispatch receiving date." HorizontalAlignment="Left"  FontSize="16"/>
+
+                <StackPanel x:Name="SignatureArea" Orientation="Vertical">
+                    <TextBlock Text="Thank you for your business!" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,1cm,0,0" FontSize="16"/>
+                    <TextBlock Text="Should you have any enquires concerning this deliverynote, please contact on below given" HorizontalAlignment="Left" FontSize="16"/>
+                    <TextBlock Text="Information." HorizontalAlignment="Left" FontSize="16"/>
+
+                    <Grid Width="8cm" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5cm"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8cm"/>
+                            <RowDefinition Height="0.8cm"/>
+                            <RowDefinition Height="0.8cm"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Received by" HorizontalAlignment="Left" FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Signature" HorizontalAlignment="Left" FontSize="16"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Date" HorizontalAlignment="Left" FontSize="16"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text=":________________________" HorizontalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text=":________________________" HorizontalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text=":________________________" HorizontalAlignment="Center" FontSize="16"/>
+
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="PJ-F-09/11/2018" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="10" Margin="0,0,1.5cm,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2cm,0,0,0">
+                <TextBlock Text="Page " HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="10"/>
+                <TextBlock Text="{Binding Page}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="10"/>
+                <TextBlock Text=" of " HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="10"/>
+                <TextBlock Text="{Binding Pages}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="10"/>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

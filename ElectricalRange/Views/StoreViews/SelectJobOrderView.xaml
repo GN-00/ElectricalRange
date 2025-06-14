@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="ProjectsNow.Views.StoreViews.SelectJobOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             BorderBrush="DarkGray"
+             BorderThickness="1"
+             Height="350" 
+             Width="auto">
+    <UserControl.Resources>
+        <ContextMenu x:Key="OrderContextMenu" FontFamily="Times New Roman">
+            <MenuItem Command="{Binding 
+                                RelativeSource=
+                                {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.NewOrderCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Select Stock"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Accept.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid Margin="10"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <Grid Grid.Row="1"
+                      Background="LightGray">
+                <StackPanel Orientation="Horizontal"
+                            Margin="20,0"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Job Order: " Style="{StaticResource IndicationStyle}"/>
+                    <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                </StackPanel>
+            </Grid>
+
+            <DataGrid ItemsSource="{Binding ItemsCollection}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                      Style="{StaticResource ViewDataGridStyle}">
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" 
+                                  Command="{Binding NewOrderCommand}"
+                                  CommandParameter="{Binding SelectedItem}">
+                    </MouseBinding>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}"
+                           BasedOn="{StaticResource ViewRowsStyle}">
+                        <Setter Property="ContextMenu" Value="{StaticResource OrderContextMenu}"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="150" 
+                                            Header="Job Order" 
+                                            Binding="{Binding Code}"
+                                            ElementStyle="{StaticResource CenterColumn}">
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

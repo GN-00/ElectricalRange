@@ -1,0 +1,36 @@
+﻿<Window x:Class="ProjectsNow.Windows.SampleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:ProjectsNow.Controls"
+        mc:Ignorable="d"
+        BorderBrush="DimGray"
+        BorderThickness="1"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="SampleWindow" Height="450" Width="800">
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Controls:WindowControls/>
+
+        <Grid Panel.ZIndex="1000" 
+              Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Sales Invoices"
+                           Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>

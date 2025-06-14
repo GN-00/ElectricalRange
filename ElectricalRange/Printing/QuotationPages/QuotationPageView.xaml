@@ -1,0 +1,79 @@
+﻿<Base:PageBase x:Class="ProjectsNow.Printing.QuotationPages.QuotationPageView"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+               xmlns:sys="clr-namespace:System;assembly=mscorlib"
+               xmlns:Base="clr-namespace:ProjectsNow.Printing"
+               mc:Ignorable="d" 
+               FontFamily="Calibri (Body)"
+               Height="29.7cm" 
+               Width="21cm">
+    <Grid Margin="20">
+        
+        <Image Margin="-20" 
+               Source="{Binding BackgroundImage}" 
+               RenderOptions.BitmapScalingMode="HighQuality">
+        </Image>
+
+        <StackPanel Margin="1cm,2.5cm,0,0"
+                    Orientation="Vertical" 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="Quotation No." 
+                       FontSize="18" 
+                       FontWeight="Bold">
+            </TextBlock>
+            <TextBlock Text="{Binding QuotationCode}" 
+                       DataContext="{Binding QuotationData}"
+                       FontSize="18" 
+                       FontWeight="Bold">
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="0,2.5cm,1.5cm,0" 
+                    Orientation="Vertical" 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right">
+            
+            <TextBlock Text="Date" 
+                       FontSize="18"
+                       FontWeight="Bold">
+            </TextBlock>
+
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dd-MM-yyyy'}" 
+                       FontSize="18"
+                       FontWeight="Bold">
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Height="760" 
+                    Margin="1cm,5cm,1cm,0" 
+                    VerticalAlignment="Top" 
+                    Orientation="Vertical">
+            <ContentControl Content="{Binding ContentData}"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,25.5cm,1cm,0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right" >
+            <TextBlock FontSize="16" Text="Page "/>
+            <TextBlock Text="{Binding PageNumber}" FontSize="16" />
+            <TextBlock FontSize="16" Text=" of "/>
+            <TextBlock Text="{Binding TotalPages}" FontSize="16"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,25.1cm,0,0" 
+                    Orientation="Horizontal" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Center" 
+                    Visibility="{Binding IsContinue}">
+            <TextBlock FontSize="18" 
+                       Foreground="#4f81bd"
+                       Text="Continues on next page.">
+            </TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Base:PageBase>

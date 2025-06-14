@@ -1,0 +1,824 @@
+﻿<UserControl x:Class="ProjectsNow.Views.InquiriesViews.InquiryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Style="{StaticResource ViewStyle}">
+    <UserControl.Resources>
+
+        <Style x:Key="InputStyle" BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="InputStyleDatePicker" BasedOn="{StaticResource DatePickerStyle}" TargetType="{x:Type DatePicker}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="{StaticResource Blue}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <ContextMenu x:Key="RowsContextMenu" FontFamily="Times New Roman">
+            <MenuItem Command="{Binding 
+                                RelativeSource=
+                                {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.AttentionCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Mark As Attention"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Attention.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding 
+                                RelativeSource=
+                                {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.RemoveContactCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Remove" Foreground="Red"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Border BorderThickness="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                BorderBrush="{StaticResource LinearGradientGray}" Height="655">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Border.Effect>
+
+            <Grid Background="LightGray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="55"/>
+                </Grid.RowDefinitions>
+                <Grid Background="{StaticResource LinearGradientGray}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Inquiry Information"
+                                   Margin="10,7.5"
+                                   Style="{StaticResource TitleStyle}">
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                    </Grid.Effect>
+                </Grid>
+
+                <TabControl Grid.Row="1" 
+                            Height="520" 
+                            Width="850"
+                            Background="White"
+                            VerticalAlignment="Center"
+                            Margin="0,15,0,0"
+                            Style="{StaticResource TabControlStyle}">
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem" BasedOn="{StaticResource ImageTabStyle}"/>
+                    </TabControl.Resources>
+
+                    <TabItem Header="TabItem" Width="20" Visibility="Hidden"/>
+
+                    <TabItem Selector.IsSelected="True"
+                             ToolTip="General Information">
+                        <TabItem.Tag>
+                            <ImageSource>/Images/Icons/info.png</ImageSource>
+                        </TabItem.Tag>
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="240"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="270"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                            </Grid.Effect>
+
+                            <TextBlock Grid.ColumnSpan="3"
+                                       Text="General Information"
+                                       FontSize="28"
+                                       Margin="20,0"
+                                       Foreground="{StaticResource Blue}"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+
+                            <Label Grid.Row="1" 
+                                   Content="Register Code" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="1" Grid.Column="1"  
+                                     Width="200" 
+                                     Focusable="False" 
+                                     IsReadOnly="True"
+                                     Text="{Binding NewInquiryData.RegisterCode}" 
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Content="Customer Name"
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                                      Width="600"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      ItemsSource="{Binding Customers}"
+                                      SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                                      DisplayMemberPath="CustomerName"
+                                      SelectedValue="{Binding NewInquiryData.CustomerID}"
+                                      SelectedValuePath="CustomerID"
+                                      Style="{StaticResource ComboBoxStyle}">
+                            </ComboBox>
+
+                            <Label Grid.Row="3" Grid.Column="0"
+                                   Content="Project"
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+                                     Width="600" 
+                                     IsEnabled="{Binding InquiryEnable}"
+                                     Text="{Binding NewInquiryData.ProjectName}" 
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="4" Grid.Column="0"
+                                   Content="Register Date"
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <DatePicker Grid.Row="4" Grid.Column="1"
+                                        Width="155" 
+                                        IsEnabled="False"
+                                        Text="{Binding NewInquiryData.RegisterDate}" 
+                                        Style="{StaticResource InputStyleDatePicker}" 
+                                        Focusable="False">
+                            </DatePicker>
+
+                            <Label Grid.Row="4" Grid.Column="2"
+                                   Content="Scope" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Width="230"
+                                      Grid.Row="4" Grid.Column="3"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      SelectedValuePath="Content"
+                                      SelectedValue="{Binding NewInquiryData.Scope}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>Panels</ComboBoxItem>
+                                <ComboBoxItem>Materials</ComboBoxItem>
+                                <ComboBoxItem>Site Work</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Grid.Row="5" Grid.Column="0" 
+                                   Content="Duo Date" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <DatePicker Grid.Row="5" Grid.Column="1"
+                                        Width="155" 
+                                        IsEnabled="{Binding InquiryEnable}"
+                                        SelectedDate="{Binding NewInquiryData.DuoDate}"
+                                        DisplayDate="{Binding NewInquiryData.DuoDate}"
+                                        Style="{StaticResource InputStyleDatePicker}">
+                            </DatePicker>
+                            
+                            <Label Grid.Row="5" Grid.Column="2" 
+                                   Content="Project Status" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Width="230"
+                                      Grid.Row="5" Grid.Column="3"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      SelectedValuePath="Content"
+                                      SelectedValue="{Binding NewInquiryData.ProjectStatus}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>On Hand</ComboBoxItem>
+                                <ComboBoxItem>Bidding</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Grid.Row="6" Grid.Column="0" 
+                                   Content="Priority" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Grid.Row="6" Grid.Column="1" 
+                                      Width="155"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      SelectedValuePath="Content"
+                                      SelectedValue="{Binding NewInquiryData.Priority}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem Content="High"/>
+                                <ComboBoxItem Content="Normal"/>
+                            </ComboBox>
+                            
+                            <Label Grid.Row="6" Grid.Column="2" 
+                                   Content="Classification"
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Width="230"
+                                      Grid.Row="6" Grid.Column="3"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      SelectedValuePath="Content"
+                                      SelectedValue="{Binding NewInquiryData.Classification}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>Long Term</ComboBoxItem>
+                                <ComboBoxItem>High Term</ComboBoxItem>
+                                <ComboBoxItem>Medium Term</ComboBoxItem>
+                                <ComboBoxItem>Low Term</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Grid.Row="7" Grid.Column="0" 
+                                   Content="Sales Eng" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Grid.Row="7" 
+                                      Grid.Column="1"
+                                      Width="155"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      ItemsSource="{Binding Salesmen}"
+                                      SelectedItem="{Binding SelectedSalesman, Mode=TwoWay}"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      SelectedValue="{Binding NewInquiryData.SalesmanID}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                            </ComboBox>
+                            
+                            <Label Grid.Row="7" Grid.Column="2" 
+                                   Content="Project Value" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="7" Grid.Column="3" 
+                                     IsEnabled="{Binding InquiryEnable}"
+                                     Text="{Binding NewInquiryData.Value}" 
+                                     Width="230" 
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="8" Grid.Column="0" 
+                                   Content="Estimation Eng" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Grid.Row="8" Grid.Column="1"
+                                      Width="155"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      ItemsSource="{Binding Estimators}"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding SelectedEstimator, Mode=TwoWay}"
+                                      SelectedValue="{Binding NewInquiryData.EstimationID}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                            </ComboBox>
+                            
+                            <Label Grid.Row="8" Grid.Column="2" 
+                                   Content="Project Location" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="8" Grid.Column="3" 
+                                     IsEnabled="{Binding InquiryEnable}"
+                                     Text="{Binding NewInquiryData.Location}" 
+                                     Width="230"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="9" Grid.Column="0" 
+                                   Content="Delivery Condition" 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Width="155"
+                                      Grid.Row="9" Grid.Column="1"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      SelectedValuePath="Content"
+                                      SelectedValue="{Binding NewInquiryData.DeliveryCondition}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>Ex-Factory</ComboBoxItem>
+                                <ComboBoxItem>Site</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+
+                    </TabItem>
+
+                    <TabItem Visibility="{Binding IsQuotation}">
+                        <TabItem.Tag>
+                            <ImageSource>/Images/Icons/Technical.png</ImageSource>
+                        </TabItem.Tag>
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                            </Grid.Effect>
+
+                            <TextBlock Grid.ColumnSpan="3"
+                                       Text="Technical Information"
+                                       FontSize="28"
+                                       Margin="20,0"
+                                       Foreground="{StaticResource Blue}"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                            
+                            <Label Content="Power Voltage" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180"
+                                      Grid.Row="1"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.PowerVoltage}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.PowerVoltage}"
+                                      Style="{StaticResource ComboBoxStyle}" >
+                                <ComboBoxItem>-</ComboBoxItem> 
+                                <ComboBoxItem>400/230V</ComboBoxItem> 
+                                <ComboBoxItem>127-220V</ComboBoxItem>
+                                <ComboBoxItem>220-380V</ComboBoxItem>
+                                <ComboBoxItem>230-400V</ComboBoxItem>
+                                <ComboBoxItem>254-440V</ComboBoxItem>
+                                <ComboBoxItem>277-480V</ComboBoxItem>
+                                <ComboBoxItem>400-690V</ComboBoxItem>
+                            </ComboBox>
+                            
+                            <Label Content="Phase" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180" 
+                                      Grid.Row="2"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.Phase}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.Phase}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>1P</ComboBoxItem>
+                                <ComboBoxItem>2P</ComboBoxItem>
+                                <ComboBoxItem>3P</ComboBoxItem>
+                                <ComboBoxItem>3P + N</ComboBoxItem>
+                                <ComboBoxItem>4P</ComboBoxItem>
+                            </ComboBox>
+                            
+                            <Label Content="Frequency" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180" 
+                                      Grid.Row="3"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.Frequency}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.Frequency}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>50Hz</ComboBoxItem>
+                                <ComboBoxItem>60Hz</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Content="Network System" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180" 
+                                      Grid.Row="4"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.NetworkSystem}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.NetworkSystem}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>AC</ComboBoxItem>
+                                <ComboBoxItem>DC</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Content="Control Voltage" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox x:Name="ControlVoltage" 
+                                      Width="180" 
+                                      Grid.Row="5"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.ControlVoltage}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.ControlVoltage}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>12V DC</ComboBoxItem>
+                                <ComboBoxItem>24V DC</ComboBoxItem>
+                                <ComboBoxItem>24V AC</ComboBoxItem>
+                                <ComboBoxItem>48V AC</ComboBoxItem>
+                                <ComboBoxItem>60V AC</ComboBoxItem>
+                                <ComboBoxItem>110V AC</ComboBoxItem>
+                                <ComboBoxItem>220V AC</ComboBoxItem>
+                                <ComboBoxItem>230V AC</ComboBoxItem>
+                            </ComboBox>
+                           
+                            <Label Content="Busbar" Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180"
+                                      IsEditable="True"
+                                      Grid.Row="1"
+                                      Grid.Column="3"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.TinPlating}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.TinPlating}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>Bare Copper</ComboBoxItem>
+                                <ComboBoxItem>Tin Plated Copper</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Content="Neutral Size" Grid.Row="2" Grid.Column="2" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180"
+                                      Grid.Row="2"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.NeutralSize}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.NeutralSize}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>Same Section of Phases</ComboBoxItem>
+                                <ComboBoxItem>Half Section of Phases</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Content="Earth Size" Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180" 
+                                      Grid.Row="3"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.EarthSize}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.EarthSize}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>Same Section of Phases</ComboBoxItem>
+                                <ComboBoxItem>Half Section of Phases</ComboBoxItem>
+                                <ComboBoxItem>Half Section of Neutral</ComboBoxItem>
+                            </ComboBox>
+
+                            <Label Content="Earthing System" Grid.Row="4" Grid.Column="2" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox Width="180" 
+                                      Grid.Row="4"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      IsEnabled="{Binding QuotationEnable}"
+                                      Text="{Binding NewQuotationData.EarthingSystem}"
+                                      SelectedValuePath="Text"
+                                      SelectedValue="{Binding NewQuotationData.EarthingSystem}"
+                                      Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem>-</ComboBoxItem>
+                                <ComboBoxItem>TNS</ComboBoxItem>
+                                <ComboBoxItem>TNC</ComboBoxItem>
+                                <ComboBoxItem>TT</ComboBoxItem>
+                                <ComboBoxItem>IT</ComboBoxItem>
+                            </ComboBox>
+
+                            <Button Grid.Row="5"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2"
+                                    IsEnabled="{Binding QuotationEnable}"
+                                    Command="{Binding DefaultCommand}">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Margin" Value="10,0"/>
+                                        <Setter Property="Height" Value="35"/>
+                                        <Setter Property="Width" Value="100"/>
+                                        <Setter Property="Background" Value="{DynamicResource Blue}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Content" Value="Default"/>
+                                        <Setter Property="FontSize" Value="16"/>
+                                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="DarkGray" Margin="0,0,0,0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image x:Name="ButtonImage" Margin="10,5,5,5" Source="/Electrical Range;component/Images/Icons/Default.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="RoyalBlue"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="Button.Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="1" BlurRadius="5" Opacity="0.8" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+
+                    </TabItem>
+
+                    <TabItem ToolTip="Contacts Information">
+                        <TabItem.Tag>
+                            <ImageSource>/Images/Icons/Contacts.png</ImageSource>
+                        </TabItem.Tag>
+                        <Grid Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                            </Grid.Effect>
+                            
+                            <TextBlock Grid.ColumnSpan="3"
+                                       Text="Contacts Information"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Blue}"
+                                       Margin="20,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+
+                            <StackPanel Grid.Row="1"
+                                        Margin="25,0,0,0" 
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Left">
+                                <Label Content="Find Contact " 
+                                       Style="{StaticResource LabelStyle}">
+                                </Label>
+                                <ComboBox Width="590"
+                                          FontSize="18"
+                                          FontWeight="Light"
+                                          DisplayMemberPath="ContactName"
+                                          IsEnabled="{Binding InquiryEnable}"
+                                          ItemsSource="{Binding CustomerContacts}"
+                                          SelectedItem="{Binding SelectedCustomerContact, Mode=TwoWay}"
+                                          Style="{StaticResource ComboBoxStyle}">
+                                </ComboBox>
+                                <Button Margin="10,0,0,0" 
+                                        Command="{Binding AddContactCommand}"
+                                        CommandParameter="{Binding SelectedCustomerContact}"
+                                        Style="{StaticResource TransparentButton}">
+                                    <ImageSource>/Images/Icons/Accept.png</ImageSource>
+                                </Button>
+                            </StackPanel>
+
+                            <Grid Grid.Row="2"
+                                  Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.Effect>
+                                    <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                                </Grid.Effect>
+                                <Grid Grid.Row="1"
+                                      Background="LightGray">
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="20,0"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Contact: " Style="{StaticResource IndicationStyle}"/>
+                                        <TextBlock Text="{Binding ContactsIndicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <DataGrid ItemsSource="{Binding ContactsCollection}"
+                                          SelectedIndex="{Binding SelectedContactIndex, Mode=OneWayToSource}"
+                                          SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+                                          Style="{StaticResource ViewDataGridStyle}">
+                                    <DataGrid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" 
+                                                      Command="{Binding AttentionCommand}"
+                                                      CommandParameter="{Binding SelectedContact}">
+                                        </MouseBinding>
+                                    </DataGrid.InputBindings>
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}"
+                                               BasedOn="{StaticResource ViewRowsStyle}">
+                                            <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Width="100" IsReadOnly="True">
+                                            <DataGridTemplateColumn.Header>
+                                                Attention
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox Style="{StaticResource CheckBoxStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Attention}" IsEnabled="False">
+                                                        <CheckBox.LayoutTransform>
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                                                        </CheckBox.LayoutTransform>
+                                                    </CheckBox>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                        <DataGridTextColumn Width="303" 
+                                                            Header="Name"
+                                                            Binding="{Binding ContactName}"
+                                                            ElementStyle="{StaticResource LeftColumnView}">
+                                        </DataGridTextColumn>
+
+                                        <DataGridTextColumn Width="200" 
+                                                            Header="Job" 
+                                                            Binding="{Binding Job}"
+                                                            ElementStyle="{StaticResource LeftColumnView}">
+                                        </DataGridTextColumn>
+
+                                        <DataGridTextColumn Width="200" 
+                                                            Header="Mobile" 
+                                                            Binding="{Binding Mobile}"
+                                                            ElementStyle="{StaticResource CenterColumn}">
+                                        </DataGridTextColumn>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem ToolTip="Consultant Information">
+                        <TabItem.Tag>
+                            <ImageSource>/Images/Icons/Consultants.png</ImageSource>
+                        </TabItem.Tag>
+                        <Grid Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                            </Grid.Effect>
+                            <TextBlock Grid.ColumnSpan="3"
+                                       Text="Consultant Information"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Blue}"
+                                       Margin="20,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Content="Consultant Name " 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <ComboBox Grid.Row="1" Grid.Column="1" 
+                                      Width="500"
+                                      IsEnabled="{Binding InquiryEnable}"
+                                      ItemsSource="{Binding Consultants}"
+                                      SelectedItem="{Binding SelectedConsultant, Mode=TwoWay}"
+                                      SelectedValue="{Binding NewInquiryData.ConsultantID}"
+                                      SelectedValuePath="ConsultantID"
+                                      DisplayMemberPath="ConsultantName"
+                                      Style="{StaticResource ComboBoxStyle}">
+                            </ComboBox>
+
+                            <Label Grid.Row="2" Grid.Column="0" 
+                                   Content="Company "
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="2" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Company}" 
+                                     Width="500" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="3" Grid.Column="0" 
+                                   Content="Job "                           
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="3" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Job}"
+                                     Width="240" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="4" Grid.Column="0" 
+                                   Content="Address " 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="4" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Address}" 
+                                     Width="240" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="5" Grid.Column="0" 
+                                   Content="Mobile " 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="5" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Mobile}" 
+                                     Width="240" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="6" Grid.Column="0" 
+                                   Content="Email " 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="6" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Email}"
+                                     Width="240" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+
+                            <Label Grid.Row="7" Grid.Column="0" 
+                                   Content="Website " 
+                                   Style="{StaticResource LabelStyle}">
+                            </Label>
+                            <TextBox Grid.Row="7" Grid.Column="1" 
+                                     Text="{Binding SelectedConsultant.Website}" 
+                                     Width="240" 
+                                     IsEnabled="False"
+                                     Style="{StaticResource InputStyle}">
+                            </TextBox>
+                        </Grid>
+
+                    </TabItem>
+
+                </TabControl>
+
+                <Grid Grid.Row="2" 
+                      Background="{StaticResource LinearGradientGray}">
+                    <StackPanel 
+                            Margin="10,0"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                        <Button Command="{Binding SaveCommand}"
+                                Style="{StaticResource SaveViewButton}">
+                        </Button>
+                        <Button Command="{Binding CancelCommand}" 
+                                Style="{StaticResource CancelViewButton}">
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

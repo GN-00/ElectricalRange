@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="ProjectsNow.Views.FinanceView.DeliveryNotesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Style="{StaticResource ViewStyle}">
+    <UserControl.Resources>
+
+        <ContextMenu x:Key="GridContextMenu" 
+                     FontFamily="Times New Roman">
+            <MenuItem Command="{Binding ExportCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Export"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <ContextMenu x:Key="RowsContextMenu" FontFamily="Times New Roman">
+            <MenuItem Command="{Binding 
+                                RelativeSource=
+                                {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.PrintCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Print"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Command="{Binding 
+                                RelativeSource=
+                                {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}, 
+                                Path= DataContext.ExportCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Export"/>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <TextBlock Text="Delivery Notes"
+                   Style="{StaticResource TitleStyle}">
+        </TextBlock>
+
+        <TabControl Style="{StaticResource ViewsTabControlStyle}">
+            <TabControl.Resources>
+                <Style TargetType="TabItem" BasedOn="{StaticResource TextItemStyle}"/>
+            </TabControl.Resources>
+
+            <TabItem Header="TabItem" Width="20" Visibility="Hidden"/>
+
+            <TabItem x:Name="Tool" Header="Tool" IsSelected="True">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="10,0,0,0">
+
+                    <Button Command="{Binding PrintCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Tag="Print"
+                            Padding="0,8,0,-8"
+                            Style="{StaticResource ManagerSubTapsButtons}">
+                        <ImageSource>/Images/Icons/Printer.png</ImageSource>
+                    </Button>
+
+                    <Button Command="{Binding ExportCommand}"
+                            Tag="Export"
+                            Padding="0,8,0,-8"
+                            Style="{StaticResource ManagerSubTapsButtons}">
+                        <ImageSource>/Images/Icons/Excel.png</ImageSource>
+                    </Button>
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Filters" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Bottom"
+                            Margin="7,0,0,0">
+
+                    <TextBox Width="148" 
+                             Text="{Binding JobOrderCode, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <TextBox Width="148" 
+                             Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <TextBox Width="148" 
+                             Text="{Binding DateInfo, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <TextBox Width="98" 
+                             Text="{Binding Panels, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <TextBox Width="353" 
+                             Text="{Binding Customer, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <TextBox Width="333" 
+                             Text="{Binding Project, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FilterInputStyle}">
+                    </TextBox>
+
+                    <Button Command="{Binding DeleteFilterCommand}"
+                            Style="{StaticResource FilterButtonStyle}">
+                    </Button>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="1"
+              Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <Grid Grid.Row="1"
+                  Background="LightGray">
+                <StackPanel Orientation="Horizontal"
+                            Margin="20,0"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Delivery Note: " Style="{StaticResource IndicationStyle}"/>
+                    <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                </StackPanel>
+            </Grid>
+
+            <DataGrid ItemsSource="{Binding ItemsCollection}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      ContextMenu="{StaticResource GridContextMenu}"
+                      Style="{StaticResource ViewDataGridStyle}">
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" 
+                                  Command="{Binding InvoicingCommand}"
+                                  CommandParameter="{Binding SelectedItem}">
+                    </MouseBinding>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}"
+                           BasedOn="{StaticResource ViewRowsStyle}">
+                        <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="150" 
+                                        Header="Job Order" 
+                                        Binding="{Binding JobOrderCode}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="150" 
+                                        Header="Code" 
+                                        Binding="{Binding Code}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="150" 
+                                        Header="Date" 
+                                        Binding="{Binding DateInfo}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="100" 
+                                        Header="Panels" 
+                                        Binding="{Binding Panels}"
+                                        ElementStyle="{StaticResource CenterColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="355" 
+                                        Header="Customer" 
+                                        Binding="{Binding Customer}"
+                                        ElementStyle="{StaticResource LeftColumnView}">
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Width="355" 
+                                        Header="Project" 
+                                        Binding="{Binding Project}"
+                                        ElementStyle="{StaticResource LeftColumnView}">
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

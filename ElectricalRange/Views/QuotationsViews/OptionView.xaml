@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="ProjectsNow.Views.QuotationsViews.OptionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="180"
+             BorderThickness="1"
+             BorderBrush="{StaticResource Blue}"
+             Width="330">
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Grid Panel.ZIndex="1000" 
+              Background="{StaticResource LinearGradientGray}">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Option"
+                           Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}">
+                </TextBlock>
+            </StackPanel>
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Background="White">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.3" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Name"
+                       Margin="10,0,5,0"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       FontFamily="Times New Roman"
+                       Foreground="{StaticResource Blue}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <TextBox Grid.Column ="1"
+                     Width="250" 
+                     MaxHeight="190" 
+                     FontSize="16"
+                     FontFamily="Times New Roman"
+                     TextAlignment="Left"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="0,10"
+                     Text="{Binding NewData.Name, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource TextBoxStyle}">
+            </TextBox>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,0,0">
+
+            <Button Command="{Binding SaveCommand}"
+                    Style="{StaticResource SaveViewButton}">
+            </Button>
+
+            <Button Command="{Binding CancelCommand}"
+                    Style="{StaticResource CancelViewButton}">
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
