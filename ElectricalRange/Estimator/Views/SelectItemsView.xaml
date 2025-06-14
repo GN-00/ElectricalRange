@@ -8,7 +8,7 @@
              Width="auto"
              Height="530"
 
-             
+             Margin="5"
              BorderThickness="2"
              Style="{StaticResource ViewStyle}"
              mc:Ignorable="d">
