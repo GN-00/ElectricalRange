@@ -23,7 +23,8 @@
             </Grid.Effect>
         </Grid>
 
-        <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
+        <ContentControl Grid.Row="1"
+                        Content="{Binding CurrentView}" />
 
         <Button Grid.Row="1"
                 Width="50"
@@ -42,14 +43,16 @@
                     Margin="0,20,0,0"
                     Style="{StaticResource ViewsTabControlStyle}">
             <TabControl.Resources>
-                <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
+                <Style BasedOn="{StaticResource TextItemStyle}"
+                       TargetType="TabItem" />
             </TabControl.Resources>
 
             <TabItem Width="20"
                      Header="TabItem"
                      Visibility="Hidden" />
 
-            <TabItem Header="Home" IsSelected="True">
+            <TabItem Header="Home"
+                     IsSelected="True">
                 <StackPanel Height="95"
                             Margin="10,0,0,0"
                             VerticalAlignment="Center"
@@ -57,67 +60,67 @@
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding TendaringCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Tendaring"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Tendaring.png" />
+                        <ImageSource>/Images/Icons/Tendaring.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding ProjectsCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Projects"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Status2.png" />
+                        <ImageSource>/Images/Icons/Status2.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding QuotationsStatusCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Status"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/QuotationsStatus.png" />
+                        <ImageSource>/Images/Icons/QuotationsStatus.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding StoreCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Store"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Store1.png" />
+                        <ImageSource>/Images/Icons/Store1.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding FinanceCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Accountant"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Accountant.png" />
+                        <ImageSource>/Images/Icons/Accountant.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding AccountantCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Accountant Trial"
                             ToolTip="Add Items"
                             Visibility="Collapsed">
-                        <Image Source="/GN.Base;component/Images/ERI/Accountant.png" />
+                        <ImageSource>/Images/Icons/Accountant.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding PartnersCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Partners"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Partner.png" />
+                        <ImageSource>/Images/Icons/Partner.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding UsersCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Users"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/GrayUser.png" />
+                        <ImageSource>/Images/Icons/GrayUser.png</ImageSource>
                     </Button>
 
                 </StackPanel>
@@ -131,10 +134,10 @@
 
                     <Button Padding="0,5,0,0"
                             Command="{Binding AppUpdateCommand}"
-                            Style="{StaticResource TabButtonStyle}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
                             Tag="Update"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Reload.png" />
+                        <ImageSource>/Images/Icons/Reload.png</ImageSource>
                     </Button>
 
                 </StackPanel>

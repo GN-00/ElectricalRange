@@ -17,13 +17,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Estimator\Images\Gray.png" />
-	  <None Remove="Estimator\Images\Green.png" />
-	  <None Remove="Estimator\Images\GroupIcons\BreakerNS.png" />
-	  <None Remove="Estimator\Images\GroupIcons\BreakerNSX.png" />
-	  <None Remove="Estimator\Images\GroupIcons\BreakerNW.png" />
-	  <None Remove="Estimator\Images\GroupIcons\Motor.png" />
-	  <None Remove="Estimator\Images\GroupIcons\SetlakEnclosure.png" />
 	  <None Remove="Images\Icons\DigitalLibrary.png" />
 	</ItemGroup>
 
@@ -48,19 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Estimator\Images\Gray.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Estimator\Images\Green.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Estimator\Images\GroupIcons\BreakerNS.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Estimator\Images\GroupIcons\BreakerNSX.png" />
-    <Resource Include="Estimator\Images\GroupIcons\BreakerNW.png" />
-    <Resource Include="Estimator\Images\GroupIcons\Motor.png" />
-    <Resource Include="Estimator\Images\GroupIcons\SetlakEnclosure.png" />
     <Resource Include="Images\Icons\AbdulRahimSignature.png" />
     <Resource Include="Images\Icons\Accept.png" />
     <Resource Include="Images\Icons\Accessories.png" />
@@ -312,10 +292,6 @@
     <Resource Include="Images\Manager\Projects.png" />
     <Resource Include="Images\Vectors\Login.png" />
     <Resource Include="Images\Vectors\Working.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Estimator\ExcelFiles\" />
   </ItemGroup>
 
 </Project>

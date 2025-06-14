@@ -29,11 +29,6 @@
                 <ResourceDictionary Source="ViewStyles/ComboBoxesDictionary.xaml" />
                 <ResourceDictionary Source="ViewStyles/DatePickersDictionary.xaml" />
                 <ResourceDictionary Source="ViewStyles/CheckBoxesDictionary.xaml" />
-
-                <!--  GN.Base  -->
-                <ResourceDictionary Source="pack://application:,,,/GN.Base;component/Icons/ERIcons.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/GN.Base;component/UI/LightThemeDictionary.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/GN.Base;component/UI/StylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
