@@ -1,17 +1,16 @@
 ﻿using Dapper;
-
+using Microsoft.Data.SqlClient;
+using ProjectsNow.AttachedProperties;
+using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.JobOrders;
 using ProjectsNow.Printing;
 using ProjectsNow.Printing.JobOrderPages;
 using ProjectsNow.Views;
 using ProjectsNow.Views.JobOrdersViews;
-
-using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ProjectsNow.Services
 {
@@ -86,6 +85,64 @@ namespace ProjectsNow.Services
             }
         }
 
+
+        private static Grid Table { get; set; }
+        private static Border NameBorder { get; set; }
+        private static TextBlock EnglishName { get; set; }
+        static void UpdateUI()
+        {
+            List<UIElement> elements = new()
+            {
+                EnglishName,
+                NameBorder,
+                Table,
+            };
+
+            foreach (UIElement element in elements)
+            {
+                if (element == null)
+                    continue;
+
+                element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                element.Arrange(new Rect(element.DesiredSize));
+            }
+        }
+        private static void NewTable()
+        {
+            Table = new Grid()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            Table.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(300) });
+            Table.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
+        }
+        private static void NewCell(ProductionPanel panel)
+        {
+            EnglishName = new TextBlock()
+            {
+                Text = panel.PanelName,
+                FontFamily = new FontFamily("Times New Roman"),
+                //FontWeight = FontWeights.Bold,
+                FontSize = 14,
+                Margin = new Thickness(5, 0, 5, 0),
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+
+            NameBorder = new Border()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(0, 0, 1, 1),
+                Child = EnglishName,
+            };
+
+            Grid.SetRow(NameBorder, Table.RowDefinitions.Count);
+            Table.RowDefinitions.Add(new RowDefinition() { MinHeight = 42 });
+            Table.Children.Add(NameBorder);
+        }
+
         public static void Production(JobOrder order, IView view)
         {
             Navigation.To(new JobFileRequestsView(order), view);
@@ -110,20 +167,99 @@ namespace ProjectsNow.Services
                 panels = connection.Query<ProductionPanel>(query).ToList();
             }
 
-            double pagesNumber = panels.Count / 10d;
-            if (pagesNumber - Math.Truncate(pagesNumber) != 0)
-            {
-                pagesNumber = Math.Truncate(pagesNumber) + 1;
-            }
 
-            int order = 1;
+            int page = 1;
+            double maxHeight = 650;
+            List<List<ProductionPanel>> pagePanels = new() { new List<ProductionPanel>() };
+
+            int pagesNumber;
+
+            NewTable();
             foreach (ProductionPanel panel in panels)
             {
-                panel.PanelOrder = order++;
+                NewCell(panel);
+                UpdateUI();
+
+                var lines = EnglishName.GetLines().ToList();
+                bool isMultiLine = lines.Count > 1;
+
+Panel:
+                int nameLines = lines.Count;
+                if (nameLines >= 1 && isMultiLine)
+                {
+                    EnglishName.Text = "";
+                    UpdateUI();
+
+                    while (Table.ActualHeight + 25 < maxHeight)
+                    {
+                        if (lines.Count == 0)
+                            break;
+
+                        if (EnglishName.Text == "")
+                            EnglishName.Text += lines[0];
+                        else
+                            EnglishName.Text += $"\n{lines[0]}";
+
+                        UpdateUI();
+                        lines.Remove(lines[0]);
+                    }
+                }
+
+
+                if (Table.ActualHeight > maxHeight)
+                {
+                    ProductionPanel newPanel = new();
+                    newPanel.Update(panel);
+
+                    if (!isMultiLine)
+                    {
+                        pagePanels[page - 1].Add(newPanel);
+
+                        page++;
+                        pagePanels.Add(new List<ProductionPanel>());
+                        NewTable();
+                        NewCell(panel);
+                    }
+                    else
+                    {
+                        newPanel.PanelName = EnglishName.Text;
+                        pagePanels[page - 1].Add(newPanel);
+
+                        page++;
+                        pagePanels.Add(new List<ProductionPanel>());
+                        NewTable();
+                        NewCell(panel);
+
+                        if (lines.Count != 0)
+                        {
+                            goto Panel;
+                        }
+                    }
+                }
+                else
+                {
+                    ProductionPanel newPanel = new();
+                    newPanel.Update(panel);
+                    pagePanels[page - 1].Add(newPanel);
+
+                    if (isMultiLine)
+                    {
+                        newPanel.PanelName = EnglishName.Text;
+                    }
+                }
+
+                if (pagePanels[page - 1].Count > 20)
+                {
+                    page++;
+                    pagePanels.Add(new List<ProductionPanel>());
+                    NewTable();
+                }
+
             }
 
-            if (pagesNumber != 0)
+            if (panels.Count != 0)
             {
+                pagesNumber = pagePanels.Count;
                 List<FrameworkElement> elements = new();
                 for (int i = 1; i <= pagesNumber; i++)
                 {
@@ -132,7 +268,7 @@ namespace ProjectsNow.Services
                         Page = i,
                         Pages = Convert.ToInt32(pagesNumber),
                         RequestData = requestInfromation,
-                        PanelsData = panels.Where(p => p.PanelOrder > ((i - 1) * 10) && p.PanelOrder <= (i * 10)).ToList()
+                        PanelsData = pagePanels[i - 1]
                     };
 
                     elements.Add(requestForm);
@@ -143,9 +279,9 @@ namespace ProjectsNow.Services
             else
             {
                 _ = MessageView.Show("Items",
-                                     "There is no panels!!",
-                                     MessageViewButton.OK,
-                                     MessageViewImage.Warning);
+                                "There is no panels!!",
+                                MessageViewButton.OK,
+                                MessageViewImage.Warning);
             }
         }
 

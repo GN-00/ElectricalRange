@@ -11,12 +11,12 @@
     <Grid Margin="20"
           Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="60" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
@@ -162,31 +162,30 @@
               HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
-                <RowDefinition Height="0" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5cm" />
-                <ColumnDefinition Width="8cm" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="2.5cm" />
                 <ColumnDefinition Width="2.5cm" />
                 <ColumnDefinition Width="3cm" />
@@ -277,7 +276,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[0].PanelNameInfo}" />
+                           Text="{Binding PanelsData[0].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="1"
                     Grid.Column="2"
@@ -327,7 +327,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[1].PanelNameInfo}" />
+                           Text="{Binding PanelsData[1].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="2"
                     Grid.Column="2"
@@ -377,7 +378,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[2].PanelNameInfo}" />
+                           Text="{Binding PanelsData[2].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="3"
                     Grid.Column="2"
@@ -427,7 +429,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[3].PanelNameInfo}" />
+                           Text="{Binding PanelsData[3].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="4"
                     Grid.Column="2"
@@ -477,7 +480,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[4].PanelNameInfo}" />
+                           Text="{Binding PanelsData[4].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="5"
                     Grid.Column="2"
@@ -527,7 +531,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[5].PanelNameInfo}" />
+                           Text="{Binding PanelsData[5].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="6"
                     Grid.Column="2"
@@ -577,7 +582,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[6].PanelNameInfo}" />
+                           Text="{Binding PanelsData[6].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="7"
                     Grid.Column="2"
@@ -627,7 +633,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[7].PanelNameInfo}" />
+                           Text="{Binding PanelsData[7].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="8"
                     Grid.Column="2"
@@ -677,7 +684,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[8].PanelNameInfo}" />
+                           Text="{Binding PanelsData[8].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="9"
                     Grid.Column="2"
@@ -727,7 +735,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[9].PanelNameInfo}" />
+                           Text="{Binding PanelsData[9].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="10"
                     Grid.Column="2"
@@ -777,7 +786,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[10].PanelNameInfo}" />
+                           Text="{Binding PanelsData[10].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="11"
                     Grid.Column="2"
@@ -827,7 +837,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[11].PanelNameInfo}" />
+                           Text="{Binding PanelsData[11].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="12"
                     Grid.Column="2"
@@ -877,7 +888,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[12].PanelNameInfo}" />
+                           Text="{Binding PanelsData[12].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="13"
                     Grid.Column="2"
@@ -927,7 +939,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[13].PanelNameInfo}" />
+                           Text="{Binding PanelsData[13].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="14"
                     Grid.Column="2"
@@ -977,7 +990,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[14].PanelNameInfo}" />
+                           Text="{Binding PanelsData[14].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="15"
                     Grid.Column="2"
@@ -1027,7 +1041,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[15].PanelNameInfo}" />
+                           Text="{Binding PanelsData[15].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="16"
                     Grid.Column="2"
@@ -1077,7 +1092,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[16].PanelNameInfo}" />
+                           Text="{Binding PanelsData[16].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="17"
                     Grid.Column="2"
@@ -1127,7 +1143,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[17].PanelNameInfo}" />
+                           Text="{Binding PanelsData[17].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="18"
                     Grid.Column="2"
@@ -1177,7 +1194,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[18].PanelNameInfo}" />
+                           Text="{Binding PanelsData[18].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="19"
                     Grid.Column="2"
@@ -1227,7 +1245,8 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Text="{Binding PanelsData[19].PanelNameInfo}" />
+                           Text="{Binding PanelsData[19].PanelName}"
+                           TextWrapping="Wrap" />
             </Border>
             <Border Grid.Row="20"
                     Grid.Column="2"

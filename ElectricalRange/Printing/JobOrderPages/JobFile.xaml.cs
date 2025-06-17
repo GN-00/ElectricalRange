@@ -1,4 +1,7 @@
-﻿using ProjectsNow.Data.JobOrders;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
+using ProjectsNow.Data;
+using ProjectsNow.Data.JobOrders;
 
 using System.Collections.Generic;
 using System.Windows;
@@ -27,12 +30,22 @@ namespace ProjectsNow.Printing.JobOrderPages
                 PagesGrid.Visibility = Visibility.Collapsed;
             }
 
-            for (int i = 0; i < PanelsData.Count; i++)
+            if (PanelsData.Count == 0)
+                PanelsTable.RowDefinitions[0].Height = new GridLength(1);
+            else
+                PanelsTable.RowDefinitions[0].Height = new GridLength(30);
+
+            int maxRows = 21;
+            for (int i = 1; i < maxRows; i++)
             {
-                PanelsTable.RowDefinitions[i + 1].Height = new GridLength(25);
+                if (i <= PanelsData.Count)
+                    PanelsTable.RowDefinitions[i].Height = new GridLength();
+                else
+                    PanelsTable.RowDefinitions[i].Height = new GridLength(0);
             }
 
             DataContext = new { RequestData, PanelsData, Page, Pages };
+
         }
     }
 }
