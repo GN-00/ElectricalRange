@@ -1,12 +1,9 @@
 ﻿using ClosedXML.Excel;
-
 using Dapper;
 using Dapper.Contrib.Extensions;
-
 using FastMember;
-
+using Microsoft.Data.SqlClient;
 using Microsoft.Win32;
-
 using ProjectsNow.Attributes;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
@@ -19,15 +16,10 @@ using ProjectsNow.Enums;
 using ProjectsNow.Services;
 using ProjectsNow.Views.InquiriesViews;
 using ProjectsNow.Windows.JobOrderWindows;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -71,6 +63,7 @@ namespace ProjectsNow.Views.JobOrdersViews
             PurchaseOrderCommand = new RelayCommand<JobOrder>(PurchaseOrder, CanAccessPurchaseOrder);
             ItemsStatusCommand = new RelayCommand<JobOrder>(ItemsStatus, CanAccessItemsStatus);
             PurchaseCommand = new RelayCommand<JobOrder>(Purchase, CanAccessPurchase);
+            PostingItemsCommand = new RelayCommand<JobOrder>(PostingItems, CanAccessPostingItems);
             ApprovalCommand = new RelayCommand<JobOrder>(Approval, CanAccessApproval);
             ProductionCommand = new RelayCommand<JobOrder>(Production, CanAccessProduction);
             InspectionCommand = new RelayCommand<JobOrder>(Inspection, CanAccessInspection);
@@ -114,7 +107,7 @@ namespace ProjectsNow.Views.JobOrdersViews
                 if (Status == Statuses.Running)
                     return Brushes.Green;
                 else if (Status == Statuses.Hold)
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFC800"));
+                    return new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FFFFC800"));
                 else if (Status == Statuses.Canceled)
                     return Brushes.Red;
                 else if (Status == Statuses.Closed)

@@ -29,6 +29,7 @@ namespace ProjectsNow.Views.Dashboard
             FinanceCommand = new RelayCommand(Finance, CanAccessFinance);
             UsersCommand = new RelayCommand(Users, CanAccessUsers);
             PartnersCommand = new RelayCommand(Partners, CanAccessPartners);
+            ProductionCommand = new RelayCommand(Production, CanAccessProduction);
             LogoutCommand = new RelayCommand(Logout, CanAccessLogout);
         }
 
@@ -45,6 +46,7 @@ namespace ProjectsNow.Views.Dashboard
         public RelayCommand FinanceCommand { get; }
         public RelayCommand UsersCommand { get; }
         public RelayCommand PartnersCommand { get; }
+        public RelayCommand ProductionCommand { get; }
         public RelayCommand LogoutCommand { get; }
 
         private void GetData()
@@ -132,6 +134,20 @@ namespace ProjectsNow.Views.Dashboard
         private bool CanAccessPartners()
         {
             return UserData.AccessPartners;
+        }
+
+        private void Production()
+        {
+            CurrentView = new ProductionControl();
+        }
+        private bool CanAccessProduction()
+        {
+            if (UserData == null)
+                return false;
+            if (UserData.EmployeeId != 0)
+                return false;
+
+            return true;
         }
 
         private void Logout()

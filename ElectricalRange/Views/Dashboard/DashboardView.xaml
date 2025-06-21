@@ -123,6 +123,14 @@
                         <ImageSource>/Images/Icons/GrayUser.png</ImageSource>
                     </Button>
 
+                    <Button Padding="0,5,0,0"
+                            Command="{Binding ProductionCommand}"
+                            Style="{StaticResource ManagerMainTapsButtons}"
+                            Tag="Production"
+                            ToolTip="Production">
+                        <ImageSource>/Images/Icons/MoneyReports.png</ImageSource>
+                    </Button>
+
                 </StackPanel>
             </TabItem>
 

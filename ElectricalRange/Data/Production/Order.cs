@@ -4,11 +4,12 @@
 namespace ProjectsNow.Data.Production
 {
     [Table("[Production].[Orders]")]
-    internal class Order : Base, IAccess
+    public class Order : Base, IAccess
     {
         private string _Code;
         private string _Project;
         private string _Customer;
+        private string _Quotation;
 
         [Key]
         public int Id { get; set; }
@@ -51,7 +52,17 @@ namespace ProjectsNow.Data.Production
             set => SetValue(ref _Customer, value);
         }
 
+        public string Quotation
+        {
+            get => _Quotation;
+            set => SetValue(ref _Quotation, value);
+        }
+
         public bool IsClosed { get; set; }
+
+        [Write(false)]
+        public int Panels { get; set; }
+
         public DateTime? ClosedDate { get; set; }
 
         public override string ToString()

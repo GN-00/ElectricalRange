@@ -244,14 +244,6 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                    <Button Padding="0,5,0,-8"
-                            Command="{Binding InfoCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Info">
-                        <ImageSource>/Images/Icons/Info.png</ImageSource>
-                    </Button>
-
                     <Button Padding="0,5,0,-10"
                             Command="{Binding PanelsCommand}"
                             CommandParameter="{Binding SelectedItem}"
@@ -381,24 +373,24 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Width="180"
-                                        Binding="{Binding QuotationCode}"
+                                        Binding="{Binding Quotation}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="Quotation Code" />
 
-                    <DataGridTextColumn Width="360"
-                                        Binding="{Binding CustomerName}"
+                    <DataGridTextColumn Width="410"
+                                        Binding="{Binding Customer}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Customer Name" />
 
-                    <DataGridTextColumn Width="360"
-                                        Binding="{Binding ProjectName}"
+                    <DataGridTextColumn Width="410"
+                                        Binding="{Binding Project}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Project Name" />
 
-                    <DataGridTextColumn Width="240"
-                                        Binding="{Binding EstimationName}"
+                    <DataGridTextColumn Width="140"
+                                        Binding="{Binding Panels}"
                                         ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Estimation Eng" />
+                                        Header="Panels" />
 
 
                 </DataGrid.Columns>
