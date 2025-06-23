@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
-
+using Microsoft.Data.SqlClient;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
@@ -8,18 +8,12 @@ using ProjectsNow.Data.JobOrders;
 using ProjectsNow.Data.Users;
 using ProjectsNow.Enums;
 using ProjectsNow.Services;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-
 using Panel = ProjectsNow.Data.JobOrders.TransactionPanel;
 
 namespace ProjectsNow.Views.JobOrdersViews
