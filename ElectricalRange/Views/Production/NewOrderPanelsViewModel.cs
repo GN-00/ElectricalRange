@@ -5,7 +5,6 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
-using ProjectsNow.Enums;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -23,18 +22,18 @@ namespace ProjectsNow.Views.Production
         private int _SelectedRequestIndex;
         private int _SelectedPanelIndex;
 
-        private OrderRequest _SelectedRequest;
-        private Panel _SelectedPanel;
+        private JobFile _SelectedRequest;
+        private ProductionPanel _SelectedPanel;
 
-        private ObservableCollection<OrderRequest> _Requests;
-        private ObservableCollection<Panel> _Panels;
+        private ObservableCollection<JobFile> _Requests;
+        private ObservableCollection<ProductionPanel> _Panels;
 
         private ICollectionView _RequestsCollection;
         private ICollectionView _PanelsCollection;
         private int _ProductionPanels;
         private int _ProjectPanels;
 
-        public NewOrderPanelsViewModel(Order order, ObservableCollection<Panel> orderPanels, IView view)
+        public NewOrderPanelsViewModel(Order order, ObservableCollection<ProductionPanel> orderPanels, IView view)
         {
             ViewData = view;
             OrderData = order;
@@ -43,14 +42,14 @@ namespace ProjectsNow.Views.Production
 
             GetData();
             AddCommand = new RelayCommand(Add, CanAccessAdd);
-            SaveCommand = new RelayCommand<OrderRequest>(Save, CanAccessSave);
-            AddPanelsCommand = new RelayCommand<OrderRequest>(AddPanels, CanAccessAddPanels);
-            DeletePanelCommand = new RelayCommand<Panel>(DeletePanel, CanAccessDeletePanel);
+            SaveCommand = new RelayCommand<JobFile>(Save, CanAccessSave);
+            AddPanelsCommand = new RelayCommand<JobFile>(AddPanels, CanAccessAddPanels);
+            DeletePanelCommand = new RelayCommand<ProductionPanel>(DeletePanel, CanAccessDeletePanel);
         }
 
         public User UserData { get; }
         public Order OrderData { get; }
-        public ObservableCollection<Panel> OrderPanels { get; private set; }
+        public ObservableCollection<ProductionPanel> OrderPanels { get; private set; }
         public string RequestsIndicator
         {
             get => _RequestsIndicator;
@@ -83,7 +82,7 @@ namespace ProjectsNow.Views.Production
                 }
             }
         }
-        public OrderRequest SelectedRequest
+        public JobFile SelectedRequest
         {
             get => _SelectedRequest;
             set
@@ -94,17 +93,17 @@ namespace ProjectsNow.Views.Production
                 }
             }
         }
-        public Panel SelectedPanel
+        public ProductionPanel SelectedPanel
         {
             get => _SelectedPanel;
             set => SetValue(ref _SelectedPanel, value);
         }
-        public ObservableCollection<OrderRequest> Requests
+        public ObservableCollection<JobFile> Requests
         {
             get => _Requests;
             private set => SetValue(ref _Requests, value);
         }
-        public ObservableCollection<Panel> Panels
+        public ObservableCollection<ProductionPanel> Panels
         {
             get => _Panels;
             private set => SetValue(ref _Panels, value);
@@ -121,9 +120,9 @@ namespace ProjectsNow.Views.Production
         }
 
         public RelayCommand AddCommand { get; }
-        public RelayCommand<OrderRequest> SaveCommand { get; }
-        public RelayCommand<OrderRequest> AddPanelsCommand { get; }
-        public RelayCommand<Panel> DeletePanelCommand { get; }
+        public RelayCommand<JobFile> SaveCommand { get; }
+        public RelayCommand<JobFile> AddPanelsCommand { get; }
+        public RelayCommand<ProductionPanel> DeletePanelCommand { get; }
 
         public int ProductionPanels
         {
@@ -146,13 +145,11 @@ namespace ProjectsNow.Views.Production
             bool result = false;
             string columnName = "Reference";
 
-            string value = $"{item.GetType().GetProperty(columnName).GetValue(item)}".ToUpper();
-            string checkValue = SelectedRequest.Number.ToUpper();
+            int value = (int)item.GetType().GetProperty(columnName).GetValue(item);
+            int checkValue = SelectedRequest.Number;
 
             if (value == checkValue)
-            {
                 result = true;
-            }
 
             return result;
         }
@@ -164,36 +161,39 @@ namespace ProjectsNow.Views.Production
             string query;
             using (SqlConnection connection = new(Database.ConnectionString))
             {
-                query = $"Select * From [Production].[OrderRequests(View)] " +
-                        $"Where ProjectId = {OrderData.ProjectId} " +
+                query = $"Select * From [Production].[OrdersJobFiles(View)] " +
+                        $"Where JobOrderId = {OrderData.JobOrderId} " +
                         $"Order By Number";
-                Requests = new ObservableCollection<OrderRequest>(connection.Query<OrderRequest>(query));
+                Requests = new ObservableCollection<JobFile>(connection.Query<JobFile>(query));
 
                 query = $"Select * From [Production].[Panels(View)] " +
-                        $"Where OrderId  = {OrderData.Id} " +
-                        $"Order By PanelSN";
-                Panels = new ObservableCollection<Panel>(connection.Query<Panel>(query));
+                        $"Where JobOrderId  = {OrderData.JobOrderId} " +
+                        $"Order By SN";
+                Panels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
 
-                //if (OrderPanels == null)
-                //{
-                //    OrderPanels = PanelController.GetOrderPanels(connection, OrderData.ID);
-                //}
+                if (OrderPanels == null)
+                {
+                    query = $"Select * From [Production].[Orders(AllPanels)] " +
+                            $"Where JobOrderId = {OrderData.JobOrderId} " +
+                            $"Order By SN";
+                    OrderPanels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
+                }
             }
 
-            //ProductionPanels = Panels.Sum(x => x.Qty);
-            //ProjectPanels = OrderPanels.Sum(x => x.PanelQty);
+            ProductionPanels = Panels.Sum(x => x.Qty);
+            ProjectPanels = OrderPanels.Sum(x => x.Qty);
 
             CreateCollectionView();
         }
         private void CreateCollectionView()
         {
             RequestsCollection = CollectionViewSource.GetDefaultView(Requests);
-            RequestsCollection.SortDescriptions.Add(new SortDescription("Code", ListSortDirection.Ascending));
+            RequestsCollection.SortDescriptions.Add(new SortDescription("Number", ListSortDirection.Ascending));
             RequestsCollection.CollectionChanged += RequestsCollectionChanged;
 
             PanelsCollection = CollectionViewSource.GetDefaultView(Panels);
             PanelsCollection.Filter = new Predicate<object>(DataFilter);
-            PanelsCollection.SortDescriptions.Add(new SortDescription("PanelSN", ListSortDirection.Ascending));
+            PanelsCollection.SortDescriptions.Add(new SortDescription("SN", ListSortDirection.Ascending));
             PanelsCollection.CollectionChanged += PanelsCollectionChanged;
         }
         private void RequestsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -210,30 +210,31 @@ namespace ProjectsNow.Views.Production
         }
         private void UpdatePanelsIndicator()
         {
-            //ProductionPanels = Panels.Sum(x => x.Qty);
+            ProductionPanels = Panels.Sum(x => x.Qty);
             PanelsIndicator = DataGridIndicator.Get(SelectedPanelIndex, PanelsCollection);
         }
 
         private void Add()
         {
-            OrderRequest delivery = new()
+            JobFile delivery = new()
             {
                 Date = DateTime.Now,
-                Number = "-New Job File-",
+                Number = 0,
             };
 
             Requests.Add(delivery);
         }
         private bool CanAccessAdd()
         {
-            if (Requests.Any(x => x.Number == "-New Job File-"))
+            if (Requests.Any(x => x.Number == 0))
                 return false;
 
             return true;
         }
 
-        private void Save(OrderRequest request)
+        private void Save(JobFile request)
         {
+            int requestNumber;
             LoadingText = "Working...";
             LoadingIcon = Visibility.Visible;
             Navigation.OpenLoading(LoadingIcon, LoadingText);
@@ -241,87 +242,96 @@ namespace ProjectsNow.Views.Production
             string query;
             using (SqlConnection connection = new(Database.ConnectionString))
             {
-                int requestNumber;
-                string requestCode;
-                query = $"Select IsNull(ProductionNumber,0) " +
-                        $"From [Order].[ProductionNumber] " +
-                        $"Where Year = {DateTime.Now.Year}";
+                query = $"Select * " +
+                        $"From [Production].[Orders(View)] " +
+                        $"Where JobOrderId = {OrderData.JobOrderId}";
+                Order orderData = connection.QueryFirstOrDefault<Order>(query);
 
-                requestNumber = connection.QueryFirstOrDefault<int>(query) + 1;
-                requestCode = $"JF{requestNumber:0000}-{DateTime.Now.Month:00}-{DateTime.Now.Year.ToString().Substring(2, 2)}";
-
-                List<Panel> newPanels = new();
-                foreach (Panel panel in Panels.Where(i => i.Reference == request.Number))
+                if (orderData == null)
                 {
-                    panel.Reference = requestCode;
-                    newPanels.Add(panel);
+                    orderData = new Order
+                    {
+                        JobOrderId = OrderData.JobOrderId,
+                        Code = OrderData.Code,
+                        CodeNumber = OrderData.CodeNumber,
+                        CodeMonth = OrderData.CodeMonth,
+                        CodeYear = OrderData.CodeYear,
+                        Date = DateTime.Now,//
+                        Project = OrderData.Project,
+                        CustomerId = OrderData.CustomerId,
+                        Customer = OrderData.Customer,
+                        Quotation = OrderData.Quotation//
+                    };
+                    _ = connection.Insert(orderData);
+                }
 
-                    //Panel panelData = OrderPanels.FirstOrDefault(i => i.PanelID == panel.PanelID);
-                    //panelData.ProductionQty += panel.Qty;
+                query = $"Select IsNull(Reference,0) " +
+                        $"From [Production].[JobFile(NewNumber)] " +
+                        $"Where Year = {DateTime.Now.Year}";
+                requestNumber = connection.QueryFirstOrDefault<int>(query) + 1;
 
-                    //if (panelData.PanelQty == panelData.ProductionQty)
-                    //{
-                    //    panelData.Status = Statuses.Production.ToString();
-                    //    _ = connection.Execute($"Update [Order].[Panels]" +
-                    //                           $" Set " +
-                    //                           $"Status ='{Statuses.Production}' " +
-                    //                           $"Where PanelID = {panelData.PanelID}");
-                    //}
+                List<AddPanel> newPanels = new();
+                AddPanel newPanel;
+                DateTime requestDate = DateTime.Now;
+                foreach (ProductionPanel panel in Panels.Where(i => i.Reference == request.Number))
+                {
+                    newPanel = new AddPanel
+                    {
+                        OrderId = orderData.Id,
+                        PanelId = panel.PanelId,
+                        InProduction = true,
+                        Reference = requestNumber,
+                        Date = requestDate
+                    };
+                    newPanels.Add(newPanel);
                 }
 
                 _ = connection.Insert(newPanels);
-
-                request.Number = requestCode;
             }
 
+            request.Number = requestNumber;
             Navigation.CloseLoading();
         }
-        private bool CanAccessSave(OrderRequest request)
+        private bool CanAccessSave(JobFile request)
         {
             if (request == null)
                 return false;
 
-            if (request.Number != "-New Job File-")
+            if (request.Number != 0)
                 return false;
 
-            if (!Panels.Any(x => x.Reference == "-New Job File-"))
+            if (!Panels.Any(x => x.Reference == 0))
                 return false;
 
             return true;
         }
 
-        private void AddPanels(OrderRequest request)
+        private void AddPanels(JobFile request)
         {
-            //Navigation.OpenPopup(new OrderRequestView(request, Panels, OrderPanels), PlacementMode.Center, true);
+            Navigation.OpenPopup(new NewOrderPanelsPostingView(request, Panels, OrderPanels), PlacementMode.Center, true);
         }
-        private bool CanAccessAddPanels(OrderRequest delivery)
+        private bool CanAccessAddPanels(JobFile delivery)
         {
             if (delivery == null)
                 return false;
 
-            if (delivery.Number != "-New Job File-")
+            if (delivery.Number != 0)
                 return false;
-
-            //if (!UserData.ModifyOrders)
-            //    return false;
 
             return true;
         }
 
-        private void DeletePanel(Panel panel)
+        private void DeletePanel(ProductionPanel panel)
         {
             _ = Panels.Remove(panel);
         }
-        private bool CanAccessDeletePanel(Panel panel)
+        private bool CanAccessDeletePanel(ProductionPanel panel)
         {
             if (panel == null)
                 return false;
 
-            if (panel.Reference != "-New Job File-")
+            if (panel.Reference != 0)
                 return false;
-
-            //if (!UserData.ModifyOrders)
-            //    return false;
 
             return true;
         }

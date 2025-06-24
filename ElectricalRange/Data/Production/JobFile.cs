@@ -1,9 +1,11 @@
 ﻿namespace ProjectsNow.Data.Production
 {
-    public class OrderRequest : Base
+    public class JobFile : Base
     {
-        private string _Number;
-        public string Number
+        public int JobOrderId { get; set; }
+
+        private int _Number;
+        public int Number
         {
             get => _Number;
             set => SetValue(ref _Number, value);

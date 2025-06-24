@@ -8,7 +8,7 @@ namespace ProjectsNow.Views.Production
         public NewOrderPanelsView(Order order)
         {
             InitializeComponent();
-            DataContext = new NewOrderPanelsViewModel(order, this);
+            DataContext = new NewOrderPanelsViewModel(order, null, this);
         }
     }
 }

@@ -312,12 +312,12 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"
-                                                Binding="{Binding PanelSN}"
+                                                Binding="{Binding SN}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="SN" />
 
-                            <DataGridTextColumn Width="250"
-                                                Binding="{Binding PanelNameInfo}"
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Name}"
                                                 ElementStyle="{StaticResource LeftColumnView}"
                                                 Header="Name" />
 
@@ -326,20 +326,7 @@
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="Qty" />
 
-                            <DataGridTextColumn Width="192"
-                                                Binding="{Binding DeliveryDate, StringFormat=dd-MM-yyyy}"
-                                                ElementStyle="{StaticResource CenterColumnView}"
-                                                Header="Delivery Date" />
 
-                            <DataGridTextColumn Width="180"
-                                                Binding="{Binding UnitGrossPrice, StringFormat=N2}"
-                                                ElementStyle="{StaticResource CenterColumnView}"
-                                                Header="U/Price" />
-
-                            <DataGridTextColumn Width="180"
-                                                Binding="{Binding GrossPrice, StringFormat=N2}"
-                                                ElementStyle="{StaticResource CenterColumnView}"
-                                                Header="T/Price" />
 
                         </DataGrid.Columns>
                     </DataGrid>

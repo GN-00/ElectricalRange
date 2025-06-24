@@ -10,10 +10,12 @@ namespace ProjectsNow.Data.Production
         private string _Project;
         private string _Customer;
         private string _Quotation;
+        private bool _IsSiteWork;
+        private bool _IsClosed;
 
         [Key]
         public int Id { get; set; }
-        public int ProjectId { get; set; }
+        public int JobOrderId { get; set; }
 
         public string Code
         {
@@ -58,12 +60,41 @@ namespace ProjectsNow.Data.Production
             set => SetValue(ref _Quotation, value);
         }
 
-        public bool IsClosed { get; set; }
+
+        public bool IsClosed
+        {
+            get => _IsClosed;
+            set => SetValue(ref _IsClosed, value)
+                  .UpdateProperties(this, "Type");
+        }
+
+        public bool IsSiteWork
+        {
+            get => _IsSiteWork;
+            set => SetValue(ref _IsSiteWork, value)
+                  .UpdateProperties(this, "Type");
+        }
+
+        [Write(false)]
+        public string Type
+        {
+            get
+            {
+                if (IsClosed)
+                    return "Closed";
+
+                if (IsSiteWork)
+                    return "Site Work";
+                else
+                    return "Factory";
+            }
+        }
+
 
         [Write(false)]
         public int Panels { get; set; }
 
-        public DateTime? ClosedDate { get; set; }
+        public DateTime? CloseDate { get; set; }
 
         public override string ToString()
         {
