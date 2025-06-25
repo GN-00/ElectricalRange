@@ -18,6 +18,8 @@ namespace ProjectsNow.Data.JobOrders
             }
         }
         public int PanelQty { get; set; }
+        public int ClosedQty { get; set; }
+        public int ReadyToCloseQty => PanelQty - ClosedQty;
         public DateTime DeliveryDate { get; set; }
         public int Revise { get; set; } = 1;
     }

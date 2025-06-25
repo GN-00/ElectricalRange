@@ -5,6 +5,7 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
+using ProjectsNow.Services;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Windows.Data;
 
 namespace ProjectsNow.Views.Production
 {
-    public class NewOrderPanelsViewModel : ViewModelBase
+    public class ClosingRequestsViewModel : ViewModelBase
     {
         private string _RequestsIndicator = "-";
         private string _PanelsIndicator = "-";
@@ -22,29 +23,29 @@ namespace ProjectsNow.Views.Production
         private int _SelectedRequestIndex;
         private int _SelectedPanelIndex;
 
-        private JobFile _SelectedRequest;
+        private CloseRequest _SelectedRequest;
         private ProductionPanel _SelectedPanel;
 
-        private ObservableCollection<JobFile> _Requests;
+        private ObservableCollection<CloseRequest> _Requests;
         private ObservableCollection<ProductionPanel> _Panels;
 
         private ICollectionView _RequestsCollection;
         private ICollectionView _PanelsCollection;
-        private int _ProductionPanels;
+        private int _ClosedPanels;
         private int _ProjectPanels;
 
-        public NewOrderPanelsViewModel(Order order, ObservableCollection<ProductionPanel> orderPanels, IView view)
+        public ClosingRequestsViewModel(Order order, IView view)
         {
             ViewData = view;
             OrderData = order;
-            OrderPanels = orderPanels;
             UserData = Navigation.UserData;
 
             GetData();
             AddCommand = new RelayCommand(Add, CanAccessAdd);
-            SaveCommand = new RelayCommand<JobFile>(Save, CanAccessSave);
-            AddPanelsCommand = new RelayCommand<JobFile>(AddPanels, CanAccessAddPanels);
+            SaveCommand = new RelayCommand<CloseRequest>(Save, CanAccessSave);
+            AddPanelsCommand = new RelayCommand<CloseRequest>(AddPanels, CanAccessAddPanels);
             DeletePanelCommand = new RelayCommand<ProductionPanel>(DeletePanel, CanAccessDeletePanel);
+            PrintCommand = new RelayCommand<CloseRequest>(Print, CanAccessPrint);
         }
 
         public User UserData { get; }
@@ -82,7 +83,7 @@ namespace ProjectsNow.Views.Production
                 }
             }
         }
-        public JobFile SelectedRequest
+        public CloseRequest SelectedRequest
         {
             get => _SelectedRequest;
             set
@@ -98,7 +99,7 @@ namespace ProjectsNow.Views.Production
             get => _SelectedPanel;
             set => SetValue(ref _SelectedPanel, value);
         }
-        public ObservableCollection<JobFile> Requests
+        public ObservableCollection<CloseRequest> Requests
         {
             get => _Requests;
             private set => SetValue(ref _Requests, value);
@@ -120,14 +121,16 @@ namespace ProjectsNow.Views.Production
         }
 
         public RelayCommand AddCommand { get; }
-        public RelayCommand<JobFile> SaveCommand { get; }
-        public RelayCommand<JobFile> AddPanelsCommand { get; }
+        public RelayCommand<CloseRequest> SaveCommand { get; }
+        public RelayCommand<CloseRequest> AddPanelsCommand { get; }
         public RelayCommand<ProductionPanel> DeletePanelCommand { get; }
+        public RelayCommand<CloseRequest> PrintCommand { get; }
 
-        public int ProductionPanels
+
+        public int ClosedPanels
         {
-            get => _ProductionPanels;
-            set => SetValue(ref _ProductionPanels, value);
+            get => _ClosedPanels;
+            set => SetValue(ref _ClosedPanels, value);
         }
 
         public int ProjectPanels
@@ -149,7 +152,9 @@ namespace ProjectsNow.Views.Production
             int checkValue = SelectedRequest.Number;
 
             if (value == checkValue)
+            {
                 result = true;
+            }
 
             return result;
         }
@@ -161,26 +166,26 @@ namespace ProjectsNow.Views.Production
             string query;
             using (SqlConnection connection = new(Database.ConnectionString))
             {
-                query = $"Select * From [Production].[OrdersJobFiles(View)] " +
-                        $"Where JobOrderId = {OrderData.JobOrderId} " +
+                query = $"Select * From [Production].[ClosingRequests(View)] " +
+                        $"Where JobOrderID = {OrderData.JobOrderId} " +
                         $"Order By Number";
-                Requests = new ObservableCollection<JobFile>(connection.Query<JobFile>(query));
+                Requests = new ObservableCollection<CloseRequest>(connection.Query<CloseRequest>(query));
 
-                query = $"Select * From [Production].[Panels(View)] " +
-                        $"Where JobOrderId  = {OrderData.JobOrderId} " +
+                query = $"Select * From [Production].[Panels(Closed)] " +
+                        $"Where JobOrderID  = {OrderData.JobOrderId} " +
                         $"Order By SN";
                 Panels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
 
                 if (OrderPanels == null)
                 {
-                    query = $"Select * From [Production].[Orders(AllPanels)] " +
-                            $"Where JobOrderId = {OrderData.JobOrderId} " +
+                    query = $"Select * From [Production].[Panels(View)] " +
+                            $"Where JobOrderID  = {OrderData.JobOrderId} " +
                             $"Order By SN";
                     OrderPanels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
                 }
             }
 
-            ProductionPanels = Panels.Sum(x => x.Qty);
+            ClosedPanels = Panels.Sum(x => x.Qty);
             ProjectPanels = OrderPanels.Sum(x => x.Qty);
 
             CreateCollectionView();
@@ -210,13 +215,13 @@ namespace ProjectsNow.Views.Production
         }
         private void UpdatePanelsIndicator()
         {
-            ProductionPanels = Panels.Sum(x => x.Qty);
+            ClosedPanels = Panels.Sum(x => x.Qty);
             PanelsIndicator = DataGridIndicator.Get(SelectedPanelIndex, PanelsCollection);
         }
 
         private void Add()
         {
-            JobFile delivery = new()
+            CloseRequest delivery = new()
             {
                 Date = DateTime.Now,
                 Number = 0,
@@ -226,15 +231,17 @@ namespace ProjectsNow.Views.Production
         }
         private bool CanAccessAdd()
         {
+            if (!UserData.ModifyJobOrders)
+                return false;
+
             if (Requests.Any(x => x.Number == 0))
                 return false;
 
             return true;
         }
 
-        private void Save(JobFile request)
+        private void Save(CloseRequest request)
         {
-            int requestNumber;
             LoadingText = "Working...";
             LoadingIcon = Visibility.Visible;
             Navigation.OpenLoading(LoadingIcon, LoadingText);
@@ -242,57 +249,37 @@ namespace ProjectsNow.Views.Production
             string query;
             using (SqlConnection connection = new(Database.ConnectionString))
             {
-                query = $"Select * " +
-                        $"From [Production].[Orders(View)] " +
+                int requestNumber;
+                query = $"Select IsNull(Number,0) " +
+                        $"From [Production].[PanelsClosing(NewNumber)] " +
                         $"Where JobOrderId = {OrderData.JobOrderId}";
-                Order orderData = connection.QueryFirstOrDefault<Order>(query);
 
-                if (orderData == null)
-                {
-                    orderData = new Order
-                    {
-                        JobOrderId = OrderData.JobOrderId,
-                        Code = OrderData.Code,
-                        CodeNumber = OrderData.CodeNumber,
-                        CodeMonth = OrderData.CodeMonth,
-                        CodeYear = OrderData.CodeYear,
-                        Date = DateTime.Now,//
-                        Project = OrderData.Project,
-                        CustomerId = OrderData.CustomerId,
-                        Customer = OrderData.Customer,
-                        Quotation = OrderData.Quotation//
-                    };
-                    _ = connection.Insert(orderData);
-                }
-
-                query = $"Select IsNull(Reference,0) " +
-                        $"From [Production].[JobFile(NewNumber)] " +
-                        $"Where JobOrderId = {OrderData.JobOrderId}";
                 requestNumber = connection.QueryFirstOrDefault<int>(query) + 1;
 
-                List<AddPanel> newPanels = new();
-                AddPanel newPanel;
+                ClosePanel closePanel;
                 DateTime requestDate = DateTime.Now;
+                List<ClosePanel> closePanels = new();
                 foreach (ProductionPanel panel in Panels.Where(i => i.Reference == request.Number))
                 {
-                    newPanel = new AddPanel
+                    closePanel = new ClosePanel
                     {
-                        OrderId = orderData.Id,
+                        JobOrderId = OrderData.JobOrderId,
                         PanelId = panel.PanelId,
-                        InProduction = true,
-                        Reference = requestNumber,
-                        Date = requestDate
+                        Number = requestNumber,
+                        Qty = panel.Qty,
+                        Date = requestDate,
                     };
-                    newPanels.Add(newPanel);
+                    closePanels.Add(closePanel);
                 }
 
-                _ = connection.Insert(newPanels);
+                _ = connection.Insert(closePanels);
+
+                request.Number = requestNumber;
             }
 
-            request.Number = requestNumber;
             Navigation.CloseLoading();
         }
-        private bool CanAccessSave(JobFile request)
+        private bool CanAccessSave(CloseRequest request)
         {
             if (request == null)
                 return false;
@@ -303,19 +290,25 @@ namespace ProjectsNow.Views.Production
             if (!Panels.Any(x => x.Reference == 0))
                 return false;
 
+            if (!UserData.ModifyJobOrders)
+                return false;
+
             return true;
         }
 
-        private void AddPanels(JobFile request)
+        private void AddPanels(CloseRequest request)
         {
-            Navigation.OpenPopup(new NewOrderPanelsPostingView(request, Panels, OrderPanels), PlacementMode.Center, true);
+            Navigation.OpenPopup(new ClosingRequestView(request, Panels, OrderPanels), PlacementMode.Center, true);
         }
-        private bool CanAccessAddPanels(JobFile delivery)
+        private bool CanAccessAddPanels(CloseRequest delivery)
         {
             if (delivery == null)
                 return false;
 
             if (delivery.Number != 0)
+                return false;
+
+            if (!UserData.ModifyJobOrders)
                 return false;
 
             return true;
@@ -331,6 +324,24 @@ namespace ProjectsNow.Views.Production
                 return false;
 
             if (panel.Reference != 0)
+                return false;
+
+            if (!UserData.ModifyJobOrders)
+                return false;
+
+            return true;
+        }
+
+        private void Print(CloseRequest request)
+        {
+            //JobOrderServices.PrintClosingRequest(OrderData.ID, request, ViewData);
+        }
+        private bool CanAccessPrint(CloseRequest request)
+        {
+            if (request == null)
+                return false;
+
+            if (request.Number == 0)
                 return false;
 
             return true;

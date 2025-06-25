@@ -1,0 +1,316 @@
+﻿<UserControl x:Class="ProjectsNow.Views.Production.ClosingRequestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:ProjectsNow.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="800"
+             Height="450"
+             BorderBrush="{StaticResource Blue}"
+             BorderThickness="1"
+             Style="{StaticResource ViewStyle}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <ContextMenu x:Key="GridContextMenu">
+            <MenuItem Command="{Binding AddCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="New" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Add.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <ContextMenu x:Key="RowsContextMenu"
+                     FontFamily="Times New Roman">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="New" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Add.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Edit" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Edit1.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteCommand}"
+                      CommandParameter="{Binding}">
+                <MenuItem.Header>
+                    <TextBlock Foreground="Red"
+                               Text="Delete" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Error.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Panel.ZIndex="1000"
+              Background="{StaticResource LinearGradientGray}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10,7.5"
+                           Style="{StaticResource TitleStyle}"
+                           Text="Panels" />
+            </StackPanel>
+
+            <c:PopupControls />
+
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Margin="10"
+              Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="1"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="5"
+                                      Direction="-90"
+                                      Opacity="0.5"
+                                      RenderingBias="Quality"
+                                      ShadowDepth="2" />
+                </Grid.Effect>
+                <Grid Grid.Row="1"
+                      Background="LightGray">
+                    <StackPanel Margin="20,0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IndicationStyle}"
+                                   Text="Panel: " />
+                        <TextBlock Foreground="Black"
+                                   Style="{StaticResource IndicationStyle}"
+                                   Text="{Binding Indicator}" />
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid ContextMenu="{x:Null}"
+                          ItemsSource="{Binding ItemsCollection}"
+                          SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          Style="{StaticResource ViewDataGridStyle}">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource ViewRowsStyle}"
+                               TargetType="{x:Type DataGridRow}">
+                            <Setter Property="ContextMenu" Value="{x:Null}" />
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Width="50"
+                                            Binding="{Binding PanelSN}"
+                                            ElementStyle="{StaticResource CenterColumnView}"
+                                            Header="SN" />
+
+                        <DataGridTextColumn Width="250"
+                                            Binding="{Binding PanelNameInfo}"
+                                            ElementStyle="{StaticResource LeftColumnView}"
+                                            Header="Name" />
+
+                        <DataGridTextColumn Width="60"
+                                            Binding="{Binding PanelQty}"
+                                            ElementStyle="{StaticResource CenterColumnView}"
+                                            Header="Qty" />
+
+                        <!--<DataGridTemplateColumn Width="60">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Button Width="20"
+                                            Height="20"
+                                            Margin="0,0,0,0"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddAllCommand}"
+                                            Style="{StaticResource SubViewTapsButtons}"
+                                            ToolTip="Add">
+                                        <ImageSource>/Images/Icons/ImportAll.png</ImageSource>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="20"
+                                            Height="20"
+                                            Margin="0,0,0,0"
+                                            Background="{StaticResource LinearGradientGray}"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCommand}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource SubViewTapsButtons}"
+                                            ToolTip="Add">
+                                        <ImageSource>/Images/Icons/Import.png</ImageSource>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  Margin="0">
+                <Grid.Resources>
+
+                    <Style x:Key="LabelStyle"
+                           TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontFamily" Value="Times New Roman" />
+                        <Setter Property="Foreground" Value="{StaticResource Blue}" />
+                        <Setter Property="Margin" Value="10,0,0,0" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
+
+                    <Style x:Key="InputStyle"
+                           BasedOn="{StaticResource TextBoxStyle}"
+                           TargetType="{x:Type TextBox}">
+                        <Setter Property="Width" Value="100" />
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontFamily" Value="Times New Roman" />
+                        <Setter Property="TextAlignment" Value="Left" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
+
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Details" />
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Qty" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Style="{StaticResource InputStyle}"
+                         Text="{Binding SelectedItem.PanelQty, Mode=OneWay}" />
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Closed" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Style="{StaticResource InputStyle}"
+                         Text="{Binding SelectedItem.ClosedQty, Mode=OneWay}" />
+
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Remaining" />
+                <TextBox Grid.Row="3"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Style="{StaticResource InputStyle}"
+                         Text="{Binding SelectedItem.NotClosedQty, Mode=OneWay}" />
+
+                <TextBlock Grid.Row="4"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Ready" />
+                <TextBox Grid.Row="4"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Style="{StaticResource InputStyle}"
+                         Text="{Binding SelectedItem.ReadyToCloseQty, Mode=OneWay}" />
+
+                <TextBlock Grid.Row="5"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelStyle}"
+                           Text="Closing" />
+                <StackPanel Grid.Row="5"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                    <TextBox Style="{StaticResource InputStyle}"
+                             Text="{Binding Closing}" />
+
+                    <Button Width="30"
+                            Height="30"
+                            Padding="2"
+                            Command="{Binding AddCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource SubShadowButtons}">
+                        <ImageSource>/Images/Icons/Add2.png</ImageSource>
+                    </Button>
+                    <Button Width="30"
+                            Height="30"
+                            Margin="0"
+                            Padding="2"
+                            Command="{Binding SubtractCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource SubShadowButtons}">
+                        <ImageSource>/Images/Icons/Remove2.png</ImageSource>
+                    </Button>
+                    <Button Width="30"
+                            Height="30"
+                            Margin="20,0"
+                            Command="{Binding PostCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource SubShadowButtons}">
+                        <ImageSource>/Images/Icons/Post1.png</ImageSource>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>
