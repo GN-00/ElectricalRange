@@ -111,6 +111,44 @@ namespace ProjectsNow.Data.JobOrders
             set => SetValue(ref _TotalUnits, value);
         }
 
+
+        [Write(false)]
+        public string TotalUnitsInfo1
+        {
+            get
+            {
+                if (TotalUnits == 1)
+                    return "panel";
+                else
+                    return "panels";
+            }
+        }
+
+        [Write(false)]
+        public string TotalUnitsInfo2
+        {
+            get
+            {
+                if (TotalUnits == 1)
+                    return "/unit";
+                else
+                    return "/units";
+            }
+        }
+
+
+        [Write(false)]
+        public string TotalUnitsInfo3
+        {
+            get
+            {
+                if (TotalUnits == 1)
+                    return "is";
+                else
+                    return "are";
+            }
+        }
+
         [Write(false)]
         public string TotalUnitsText
         {
