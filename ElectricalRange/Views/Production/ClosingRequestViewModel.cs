@@ -1,6 +1,6 @@
 ﻿using ProjectsNow.Commands;
 using ProjectsNow.Data;
-using ProjectsNow.Data.JobOrders;
+using ProjectsNow.Data.Production;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -17,7 +17,7 @@ namespace ProjectsNow.Views.Production
         private ObservableCollection<ProductionPanel> _Items;
         private ICollectionView _ItemsCollection;
 
-        public ClosingRequestViewModel(ClosingRequest request, ObservableCollection<ProductionPanel> panels, ObservableCollection<ProductionPanel> orderPanels)
+        public ClosingRequestViewModel(CloseRequest request, ObservableCollection<ProductionPanel> panels, ObservableCollection<ProductionPanel> orderPanels)
         {
             RequestData = request;
             TransactionsData = panels;
@@ -34,7 +34,7 @@ namespace ProjectsNow.Views.Production
             PostCommand = new RelayCommand<ProductionPanel>(Post, CanPost);
         }
 
-        public ClosingRequest RequestData { get; }
+        public CloseRequest RequestData { get; }
 
         public int? Closing
         {
@@ -106,11 +106,11 @@ namespace ProjectsNow.Views.Production
             if (((ProductionPanel)panel).ReadyToCloseQty == 0)
                 return false;
 
-            //if (Items.Count != 0)
-            //{
-            //    if (TransactionsData.Any(x => x.Reference == RequestData.Number && x.PanelID == ((ProductionPanel)panel).PanelID))
-            //        return false;
-            //}
+            if (Items.Count != 0)
+            {
+                if (TransactionsData.Any(x => x.Reference == RequestData.Number && x.PanelId == ((ProductionPanel)panel).PanelId))
+                    return false;
+            }
 
             return true;
         }
@@ -122,7 +122,7 @@ namespace ProjectsNow.Views.Production
             ItemsCollection = CollectionViewSource.GetDefaultView(Items);
 
             ItemsCollection.Filter = new Predicate<object>(DataFilter);
-            ItemsCollection.SortDescriptions.Add(new SortDescription("PanelSN", ListSortDirection.Ascending));
+            ItemsCollection.SortDescriptions.Add(new SortDescription("SN", ListSortDirection.Ascending));
             ItemsCollection.CollectionChanged += CollectionChanged;
         }
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -173,25 +173,17 @@ namespace ProjectsNow.Views.Production
         private void Post(ProductionPanel panel)
         {
             int index = SelectedIndex;
-
             ProductionPanel newPanel = new()
             {
-                JobOrderId = panel.JobOrderID,
-                PanelID = panel.PanelID,
-                PanelSN = panel.PanelSN.Value,
-                PanelName = panel.PanelName,
-                PanelTypeArabic = panel.PanelTypeArabic,
-                Qty = Closing.Value,
-                EnclosureType = panel.EnclosureType,
+                PanelId = panel.PanelId,
+                OrderId = panel.OrderId,
                 Reference = RequestData.Number,
-                Date = RequestData.Date,
-                Action = "Closed",
-                NetPrice = panel.PanelsEstimatedPrice / panel.PanelQty * Closing.Value,
-                UnitNetPrice = panel.PanelEstimatedPrice,
-                VATValue = panel.PanelsVATValue / panel.PanelQty * Closing.Value,
-                UnitVATValue = panel.PanelVATValue,
-                GrossPrice = panel.PanelsFinalPrice / panel.PanelQty * Closing.Value,
-                UnitGrossPrice = panel.PanelFinalPrice,
+                SN = panel.SN,
+                Name = panel.Name,
+                Qty = panel.Qty,
+                ClosedQty = Closing.Value,
+                Date = DateTime.Now,
+                InProduction = false
             };
 
             TransactionsData.Add(newPanel);

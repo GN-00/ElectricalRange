@@ -534,24 +534,6 @@ namespace ProjectsNow.Services
 
         }
 
-        
-
-        //private static int EditPages(List<List<InvoiceItem>> pagePanels, List<InvoiceItem> panels, List<InvoiceEdit> edits)
-        //{
-        //    pagePanels = new List<List<InvoiceItem>>();
-        //    foreach (InvoiceEdit edit in edits)
-        //    {
-        //        pagePanels.Add(new List<InvoiceItem>());
-
-        //        for (int i = 0; i < edit.PagePanels; i++)
-        //        {
-        //            pagePanels.Add()
-        //        }
-        //    }
-
-        //    return edits.Count;
-
-        //}
 
         private static void PercentageInvoice(Invoice invoice, List<InvoiceItem> panels, MessageBoxResult result, IView checkPoint)
         {

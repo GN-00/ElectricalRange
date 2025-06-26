@@ -137,17 +137,17 @@
                     <DataGrid.Columns>
 
                         <DataGridTextColumn Width="50"
-                                            Binding="{Binding PanelSN}"
+                                            Binding="{Binding SN}"
                                             ElementStyle="{StaticResource CenterColumnView}"
                                             Header="SN" />
 
                         <DataGridTextColumn Width="250"
-                                            Binding="{Binding PanelNameInfo}"
+                                            Binding="{Binding Name}"
                                             ElementStyle="{StaticResource LeftColumnView}"
                                             Header="Name" />
 
                         <DataGridTextColumn Width="60"
-                                            Binding="{Binding PanelQty}"
+                                            Binding="{Binding Qty}"
                                             ElementStyle="{StaticResource CenterColumnView}"
                                             Header="Qty" />
 
@@ -185,7 +185,7 @@
             </Grid>
 
             <Grid Grid.Column="1"
-                  Margin="0">
+                  Margin="0,20,0,40">
                 <Grid.Resources>
 
                     <Style x:Key="LabelStyle"
@@ -221,7 +221,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="0"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
@@ -241,7 +241,7 @@
                          Grid.Column="1"
                          IsEnabled="False"
                          Style="{StaticResource InputStyle}"
-                         Text="{Binding SelectedItem.PanelQty, Mode=OneWay}" />
+                         Text="{Binding SelectedItem.Qty, Mode=OneWay}" />
 
                 <TextBlock Grid.Row="2"
                            Grid.Column="0"
@@ -261,7 +261,7 @@
                          Grid.Column="1"
                          IsEnabled="False"
                          Style="{StaticResource InputStyle}"
-                         Text="{Binding SelectedItem.NotClosedQty, Mode=OneWay}" />
+                         Text="{Binding SelectedItem.ReadyToCloseQty, Mode=OneWay}" />
 
                 <TextBlock Grid.Row="4"
                            Grid.Column="0"

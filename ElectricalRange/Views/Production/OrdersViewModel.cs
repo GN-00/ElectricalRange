@@ -279,18 +279,20 @@ namespace ProjectsNow.Views.Production
 
         private void Close(Order order)
         {
-            order.IsClosed = true;
-            order.CloseDate = DateTime.Now;
-            using SqlConnection connection = new(Database.ConnectionString);
-            connection.Update(order);
+            //order.IsClosed = true;
+            //order.CloseDate = DateTime.Now;
+            //using SqlConnection connection = new(Database.ConnectionString);
+            //connection.Update(order);
+
+            Navigation.To(new ClosingRequestsView(order), ViewData);
         }
         private bool CanAccessClose(Order order)
         {
             if (order == null)
                 return false;
 
-            if (order.IsClosed)
-                return false;
+            //if (order.IsClosed)
+            //    return false;
 
             return true;
         }

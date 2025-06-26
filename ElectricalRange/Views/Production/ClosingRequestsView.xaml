@@ -321,22 +321,22 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"
-                                                Binding="{Binding PanelSN}"
+                                                Binding="{Binding SN}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="SN" />
 
                             <DataGridTextColumn Width="*"
-                                                Binding="{Binding PanelNameInfo}"
+                                                Binding="{Binding Name}"
                                                 ElementStyle="{StaticResource LeftColumnView}"
                                                 Header="Name" />
 
-                            <DataGridTextColumn Width="80"
+                            <DataGridTextColumn Width="150"
                                                 Binding="{Binding Qty}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="Qty" />
 
-                            <DataGridTextColumn Width="180"
-                                                Binding="{Binding UnitGrossPrice, StringFormat=N2}"
+                            <DataGridTextColumn Width="150"
+                                                Binding="{Binding ClosedQty}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="Closed Qty" />
 

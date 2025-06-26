@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 	  <None Remove="Images\Icons\DigitalLibrary.png" />
+	  <None Remove="Images\Vectors\Closing.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -290,6 +291,9 @@
     <Resource Include="Images\Manager\Invoices.png" />
     <Resource Include="Images\Manager\Invoices2.png" />
     <Resource Include="Images\Manager\Projects.png" />
+    <Resource Include="Images\Vectors\Closing.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Vectors\Login.png" />
     <Resource Include="Images\Vectors\Working.png" />
   </ItemGroup>

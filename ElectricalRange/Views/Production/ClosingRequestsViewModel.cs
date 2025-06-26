@@ -266,7 +266,7 @@ namespace ProjectsNow.Views.Production
                         JobOrderId = OrderData.JobOrderId,
                         PanelId = panel.PanelId,
                         Number = requestNumber,
-                        Qty = panel.Qty,
+                        Qty = panel.ClosedQty,
                         Date = requestDate,
                     };
                     closePanels.Add(closePanel);
@@ -334,7 +334,7 @@ namespace ProjectsNow.Views.Production
 
         private void Print(CloseRequest request)
         {
-            //JobOrderServices.PrintClosingRequest(OrderData.ID, request, ViewData);
+            ProductionServices.PrintCloseRequest(request, ViewData);
         }
         private bool CanAccessPrint(CloseRequest request)
         {
