@@ -94,6 +94,12 @@ namespace ProjectsNow.Data.Production
         [Write(false)]
         public int Panels { get; set; }
 
+        [Write(false)]
+        public int ClosedPanels { get; set; }
+
+        [Write(false)]
+        public bool IsComplete => Panels == ClosedPanels;
+
         public DateTime? CloseDate { get; set; }
 
         public override string ToString()

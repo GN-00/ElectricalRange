@@ -40,12 +40,11 @@ namespace ProjectsNow.Views.Production
             ViewData = view;
             UserData = Navigation.UserData;
 
-            GetData();
-
             PanelsCommand = new RelayCommand<Order>(Panels, CanAccessPanels);
             SiteWorkCommand = new RelayCommand<Order>(SiteWork, CanAccessSiteWork);
             CloseCommand = new RelayCommand<Order>(Close, CanAccessClose);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
+            UpdateCommand = new RelayCommand(GetData);
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
@@ -92,6 +91,7 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> PanelsCommand { get; }
         public RelayCommand<Order> SiteWorkCommand { get; }
         public RelayCommand<Order> CloseCommand { get; }
+        public RelayCommand UpdateCommand { get; }
         public RelayCommand ExportCommand { get; }
         public RelayCommand DeleteFilterCommand { get; }
 
@@ -187,6 +187,9 @@ namespace ProjectsNow.Views.Production
 
         private bool DataFilter(object item)
         {
+            if (((Order)item).IsComplete)
+                return false;
+
             if (FilterProperty == null)
                 return true;
 
@@ -250,7 +253,7 @@ namespace ProjectsNow.Views.Production
 
         private void Panels(Order order)
         {
-            Navigation.To(new OrderPanelsView(order), ViewData);
+            Navigation.To(new PanelsView(order), ViewData);
         }
         private bool CanAccessPanels(Order order)
         {
@@ -304,6 +307,7 @@ namespace ProjectsNow.Views.Production
             public string Customer { get; set; }
             public string Project { get; set; }
             public int Panels { get; set; }
+            public int Closed { get; set; }
             public string Note { get; set; }
         }
         private void Export()
@@ -331,6 +335,7 @@ namespace ProjectsNow.Views.Production
                         Customer = order.Customer,
                         Project = order.Project,
                         Panels = order.Panels,
+                        Closed = order.ClosedPanels,
                     };
 
                     if (order.IsSiteWork)
@@ -361,6 +366,8 @@ namespace ProjectsNow.Views.Production
                     table.Columns["Customer"].SetOrdinal(2);
                     table.Columns["Project"].SetOrdinal(3);
                     table.Columns["Panels"].SetOrdinal(4);
+                    table.Columns["Closed"].SetOrdinal(5);
+                    table.Columns["Note"].SetOrdinal(6);
 
                     worksheetName = $"Job Orders";
                     _ = workbook.Worksheets.Add(table, worksheetName);
@@ -372,6 +379,8 @@ namespace ProjectsNow.Views.Production
                     _ = workSheet.Column(3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                     _ = workSheet.Column(4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                     _ = workSheet.Column(5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                     workSheet.Cell(1, 1).Value = "Job Order";
 
@@ -380,7 +389,8 @@ namespace ProjectsNow.Views.Production
                     _ = workSheet.Column(3).AdjustToContents();
                     _ = workSheet.Column(4).AdjustToContents();
                     _ = workSheet.Column(5).AdjustToContents();
-                    _ = workSheet.Column(6).Width = 50;
+                    _ = workSheet.Column(6).AdjustToContents();
+                    _ = workSheet.Column(7).Width = 50;
 
 
                     workSheet.Cell(1, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -400,6 +410,8 @@ namespace ProjectsNow.Views.Production
                     table.Columns["Customer"].SetOrdinal(2);
                     table.Columns["Project"].SetOrdinal(3);
                     table.Columns["Panels"].SetOrdinal(4);
+                    table.Columns["Closed"].SetOrdinal(5);
+                    table.Columns["Note"].SetOrdinal(6);
 
                     worksheetName = $"Site Work";
                     _ = workbook.Worksheets.Add(table, worksheetName);
@@ -411,6 +423,8 @@ namespace ProjectsNow.Views.Production
                     _ = workSheet.Column(3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                     _ = workSheet.Column(4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                     _ = workSheet.Column(5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                     workSheet.Cell(1, 1).Value = "Job Order";
 
@@ -419,7 +433,8 @@ namespace ProjectsNow.Views.Production
                     _ = workSheet.Column(3).AdjustToContents();
                     _ = workSheet.Column(4).AdjustToContents();
                     _ = workSheet.Column(5).AdjustToContents();
-                    _ = workSheet.Column(6).Width = 50;
+                    _ = workSheet.Column(6).AdjustToContents();
+                    _ = workSheet.Column(7).Width = 50;
 
 
                     workSheet.Cell(1, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);

@@ -7,17 +7,25 @@
     <CornerRadius x:Key="NormalRadius">1</CornerRadius>
     <Thickness x:Key="NormalThickness">2</Thickness>
 
-    <SolidColorBrush x:Key="MyBlue" Color="#FF376CDC" />
-    <SolidColorBrush x:Key="MyPurple" Color="#FF9211E8" />
+    <SolidColorBrush x:Key="MyBlue"
+                     Color="#FF376CDC" />
+    <SolidColorBrush x:Key="MyPurple"
+                     Color="#FF9211E8" />
 
-    <SolidColorBrush x:Key="NormalForeground" Color="Black" />
+    <SolidColorBrush x:Key="NormalForeground"
+                     Color="Black" />
 
-    <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5" />
-    <SolidColorBrush x:Key="SecondaryBackground" Color="White" />
+    <SolidColorBrush x:Key="PrimaryBackground"
+                     Color="#F5F5F5" />
+    <SolidColorBrush x:Key="SecondaryBackground"
+                     Color="White" />
 
-    <SolidColorBrush x:Key="NormalBorder" Color="LightGray" />
-    <SolidColorBrush x:Key="SelectedBorder" Color="LightBlue" />
-    <SolidColorBrush x:Key="MouseOverBorder" Color="LightBlue" />
+    <SolidColorBrush x:Key="NormalBorder"
+                     Color="LightGray" />
+    <SolidColorBrush x:Key="SelectedBorder"
+                     Color="LightBlue" />
+    <SolidColorBrush x:Key="MouseOverBorder"
+                     Color="LightBlue" />
 
 
 
@@ -25,5 +33,12 @@
         <GradientStop Color="LightGray" />
         <GradientStop Offset="0.5" Color="DarkGray" />
     </LinearGradientBrush>
+
+    <DropShadowEffect x:Key="Shadow"
+                      BlurRadius="5"
+                      Direction="-90"
+                      Opacity="0.8"
+                      ShadowDepth="1"
+                      Color="Black" />
 
 </ResourceDictionary>

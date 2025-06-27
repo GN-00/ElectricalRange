@@ -1,6 +1,6 @@
 ﻿namespace ProjectsNow.Data.Production
 {
-    public class ProductionPanel
+    public class ProductionPanel: Base
     {
         public int PanelId { get; set; } 
         public int OrderId { get; set; }
@@ -12,5 +12,54 @@
         public DateTime Date { get; set; }
         public bool InProduction { get; set; }
         public int ReadyToCloseQty => Qty - ClosedQty;
+
+        private string _EnclosureName;
+        public string EnclosureName
+        {
+            get => _EnclosureName;
+            set => SetValue(ref _EnclosureName, value);
+        }
+
+        private string _EnclosureType;
+        public string EnclosureType
+        {
+            get => _EnclosureType;
+            set => SetValue(ref _EnclosureType, value);
+        }
+
+        private string _EnclosureInstallation;
+        public string EnclosureInstallation
+        {
+            get => _EnclosureInstallation;
+            set => SetValue(ref _EnclosureInstallation, value);
+        }
+
+        private decimal? _EnclosureHeight;
+        public decimal? EnclosureHeight
+        {
+            get => _EnclosureHeight;
+            set => SetValue(ref _EnclosureHeight, value);
+        }
+
+        private decimal? _EnclosureWidth;
+        public decimal? EnclosureWidth
+        {
+            get => _EnclosureWidth;
+            set => SetValue(ref _EnclosureWidth, value);
+        }
+
+        private decimal? _EnclosureDepth;
+        public decimal? EnclosureDepth
+        {
+            get => _EnclosureDepth;
+            set => SetValue(ref _EnclosureDepth, value);
+        }
+
+        private string _EnclosureIP;
+        public string EnclosureIP
+        {
+            get => _EnclosureIP;
+            set => SetValue(ref _EnclosureIP, value);
+        }
     }
 }

@@ -1,80 +1,76 @@
 ﻿<Window x:Class="ProjectsNow.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:ProjectsNow.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:Controls="clr-namespace:ProjectsNow.Controls"
-        mc:Ignorable="d"
-        Title="Projects Now" 
-        Height="700" 
+        Title="Projects Now"
         Width="1300"
+        Height="700"
+        BorderBrush="Gray"
+        BorderThickness="1"
+        Icon="/Images/Icons/Price.png"
         Loaded="Window_Loaded"
         ResizeMode="CanMinimize"
-        BorderThickness="1"
-        BorderBrush="Gray"
-        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         WindowState="Normal"
-        WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        mc:Ignorable="d">
     <Window.InputBindings>
-        <KeyBinding Key="Esc" 
-                    Command="{Binding BackCommand}">
-        </KeyBinding>
-        <KeyBinding Key="Home" 
-                    Command="{Binding HomeCommand}">
-        </KeyBinding>
-        <KeyBinding Key="LWin" 
-                    Modifiers="Ctrl"
-                    Command="{Binding HomeCommand}">
-        </KeyBinding>
-        <KeyBinding Key="H" 
-                    Modifiers="Ctrl"
-                    Command="{Binding HomeCommand}">
-        </KeyBinding>
+        <KeyBinding Key="Esc"
+                    Command="{Binding BackCommand}" />
+        <KeyBinding Key="Home"
+                    Command="{Binding HomeCommand}" />
+        <KeyBinding Key="LWin"
+                    Command="{Binding HomeCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="H"
+                    Command="{Binding HomeCommand}"
+                    Modifiers="Ctrl" />
     </Window.InputBindings>
     <Grid>
         <Popup x:Name="popup"
-               Placement="MousePoint"
-               StaysOpen="False"
                AllowsTransparency="True"
-               IsOpen="{Binding OpenPopup, Mode=TwoWay}">
-            <ContentControl Content="{Binding PopupView}" Focusable="False"/>
+               IsOpen="{Binding OpenPopup, Mode=TwoWay}"
+               Placement="MousePoint"
+               StaysOpen="False">
+            <ContentControl Content="{Binding PopupView}"
+                            Focusable="False" />
         </Popup>
-        <Controls:ViewControls DataContext="{Binding}"/>
+        <Controls:ViewControls DataContext="{Binding}" />
         <Grid Height="23"
-              TextBlock.FontFamily="Times New Roman"
               VerticalAlignment="Bottom"
-              Background="{StaticResource LinearGradientGray}">
-            <TextBlock Text="{Binding Username}" 
-                       FontWeight="Bold" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Left" Margin="10,0,0,0">
-            </TextBlock>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <TextBlock Text="Electrical Range " 
-                           FontWeight="Bold" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock Text="{Binding Version}" 
-                           FontWeight="Bold" 
-                           VerticalAlignment="Center">
-                </TextBlock>
+              Background="{StaticResource LinearGradientGray}"
+              TextBlock.FontFamily="Times New Roman">
+            <TextBlock Margin="10,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Text="{Binding Username}" />
+            <StackPanel HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Electrical Range " />
+                <TextBlock VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="{Binding Version}" />
             </StackPanel>
 
-            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dddd - dd / MM / yyyy'}" 
-                       FontFamily="Times New Roman" 
-                       FontWeight="Bold" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Right" 
-                       Margin="0,0,10,0">
-            </TextBlock>
+            <TextBlock Margin="0,0,10,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontFamily="Times New Roman"
+                       FontWeight="Bold"
+                       Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dddd - dd / MM / yyyy'}" />
         </Grid>
-        <ContentControl Content="{Binding CurrentView}" 
-                        Focusable="False"
-                        VerticalAlignment="Top">
-        </ContentControl>
-        <Controls:LoadingControl DataContext="{Binding}" IsEnabled="{Binding OpenPopup}"/>
-        <Controls:LoadingControl DataContext="{Binding}" IsEnabled="{Binding IsLoading}"/>
+        <ContentControl VerticalAlignment="Top"
+                        Content="{Binding CurrentView}"
+                        Focusable="False" />
+        <Controls:LoadingControl DataContext="{Binding}"
+                                 IsEnabled="{Binding OpenPopup}" />
+        <Controls:LoadingControl DataContext="{Binding}"
+                                 IsEnabled="{Binding IsLoading}" />
     </Grid>
 </Window>

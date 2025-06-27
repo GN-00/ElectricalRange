@@ -12,8 +12,8 @@
 
 	<PropertyGroup>
 		<StartupObject>ProjectsNow.Program</StartupObject>
-		<ApplicationIcon>ER.ico</ApplicationIcon>
-		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,7 +22,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="ER.ico" />
+	  <Resource Include="logo.ico">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 
