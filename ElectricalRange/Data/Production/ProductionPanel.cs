@@ -9,9 +9,11 @@
         public string Name { get; set; }
         public int Qty { get; set; }
         public int ClosedQty { get; set; }
+        public int DeliveredQty { get; set; }
         public DateTime Date { get; set; }
         public bool InProduction { get; set; }
         public int ReadyToCloseQty => Qty - ClosedQty;
+        public int ReadyToDeliverQty => ClosedQty - DeliveredQty;
 
         private string _EnclosureName;
         public string EnclosureName
