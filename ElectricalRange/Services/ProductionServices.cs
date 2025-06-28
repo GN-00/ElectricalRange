@@ -35,7 +35,6 @@ namespace ProjectsNow.Services
             foreach (var panel in panels)
                 panel.SN = panels.IndexOf(panel) + 1;
 
-
             if (pagesNumber != 0)
             {
                 requestInfo.Pages = (int)pagesNumber;

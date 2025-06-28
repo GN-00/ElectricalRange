@@ -151,55 +151,35 @@
 
                     <TextBox Width="38"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelSN, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding SN, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="239"
+                    <TextBox Width="395"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelNameInfo, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox Width="58"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelQty, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding Qty, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox Width="178"
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding EnclosureType, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="58"
+                    <TextBox Width="118"
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding EnclosureHeight, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="58"
+                    <TextBox Width="118"
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding EnclosureWidth, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="58"
+                    <TextBox Width="118"
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding EnclosureDepth, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="58"
+                    <TextBox Width="118"
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding EnclosureIP, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="78"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelProfit, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="103"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelCost, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="103"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelPrice, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="103"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelsCost, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="85"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding PanelsPrice, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Button Command="{Binding DeleteFilterCommand}"
                             Style="{StaticResource FilterButtonStyle}" />

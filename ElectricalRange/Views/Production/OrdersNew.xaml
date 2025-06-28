@@ -7,98 +7,9 @@
              mc:Ignorable="d">
     <UserControl.Resources>
 
-        <ContextMenu x:Key="GridContextMenu"
-                     FontFamily="Times New Roman">
-
-            <MenuItem Command="{Binding NewOrdersCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="New Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Partnership.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding AllCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="All Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AllFiles.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RunningCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Running Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/GreenFolder.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding ClosedCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Closed Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/BlueFolder.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding ExportCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Export" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Excel.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-
-        </ContextMenu>
-
         <ContextMenu x:Key="RowsContextMenu"
                      FontFamily="Times New Roman">
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.InfoCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Info" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Information.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AcknowledgmentCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Acknowledgment" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Acknowledgement.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PurchaseOrderCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Purchase Order" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/purchase-orders.png" />
-                </MenuItem.Icon>
-            </MenuItem>
             <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PanelsCommand}"
                       CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
@@ -108,101 +19,6 @@
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
                            Source="/Images/Icons/Enclosure.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ItemsStatusCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Items Status" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/ItemsStatus.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PurchaseCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Purchase" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Purchase.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PostingItemsCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Posting Items" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/PostItems.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.WarrantiesCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Warranties" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Warranties.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.NewOrdersCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="New Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Partnership.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AllCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="All Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AllFiles.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.RunningCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Running Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/GreenFolder.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ClosedCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Closed Orders" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/BlueFolder.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ExportCommand}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Export" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Excel.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -267,19 +83,15 @@
 
                     <TextBox Width="178"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding QuotationCode, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding Quotation, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="358"
+                    <TextBox Width="412"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding Customer, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Width="358"
+                    <TextBox Width="408"
                              Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <TextBox Width="218"
-                             Style="{StaticResource FilterInputStyle}"
-                             Text="{Binding EstimationName, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding Project, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Button Command="{Binding DeleteFilterCommand}"
                             Style="{StaticResource FilterButtonStyle}" />
@@ -314,7 +126,7 @@
                 </StackPanel>
             </Grid>
 
-            <DataGrid ContextMenu="{StaticResource GridContextMenu}"
+            <DataGrid ContextMenu="{x:Null}"
                       ItemsSource="{Binding ItemsCollection}"
                       SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}"

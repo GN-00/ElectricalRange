@@ -33,7 +33,6 @@ namespace ProjectsNow.Views.Production
         private string _EnclosureWidth;
         private string _EnclosureDepth;
         private string _EnclosureIP;
-        private string _ClosedQty;
 
         private ICollectionView _ItemsCollection;
 
@@ -212,21 +211,6 @@ namespace ProjectsNow.Views.Production
                 if (SetValue(ref _EnclosureIP, value))
                 {
                     FilterProperty = nameof(EnclosureIP);
-                    ItemsCollection.Refresh();
-                }
-            }
-        }
-
-
-        [FilterProperty]
-        public string ClosedQty
-        {
-            get => _ClosedQty;
-            set
-            {
-                if (SetValue(ref _ClosedQty, value))
-                {
-                    FilterProperty = nameof(ClosedQty);
                     ItemsCollection.Refresh();
                 }
             }

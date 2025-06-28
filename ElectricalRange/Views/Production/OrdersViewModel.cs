@@ -28,11 +28,9 @@ namespace ProjectsNow.Views.Production
         private int? _SelectedYear;
 
         private string _Code;
-        private string _QuotationCode;
-        private string _CustomerName;
-        private string _ProjectName;
-        private string _EstimationName;
-        private string _SalesmanName;
+        private string _Quotation;
+        private string _Customer;
+        private string _Project;
 
         private ICollectionView _ItemsCollection;
         public OrdersViewModel(IView view)
@@ -116,70 +114,42 @@ namespace ProjectsNow.Views.Production
         }
 
         [FilterProperty]
-        public string QuotationCode
+        public string Quotation
         {
-            get => _QuotationCode;
+            get => _Quotation;
             set
             {
-                if (SetValue(ref _QuotationCode, value))
+                if (SetValue(ref _Quotation, value))
                 {
-                    FilterProperty = nameof(QuotationCode);
+                    FilterProperty = nameof(Quotation);
                     ItemsCollection.Refresh();
                 }
             }
         }
 
         [FilterProperty]
-        public string CustomerName
+        public string Customer
         {
-            get => _CustomerName;
+            get => _Customer;
             set
             {
-                if (SetValue(ref _CustomerName, value))
+                if (SetValue(ref _Customer, value))
                 {
-                    FilterProperty = nameof(CustomerName);
+                    FilterProperty = nameof(Customer);
                     ItemsCollection.Refresh();
                 }
             }
         }
 
         [FilterProperty]
-        public string ProjectName
+        public string Project
         {
-            get => _ProjectName;
+            get => _Project;
             set
             {
-                if (SetValue(ref _ProjectName, value))
+                if (SetValue(ref _Project, value))
                 {
-                    FilterProperty = nameof(ProjectName);
-                    ItemsCollection.Refresh();
-                }
-            }
-        }
-
-        [FilterProperty]
-        public string EstimationName
-        {
-            get => _EstimationName;
-            set
-            {
-                if (SetValue(ref _EstimationName, value))
-                {
-                    FilterProperty = nameof(EstimationName);
-                    ItemsCollection.Refresh();
-                }
-            }
-        }
-
-        [FilterProperty]
-        public string SalesmanName
-        {
-            get => _SalesmanName;
-            set
-            {
-                if (SetValue(ref _SalesmanName, value))
-                {
-                    FilterProperty = nameof(SalesmanName);
+                    FilterProperty = nameof(Project);
                     ItemsCollection.Refresh();
                 }
             }
