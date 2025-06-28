@@ -261,6 +261,7 @@ namespace ProjectsNow.Views.Production
                 List<ClosePanel> closePanels = new();
                 foreach (ProductionPanel panel in Panels.Where(i => i.Reference == request.Number))
                 {
+                    panel.Reference = requestNumber;
                     closePanel = new ClosePanel
                     {
                         JobOrderId = OrderData.JobOrderId,
@@ -275,6 +276,7 @@ namespace ProjectsNow.Views.Production
                 _ = connection.Insert(closePanels);
 
                 request.Number = requestNumber;
+                request.JobOrderId = OrderData.JobOrderId;
             }
 
             Navigation.CloseLoading();
