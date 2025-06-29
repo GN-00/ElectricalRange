@@ -5,11 +5,9 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
-using ProjectsNow.Services;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -183,18 +181,15 @@ namespace ProjectsNow.Views.Production
                         $"Order By Number";
                 Requests = new ObservableCollection<DeliveryRequest>(connection.Query<DeliveryRequest>(query));
 
-                query = $"Select * From [Production].[Panels(DeliveryRequest)] " +
+                query = $"Select * From [Production].[Panels(Delivered)] " +
                         $"Where JobOrderID  = {OrderData.JobOrderId} " +
                         $"Order By SN";
                 Panels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
 
-                if (OrderPanels == null)
-                {
-                    query = $"Select * From [Production].[Panels(View)] " +
-                            $"Where JobOrderID  = {OrderData.JobOrderId} " +
-                            $"Order By SN";
-                    OrderPanels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
-                }
+                query = $"Select * From [Production].[Panels(View)] " +
+                        $"Where JobOrderID  = {OrderData.JobOrderId} " +
+                        $"Order By SN";
+                OrderPanels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
             }
 
             ClosedPanels = Panels.Sum(x => x.Qty);
@@ -268,13 +263,13 @@ namespace ProjectsNow.Views.Production
 
                 requestNumber = connection.QueryFirstOrDefault<int>(query) + 1;
 
-                ClosePanel closePanel;
+                DeliverPanel DeliverPanel;
                 DateTime requestDate = DateTime.Now;
-                List<ClosePanel> closePanels = new();
+                List<DeliverPanel> closePanels = new();
                 foreach (ProductionPanel panel in Panels.Where(i => i.Reference == request.Number))
                 {
                     panel.Reference = requestNumber;
-                    closePanel = new ClosePanel
+                    DeliverPanel = new DeliverPanel
                     {
                         JobOrderId = OrderData.JobOrderId,
                         PanelId = panel.PanelId,
@@ -282,13 +277,14 @@ namespace ProjectsNow.Views.Production
                         Qty = panel.DeliveredQty,
                         Date = requestDate,
                     };
-                    closePanels.Add(closePanel);
+                    closePanels.Add(DeliverPanel);
                 }
 
                 _ = connection.Insert(closePanels);
 
                 request.Number = requestNumber;
                 request.JobOrderId = OrderData.JobOrderId;
+                request.JobOrderCode = OrderData.Code;
             }
 
             Navigation.CloseLoading();
@@ -370,7 +366,7 @@ namespace ProjectsNow.Views.Production
             {
                 DeliveryAttachment attachment = new()
                 {
-                    DeliveryNumber = delivery.Number,
+                    DeliveryNumber = delivery.DeliveryCode,
                 };
 
                 Attachment.SaveFile<DeliveryAttachment>(attachment);
@@ -398,9 +394,6 @@ namespace ProjectsNow.Views.Production
             if (delivery.Number == 0)
                 return false;
 
-            if (!UserData.ModifyJobOrders)
-                return false;
-
             return true;
         }
 
@@ -422,9 +415,6 @@ namespace ProjectsNow.Views.Production
                 return false;
 
             if (delivery.AttachmentId == null)
-                return false;
-
-            if (!UserData.ModifyJobOrders)
                 return false;
 
             return true;

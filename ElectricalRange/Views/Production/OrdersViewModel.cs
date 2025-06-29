@@ -25,8 +25,6 @@ namespace ProjectsNow.Views.Production
         private Order _SelectedItem;
         private ObservableCollection<Order> _Items;
 
-        private int? _SelectedYear;
-
         private string _Code;
         private string _Quotation;
         private string _Customer;
@@ -41,13 +39,16 @@ namespace ProjectsNow.Views.Production
             PanelsCommand = new RelayCommand<Order>(Panels, CanAccessPanels);
             SiteWorkCommand = new RelayCommand<Order>(SiteWork, CanAccessSiteWork);
             CloseCommand = new RelayCommand<Order>(Close, CanAccessClose);
+            DeliveryCommand = new RelayCommand<Order>(Delivery, CanAccessDelivery);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
             UpdateCommand = new RelayCommand(GetData);
+            AllOrdersCommand = new RelayCommand(AllOrdersData, CanAccessAllOrdersData);
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
 
         public User UserData { get; }
+        public bool IsAllOrder { get; set; } = false;
         public string Indicator
         {
             get => _Indicator;
@@ -89,7 +90,9 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> PanelsCommand { get; }
         public RelayCommand<Order> SiteWorkCommand { get; }
         public RelayCommand<Order> CloseCommand { get; }
+        public RelayCommand<Order> DeliveryCommand { get; }
         public RelayCommand UpdateCommand { get; }
+        public RelayCommand AllOrdersCommand { get; }
         public RelayCommand ExportCommand { get; }
         public RelayCommand DeleteFilterCommand { get; }
 
@@ -157,8 +160,12 @@ namespace ProjectsNow.Views.Production
 
         private bool DataFilter(object item)
         {
-            if (((Order)item).IsComplete)
-                return false;
+            if (!IsAllOrder)
+            {
+                if (((Order)item).IsComplete)
+                    return false;
+            }
+
 
             if (FilterProperty == null)
                 return true;
@@ -252,11 +259,6 @@ namespace ProjectsNow.Views.Production
 
         private void Close(Order order)
         {
-            //order.IsClosed = true;
-            //order.CloseDate = DateTime.Now;
-            //using SqlConnection connection = new(Database.ConnectionString);
-            //connection.Update(order);
-
             Navigation.To(new ClosingRequestsView(order), ViewData);
         }
         private bool CanAccessClose(Order order)
@@ -264,11 +266,32 @@ namespace ProjectsNow.Views.Production
             if (order == null)
                 return false;
 
-            //if (order.IsClosed)
-            //    return false;
+            return true;
+        }
+
+        private void Delivery(Order order)
+        {
+            Navigation.To(new DeliveryRequestsView(order), ViewData);
+        }
+        private bool CanAccessDelivery(Order order)
+        {
+            if (order == null)
+                return false;
 
             return true;
         }
+
+        private void AllOrdersData()
+        {
+            IsAllOrder = !IsAllOrder;
+            ItemsCollection.Filter = new Predicate<object>(DataFilter);
+        }
+        private bool CanAccessAllOrdersData()
+        {
+            return true;
+        }
+
+        
 
         private class ExcelOrder
         {

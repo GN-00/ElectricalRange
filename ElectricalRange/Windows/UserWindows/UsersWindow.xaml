@@ -129,7 +129,7 @@
             <TabItem Header="Tool" IsSelected="True">
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center"
-                            Height="65" Margin="15,0,0,0">
+                            Height="75" Margin="15,0,0,0">
 
                     <Button Tag="Add"
                             Padding="0,5,0,0"

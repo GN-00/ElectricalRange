@@ -183,7 +183,7 @@
 
                         <Button Padding="0,5,0,0"
                                 Command="{Binding AttachCommand}"
-                                CommandParameter="{Binding SelectedDelivery}"
+                                CommandParameter="{Binding SelectedRequest}"
                                 Style="{StaticResource ManagerSubTapsButtons}"
                                 Tag="Attach">
                             <ImageSource>/Images/Icons/Attach.png</ImageSource>
@@ -191,7 +191,7 @@
 
                         <Button Padding="0,5,0,0"
                                 Command="{Binding DeleteAttachmentCommand}"
-                                CommandParameter="{Binding SelectedDelivery}"
+                                CommandParameter="{Binding SelectedRequest}"
                                 FontSize="10"
                                 Style="{StaticResource ManagerSubTapsButtons}"
                                 Tag="Delete Attachment">
@@ -200,7 +200,7 @@
 
                         <Button Padding="0,5,0,0"
                                 Command="{Binding DownloadAttachmentCommand}"
-                                CommandParameter="{Binding SelectedDelivery}"
+                                CommandParameter="{Binding SelectedRequest}"
                                 FontSize="10"
                                 Style="{StaticResource ManagerSubTapsButtons}"
                                 Tag="Download Attachment">
@@ -209,7 +209,7 @@
 
                         <Button Padding="0,5,0,0"
                                 Command="{Binding ReadAttachmentCommand}"
-                                CommandParameter="{Binding SelectedDelivery}"
+                                CommandParameter="{Binding SelectedRequest}"
                                 FontSize="10"
                                 Style="{StaticResource ManagerSubTapsButtons}"
                                 Tag="Read Attachment">
@@ -371,9 +371,9 @@
                                                 Header="Qty" />
 
                             <DataGridTextColumn Width="150"
-                                                Binding="{Binding ClosedQty}"
+                                                Binding="{Binding DeliveredQty}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
-                                                Header="Closed Qty" />
+                                                Header="Delivered Qty" />
 
                         </DataGrid.Columns>
                     </DataGrid>

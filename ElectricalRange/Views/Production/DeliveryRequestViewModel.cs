@@ -67,7 +67,7 @@ namespace ProjectsNow.Views.Production
                 {
                     if (SelectedItem != null)
                     {
-                        Deliver = SelectedItem.ReadyToCloseQty;
+                        Deliver = SelectedItem.ReadyToDeliverQty;
                     }
                 }
             }
@@ -103,7 +103,7 @@ namespace ProjectsNow.Views.Production
             if (panel == null)
                 return false;
 
-            if (((ProductionPanel)panel).ReadyToCloseQty == 0)
+            if (((ProductionPanel)panel).ReadyToDeliverQty == 0)
                 return false;
 
             if (Items.Count != 0)
