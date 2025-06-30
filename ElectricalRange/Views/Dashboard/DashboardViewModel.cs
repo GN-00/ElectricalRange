@@ -69,6 +69,9 @@ namespace ProjectsNow.Views.Dashboard
                 Finance();
             else if (UserData.AccessPartners)
                 Partners();
+
+            if (UserData.EmployeeId == 0)
+                Production();
         }
 
 

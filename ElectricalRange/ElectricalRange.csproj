@@ -12,7 +12,7 @@
 
 	<PropertyGroup>
 		<StartupObject>ProjectsNow.Program</StartupObject>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 
