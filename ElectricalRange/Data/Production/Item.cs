@@ -13,7 +13,11 @@ namespace ProjectsNow.Data.Production
         public string Description { get; set; }
         public double Qty { get; set; }
         public string Type { get; set; }
+
+        [Write(false)]
         public double ReceivedQty { get; set; }
+
+        [Write(false)]
         public double Percentage  => (ReceivedQty / Qty) * 100;
 
     }

@@ -251,7 +251,7 @@ namespace ProjectsNow.Views.Production
         private void GetData()
         {
             using SqlConnection connection = new(Database.ConnectionString);
-            string query = $"Select * From [Production].[PanelsItems] " +
+            string query = $"Select * From [Production].[PanelsItems(View)] " +
                            $"Where PanelId = {PanelData.PanelId} " +
                            $"And JobOrderId = {PanelData.JobOrderId}" +
                            $"Order By Code";
@@ -277,7 +277,8 @@ namespace ProjectsNow.Views.Production
 
         private void AddItems()
         {
-            Items = new ObservableCollection<Item>(Services.ProductionServices.AddItems(PanelData));
+            Services.ProductionServices.AddItems(PanelData);
+            GetData();
         }
         private bool CanAccessAddItems()
         {

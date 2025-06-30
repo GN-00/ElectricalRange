@@ -65,7 +65,7 @@ namespace ProjectsNow.Services
             }
         }
 
-        public static List<Item> AddItems(ProductionPanel panel) 
+        public static void AddItems(ProductionPanel panel) 
         {
             Navigation.OpenLoading(Visibility.Visible, "Working....");
 
@@ -89,7 +89,6 @@ namespace ProjectsNow.Services
                 {
                     _ = MessageWindow.Show("Data Error", "No data!", MessageWindowButton.OK, MessageWindowImage.Warning);
                     Navigation.CloseLoading();
-                    return null;
                 }
 
                 List<Item> excelList = new();
@@ -114,16 +113,12 @@ namespace ProjectsNow.Services
 
                 panel.Items = excelList.Sum(x => x.Qty);
 
-                _ = MessageWindow.Show("Data", $"Items updated!", MessageWindowButton.OK, MessageWindowImage.Information);
                 Navigation.CloseLoading();
-                return excelList;
 
             }
             catch (Exception exception)
             {
-                _ = MessageWindow.Show("Error", exception.Message, MessageWindowButton.OK, MessageWindowImage.Warning);
                 Navigation.CloseLoading();
-                return null;
             }
         }
     }

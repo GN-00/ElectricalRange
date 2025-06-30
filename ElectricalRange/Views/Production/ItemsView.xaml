@@ -347,7 +347,7 @@
         <TextBlock Style="{StaticResource TitleStyle}">
             <Run Text="Panel:" />
             <Run Foreground="{StaticResource Blue}"
-                 Text="{Binding PanelData.PanelNameInfo, Mode=OneWay}" />
+                 Text="{Binding PanelData.Name, Mode=OneWay}" />
         </TextBlock>
 
         <TextBlock Margin="0,35,0,0"
@@ -365,7 +365,7 @@
                    Style="{StaticResource TitleStyle}">
             <Run Text="Panel Qty:" />
             <Run Foreground="{StaticResource Blue}"
-                 Text="{Binding PanelData.PanelQty, Mode=OneWay}" />
+                 Text="{Binding PanelData.Qty, Mode=OneWay}" />
         </TextBlock>
 
         <TabControl Style="{StaticResource ViewsTabControlStyle}">
@@ -487,68 +487,38 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding Article1}"
-                                        ElementStyle="{StaticResource LeftColumnView}"
-                                        Header="Article" />
-
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding Article2}"
-                                        ElementStyle="{StaticResource LeftColumnView}"
-                                        Header="Article" />
-
-                    <DataGridTextColumn Width="200"
+                    <DataGridTextColumn Width="250"
                                         Binding="{Binding Code}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Code" />
 
-                    <DataGridTextColumn Width="300"
+                    <DataGridTextColumn Width="350"
                                         Binding="{Binding Description}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Description" />
 
-                    <DataGridTextColumn Width="80"
+                    <DataGridTextColumn Width="100"
                                         Binding="{Binding Qty, StringFormat=N2}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="Qty" />
 
-                    <DataGridTextColumn Width="180"
-                                        Binding="{Binding Brand}"
-                                        ElementStyle="{StaticResource LeftColumnView}"
-                                        Header="Brand" />
-
-                    <DataGridTextColumn Width="80"
-                                        Binding="{Binding ItemDiscount, StringFormat=N2}"
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding ReceivedQty, StringFormat=N2}"
                                         ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Discount" />
-
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding ItemCost, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Unit Cost" />
-
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding ItemPrice, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Unit Price" />
-
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding ItemTotalCost, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Total Cost" />
-
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding ItemTotalPrice, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}"
-                                        Header="Total Price" />
+                                        Header="Received" />
 
                     <DataGridTextColumn Width="100"
-                                        Binding="{Binding ItemType}"
+                                        Binding="{Binding Percentage, StringFormat=N2}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="%" />
+
+                    <DataGridTextColumn Width="150"
+                                        Binding="{Binding Type}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="Type" />
 
-                    <DataGridTextColumn Width="300"
-                                        Binding="{Binding Remarks}"
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding Note}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Note" />
 
