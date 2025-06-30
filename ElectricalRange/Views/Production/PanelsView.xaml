@@ -118,6 +118,14 @@
                             Orientation="Horizontal">
 
                     <Button Padding="0,5,0,-10"
+                            Command="{Binding AddItemsCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Add Items">
+                        <ImageSource>/Images/Icons/AddItems.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
                             Command="{Binding ItemsCommand}"
                             CommandParameter="{Binding SelectedItem}"
                             Style="{StaticResource ManagerSubTapsButtons}"
@@ -298,27 +306,42 @@
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="Qty" />
 
-                    <DataGridTextColumn Width="180"
+                    <DataGridTextColumn Width="60"
+                                        Binding="{Binding Items}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Items" />
+
+                    <DataGridTextColumn Width="80"
+                                        Binding="{Binding ReceivedItems}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Received" />
+
+                    <DataGridTextColumn Width="80"
+                                        Binding="{Binding PercentageItems}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="%" />
+
+                    <DataGridTextColumn Width="160"
                                         Binding="{Binding EnclosureType}"
                                         ElementStyle="{StaticResource LeftColumnView}"
                                         Header="Enclosure" />
 
-                    <DataGridTextColumn Width="120"
+                    <DataGridTextColumn Width="80"
                                         Binding="{Binding EnclosureHeight}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="H" />
 
-                    <DataGridTextColumn Width="120"
+                    <DataGridTextColumn Width="60"
                                         Binding="{Binding EnclosureWidth}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="W" />
 
-                    <DataGridTextColumn Width="120"
+                    <DataGridTextColumn Width="60"
                                         Binding="{Binding EnclosureDepth}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="D" />
 
-                    <DataGridTextColumn Width="120"
+                    <DataGridTextColumn Width="60"
                                         Binding="{Binding EnclosureIP}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="IP" />

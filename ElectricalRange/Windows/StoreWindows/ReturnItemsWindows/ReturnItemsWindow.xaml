@@ -21,7 +21,7 @@
                     <TextBlock Text="Return To Stock" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnMaterials.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/ReturnMaterials.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>

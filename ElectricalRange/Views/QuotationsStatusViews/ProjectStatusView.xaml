@@ -41,7 +41,7 @@
                                 <ControlTemplate TargetType="Button">
                                     <Border Name="border" Background="White" CornerRadius="5"  BorderBrush="Gray" >
                                         <StackPanel Orientation="Horizontal" >
-                                            <Image Source="/GN.Base;component/Images/Icons/Accept.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <Image Source="/Images/Icons/Accept.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                                         </StackPanel>
                                     </Border>
                                     <ControlTemplate.Triggers>

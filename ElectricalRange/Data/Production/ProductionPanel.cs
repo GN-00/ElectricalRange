@@ -1,8 +1,9 @@
 ﻿namespace ProjectsNow.Data.Production
 {
-    public class ProductionPanel: Base
+    public class ProductionPanel : Base
     {
-        public int PanelId { get; set; } 
+        public int JobOrderId { get; set; }
+        public int PanelId { get; set; }
         public int OrderId { get; set; }
         public int Reference { get; set; }
         public int SN { get; set; }
@@ -58,10 +59,30 @@
         }
 
         private string _EnclosureIP;
+
         public string EnclosureIP
         {
             get => _EnclosureIP;
             set => SetValue(ref _EnclosureIP, value);
         }
+
+        private double _Items;
+        public double Items
+        {
+            get => _Items;
+            set => SetValue(ref _Items, value)
+                  .UpdateProperties(this, "PercentageItems");
+
+        }
+
+        private double _ReceivedItems;
+        public double ReceivedItems
+        {
+            get => _ReceivedItems;
+            set => SetValue(ref _ReceivedItems, value)
+                  .UpdateProperties(this, "PercentageItems");
+        }
+
+        public double PercentageItems => (ReceivedItems / Items) * 100;
     }
 }

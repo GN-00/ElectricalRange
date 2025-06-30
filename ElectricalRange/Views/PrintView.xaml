@@ -29,7 +29,7 @@
                                 <ControlTemplate TargetType="Button">
                                     <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
                                         <Grid>
-                                            <Image Source="/GN.Base;component/Images/Icons/printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2"/>
+                                            <Image Source="/Images/Icons/printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2"/>
                                         </Grid>
                                     </Border>
                                 </ControlTemplate>

@@ -20,7 +20,7 @@
                     <TextBlock Text="New Order"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -36,7 +36,7 @@
                     <TextBlock Text="New Order"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -52,7 +52,7 @@
                     <TextBlock Text="Information"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Info.png" 
+                    <Image Source="/Images/Icons/Info.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -70,7 +70,7 @@
                     </TextBlock>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -86,7 +86,7 @@
                     <TextBlock Text="Revise"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/PreviousYears.png" 
+                    <Image Source="/Images/Icons/PreviousYears.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -104,7 +104,7 @@
                     </TextBlock>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/RedFolder.png" 
+                    <Image Source="/Images/Icons/RedFolder.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -120,7 +120,7 @@
                     <TextBlock Text="Post Items"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/PreviousYears.png" 
+                    <Image Source="/Images/Icons/PreviousYears.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -136,7 +136,7 @@
                     <TextBlock Text="Print"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                    <Image Source="/Images/Icons/Printer.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

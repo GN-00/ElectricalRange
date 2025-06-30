@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using FastMember;
 using Microsoft.Data.SqlClient;
 using Microsoft.Win32;
@@ -8,10 +9,13 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
+using ProjectsNow.Windows.MessageWindows;
+using ProjectsNow.Windows.ReferencesWindows;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
@@ -45,6 +49,7 @@ namespace ProjectsNow.Views.Production
             GetData();
 
             CopyNameCommand = new RelayCommand(CopyName);
+            AddItemsCommand = new RelayCommand<ProductionPanel>(AddItems, CanAccessAddItems);
             ItemsCommand = new RelayCommand<ProductionPanel>(GetItems, CanAccessGetItems);
             ClosingCommand = new RelayCommand(Closing, CanAccessClosing);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
@@ -94,6 +99,7 @@ namespace ProjectsNow.Views.Production
             set => SetValue(ref _ItemsCollection, value);
         }
         public RelayCommand CopyNameCommand { get; }
+        public RelayCommand<ProductionPanel> AddItemsCommand { get; }
         public RelayCommand<ProductionPanel> ItemsCommand { get; }
         public RelayCommand ClosingCommand { get; }
         public RelayCommand ExportCommand { get; }
@@ -278,15 +284,23 @@ namespace ProjectsNow.Views.Production
                 return;
             Clipboard.SetText(SelectedItem.Name);
         }
+
+        public void AddItems(ProductionPanel panel)
+        {
+            Services.ProductionServices.AddItems(panel);
+        }
+        private bool CanAccessAddItems(ProductionPanel panel)
+        {
+            if (panel == null)
+                return false;
+
+            return true;
+        }
+
+
         private void GetItems(ProductionPanel panel)
         {
-            //PanelItemsWindow panelItemsWindow = new()
-            //{
-            //    UserData = UserData,
-            //    PanelData = panel,
-            //    JobOrderData = OrderData,
-            //};
-            //_ = panelItemsWindow.ShowDialog();
+            Navigation.To(new ItemsView(panel), ViewData);
         }
         private bool CanAccessGetItems(ProductionPanel panel)
         {

@@ -31,7 +31,7 @@
                            HorizontalAlignment="Left">
                 </TextBlock>
 
-                <Image Source="/GN.Base;component/Images/Icons/QualityControl.png"
+                <Image Source="/Images/Icons/QualityControl.png"
                        Height="4cm"
                        Width="4.5cm"
                        VerticalAlignment="Center"

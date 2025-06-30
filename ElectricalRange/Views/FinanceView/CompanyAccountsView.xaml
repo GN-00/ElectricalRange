@@ -14,7 +14,7 @@
                     <TextBlock Text="New Account"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -30,7 +30,7 @@
                     <TextBlock Text="New"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -45,7 +45,7 @@
                     <TextBlock Text="Edit Account"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit.png" 
+                    <Image Source="/Images/Icons/Edit.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -62,7 +62,7 @@
                     </TextBlock>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -77,7 +77,7 @@
                     <TextBlock Text="Bank Information"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Bank.png" 
+                    <Image Source="/Images/Icons/Bank.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -92,7 +92,7 @@
                     <TextBlock Text="Transactions"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Transactions.png" 
+                    <Image Source="/Images/Icons/Transactions.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

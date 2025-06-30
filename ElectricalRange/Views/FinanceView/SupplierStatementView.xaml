@@ -15,7 +15,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -33,7 +33,7 @@
                     <TextBlock Text="Print"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                    <Image Source="/Images/Icons/Printer.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -50,7 +50,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

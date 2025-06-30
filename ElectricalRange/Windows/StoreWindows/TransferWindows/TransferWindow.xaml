@@ -21,7 +21,7 @@
                     <TextBlock Text="Transfer" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Change.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Change.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>

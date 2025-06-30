@@ -15,7 +15,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Transactions.png" />
+                           Source="/Images/Icons/Transactions.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Command="{Binding ReceiptsCommand}"
@@ -25,7 +25,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Add2.png" />
+                           Source="/Images/Icons/Add2.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Command="{Binding PaymentsCommand}"
@@ -35,7 +35,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Remove2.png" />
+                           Source="/Images/Icons/Remove2.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
@@ -46,7 +46,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Excel.png" />
+                           Source="/Images/Icons/Excel.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -60,7 +60,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Transactions.png" />
+                           Source="/Images/Icons/Transactions.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ReceiptsCommand}"
@@ -70,7 +70,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Add2.png" />
+                           Source="/Images/Icons/Add2.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PaymentsCommand}"
@@ -80,7 +80,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Remove2.png" />
+                           Source="/Images/Icons/Remove2.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
@@ -91,7 +91,7 @@
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/GN.Base;component/Images/Icons/Excel.png" />
+                           Source="/Images/Icons/Excel.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -159,7 +159,7 @@
                             Style="{StaticResource SubTabButtonStyle}"
                             Tag="All"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Transactions.png" />
+                        <Image Source="/Images/ERI/Transactions.png" />
                     </Button>
 
                     <Button Padding="0,5,0,0"
@@ -167,7 +167,7 @@
                             Style="{StaticResource SubTabButtonStyle}"
                             Tag="Receipt"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Add2.png" />
+                        <Image Source="/Images/ERI/Add2.png" />
                     </Button>
 
                     <Button Padding="0,5,0,0"
@@ -175,7 +175,7 @@
                             Style="{StaticResource SubTabButtonStyle}"
                             Tag="Payment"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Remove2.png" />
+                        <Image Source="/Images/ERI/Remove2.png" />
                     </Button>
 
                     <Button Padding="0,5,0,0"
@@ -183,7 +183,7 @@
                             Style="{StaticResource SubTabButtonStyle}"
                             Tag="Export"
                             ToolTip="Add Items">
-                        <Image Source="/GN.Base;component/Images/ERI/Excel.png" />
+                        <Image Source="/Images/ERI/Excel.png" />
                     </Button>
 
                 </StackPanel>

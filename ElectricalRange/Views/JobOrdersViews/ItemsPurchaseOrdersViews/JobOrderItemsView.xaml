@@ -17,7 +17,7 @@
                     <TextBlock Text="Add"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewItem.png" 
+                    <Image Source="/Images/Icons/NewItem.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

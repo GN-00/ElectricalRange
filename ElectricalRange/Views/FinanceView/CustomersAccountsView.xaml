@@ -14,7 +14,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -32,7 +32,7 @@
                     <TextBlock Text="Transactions"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Transactions.png" 
+                    <Image Source="/Images/Icons/Transactions.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -47,7 +47,7 @@
                     <TextBlock Text="Statement"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Statement.png" 
+                    <Image Source="/Images/Icons/Statement.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -62,7 +62,7 @@
                     <TextBlock Text="Job Orders"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Order.png" 
+                    <Image Source="/Images/Icons/Order.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -77,7 +77,7 @@
                     <TextBlock Text="Invoices"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/History2.png" 
+                    <Image Source="/Images/Icons/History2.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -92,7 +92,7 @@
                     <TextBlock Text="Bank Information"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Bank.png" 
+                    <Image Source="/Images/Icons/Bank.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -106,7 +106,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>

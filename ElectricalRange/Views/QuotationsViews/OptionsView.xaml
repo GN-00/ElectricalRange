@@ -14,7 +14,7 @@
                     <TextBlock Text="New Option"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -31,7 +31,7 @@
                     <TextBlock Text="New Option"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -46,7 +46,7 @@
                     <TextBlock Text="Edit Option"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit1.png" 
+                    <Image Source="/Images/Icons/Edit1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -61,7 +61,7 @@
                     <TextBlock Text="Delete Option" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -76,7 +76,7 @@
                     <TextBlock Text="Print"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                    <Image Source="/Images/Icons/Printer.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -91,7 +91,7 @@
                     <TextBlock Text="New Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" 
+                    <Image Source="/Images/Icons/NewPanels.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -108,7 +108,7 @@
                     <TextBlock Text="New Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" 
+                    <Image Source="/Images/Icons/NewPanels.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -123,7 +123,7 @@
                     <TextBlock Text="Delete Panel" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/DeleteEnclosure.png" 
+                    <Image Source="/Images/Icons/DeleteEnclosure.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

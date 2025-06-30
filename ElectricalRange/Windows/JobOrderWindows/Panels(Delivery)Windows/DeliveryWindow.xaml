@@ -23,7 +23,7 @@
                     <TextBlock Text="New" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile.png" 
+                    <Image Source="/Images/Icons/NewFile.png" 
                            SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -36,7 +36,7 @@
                     <TextBlock Text="New" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile.png" 
+                    <Image Source="/Images/Icons/NewFile.png" 
                            SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -47,7 +47,7 @@
                     <TextBlock Text="Print" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/printer.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/printer.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -58,7 +58,7 @@
                     <TextBlock Text="Add Panels" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" 
+                    <Image Source="/Images/Icons/NewPanels.png" 
                            SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -71,7 +71,7 @@
                     <TextBlock Text="Add Panels" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" 
+                    <Image Source="/Images/Icons/NewPanels.png" 
                            SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -82,7 +82,7 @@
                     <TextBlock Text="Delete" Foreground="Red" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -284,7 +284,7 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="Button">
                                                         <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                            <Image Source="/GN.Base;component/Images/Icons/NewFile.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                            <Image Source="/Images/Icons/NewFile.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                         </Border>
                                                     </ControlTemplate>
                                                 </Setter.Value>
@@ -316,7 +316,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                                <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                                <Image Source="/Images/Icons/NewPanels.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Setter.Value>
@@ -343,7 +343,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                                <Image Source="/GN.Base;component/Images/Icons/Save.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                                <Image Source="/Images/Icons/Save.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Setter.Value>
@@ -370,7 +370,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                                <Image Source="/GN.Base;component/Images/Icons/Cancel.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                                <Image Source="/Images/Icons/Cancel.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Setter.Value>
@@ -406,7 +406,7 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="Button">
                                                 <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                    <Image Source="/Images/Icons/Printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>

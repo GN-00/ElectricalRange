@@ -20,7 +20,7 @@
                     <TextBlock Text="Select Stock"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Accept.png" 
+                    <Image Source="/Images/Icons/Accept.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

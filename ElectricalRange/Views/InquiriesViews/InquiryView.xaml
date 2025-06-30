@@ -40,7 +40,7 @@
                     <TextBlock Text="Mark As Attention"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Attention.png" 
+                    <Image Source="/Images/Icons/Attention.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -55,7 +55,7 @@
                     <TextBlock Text="Remove" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

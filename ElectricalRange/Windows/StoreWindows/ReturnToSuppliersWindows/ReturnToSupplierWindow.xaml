@@ -25,7 +25,7 @@
                     <TextBlock Text="Return To Supplier"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnMaterials.png" 
+                    <Image Source="/Images/Icons/ReturnMaterials.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

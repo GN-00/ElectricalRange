@@ -22,7 +22,7 @@
                     <TextBlock Text="Details" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="Enclosure_Click">
@@ -30,7 +30,7 @@
                     <TextBlock Text="Enclosure" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -39,7 +39,7 @@
                     <TextBlock Text="Modification" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -50,7 +50,7 @@
                     <TextBlock Text="Move Item Up" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/MoveUp.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/MoveUp.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="MoveDown_Click">
@@ -58,7 +58,7 @@
                     <TextBlock Text="Move Item Down" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/MoveDown.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/MoveDown.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -67,7 +67,7 @@
                     <TextBlock Text="Change Table" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Change.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Change.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -76,7 +76,7 @@
                     <TextBlock Text="Details" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Materials.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="Enclosure_Click">
@@ -84,7 +84,7 @@
                     <TextBlock Text="Enclosure" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -93,7 +93,7 @@
                     <TextBlock Text="Modification" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/ItemChange.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -344,7 +344,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/PostItems.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                                <Image Source="/Images/Icons/PostItems.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -372,7 +372,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                                <Image Source="/Images/Icons/Enclosure.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -402,7 +402,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/ItemChange.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                                <Image Source="/Images/Icons/ItemChange.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -430,7 +430,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/History.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                                <Image Source="/Images/Icons/History.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -460,7 +460,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/MoveUp.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                                <Image Source="/Images/Icons/MoveUp.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -488,7 +488,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/MoveDown.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
+                                                <Image Source="/Images/Icons/MoveDown.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -581,7 +581,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                <Image Source="/GN.Base;component/Images/Icons/DeleteFilter.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
+                                                <Image Source="/Images/Icons/DeleteFilter.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>

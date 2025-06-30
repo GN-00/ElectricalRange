@@ -14,7 +14,7 @@
                     <TextBlock Text="New Invoice"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -30,7 +30,7 @@
                     <TextBlock Text="New Invoice"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -46,7 +46,7 @@
                     <TextBlock Text="Information"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Info.png" 
+                    <Image Source="/Images/Icons/Info.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

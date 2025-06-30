@@ -235,7 +235,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="Gray" Margin="0,0,0,0">
-                                                                <Image Source="/GN.Base;component/Images/Icons/Printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
+                                                                <Image Source="/Images/Icons/Printer.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Margin="2.5"/>
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Setter.Value>

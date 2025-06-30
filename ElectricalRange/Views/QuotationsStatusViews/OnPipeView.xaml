@@ -44,7 +44,7 @@
                     <TextBlock Text="Information" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Information.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Information.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="TC_Click">
@@ -52,7 +52,7 @@
                     <TextBlock Text="Terms" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/TC.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/TC.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="QuotationPanels_ClicK">
@@ -60,7 +60,7 @@
                     <TextBlock Text="Panels" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Enclosure.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="Prices_Click">
@@ -68,7 +68,7 @@
                     <TextBlock Text="Prices Information" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Price.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Price.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="Printer_Click">
@@ -76,7 +76,7 @@
                     <TextBlock Text="Print" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Printer.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>

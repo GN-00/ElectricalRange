@@ -18,7 +18,7 @@
                     <TextBlock Text="Invoices"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Invoice.png" 
+                    <Image Source="/Images/Icons/Invoice.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

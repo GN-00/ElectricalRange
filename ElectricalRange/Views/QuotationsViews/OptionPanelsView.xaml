@@ -18,7 +18,7 @@
                     <TextBlock Text="Add All"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ImportAll.png" 
+                    <Image Source="/Images/Icons/ImportAll.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -35,7 +35,7 @@
                     <TextBlock Text="Add All"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ImportAll.png" 
+                    <Image Source="/Images/Icons/ImportAll.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -50,7 +50,7 @@
                     <TextBlock Text="New Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewPanels.png" 
+                    <Image Source="/Images/Icons/NewPanels.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

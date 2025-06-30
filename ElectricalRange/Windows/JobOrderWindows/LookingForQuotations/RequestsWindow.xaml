@@ -23,7 +23,7 @@
                     <TextBlock Text="New" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/New.png" 
+                    <Image Source="/Images/Icons/New.png" 
                            SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -36,7 +36,7 @@
                     <TextBlock Text="New" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/New.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/New.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -45,7 +45,7 @@
                     <TextBlock Text="Add Items" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="DeleteRequest_Click">
@@ -53,7 +53,7 @@
                     <TextBlock Text="Delete" Foreground="Red" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
@@ -62,7 +62,7 @@
                     <TextBlock Text="Print" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Printer.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -73,7 +73,7 @@
                     <TextBlock Text="Add Items" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -84,7 +84,7 @@
                     <TextBlock Text="Add Items" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/AddItem.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="EditItems_Click">
@@ -92,7 +92,7 @@
                     <TextBlock Text="Edit" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Edit.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Click="DeleteItems_Click">
@@ -100,7 +100,7 @@
                     <TextBlock Text="Delete" Foreground="Red" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/Images/Icons/Error.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>

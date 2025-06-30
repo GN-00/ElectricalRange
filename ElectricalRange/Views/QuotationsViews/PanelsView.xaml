@@ -21,7 +21,7 @@
                     <TextBlock Text="Library"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Library.png" 
+                    <Image Source="/Images/Icons/Library.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -32,7 +32,7 @@
                     <TextBlock Text="Import Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ImportData.png" 
+                    <Image Source="/Images/Icons/ImportData.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -45,7 +45,7 @@
                     <TextBlock Text="Add Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewRow.png" 
+                    <Image Source="/Images/Icons/NewRow.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -56,7 +56,7 @@
                     <TextBlock Text="Special Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewRowSpecial.png" 
+                    <Image Source="/Images/Icons/NewRowSpecial.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -74,7 +74,7 @@
                     <TextBlock Text="Library"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Library.png" 
+                    <Image Source="/Images/Icons/Library.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -89,7 +89,7 @@
                     <TextBlock Text="Import Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ImportData.png" 
+                    <Image Source="/Images/Icons/ImportData.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -109,7 +109,7 @@
                     <TextBlock Text="Add Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewRow.png" 
+                    <Image Source="/Images/Icons/NewRow.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -123,7 +123,7 @@
                     <TextBlock Text="Special Panel"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewRowSpecial.png" 
+                    <Image Source="/Images/Icons/NewRowSpecial.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -144,7 +144,7 @@
                     <TextBlock Text="Info"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Info.png" 
+                    <Image Source="/Images/Icons/Info.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -166,7 +166,7 @@
                     <TextBlock Text="Insert Up"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/InsertUp.png" 
+                    <Image Source="/Images/Icons/InsertUp.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -182,7 +182,7 @@
                     <TextBlock Text="Insert Down"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/InsertDown.png" 
+                    <Image Source="/Images/Icons/InsertDown.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -204,7 +204,7 @@
                     <TextBlock Text="Move Up"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/MoveUp.png" 
+                    <Image Source="/Images/Icons/MoveUp.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -220,7 +220,7 @@
                     <TextBlock Text="Move Down"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/MoveDown.png" 
+                    <Image Source="/Images/Icons/MoveDown.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -242,7 +242,7 @@
                     <TextBlock Text="Copy"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Copy.png" 
+                    <Image Source="/Images/Icons/Copy.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -264,7 +264,7 @@
                     <TextBlock Text="Delete" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

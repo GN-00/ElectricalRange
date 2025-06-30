@@ -22,7 +22,7 @@
                     <TextBlock Text="New Invoice" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile.png" 
+                    <Image Source="/Images/Icons/NewFile.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -34,7 +34,7 @@
                     <TextBlock Text="Internal Invoice" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile1.png" 
+                    <Image Source="/Images/Icons/NewFile1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -51,7 +51,7 @@
                     <TextBlock Text="New Invoice" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile.png" 
+                    <Image Source="/Images/Icons/NewFile.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -65,7 +65,7 @@
                     <TextBlock Text="Internal Invoice" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/NewFile1.png" 
+                    <Image Source="/Images/Icons/NewFile1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -81,7 +81,7 @@
                     <TextBlock Text="Edit" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit1.png" 
+                    <Image Source="/Images/Icons/Edit1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -97,7 +97,7 @@
                     <TextBlock Text="Delete Internal Invoice" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -113,7 +113,7 @@
                     <TextBlock Text="Purchase Orders" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Purchase.png" 
+                    <Image Source="/Images/Icons/Purchase.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -129,7 +129,7 @@
                     <TextBlock Text="Return Items" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnMaterials.png" 
+                    <Image Source="/Images/Icons/ReturnMaterials.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -145,7 +145,7 @@
                     <TextBlock Text="Return Invoices" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnInvoice.png" 
+                    <Image Source="/Images/Icons/ReturnInvoice.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -162,7 +162,7 @@
                     <TextBlock Text="Attach PDF" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Attach.png" 
+                    <Image Source="/Images/Icons/Attach.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -178,7 +178,7 @@
                     <TextBlock Text="Delete Attachment" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/RemoveAttachment.png" 
+                    <Image Source="/Images/Icons/RemoveAttachment.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -194,7 +194,7 @@
                     <TextBlock Text="Download Attachment" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Download1.png" 
+                    <Image Source="/Images/Icons/Download1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -210,7 +210,7 @@
                     <TextBlock Text="Read Attachment" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Read.png" 
+                    <Image Source="/Images/Icons/Read.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -226,7 +226,7 @@
                     <TextBlock Text="New Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -243,7 +243,7 @@
                     <TextBlock Text="New Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Add.png" 
+                    <Image Source="/Images/Icons/Add.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -259,7 +259,7 @@
                     <TextBlock Text="Edit Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit1.png" 
+                    <Image Source="/Images/Icons/Edit1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -275,7 +275,7 @@
                     <TextBlock Text="Delete Item" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Error.png" 
+                    <Image Source="/Images/Icons/Error.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

@@ -22,7 +22,7 @@
                     <TextBlock Text="Designing" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AsBuilt.png" 
+                    <Image Source="/Images/Icons/AsBuilt.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -36,7 +36,7 @@
                     <TextBlock Text="Undo" VerticalAlignment="Center"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Undo.png" 
+                    <Image Source="/Images/Icons/Undo.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

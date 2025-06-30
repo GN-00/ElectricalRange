@@ -19,7 +19,7 @@
                     <TextBlock Text="Delete" Foreground="Red"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Cancel.png" 
+                    <Image Source="/Images/Icons/Cancel.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

@@ -20,7 +20,7 @@
                     <TextBlock Text="Select Job Order"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Change1.png" 
+                    <Image Source="/Images/Icons/Change1.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -32,7 +32,7 @@
                     <TextBlock Text="Post Items"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/DownloadBox.png" 
+                    <Image Source="/Images/Icons/DownloadBox.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -44,7 +44,7 @@
                     <TextBlock Text="Purchase Orders"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Purchase.png" 
+                    <Image Source="/Images/Icons/Purchase.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -56,7 +56,7 @@
                     <TextBlock Text="Return To Stock"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnMaterials.png" 
+                    <Image Source="/Images/Icons/ReturnMaterials.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -67,7 +67,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -83,7 +83,7 @@
                     <TextBlock Text="Select Job Order"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Change1.png" 
+                    <Image Source="/Images/Icons/Change1.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -102,7 +102,7 @@
                     <TextBlock Text="Post Items"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/DownloadBox.png" 
+                    <Image Source="/Images/Icons/DownloadBox.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -120,7 +120,7 @@
                     <TextBlock Text="Purchase Orders"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Purchase.png" 
+                    <Image Source="/Images/Icons/Purchase.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -135,7 +135,7 @@
                     <TextBlock Text="Return To Stock"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ReturnMaterials.png" 
+                    <Image Source="/Images/Icons/ReturnMaterials.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -149,7 +149,7 @@
                     <TextBlock Text="Export"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Excel.png" 
+                    <Image Source="/Images/Icons/Excel.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>

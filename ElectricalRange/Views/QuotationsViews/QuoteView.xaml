@@ -15,7 +15,7 @@
                     <TextBlock Text="Quotations"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Quotation1.png" 
+                    <Image Source="/Images/Icons/Quotation1.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -33,7 +33,7 @@
                     <TextBlock Text="Quote"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Quote.png" 
+                    <Image Source="/Images/Icons/Quote.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -48,7 +48,7 @@
                     <TextBlock Text="Quotations"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Quotation1.png" 
+                    <Image Source="/Images/Icons/Quotation1.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

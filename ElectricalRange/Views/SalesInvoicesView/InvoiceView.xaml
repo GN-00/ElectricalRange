@@ -14,7 +14,7 @@
                     <TextBlock Text="New Item"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AddItem.png" 
+                    <Image Source="/Images/Icons/AddItem.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -25,7 +25,7 @@
                     <TextBlock Text="Print"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                    <Image Source="/Images/Icons/Printer.png" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </MenuItem.Icon>
             </MenuItem>
@@ -41,7 +41,7 @@
                     <TextBlock Text="New Item"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/AddItem.png" 
+                    <Image Source="/Images/Icons/AddItem.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -56,7 +56,7 @@
                     <TextBlock Text="Edit Item"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/ItemsStatus.png" 
+                    <Image Source="/Images/Icons/ItemsStatus.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -73,7 +73,7 @@
                     </TextBlock>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/DeleteItem.png" 
+                    <Image Source="/Images/Icons/DeleteItem.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>
@@ -88,7 +88,7 @@
                     <TextBlock Text="Print"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Printer.png" 
+                    <Image Source="/Images/Icons/Printer.png" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
                 </MenuItem.Icon>

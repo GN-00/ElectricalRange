@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="ProjectsNow.Views.QuotationsViews.ItemsView"
+﻿<UserControl x:Class="ProjectsNow.Views.Production.ItemsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Loaded="UserControl_Loaded"
              Style="{StaticResource ViewStyle}"
              mc:Ignorable="d">
     <i:Interaction.Triggers>
@@ -385,59 +384,6 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                    <TextBlock Width="50"
-                               VerticalAlignment="Center"
-                               FontFamily="Times New Roman"
-                               FontSize="18"
-                               Foreground="{StaticResource Blue}"
-                               Text="Select Table"
-                               TextAlignment="Center"
-                               TextWrapping="Wrap" />
-
-                    <Button Padding="0,5,0,-8"
-                            Command="{Binding DetailsCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Details">
-                        <ImageSource>/Images/Icons/PostItems.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding EnclosureCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Enclosure">
-                        <ImageSource>/Images/Icons/PanelItems.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding AccessoriesCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Accessories">
-                        <ImageSource>/Images/Icons/Accessories.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray" />
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding CostSheetCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Cost Sheet">
-                        <ImageSource>/Images/Icons/CostSheet.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray" />
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding AddCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="New Item">
-                        <ImageSource>/Images/Icons/AddItem.png</ImageSource>
-                    </Button>
-
                     <Button Padding="0,5,0,-10"
                             Command="{Binding AddItemsCommand}"
                             CommandParameter="{Binding SelectedItem}"
@@ -446,138 +392,9 @@
                         <ImageSource>/Images/Icons/AddItems.png</ImageSource>
                     </Button>
 
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray"
-                                  Visibility="{Binding HasToolsButtons}" />
-
-                    <Button Padding="0,5,0,-8"
-                            Command="{Binding EditCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Info">
-                        <ImageSource>/Images/Icons/Info.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray"
-                                  Visibility="{Binding HasInfoButtons}" />
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding InsertUpCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Insert Up">
-                        <ImageSource>/Images/Icons/InsertUp.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding InsertDownCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            FontSize="11"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Insert Down">
-                        <ImageSource>/Images/Icons/InsertDown.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray"
-                                  Visibility="{Binding HasToolsButtons}" />
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding MoveUpCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Move Up">
-                        <ImageSource>/Images/Icons/MoveUp.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-10"
-                            Command="{Binding MoveDownCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            FontSize="11"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Move Down">
-                        <ImageSource>/Images/Icons/MoveDown.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray"
-                                  Visibility="{Binding HasMovingButtons}" />
-
-                    <Button Padding="0,8,0,-5"
-                            Command="{Binding CopyCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Copy">
-                        <ImageSource>/Images/Icons/Copy.png</ImageSource>
-                    </Button>
-
-                    <GridSplitter Width="2"
-                                  Margin="5"
-                                  Background="LightGray"
-                                  Visibility="{Binding HasToolsButtons}" />
-
-                    <Button Padding="0,5,0,-8"
-                            Command="{Binding DeleteCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Delete">
-                        <ImageSource>/Images/Icons/DeleteItem.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-8"
-                            Command="{Binding ResetCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Reset">
-                        <ImageSource>/Images/Icons/PreviousYears.png</ImageSource>
-                    </Button>
-
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Library">
-                <StackPanel Margin="10,0,0,0"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
-
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding ReferencesCommand}"
-                            FontSize="11"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="References">
-                        <ImageSource>/Images/Icons/BarCode.png</ImageSource>
-                    </Button>
-
-                    <!--<Button Command="{Binding DigitalLibraryCommand}"
-                            Tag="Library"
-                            FontSize="11"
-                            Padding="0,5,0,-5"
-                            Style="{StaticResource ManagerSubTapsButtons}">
-                        <ImageSource>/Images/Icons/DigitalLibrary.png</ImageSource>
-                    </Button>-->
-
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding AddEnclosureCommand}"
-                            FontSize="11"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Add Enclosure">
-                        <ImageSource>/Images/Icons/NewPanels.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding DeleteEnclosureCommand}"
-                            FontSize="11"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Delete Enclosure">
-                        <ImageSource>/Images/Icons/DeleteEnclosure.png</ImageSource>
-                    </Button>
-
-                </StackPanel>
-            </TabItem>
 
             <TabItem HorizontalAlignment="Right"
                      Header="Filters">
@@ -625,7 +442,7 @@
               Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="5"
@@ -636,132 +453,19 @@
             </Grid.Effect>
             <Grid Grid.Row="1"
                   Background="LightGray">
-                <Grid.Resources>
-                    <Style x:Key="LableStyle"
-                           TargetType="{x:Type TextBlock}">
-                        <Setter Property="SnapsToDevicePixels" Value="True" />
-                        <Setter Property="FontSize" Value="16" />
-                        <Setter Property="FontWeight" Value="Bold" />
-                        <Setter Property="FontFamily" Value="Times New Roman" />
-                        <Setter Property="Foreground" Value="{StaticResource MyBlue}" />
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0"
-                            Grid.Column="0"
+                <StackPanel Grid.RowSpan="2"
+                            Margin="20,0"
+                            VerticalAlignment="Center"
                             Orientation="Horizontal">
-                    <TextBlock Width="80"
-                               Style="{StaticResource LableStyle}"
-                               Text="Unit Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding PanelData.PanelCost, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1"
-                            Grid.Column="0"
-                            Orientation="Horizontal">
-                    <TextBlock Width="80"
-                               Style="{StaticResource LableStyle}"
-                               Text="Total Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding PanelData.PanelsCost, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="0"
-                            Grid.Column="1"
-                            Orientation="Horizontal">
-                    <TextBlock Width="125"
-                               Style="{StaticResource LableStyle}"
-                               Text="Unit Price:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding PanelData.PanelPrice, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1"
-                            Grid.Column="1"
-                            Orientation="Horizontal">
-                    <TextBlock Width="125"
-                               Style="{StaticResource LableStyle}"
-                               Text="Total Price:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding PanelData.PanelsPrice, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="0"
-                            Grid.Column="2"
-                            Orientation="Horizontal">
-                    <TextBlock Width="125"
-                               Style="{StaticResource LableStyle}"
-                               Text="Details Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding DetailsCost, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1"
-                            Grid.Column="2"
-                            Orientation="Horizontal">
-                    <TextBlock Width="125"
-                               Style="{StaticResource LableStyle}"
-                               Text="Enclosure Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding EnclosureCost, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="0"
-                            Grid.Column="3"
-                            Orientation="Horizontal">
-                    <TextBlock Width="130"
-                               Style="{StaticResource LableStyle}"
-                               Text="Accessories Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding AccessoriesCost, StringFormat=N2}" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1"
-                            Grid.Column="3"
-                            Orientation="Horizontal">
-                    <TextBlock Width="130"
-                               Style="{StaticResource LableStyle}"
-                               Text="Copper Cost:"
-                               TextAlignment="Right" />
-                    <TextBlock Margin="5,0"
-                               Foreground="Black"
-                               Style="{StaticResource LableStyle}"
-                               Text="{Binding CopperCost, StringFormat=N2}" />
+                    <TextBlock Style="{StaticResource IndicationStyle}"
+                               Text="Items: " />
+                    <TextBlock Foreground="Black"
+                               Style="{StaticResource IndicationStyle}"
+                               Text="{Binding Indicator}" />
                 </StackPanel>
             </Grid>
+
 
             <DataGrid x:Name="grid"
                       ContextMenu="{StaticResource GridContextMenu}"
@@ -804,7 +508,7 @@
                                         Header="Description" />
 
                     <DataGridTextColumn Width="80"
-                                        Binding="{Binding ItemQty, StringFormat=N2}"
+                                        Binding="{Binding Qty, StringFormat=N2}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="Qty" />
 

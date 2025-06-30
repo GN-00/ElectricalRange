@@ -22,7 +22,7 @@
                     <TextBlock Text="Edit"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Edit1.png" 
+                    <Image Source="/Images/Icons/Edit1.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>
@@ -38,7 +38,7 @@
                     <TextBlock Text="Save"/>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/GN.Base;component/Images/Icons/Save.png" 
+                    <Image Source="/Images/Icons/Save.png" 
                            SnapsToDevicePixels="True" 
                            RenderOptions.BitmapScalingMode="HighQuality">
                     </Image>

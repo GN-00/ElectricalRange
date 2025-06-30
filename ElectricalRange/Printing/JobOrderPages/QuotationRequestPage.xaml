@@ -18,7 +18,7 @@
             <RowDefinition Height="7.5cm"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/GN.Base;component/Images/Icons/ER.png"
+        <Image Source="/Images/Icons/ER.png"
                RenderOptions.BitmapScalingMode="HighQuality"
                VerticalAlignment="Center"
                HorizontalAlignment="Center">
