@@ -1,15 +1,12 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
-
+using Microsoft.Data.SqlClient;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Finance;
 using ProjectsNow.Data.Users;
-
 using System.Collections.ObjectModel;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 
 namespace ProjectsNow.Views.FinanceView
 {

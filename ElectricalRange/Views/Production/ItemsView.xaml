@@ -392,6 +392,14 @@
                         <ImageSource>/Images/Icons/AddItems.png</ImageSource>
                     </Button>
 
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding StockCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Add Stock">
+                        <ImageSource>/Images/Icons/Stock.png</ImageSource>
+                    </Button>
+
                 </StackPanel>
             </TabItem>
 

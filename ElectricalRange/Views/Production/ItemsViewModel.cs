@@ -44,6 +44,7 @@ namespace ProjectsNow.Views.Production
 
             GetData();
             AddItemsCommand = new RelayCommand(AddItems, CanAccessAddItems);
+            StockCommand = new RelayCommand(Stock, CanAccessStock);
             UpdateCommand = new RelayCommand(GetData);
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
@@ -91,6 +92,7 @@ namespace ProjectsNow.Views.Production
 
 
         public RelayCommand AddItemsCommand { get; }
+        public RelayCommand StockCommand { get; }
         public RelayCommand UpdateCommand { get; }
         public RelayCommand DeleteFilterCommand { get; }
 
@@ -281,6 +283,16 @@ namespace ProjectsNow.Views.Production
             GetData();
         }
         private bool CanAccessAddItems()
+        {
+            return true;
+        }
+
+        private void Stock()
+        {
+            Services.ProductionServices.Stock(PanelData.JobOrderId);
+            GetData();
+        }
+        private bool CanAccessStock()
         {
             return true;
         }

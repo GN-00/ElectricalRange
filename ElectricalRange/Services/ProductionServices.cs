@@ -8,7 +8,6 @@ using ProjectsNow.Printing;
 using ProjectsNow.Printing.ProductionPages;
 using ProjectsNow.Views;
 using ProjectsNow.Windows.MessageWindows;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Windows;
@@ -65,7 +64,7 @@ namespace ProjectsNow.Services
             }
         }
 
-        public static void AddItems(ProductionPanel panel) 
+        public static void AddItems(ProductionPanel panel)
         {
             Navigation.OpenLoading(Visibility.Visible, "Working....");
 
@@ -112,6 +111,59 @@ namespace ProjectsNow.Services
                 }
 
                 panel.Items = excelList.Sum(x => x.Qty);
+
+                Navigation.CloseLoading();
+
+            }
+            catch (Exception exception)
+            {
+                Navigation.CloseLoading();
+            }
+        }
+
+        internal static void Stock(int jobOrderId)
+        {
+            Navigation.OpenLoading(Visibility.Visible, "Working....");
+
+            OpenFileDialog path = new() { Filter = "Excel Files|*.xls;*.xlsx;*.xlsm" };
+            _ = path.ShowDialog();
+
+            string filePath = $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={path.FileName};" +
+                              $@"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+            try
+            {
+                DataTable excelData = new();
+                using (OleDbConnection connection = new(filePath))
+                {
+                    connection.Open();
+                    OleDbDataAdapter oleAdpt = new("select Code, Description, Qty from [Sheet1$]", connection); //here we read data from sheet1  
+                    _ = oleAdpt.Fill(excelData);
+                }
+
+                if (excelData.Rows.Count == 0)
+                {
+                    _ = MessageWindow.Show("Data Error", "No data!", MessageWindowButton.OK, MessageWindowImage.Warning);
+                    Navigation.CloseLoading();
+                }
+
+                List<AddStock> excelList = new();
+                for (int i = 0; i < excelData.Rows.Count; i++)
+                {
+                    AddStock excelRow = new();
+                    excelRow.JobOrderId = jobOrderId;
+                    excelRow.Code = excelData.Rows[i]["Code"].ToString();
+                    excelRow.Description = excelData.Rows[i]["Description"].ToString();
+                    excelRow.Qty = Convert.ToDouble(excelData.Rows[i]["Qty"]);
+                    excelList.Add(excelRow);
+                }
+
+                using (SqlConnection connection = new(Database.ConnectionString))
+                {
+                    string query = $"DELETE FROM [Production].[OrdersStock] WHERE JobOrderId = {jobOrderId}";
+                    _ = connection.Execute(query);
+                    _ = connection.Insert(excelList);
+                }
 
                 Navigation.CloseLoading();
 
