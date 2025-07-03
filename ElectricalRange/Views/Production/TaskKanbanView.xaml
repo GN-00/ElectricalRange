@@ -5,196 +5,386 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <!-- To Do Column -->
-        <Border Grid.Column="0" 
-                Background="LightGray" 
-                BorderBrush="DarkGray" 
-                BorderThickness="1" 
-                Margin="5"
-                CornerRadius="5"
-                AllowDrop="True"
-                Drop="Column_Drop"
-                DragOver="Column_DragOver">
+        <!-- Kanban Header -->
+        <Border Grid.Row="0" Background="{StaticResource LinearGradientGray}" Margin="0,0,0,10">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0"
-                           Text="To Do"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           HorizontalAlignment="Center"
+                <TextBlock Text="Task Kanban Board" 
+                           Style="{StaticResource TitleStyle}"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           Background="#FF6B6B"
-                           Foreground="White"
-                           Padding="10,5" />
-                
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding ToDoTasks}" Margin="5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="White"
-                                        BorderBrush="Gray"
-                                        BorderThickness="1"
-                                        Margin="2"
-                                        Padding="8"
-                                        CornerRadius="3"
-                                        Tag="To Do"
-                                        MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
-                                        MouseMove="TaskCard_MouseMove">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding TaskName}" FontWeight="Bold" TextWrapping="Wrap" />
-                                        <TextBlock Text="{Binding PanelName}" FontSize="12" Foreground="Gray" />
-                                        <TextBlock Text="{Binding StartDate, StringFormat='Start: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <TextBlock Text="{Binding EndDate, StringFormat='End: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <ProgressBar Value="{Binding Progress}" Maximum="100" Height="10" Margin="0,2" />
-                                        <TextBlock Text="{Binding Progress, StringFormat='{0}%'}" FontSize="10" HorizontalAlignment="Center" />
-                                    </StackPanel>
-                                    <Border.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Assign Employees" Click="AssignEmployees_Click" />
-                                            <MenuItem Header="Edit Task" Click="EditTask_Click" />
-                                        </ContextMenu>
-                                    </Border.ContextMenu>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                           Margin="20,0" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0">
+                    <TextBlock Text="Total Tasks:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock FontWeight="Bold" VerticalAlignment="Center" Foreground="{StaticResource Blue}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}">
+                                <Binding Path="ToDoTasks.Count" />
+                                <Binding Path="InProgressTasks.Count" />
+                                <Binding Path="DoneTasks.Count" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
         </Border>
 
-        <!-- In Progress Column -->
-        <Border Grid.Column="1" 
-                Background="LightGray" 
-                BorderBrush="DarkGray" 
-                BorderThickness="1" 
-                Margin="5"
-                CornerRadius="5"
-                AllowDrop="True"
-                Drop="Column_Drop"
-                DragOver="Column_DragOver">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0"
-                           Text="In Progress"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="#FFD93D"
-                           Foreground="Black"
-                           Padding="10,5" />
-                
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding InProgressTasks}" Margin="5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="White"
-                                        BorderBrush="Gray"
-                                        BorderThickness="1"
-                                        Margin="2"
-                                        Padding="8"
-                                        CornerRadius="3"
-                                        Tag="In Progress"
-                                        MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
-                                        MouseMove="TaskCard_MouseMove">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding TaskName}" FontWeight="Bold" TextWrapping="Wrap" />
-                                        <TextBlock Text="{Binding PanelName}" FontSize="12" Foreground="Gray" />
-                                        <TextBlock Text="{Binding StartDate, StringFormat='Start: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <TextBlock Text="{Binding EndDate, StringFormat='End: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <ProgressBar Value="{Binding Progress}" Maximum="100" Height="10" Margin="0,2" />
-                                        <TextBlock Text="{Binding Progress, StringFormat='{0}%'}" FontSize="10" HorizontalAlignment="Center" />
-                                        <TextBlock Text="{Binding AssignedEmployees}" FontSize="10" Foreground="Blue" TextWrapping="Wrap" />
-                                    </StackPanel>
-                                    <Border.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Assign Employees" Click="AssignEmployees_Click" />
-                                            <MenuItem Header="Edit Task" Click="EditTask_Click" />
-                                        </ContextMenu>
-                                    </Border.ContextMenu>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+        <!-- Kanban Columns -->
+        <Grid Grid.Row="1" Margin="20,0,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!-- Done Column -->
-        <Border Grid.Column="2" 
-                Background="LightGray" 
-                BorderBrush="DarkGray" 
-                BorderThickness="1" 
-                Margin="5"
-                CornerRadius="5"
-                AllowDrop="True"
-                Drop="Column_Drop"
-                DragOver="Column_DragOver">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0"
-                           Text="Done"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="#6BCF7F"
-                           Foreground="White"
-                           Padding="10,5" />
-                
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding DoneTasks}" Margin="5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="White"
-                                        BorderBrush="Gray"
-                                        BorderThickness="1"
-                                        Margin="2"
-                                        Padding="8"
-                                        CornerRadius="3"
-                                        Tag="Done"
-                                        MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
-                                        MouseMove="TaskCard_MouseMove">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding TaskName}" FontWeight="Bold" TextWrapping="Wrap" />
-                                        <TextBlock Text="{Binding PanelName}" FontSize="12" Foreground="Gray" />
-                                        <TextBlock Text="{Binding StartDate, StringFormat='Start: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <TextBlock Text="{Binding EndDate, StringFormat='End: {0:dd/MM/yyyy}'}" FontSize="10" />
-                                        <ProgressBar Value="{Binding Progress}" Maximum="100" Height="10" Margin="0,2" />
-                                        <TextBlock Text="{Binding Progress, StringFormat='{0}%'}" FontSize="10" HorizontalAlignment="Center" />
-                                        <TextBlock Text="{Binding AssignedEmployees}" FontSize="10" Foreground="Blue" TextWrapping="Wrap" />
-                                    </StackPanel>
-                                    <Border.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Assign Employees" Click="AssignEmployees_Click" />
-                                            <MenuItem Header="Edit Task" Click="EditTask_Click" />
-                                        </ContextMenu>
-                                    </Border.ContextMenu>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+            <!-- To Do Column -->
+            <Border Grid.Column="0" 
+                    Background="White" 
+                    BorderBrush="#FF6B6B" 
+                    BorderThickness="2" 
+                    CornerRadius="10"
+                    AllowDrop="True"
+                    Drop="Column_Drop"
+                    DragOver="Column_DragOver"
+                    Tag="To Do">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.3" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Border Grid.Row="0"
+                            Background="#FF6B6B"
+                            CornerRadius="8,8,0,0">
+                        <Grid>
+                            <TextBlock Text="TO DO"
+                                       FontWeight="Bold"
+                                       FontSize="18"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       Margin="20,0" />
+                            <Border Background="White"
+                                    CornerRadius="15"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,20,0"
+                                    Padding="10,5">
+                                <TextBlock Text="{Binding ToDoTasks.Count}"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Foreground="#FF6B6B" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="15">
+                        <ItemsControl ItemsSource="{Binding ToDoTasks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="White"
+                                            BorderBrush="#E0E0E0"
+                                            BorderThickness="1"
+                                            Margin="0,0,0,10"
+                                            Padding="15"
+                                            CornerRadius="8"
+                                            Tag="To Do"
+                                            MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
+                                            MouseMove="TaskCard_MouseMove"
+                                            Cursor="Hand">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.2" />
+                                        </Border.Effect>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding TaskName}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="14"
+                                                       TextWrapping="Wrap" 
+                                                       Margin="0,0,0,5" />
+                                            <TextBlock Text="{Binding PanelName}" 
+                                                       FontSize="12" 
+                                                       Foreground="Gray"
+                                                       Margin="0,0,0,8" />
+                                            <Grid Margin="0,0,0,8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding StartDate, StringFormat='Start: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkBlue" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding EndDate, StringFormat='End: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkRed" />
+                                            </Grid>
+                                            <ProgressBar Value="{Binding Progress}" 
+                                                         Maximum="100" 
+                                                         Height="8" 
+                                                         Margin="0,0,0,5"
+                                                         Foreground="#FF6B6B" />
+                                            <TextBlock Text="{Binding Progress, StringFormat='{0}% Complete'}" 
+                                                       FontSize="10" 
+                                                       HorizontalAlignment="Center"
+                                                       Foreground="Gray" />
+                                            <TextBlock Text="{Binding AssignedEmployees}" 
+                                                       FontSize="10" 
+                                                       Foreground="Blue" 
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0" />
+                                        </StackPanel>
+                                        <Border.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="🧑‍💼 Assign Employees" Click="AssignEmployees_Click" />
+                                                <MenuItem Header="✏️ Edit Task" Click="EditTask_Click" />
+                                            </ContextMenu>
+                                        </Border.ContextMenu>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <!-- In Progress Column -->
+            <Border Grid.Column="2" 
+                    Background="White" 
+                    BorderBrush="#FFD93D" 
+                    BorderThickness="2" 
+                    CornerRadius="10"
+                    AllowDrop="True"
+                    Drop="Column_Drop"
+                    DragOver="Column_DragOver"
+                    Tag="In Progress">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.3" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Border Grid.Row="0"
+                            Background="#FFD93D"
+                            CornerRadius="8,8,0,0">
+                        <Grid>
+                            <TextBlock Text="IN PROGRESS"
+                                       FontWeight="Bold"
+                                       FontSize="18"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="Black"
+                                       Margin="20,0" />
+                            <Border Background="White"
+                                    CornerRadius="15"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,20,0"
+                                    Padding="10,5">
+                                <TextBlock Text="{Binding InProgressTasks.Count}"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Foreground="#FFD93D" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="15">
+                        <ItemsControl ItemsSource="{Binding InProgressTasks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="White"
+                                            BorderBrush="#E0E0E0"
+                                            BorderThickness="1"
+                                            Margin="0,0,0,10"
+                                            Padding="15"
+                                            CornerRadius="8"
+                                            Tag="In Progress"
+                                            MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
+                                            MouseMove="TaskCard_MouseMove"
+                                            Cursor="Hand">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.2" />
+                                        </Border.Effect>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding TaskName}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="14"
+                                                       TextWrapping="Wrap" 
+                                                       Margin="0,0,0,5" />
+                                            <TextBlock Text="{Binding PanelName}" 
+                                                       FontSize="12" 
+                                                       Foreground="Gray"
+                                                       Margin="0,0,0,8" />
+                                            <Grid Margin="0,0,0,8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding StartDate, StringFormat='Start: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkBlue" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding EndDate, StringFormat='End: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkRed" />
+                                            </Grid>
+                                            <ProgressBar Value="{Binding Progress}" 
+                                                         Maximum="100" 
+                                                         Height="8" 
+                                                         Margin="0,0,0,5"
+                                                         Foreground="#FFD93D" />
+                                            <TextBlock Text="{Binding Progress, StringFormat='{0}% Complete'}" 
+                                                       FontSize="10" 
+                                                       HorizontalAlignment="Center"
+                                                       Foreground="Gray" />
+                                            <TextBlock Text="{Binding AssignedEmployees}" 
+                                                       FontSize="10" 
+                                                       Foreground="Blue" 
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0" />
+                                        </StackPanel>
+                                        <Border.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="🧑‍💼 Assign Employees" Click="AssignEmployees_Click" />
+                                                <MenuItem Header="✏️ Edit Task" Click="EditTask_Click" />
+                                            </ContextMenu>
+                                        </Border.ContextMenu>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <!-- Done Column -->
+            <Border Grid.Column="4" 
+                    Background="White" 
+                    BorderBrush="#6BCF7F" 
+                    BorderThickness="2" 
+                    CornerRadius="10"
+                    AllowDrop="True"
+                    Drop="Column_Drop"
+                    DragOver="Column_DragOver"
+                    Tag="Done">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.3" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Border Grid.Row="0"
+                            Background="#6BCF7F"
+                            CornerRadius="8,8,0,0">
+                        <Grid>
+                            <TextBlock Text="DONE"
+                                       FontWeight="Bold"
+                                       FontSize="18"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       Margin="20,0" />
+                            <Border Background="White"
+                                    CornerRadius="15"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,20,0"
+                                    Padding="10,5">
+                                <TextBlock Text="{Binding DoneTasks.Count}"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Foreground="#6BCF7F" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="15">
+                        <ItemsControl ItemsSource="{Binding DoneTasks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="White"
+                                            BorderBrush="#E0E0E0"
+                                            BorderThickness="1"
+                                            Margin="0,0,0,10"
+                                            Padding="15"
+                                            CornerRadius="8"
+                                            Tag="Done"
+                                            MouseLeftButtonDown="TaskCard_MouseLeftButtonDown"
+                                            MouseMove="TaskCard_MouseMove"
+                                            Cursor="Hand">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.2" />
+                                        </Border.Effect>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding TaskName}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="14"
+                                                       TextWrapping="Wrap" 
+                                                       Margin="0,0,0,5" />
+                                            <TextBlock Text="{Binding PanelName}" 
+                                                       FontSize="12" 
+                                                       Foreground="Gray"
+                                                       Margin="0,0,0,8" />
+                                            <Grid Margin="0,0,0,8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding StartDate, StringFormat='Start: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkBlue" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding EndDate, StringFormat='End: {0:dd/MM}'}" 
+                                                           FontSize="10" 
+                                                           Foreground="DarkRed" />
+                                            </Grid>
+                                            <ProgressBar Value="{Binding Progress}" 
+                                                         Maximum="100" 
+                                                         Height="8" 
+                                                         Margin="0,0,0,5"
+                                                         Foreground="#6BCF7F" />
+                                            <TextBlock Text="{Binding Progress, StringFormat='{0}% Complete'}" 
+                                                       FontSize="10" 
+                                                       HorizontalAlignment="Center"
+                                                       Foreground="Gray" />
+                                            <TextBlock Text="{Binding AssignedEmployees}" 
+                                                       FontSize="10" 
+                                                       Foreground="Blue" 
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0" />
+                                        </StackPanel>
+                                        <Border.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="🧑‍💼 Assign Employees" Click="AssignEmployees_Click" />
+                                                <MenuItem Header="✏️ Edit Task" Click="EditTask_Click" />
+                                            </ContextMenu>
+                                        </Border.ContextMenu>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

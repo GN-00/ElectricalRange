@@ -9,11 +9,12 @@
     <Grid Background="{StaticResource LinearGradientGray}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
         <!-- Header -->
-        <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid Grid.Row="0" Background="{StaticResource LinearGradientGray}">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="5"
                                   Direction="-90"
@@ -29,30 +30,56 @@
             </TextBlock>
         </Grid>
 
-        <!-- Main Content -->
-        <Grid Grid.Row="1" Margin="10">
+        <!-- View Toggle Buttons -->
+        <Grid Grid.Row="1" Margin="10,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="ListViewButton" 
+                        Content="List View" 
+                        Style="{StaticResource ButtonStyle}"
+                        Padding="15,8"
+                        Margin="5"
+                        Click="ListViewButton_Click"
+                        Background="{StaticResource Blue}"
+                        Foreground="White" />
+                <Button Name="KanbanViewButton" 
+                        Content="Kanban Board" 
+                        Style="{StaticResource ButtonStyle}"
+                        Padding="15,8"
+                        Margin="5"
+                        Click="KanbanViewButton_Click" />
+            </StackPanel>
+        </Grid>
+
+        <!-- List View Content -->
+        <Grid Name="ListViewGrid" Grid.Row="2" Margin="10" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Panels and Tasks List -->
+            <!-- Panels Section -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="50" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!-- Panels Header -->
                 <Border Grid.Row="0" Background="{StaticResource Blue}" CornerRadius="5,5,0,0">
-                    <TextBlock Text="Panels" 
-                               Style="{StaticResource TitleStyle}" 
-                               Foreground="White" 
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" />
+                    <Grid>
+                        <TextBlock Text="Panels" 
+                                   Style="{StaticResource TitleStyle}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="15,0" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0">
+                            <TextBlock Text="Total:" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Panels.Count}" Foreground="Yellow" FontWeight="Bold" 
+                                       VerticalAlignment="Center" Margin="5,0" />
+                        </StackPanel>
+                    </Grid>
                 </Border>
 
                 <!-- Panels DataGrid -->
@@ -61,43 +88,111 @@
                           SelectedItem="{Binding SelectedPanel}"
                           Style="{StaticResource DataGridStyle}"
                           AutoGenerateColumns="False"
-                          CanUserAddRows="False">
+                          CanUserAddRows="False"
+                          SelectionMode="Single"
+                          GridLinesVisibility="Horizontal"
+                          AlternatingRowBackground="LightGray">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="SN" Binding="{Binding SN}" Width="50" />
+                        <DataGridTextColumn Header="SN" Binding="{Binding SN}" Width="60" />
                         <DataGridTextColumn Header="Panel Name" Binding="{Binding Name}" Width="*" />
                         <DataGridTextColumn Header="Qty" Binding="{Binding Qty}" Width="60" />
                         <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" />
                     </DataGrid.Columns>
                 </DataGrid>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" 
+                          HorizontalAlignment="Stretch" 
+                          Background="Gray"
+                          ResizeBehavior="PreviousAndNext" />
+
+            <!-- Tasks Section -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
                 <!-- Tasks Header -->
-                <Border Grid.Row="2" Background="{StaticResource Green}" CornerRadius="0" Margin="0,5,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="Tasks" 
-                                   Style="{StaticResource TitleStyle}" 
-                                   Foreground="White" />
-                        <Button Content="Add Task" 
-                                Command="{Binding AddTaskCommand}"
-                                Style="{StaticResource ButtonStyle}"
-                                Margin="10,0,0,0"
-                                Padding="10,5" />
-                    </StackPanel>
+                <Border Grid.Row="0" Background="{StaticResource Green}" CornerRadius="5,5,0,0">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0">
+                            <TextBlock Text="Tasks" 
+                                       Style="{StaticResource TitleStyle}" 
+                                       Foreground="White" />
+                            <TextBlock Text="{Binding SelectedPanel.Name, StringFormat=' - {0}'}" 
+                                       Foreground="Yellow" 
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0">
+                            <Button Content="+ Add Task" 
+                                    Command="{Binding AddTaskCommand}"
+                                    Style="{StaticResource ButtonStyle}"
+                                    Background="White"
+                                    Foreground="{StaticResource Green}"
+                                    Padding="10,5"
+                                    FontWeight="Bold" />
+                        </StackPanel>
+                    </Grid>
                 </Border>
 
                 <!-- Tasks DataGrid -->
-                <DataGrid Grid.Row="3" 
+                <DataGrid Grid.Row="1" 
                           ItemsSource="{Binding Tasks}"
                           SelectedItem="{Binding SelectedTask}"
                           Style="{StaticResource DataGridStyle}"
                           AutoGenerateColumns="False"
-                          CanUserAddRows="False">
+                          CanUserAddRows="False"
+                          SelectionMode="Single"
+                          GridLinesVisibility="Horizontal"
+                          AlternatingRowBackground="LightGray">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Task" Binding="{Binding TaskName}" Width="*" />
-                        <DataGridTextColumn Header="Panel" Binding="{Binding PanelName}" Width="120" />
-                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="80" />
-                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="80" />
-                        <DataGridTextColumn Header="Progress %" Binding="{Binding Progress}" Width="80" />
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" />
+                        <DataGridTextColumn Header="Task Name" Binding="{Binding TaskName}" Width="*" />
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="90" />
+                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="90" />
+                        <DataGridTemplateColumn Header="Progress" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <ProgressBar Value="{Binding Progress}" Maximum="100" Height="15" />
+                                        <TextBlock Text="{Binding Progress, StringFormat='{0}%'}" 
+                                                   HorizontalAlignment="Center" 
+                                                   FontSize="10" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Status" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="10" Padding="5,2">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="To Do">
+                                                        <Setter Property="Background" Value="#FF6B6B" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="In Progress">
+                                                        <Setter Property="Background" Value="#FFD93D" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Done">
+                                                        <Setter Property="Background" Value="#6BCF7F" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding Status}" 
+                                                   Foreground="White" 
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="10" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Employees" Binding="{Binding AssignedEmployees}" Width="120" />
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
@@ -108,14 +203,11 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
             </Grid>
+        </Grid>
 
-            <GridSplitter Grid.Column="1" 
-                          HorizontalAlignment="Stretch" 
-                          Background="Gray" />
-
-            <!-- Kanban Board -->
-            <ContentControl Grid.Column="2" 
-                            Content="{Binding KanbanView}" />
+        <!-- Kanban View Content -->
+        <Grid Name="KanbanViewGrid" Grid.Row="2" Margin="10" Visibility="Collapsed">
+            <ContentControl Content="{Binding KanbanView}" />
         </Grid>
     </Grid>
 </UserControl>
