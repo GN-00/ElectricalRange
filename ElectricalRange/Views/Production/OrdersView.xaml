@@ -127,14 +127,6 @@
                     </Button>
 
                     <Button Padding="0,5,0,-10"
-                            Command="{Binding SiteWorkCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Site Work">
-                        <ImageSource>/Images/Icons/ImportAll.png</ImageSource>
-                    </Button>
-
-                    <Button Padding="0,5,0,-10"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding SelectedItem}"
                             Style="{StaticResource ManagerSubTapsButtons}"
@@ -161,8 +153,16 @@
                     <Button Padding="0,5,0,-10"
                             Command="{Binding AllOrdersCommand}"
                             Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Export">
+                            Tag="All Orders">
                         <ImageSource>/Images/Icons/AllFiles.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding SiteWorkCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Site Work">
+                        <ImageSource>/Images/Icons/ImportAll.png</ImageSource>
                     </Button>
 
                 </StackPanel>
@@ -192,6 +192,8 @@
 
                     <Button Command="{Binding DeleteFilterCommand}"
                             Style="{StaticResource FilterButtonStyle}" />
+                    
+                    
                 </StackPanel>
             </TabItem>
 
