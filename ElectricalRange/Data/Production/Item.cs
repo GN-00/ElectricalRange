@@ -20,5 +20,8 @@ namespace ProjectsNow.Data.Production
         [Write(false)]
         public double Percentage  => (ReceivedQty / Qty) * 100;
 
+        [Write(false)]
+        public double StockQty { get; set; }
+
     }
 }

@@ -84,5 +84,8 @@
         }
 
         public double PercentageItems => (ReceivedItems / Items) * 100;
+
+        public double MissingItems { get; set; }
+        public List<Item> ItemsList { get; set; } = [];
     }
 }

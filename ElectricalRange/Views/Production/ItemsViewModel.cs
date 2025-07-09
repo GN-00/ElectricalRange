@@ -255,7 +255,6 @@ namespace ProjectsNow.Views.Production
             using SqlConnection connection = new(Database.ConnectionString);
             string query = $"Select * From [Production].[PanelsItems(View)] " +
                            $"Where PanelId = {PanelData.PanelId} " +
-                           $"And JobOrderId = {PanelData.JobOrderId}" +
                            $"Order By Code";
 
             Items = new ObservableCollection<Item>(connection.Query<Item>(query));

@@ -12,5 +12,6 @@ namespace ProjectsNow.Data.Production
         public bool InProduction { get; set; }
         public int Reference { get; set; }
         public DateTime Date { get; set; }
+        public double MissingItems { get; set; }
     }
 }

@@ -9,13 +9,10 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
-using ProjectsNow.Windows.MessageWindows;
-using ProjectsNow.Windows.ReferencesWindows;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
@@ -48,6 +45,7 @@ namespace ProjectsNow.Views.Production
 
             GetData();
 
+            CheckItemsCommand = new RelayCommand(CheckItems);
             CopyNameCommand = new RelayCommand(CopyName);
             AddItemsCommand = new RelayCommand<ProductionPanel>(AddItems, CanAccessAddItems);
             ItemsCommand = new RelayCommand<ProductionPanel>(GetItems, CanAccessGetItems);
@@ -101,6 +99,7 @@ namespace ProjectsNow.Views.Production
         public RelayCommand CopyNameCommand { get; }
         public RelayCommand<ProductionPanel> AddItemsCommand { get; }
         public RelayCommand<ProductionPanel> ItemsCommand { get; }
+        public RelayCommand CheckItemsCommand { get; }
         public RelayCommand ClosingCommand { get; }
         public RelayCommand ExportCommand { get; }
         public RelayCommand DeleteFilterCommand { get; }
@@ -317,6 +316,80 @@ namespace ProjectsNow.Views.Production
         private bool CanAccessClosing()
         {
             return true;
+        }
+
+        private void CheckItems()
+        {
+            string query;
+            List<OrderItem> orderItems = [];
+            List<ProductionPanel> closedPanels = [];
+            List<ProductionPanel> RunningPanels = [];
+            using SqlConnection connection = new(Database.ConnectionString);
+            foreach (ProductionPanel panel in Items)
+            {
+                panel.MissingItems = panel.Items - panel.ReceivedItems;
+                query = $"Delete From [Production].[PanelsItems(Used)] Where PanelId = {panel.PanelId}";
+                connection.Execute(query);
+                if (panel.ClosedQty == panel.Qty)
+                    closedPanels.Add(panel);
+                else
+                    RunningPanels.Add(panel);
+
+                query = $"Select * From [Production].[PanelsItems(View)] " +
+                        $"Where PanelId = {panel.PanelId} " +
+                        $"Order By Code";
+                panel.ItemsList = connection.Query<Item>(query).ToList();
+
+                foreach (Item item in panel.ItemsList)
+                {
+                    if (item.StockQty < item.Qty)
+                        panel.MissingItems += item.Qty - item.StockQty;
+                }
+
+                //query = $"Update [JobOrder].[Panels(InProduction)] Set Missing = {panel.MissingItems} Where PanelId = {panel.PanelId};";
+                //connection.Execute(query);
+            }
+
+            query = $"Select * From [Production].[OrdersItems(View)] Where JobOrderId = {OrderData.JobOrderId}";
+            orderItems = [.. connection.Query<OrderItem>(query)];
+
+            UpdateUsedItems(orderItems, closedPanels, connection);
+
+            RunningPanels = RunningPanels.OrderBy(p => p.MissingItems).ToList();
+            UpdateUsedItems(orderItems, RunningPanels, connection);
+
+        }
+
+        private void UpdateUsedItems(List<OrderItem> orderItems, List<ProductionPanel> panels, SqlConnection connection)
+        {
+            foreach (ProductionPanel panel in panels)
+            {
+                foreach (Item item in panel.ItemsList)
+                {
+                    UsedItem itemUsed = new();
+                    OrderItem orderItem = orderItems.FirstOrDefault(i => i.Code == item.Code);
+                    if (orderItem != null)
+                    {
+                        if (item.StockQty < item.Qty)
+                        {
+                            itemUsed.Qty = orderItem.Stock;
+                            orderItem.Stock -= orderItem.Stock;
+                        }
+                        else
+                        {
+                            itemUsed.Qty = item.Qty;
+                            orderItem.Stock -= item.Qty;
+                        }
+                    }
+
+                    itemUsed.JobOrderId = OrderData.JobOrderId;
+                    itemUsed.PanelId = panel.PanelId;
+                    itemUsed.Code = item.Code;
+                    itemUsed.Description = item.Description;
+                    itemUsed.Date = DateTime.Now;
+                    connection.Insert(itemUsed);
+                }
+            }
         }
 
         private class ExcelPanel

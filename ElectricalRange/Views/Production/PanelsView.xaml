@@ -148,6 +148,14 @@
                         <ImageSource>/Images/Icons/Excel.png</ImageSource>
                     </Button>
 
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding CheckItemsCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Update">
+                        <ImageSource>/Images/Icons/reload.png</ImageSource>
+                    </Button>
+
                 </StackPanel>
             </TabItem>
 
@@ -317,7 +325,7 @@
                                         Header="Received" />
 
                     <DataGridTextColumn Width="80"
-                                        Binding="{Binding PercentageItems}"
+                                        Binding="{Binding PercentageItems, StringFormat=N0}"
                                         ElementStyle="{StaticResource CenterColumnView}"
                                         Header="%" />
 
