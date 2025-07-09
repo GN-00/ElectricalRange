@@ -19,6 +19,7 @@ namespace ProjectsNow.Views.Production
         private int _SelectedIndex;
         private OrderItem _SelectedItem;
         private ObservableCollection<OrderItem> _Items;
+        private ObservableCollection<OrderItem> _ItemsToAdd;
         private ICollectionView _ItemsCollection;
 
         public ReceiveItemsViewModel(Order order, IView view)
@@ -66,6 +67,17 @@ namespace ProjectsNow.Views.Production
                 }
             }
         }
+        public ObservableCollection<OrderItem> ItemsToAdd
+        {
+            get => _ItemsToAdd;
+            private set
+            {
+                if (SetValue(ref _ItemsToAdd, value))
+                {
+                    CreateCollectionView();
+                }
+            }
+        }
         public ICollectionView ItemsCollection
         {
             get => _ItemsCollection;
@@ -92,17 +104,17 @@ namespace ProjectsNow.Views.Production
         }
         private bool DataFilter(object obj)
         {
-            //if (!(obj is OrderItem item))
-            //    return false;
+            if (!(obj is OrderItem item))
+                return false;
 
-            //decimal value = item.PurchasedQty + item.InOrderQty;
-            //decimal checkValue = item.Qty;
+            double value = item.Stock;
+            double checkValue = item.Qty;
 
-            //if (value >= checkValue)
-            //    return false;
+            if (value >= checkValue)
+                return false;
 
-            //if (PurchaseItemsData.Any(x => x.PurchaseOrderID == 0 && x.Code == item.Code))
-            //    return false;
+            if (ItemsToAdd.Any(x => x.Code == item.Code))
+                return false;
 
             return true;
         }
