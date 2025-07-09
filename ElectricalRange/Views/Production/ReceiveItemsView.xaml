@@ -1,26 +1,23 @@
 ﻿<UserControl x:Class="ProjectsNow.Views.Production.ReceiveItemsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             Style="{StaticResource ViewStyle}">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Style="{StaticResource ViewStyle}"
+             mc:Ignorable="d">
     <UserControl.Resources>
 
         <ContextMenu x:Key="ItemsContextMenu">
-            <MenuItem Command="{Binding 
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, 
-                                Path= DataContext.AddCommand}"
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCommand}"
                       CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
-                    <TextBlock Text="Add"/>
+                    <TextBlock Text="Add" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image Source="/Images/Icons/NewItem.png" 
-                           SnapsToDevicePixels="True" 
-                           RenderOptions.BitmapScalingMode="HighQuality">
-                    </Image>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           SnapsToDevicePixels="True"
+                           Source="/Images/Icons/NewItem.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -28,32 +25,37 @@
     </UserControl.Resources>
     <Grid Background="{StaticResource LinearGradientGray}">
 
-        <StackPanel Orientation="Horizontal" 
-                    Margin="20,30,0,0" 
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left">
-            <TextBlock Text="Items" 
-                       FontFamily="Times New Roman" 
-                       FontSize="30" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-        </StackPanel>
+        <TextBlock Margin="20,15,0,0"
+                   Style="{StaticResource TitleStyle}">
+            <Run Text="Job Order:" />
+            <Run Foreground="{StaticResource Blue}"
+                 Text="{Binding OrderData.Code}" />
+            <Run Text="Items" />
 
-        <Grid Margin="10,70,10,25">
+        </TextBlock>
+
+        <Grid Margin="10,60,10,25">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.Effect>
-                <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.5"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
             </Grid.Effect>
             <Grid Grid.Row="1"
                   Background="LightGray">
-                <StackPanel Orientation="Horizontal"
-                            Margin="20,0"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="Item: " Style="{StaticResource IndicationStyle}"/>
-                    <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
+                <StackPanel Margin="20,0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndicationStyle}"
+                               Text="Item: " />
+                    <TextBlock Foreground="Black"
+                               Style="{StaticResource IndicationStyle}"
+                               Text="{Binding Indicator}" />
                 </StackPanel>
             </Grid>
             <DataGrid ItemsSource="{Binding ItemsCollection}"
@@ -64,19 +66,25 @@
                     <GroupStyle>
                         <GroupStyle.ContainerStyle>
                             <Style TargetType="{x:Type GroupItem}">
-                                <Setter Property="Margin" Value="0,0,0,0"/>
+                                <Setter Property="Margin" Value="0,0,0,0" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <Expander IsExpanded="True" Background="DarkGray" Foreground="Black">
+                                            <Expander Background="DarkGray"
+                                                      Foreground="Black"
+                                                      IsExpanded="True">
                                                 <Expander.Header>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,5,0" />
-                                                        <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount, StringFormat='({0})'}" HorizontalAlignment="Right"/>
+                                                        <TextBlock Margin="5,0,5,0"
+                                                                   FontWeight="Bold"
+                                                                   Text="{Binding Path=Name}" />
+                                                        <TextBlock HorizontalAlignment="Right"
+                                                                   FontWeight="Bold"
+                                                                   Text="{Binding Path=ItemCount, StringFormat='({0})'}" />
                                                     </StackPanel>
                                                 </Expander.Header>
                                                 <Expander.Content>
-                                                    <ItemsPresenter/>
+                                                    <ItemsPresenter />
                                                 </Expander.Content>
                                             </Expander>
                                         </ControlTemplate>
@@ -87,70 +95,82 @@
                     </GroupStyle>
                 </DataGrid.GroupStyle>
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource ViewRowsStyle}">
-                        <Setter Property="ContextMenu" Value="{StaticResource ItemsContextMenu}"/>
+                    <Style BasedOn="{StaticResource ViewRowsStyle}"
+                           TargetType="{x:Type DataGridRow}">
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemsContextMenu}" />
                     </Style>
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="240" 
-                                        Header="Code" 
+                    <DataGridTextColumn Width="340"
                                         Binding="{Binding Code}"
-                                        ElementStyle="{StaticResource LeftColumnView}">
-                    </DataGridTextColumn>
+                                        ElementStyle="{StaticResource LeftColumnView}"
+                                        Header="Code" />
 
-                    <DataGridTextColumn Width="340" 
-                                        Header="Description" 
+                    <DataGridTextColumn Width="440"
                                         Binding="{Binding Description}"
-                                        ElementStyle="{StaticResource LeftColumnView}">
-                    </DataGridTextColumn>
+                                        ElementStyle="{StaticResource LeftColumnView}"
+                                        Header="Description" />
 
-                    <DataGridTextColumn Width="80" 
-                                        Header="Unit" 
-                                        Binding="{Binding Unit}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Width="100" 
-                                        Header="Qty" 
+                    <DataGridTextColumn Width="100"
                                         Binding="{Binding Qty}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Qty" />
 
-                    <DataGridTextColumn Width="100" 
-                                        Header="In Need" 
-                                        Binding="{Binding RemainingQty, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding Stock}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="Stock" />
 
-                    <DataGridTextColumn Width="100" 
-                                        Header="In Order" 
-                                        Binding="{Binding InOrderQty, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding Missing}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="In Need" />
 
-                    <DataGridTextColumn Width="150" 
-                                        Header="List Price" 
-                                        Binding="{Binding ListPrice, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding Percent, StringFormat=N0}"
+                                        ElementStyle="{StaticResource CenterColumnView}"
+                                        Header="%" />
 
-                    <DataGridTextColumn Width="150" 
-                                        Header="Estimated Price" 
-                                        Binding="{Binding Estimated, StringFormat=N2}"
-                                        ElementStyle="{StaticResource CenterColumnView}">
-                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Width="80">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Width="20"
+                                       Height="20"
+                                       Margin="0,0,0,0"
+                                       Source="/Images/Icons/NewItem.png"
+                                       ToolTip="Add" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="20"
+                                        Height="20"
+                                        Margin="0,0,0,0"
+                                        Background="Transparent"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource SubViewTapsButtons}"
+                                        ToolTip="Add">
+                                    <ImageSource>/Images/Icons/Add.png</ImageSource>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
 
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
 
-        <StackPanel Margin="20,10" Orientation="Horizontal"
+        <StackPanel Margin="20,10"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right">
+                    Orientation="Horizontal">
             <Button Command="{Binding CancelCommand}"
-                    Style="{StaticResource OkViewButton}">
-            </Button>
+                    Style="{StaticResource OkViewButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

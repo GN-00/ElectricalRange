@@ -7,5 +7,7 @@
         public string Description { get; set; }
         public double Qty { get; set; }
         public double Stock { get; set; }
+        public double Missing => Qty - Stock;
+        public double Percent => Stock == 0 ? 0 : (Stock / Qty) * 100;
     }
 }

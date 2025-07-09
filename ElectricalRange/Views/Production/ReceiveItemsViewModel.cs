@@ -19,7 +19,7 @@ namespace ProjectsNow.Views.Production
         private int _SelectedIndex;
         private OrderItem _SelectedItem;
         private ObservableCollection<OrderItem> _Items;
-        private ObservableCollection<OrderItem> _ItemsToAdd;
+        private ObservableCollection<OrderItem> _ItemsToAdd = [];
         private ICollectionView _ItemsCollection;
 
         public ReceiveItemsViewModel(Order order, IView view)
@@ -90,7 +90,7 @@ namespace ProjectsNow.Views.Production
 
         private void GetData()
         {
-            string query = $"SELECT * FROM [Production].[] WHERE JobOrderId = {OrderData.JobOrderId}";
+            string query = $"SELECT * FROM [Production].[OrdersItems(View)] WHERE JobOrderId = {OrderData.JobOrderId}";
             using SqlConnection connection = new(Database.ConnectionString);
             Items = new ObservableCollection<OrderItem>(connection.Query<OrderItem>(query));
         }

@@ -165,6 +165,14 @@
                         <ImageSource>/Images/Icons/ImportAll.png</ImageSource>
                     </Button>
 
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding AddStockCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Add Stock">
+                        <ImageSource>/Images/Icons/Stock.png</ImageSource>
+                    </Button>
+
                 </StackPanel>
             </TabItem>
 
@@ -192,8 +200,8 @@
 
                     <Button Command="{Binding DeleteFilterCommand}"
                             Style="{StaticResource FilterButtonStyle}" />
-                    
-                    
+
+
                 </StackPanel>
             </TabItem>
 

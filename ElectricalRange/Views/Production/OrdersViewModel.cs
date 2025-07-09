@@ -40,6 +40,7 @@ namespace ProjectsNow.Views.Production
             SiteWorkCommand = new RelayCommand<Order>(SiteWork, CanAccessSiteWork);
             CloseCommand = new RelayCommand<Order>(Close, CanAccessClose);
             DeliveryCommand = new RelayCommand<Order>(Delivery, CanAccessDelivery);
+            AddStockCommand = new RelayCommand<Order>(AddStockToOrder, CanAccessAddStockToOrder);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
             UpdateCommand = new RelayCommand(GetData);
             AllOrdersCommand = new RelayCommand(AllOrdersData, CanAccessAllOrdersData);
@@ -91,6 +92,7 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> SiteWorkCommand { get; }
         public RelayCommand<Order> CloseCommand { get; }
         public RelayCommand<Order> DeliveryCommand { get; }
+        public RelayCommand<Order> AddStockCommand { get; }
         public RelayCommand UpdateCommand { get; }
         public RelayCommand AllOrdersCommand { get; }
         public RelayCommand ExportCommand { get; }
@@ -274,6 +276,19 @@ namespace ProjectsNow.Views.Production
             Navigation.To(new DeliveryRequestsView(order), ViewData);
         }
         private bool CanAccessDelivery(Order order)
+        {
+            if (order == null)
+                return false;
+
+            return true;
+        }
+
+
+        private void AddStockToOrder(Order order)
+        {
+            Navigation.To(new ReceiveItemsView(order), ViewData);
+        }
+        private bool CanAccessAddStockToOrder(Order order)
         {
             if (order == null)
                 return false;
