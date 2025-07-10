@@ -4,7 +4,6 @@ using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
-using System.Collections.ObjectModel;
 
 namespace ProjectsNow.Views.Production
 {
