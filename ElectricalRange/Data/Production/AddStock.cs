@@ -14,6 +14,4 @@ namespace ProjectsNow.Data.Production
         public double Qty { get; set; }
         public DateTime Date { get; set; }
     }
-
-
 }

@@ -1,7 +1,8 @@
-﻿using ProjectsNow.Commands;
+﻿using Dapper.Contrib.Extensions;
+using Microsoft.Data.SqlClient;
+using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
-using ProjectsNow.Data.Application;
 using ProjectsNow.Data.Production;
 using System.Collections.ObjectModel;
 
@@ -9,60 +10,52 @@ namespace ProjectsNow.Views.Production
 {
     internal class ItemQtyViewModel : ViewModelBase
     {
-        public ItemQtyViewModel(OrderItem item, ObservableCollection<OrderItem> orderItems, ObservableCollection<OrderItem> itemsToAdd)
+        public ItemQtyViewModel(OrderItem item)
         {
             Item = item;
             NewData.Update(Item);
-            Items = orderItems;
+
+            Posting = NewData.Missing;
 
             SaveCommand = new RelayCommand(Save, CanSave);
             CancelCommand = new RelayCommand(Cancel, CanCancel);
         }
 
+        private double _Posting;
         public double Posting
         {
             get => _Posting;
             set
             {
-                if (NewData.RemainingQty >= value)
-                {
-                    SetValue(ref _Posting, value)
-                   .UpdateProperties(this, nameof(GrossPrice));
-                }
+                if (NewData.Missing >= value)
+                    SetValue(ref _Posting, value);
                 else
-                {
-                    SetValue(ref _Posting, NewData.RemainingQty)
-                   .UpdateProperties(this, nameof(GrossPrice));
-                }
+                    SetValue(ref _Posting, NewData.Missing);
             }
         }
 
         public OrderItem Item { get; }
         public OrderItem NewData { get; } = new OrderItem();
-        public ObservableCollection<OrderItem> Items { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CancelCommand { get; }
 
         private void Save()
         {
-            NewData.InOrderQty += Posting;
+            NewData.Stock += Posting;
 
-            CompanyPOTransaction newItem = new()
+            AddStock newItem = new()
             {
-                VAT = VAT,
-                Code = NewData.Code,
-                Description = NewData.Description,
-                Unit = NewData.Unit,
+                JobOrderId = Item.JobOrderId,
+                Code = Item.Code,
+                Description = Item.Description,
                 Qty = Posting,
-                Cost = NetPrice,
+                Date = DateTime.Now
             };
 
             Item.Update(NewData);
 
-            if (Items != null)
-            {
-                Items.Add(newItem);
-            }
+            using SqlConnection connection = new(Database.ConnectionString);
+            _ = connection.Insert(newItem);
 
             Navigation.ClosePopup();
         }

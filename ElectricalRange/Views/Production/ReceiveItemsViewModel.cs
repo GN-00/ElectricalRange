@@ -9,6 +9,7 @@ using ProjectsNow.Data.Production;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ProjectsNow.Views.Production
@@ -19,7 +20,7 @@ namespace ProjectsNow.Views.Production
         private int _SelectedIndex;
         private OrderItem _SelectedItem;
         private ObservableCollection<OrderItem> _Items;
-        private ObservableCollection<OrderItem> _ItemsToAdd = [];
+        private ObservableCollection<AddStock> _ItemsToAdd = [];
         private ICollectionView _ItemsCollection;
 
         public ReceiveItemsViewModel(Order order, IView view)
@@ -67,7 +68,7 @@ namespace ProjectsNow.Views.Production
                 }
             }
         }
-        public ObservableCollection<OrderItem> ItemsToAdd
+        public ObservableCollection<AddStock> ItemsToAdd
         {
             get => _ItemsToAdd;
             private set
@@ -130,8 +131,8 @@ namespace ProjectsNow.Views.Production
 
         private void Add(OrderItem item)
         {
-            //Navigation.OpenPopup(new ItemQtyView(item, Items, PurchaseItemsData), PlacementMode.Center, true);
-            //Navigation.ClosePopupEvent += UpdateList;
+            Navigation.OpenPopup(new ItemQtyView(item), PlacementMode.Center, true);
+            Navigation.ClosePopupEvent += UpdateList;
         }
         private void UpdateList()
         {
@@ -139,11 +140,11 @@ namespace ProjectsNow.Views.Production
         }
         private bool CanAdd(OrderItem item)
         {
-            //if (item == null)
-            //    return false;
+            if (item == null)
+                return false;
 
-            //if (item.RemainingQty <= 0)
-            //    return false;
+            if (item.Missing <= 0)
+                return false;
 
             return true;
         }
