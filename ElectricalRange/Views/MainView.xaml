@@ -10,7 +10,7 @@
         Height="700"
         BorderBrush="Gray"
         BorderThickness="1"
-        Icon="/Images/Icons/Price.png"
+        Icon="/logo.ico"
         Loaded="Window_Loaded"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"

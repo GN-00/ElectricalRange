@@ -169,6 +169,13 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Orientation="Horizontal">
+
+            <!--<Button Command="{Binding PrintCommand}"
+                    Style="{StaticResource PrintViewButton}" />-->
+
+            <Button Command="{Binding ExportCommand}"
+                    Style="{StaticResource ExcelViewButton}" />
+
             <Button Command="{Binding CancelCommand}"
                     Style="{StaticResource OkViewButton}" />
         </StackPanel>
