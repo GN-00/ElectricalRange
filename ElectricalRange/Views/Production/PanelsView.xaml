@@ -6,11 +6,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Style="{StaticResource ViewStyle}"
              mc:Ignorable="d">
-    <!--<i:Interaction.Triggers>
+    <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding UpdateCommand}" />
         </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+    </i:Interaction.Triggers>
     <UserControl.Resources>
 
         <ContextMenu x:Key="GridContextMenu"

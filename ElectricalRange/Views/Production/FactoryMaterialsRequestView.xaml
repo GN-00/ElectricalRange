@@ -20,59 +20,32 @@
                            Source="/Images/Icons/AddForm.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Add Items" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           SnapsToDevicePixels="True"
-                           Source="/Images/Icons/AddItem.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-        </ContextMenu>
-
-        <ContextMenu x:Key="ItemsContextMenu">
-            <MenuItem Command="{Binding AddRequestCommand}"
-                      CommandParameter="{Binding SelectedRequest}"
-                      Style="{StaticResource MenuItemStyle}">
-                <MenuItem.Header>
-                    <TextBlock Text="Add Panels" />
-                </MenuItem.Header>
-                <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           SnapsToDevicePixels="True"
-                           Source="/Images/Icons/NewPanels.png" />
-                </MenuItem.Icon>
-            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="ItemContextMenu">
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddPanelsCommand}"
-                      CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.SelectedRequest}"
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditItemCommand}"
+                      CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
-                    <TextBlock Text="Add Panels" />
+                    <TextBlock Text="Edit" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
                            SnapsToDevicePixels="True"
-                           Source="/Images/Icons/NewPanels.png" />
+                           Source="/Images/Icons/Edit.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeletePanelCommand}"
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteItemCommand}"
                       CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Foreground="Red"
-                               Text="Delete Panel" />
+                               Text="Delete Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
                            SnapsToDevicePixels="True"
-                           Source="/Images/Icons/DeleteEnclosure.png" />
+                           Source="/Images/Icons/DeleteItem.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -126,38 +99,125 @@
                             <ImageSource>/Images/Icons/AddForm.png</ImageSource>
                         </Button>
 
-                        <Button Padding="0,5,0,-2"
-                                Command="{Binding AddItemCommand}"
-                                CommandParameter="{Binding SelectedPanel}"
-                                Style="{StaticResource ManagerSubTapsButtons}"
-                                Tag="Add Item">
-                            <ImageSource>/Images/Icons/AddItem.png</ImageSource>
-                        </Button>
-
-                        <Button Padding="0,5,0,-8"
-                                Command="{Binding EditItemCommand}"
-                                CommandParameter="{Binding SelectedItem}"
-                                Style="{StaticResource ManagerSubTapsButtons}"
-                                Tag="Edit">
-                            <ImageSource>/Images/Icons/Edit1.png</ImageSource>
-                        </Button>
-
-                        <Button Padding="0,5,0,-2"
-                                Command="{Binding DeleteItemCommand}"
-                                CommandParameter="{Binding SelectedItem}"
-                                Style="{StaticResource ManagerSubTapsButtons}"
-                                Tag="Delete Panel">
-                            <ImageSource>/Images/Icons/DeleteItem.png</ImageSource>
-                        </Button>
-
-                        <Button Padding="0,5,0,-8"
-                                Command="{Binding PrintCommand}"
-                                Style="{StaticResource ManagerSubTapsButtons}"
-                                Tag="Print">
-                            <ImageSource>/Images/Icons/Printer.png</ImageSource>
-                        </Button>
-
                     </StackPanel>
+
+                    <Border Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Right"
+                            BorderBrush="{StaticResource LinearGray}"
+                            BorderThickness="2"
+                            CornerRadius="5">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Margin="3,0,2.5,0"
+                                            VerticalAlignment="Center"
+                                            Orientation="Vertical">
+                                    <Button Focusable="False">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Height" Value="26" />
+                                                <Setter Property="Width" Value="26" />
+                                                <Setter Property="Effect" Value="{StaticResource Shadow}" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="Command" Value="{Binding NextRequestCommand}" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Margin="0,0,0,0"
+                                                                    Background="{TemplateBinding Background}"
+                                                                    BorderBrush="Gray"
+                                                                    CornerRadius="5">
+                                                                <Image Margin="2.5"
+                                                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                                                       Stretch="Uniform">
+                                                                    <Image.Source>
+                                                                        <BitmapImage Rotation="Rotate270"
+                                                                                     UriSource="/Images/Icons/RightGreen.png" />
+                                                                    </Image.Source>
+                                                                </Image>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{StaticResource LinearGray}" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    <Button Focusable="False">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Height" Value="26" />
+                                                <Setter Property="Width" Value="26" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="Effect" Value="{StaticResource Shadow}" />
+                                                <Setter Property="Command" Value="{Binding PreviousRequestCommand}" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Margin="0,0,0,0"
+                                                                    Background="{TemplateBinding Background}"
+                                                                    BorderBrush="Gray"
+                                                                    CornerRadius="5">
+                                                                <Image Margin="2.5"
+                                                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                                                       Stretch="Uniform">
+                                                                    <Image.Source>
+                                                                        <BitmapImage Rotation="Rotate90"
+                                                                                     UriSource="/Images/Icons/RightGreen.png" />
+                                                                    </Image.Source>
+                                                                </Image>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{StaticResource LinearGray}" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Margin="10,0"
+                                            VerticalAlignment="Center"
+                                            Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource Blue}"
+                                               Text="R.Id" />
+                                    <ComboBox Name="ModificationsList"
+                                              Width="80"
+                                              VerticalAlignment="Center"
+                                              DisplayMemberPath="RequestId"
+                                              Focusable="False"
+                                              FontSize="14"
+                                              ItemsSource="{Binding Requests}"
+                                              SelectedItem="{Binding SelectedRequest, Mode=TwoWay}"
+                                              SelectedValuePath="RequestId"
+                                              Style="{StaticResource YearsComboStyle}" />
+                                </StackPanel>
+
+                                <Button Padding="0,5,0,-8"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding PrintCommand}"
+                                        Style="{StaticResource ManagerSubTapsButtons}"
+                                        Tag="Print">
+                                    <ImageSource>/Images/Icons/Printer.png</ImageSource>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </Border>
                 </Grid>
             </TabItem>
 
@@ -272,7 +332,7 @@
                                        Text="{Binding ItemsIndicator}" />
                         </StackPanel>
                     </Grid>
-                    <DataGrid ContextMenu="{StaticResource ItemsContextMenu}"
+                    <DataGrid ContextMenu="{x:Null}"
                               ItemsSource="{Binding ItemsCollection}"
                               SelectedIndex="{Binding SelectedItemIndex, Mode=OneWayToSource}"
                               SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -287,7 +347,7 @@
                                                 <ControlTemplate TargetType="{x:Type GroupItem}">
                                                     <Expander Background="DarkGray"
                                                               Foreground="Black"
-                                                              IsExpanded="False">
+                                                              IsExpanded="True">
                                                         <Expander.Header>
                                                             <Grid Width="750"
                                                                   Height="40">
@@ -309,19 +369,20 @@
                                                                 <StackPanel Grid.Column="2"
                                                                             HorizontalAlignment="Right"
                                                                             Orientation="Horizontal">
-                                                                    <Button Click="NewItem_Clicked"
-                                                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemToGroupCommand}"
+                                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemToGroupCommand}"
                                                                             CommandParameter="{Binding}"
                                                                             Style="{StaticResource GroupButton}"
                                                                             ToolTip="New Item">
                                                                         <ImageSource>/Images/Icons/NewItem.png</ImageSource>
                                                                     </Button>
-                                                                    <Button Click="DeleteRequest_Clicked"
+                                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteGroupCommand}"
+                                                                            CommandParameter="{Binding}"
                                                                             Style="{StaticResource GroupButton}"
                                                                             ToolTip="Delete Modification">
                                                                         <ImageSource>/Images/Icons/Error.png</ImageSource>
                                                                     </Button>
-                                                                    <Button Click="Print_Click"
+                                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PrintGroupCommand}"
+                                                                            CommandParameter="{Binding}"
                                                                             Style="{StaticResource GroupButton}"
                                                                             ToolTip="Print">
                                                                         <ImageSource>/Images/Icons/Printer.png</ImageSource>
@@ -350,7 +411,7 @@
 
                             <DataGridTextColumn Width="250"
                                                 Binding="{Binding Code}"
-                                                ElementStyle="{StaticResource CenterColumnView}"
+                                                ElementStyle="{StaticResource LeftColumnView}"
                                                 Header="Code" />
 
                             <DataGridTextColumn Width="400"

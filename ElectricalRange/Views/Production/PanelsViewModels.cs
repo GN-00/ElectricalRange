@@ -43,8 +43,7 @@ namespace ProjectsNow.Views.Production
             UserData = Navigation.UserData;
             OrderData = order;
 
-            GetData();
-
+            UpdateCommand = new RelayCommand(GetData);
             CheckItemsCommand = new RelayCommand(CheckItems);
             CopyNameCommand = new RelayCommand(CopyName);
             AddItemsCommand = new RelayCommand<ProductionPanel>(AddItems, CanAccessAddItems);
@@ -59,7 +58,6 @@ namespace ProjectsNow.Views.Production
 
         public User UserData { get; }
         public Order OrderData { get; }
-
         public string Indicator
         {
             get => _Indicator;
@@ -97,6 +95,7 @@ namespace ProjectsNow.Views.Production
             get => _ItemsCollection;
             set => SetValue(ref _ItemsCollection, value);
         }
+        public RelayCommand UpdateCommand { get; }
         public RelayCommand CopyNameCommand { get; }
         public RelayCommand<ProductionPanel> AddItemsCommand { get; }
         public RelayCommand<ProductionPanel> ItemsCommand { get; }

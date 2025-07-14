@@ -1,14 +1,14 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
+
+using Microsoft.Data.SqlClient;
 
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
-using ProjectsNow.Data.Application;
-using ProjectsNow.Data.References;
+using ProjectsNow.Data;
+using ProjectsNow.Data.Production;
 
 using System.Collections.ObjectModel;
-using Microsoft.Data.SqlClient;
-using ProjectsNow.Data.Production;
-using ProjectsNow.Data;
 
 namespace ProjectsNow.Views.Production
 {
@@ -59,33 +59,28 @@ namespace ProjectsNow.Views.Production
 
         private void GetData()
         {
-            ReferencesData = AppData.ReferencesListData;
-            if (ReferencesData == null)
-            {
-                using SqlConnection connection = new(Database.ConnectionString);
-                ReferencesData =
-                    AppData.ReferencesListData =
-                        new ObservableCollection<Reference>(ReferenceController.GetReferences(connection));
-            }
+            string query = "SELECT * FROM [Production].[References] Order By Code";
+            using SqlConnection connection = new(Database.ConnectionString);
+            ReferencesData = new ObservableCollection<Reference>(connection.Query<Reference>(query));
         }
 
         private void Save()
         {
+            using SqlConnection connection = new(Database.ConnectionString);
+
             if (NewData.Id != 0)
             {
-                using (SqlConnection connection = new(Database.ConnectionString))
-                {
-                    _ = connection.Update(NewData);
-                }
-
+                _ = connection.Update(NewData);
                 ItemData.Update(NewData);
             }
             else
             {
-                if (ItemsData != null)
-                {
-                    ItemsData.Add(NewData);
-                }
+                _ = connection.Insert(NewData);
+                ItemsData.Add(NewData);
+
+                Item item = ItemsData.FirstOrDefault(i => i.Id == -1);
+                if (item != null)
+                    ItemsData.Remove(item);
             }
 
             Navigation.ClosePopup();
