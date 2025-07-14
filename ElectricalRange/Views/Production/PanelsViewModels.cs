@@ -49,6 +49,7 @@ namespace ProjectsNow.Views.Production
             CopyNameCommand = new RelayCommand(CopyName);
             AddItemsCommand = new RelayCommand<ProductionPanel>(AddItems, CanAccessAddItems);
             ItemsCommand = new RelayCommand<ProductionPanel>(GetItems, CanAccessGetItems);
+            FMRCommand = new RelayCommand(FMR, CanAccessFMR);
             ClosingCommand = new RelayCommand(Closing, CanAccessClosing);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
 
@@ -99,6 +100,7 @@ namespace ProjectsNow.Views.Production
         public RelayCommand CopyNameCommand { get; }
         public RelayCommand<ProductionPanel> AddItemsCommand { get; }
         public RelayCommand<ProductionPanel> ItemsCommand { get; }
+        public RelayCommand FMRCommand { get; }
         public RelayCommand CheckItemsCommand { get; }
         public RelayCommand ClosingCommand { get; }
         public RelayCommand ExportCommand { get; }
@@ -306,6 +308,15 @@ namespace ProjectsNow.Views.Production
             if (panel == null)
                 return false;
 
+            return true;
+        }
+
+        private void FMR()
+        {
+            Navigation.To(new FactoryMaterialsRequestView(OrderData), ViewData);
+        }
+        private bool CanAccessFMR()
+        {
             return true;
         }
 

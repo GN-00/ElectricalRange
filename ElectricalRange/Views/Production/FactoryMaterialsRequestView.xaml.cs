@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using ProjectsNow.Data.Production;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProjectsNow.Views.Production
 {
-    /// <summary>
-    /// Interaction logic for FactoryMaterialsRequestView.xaml
-    /// </summary>
-    public partial class FactoryMaterialsRequestView : UserControl
+    public partial class FactoryMaterialsRequestView : UserControl, IView
     {
-        public FactoryMaterialsRequestView()
+        public FactoryMaterialsRequestView(Order order)
         {
             InitializeComponent();
+            DataContext = new FactoryMaterialsRequestViewModel(order, this);
+        }
+
+        private void NewItem_Clicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteRequest_Clicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void Print_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }

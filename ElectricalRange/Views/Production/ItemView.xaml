@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="ProjectsNow.Views.Production.ItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:ProjectsNow.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="1020"
+             Height="230"
+             BorderBrush="{StaticResource Blue}"
+             BorderThickness="1"
+             Style="{StaticResource ViewStyle}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <Style x:Key="InputStyle"
+               BasedOn="{StaticResource TextBoxStyle}"
+               TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="LabelStyle"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="{StaticResource MyBlue}" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+        </Style>
+
+        <Style x:Key="InputComboBoxStyle"
+               BasedOn="{StaticResource ComboBoxStyle}"
+               TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="{StaticResource LinearGradientGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170" />
+            <RowDefinition Height="55" />
+        </Grid.RowDefinitions>
+        <Grid Margin="5"
+              Background="White">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-90"
+                                  Opacity="0.3"
+                                  RenderingBias="Quality"
+                                  ShadowDepth="2" />
+            </Grid.Effect>
+
+            <TextBlock Margin="10,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="32"
+                       Foreground="Black"
+                       Style="{StaticResource LabelStyle}"
+                       Text="Item Information" />
+
+            <c:PopupControls />
+
+            <StackPanel Margin="25,55,0,10"
+                        Orientation="Vertical">
+                <StackPanel Margin="0,15,0,0"
+                            Orientation="Horizontal">
+                    <TextBlock Width="100"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Part Number " />
+                    <ComboBox Width="250"
+                              DisplayMemberPath="Code"
+                              IsEditable="True"
+                              ItemsSource="{Binding ReferencesData}"
+                              SelectedItem="{Binding SelectedReference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValue="{Binding NewData.Code}"
+                              SelectedValuePath="Code"
+                              Style="{StaticResource InputComboBoxStyle}"
+                              Text="{Binding NewData.Code}">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <TextBlock Width="100"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Description" />
+                    <TextBox Width="500"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}"
+                             Text="{Binding NewData.Description, Mode=OneWay}" />
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0"
+                            Orientation="Horizontal">
+                    <TextBlock Width="410"
+                               Visibility="Hidden" />
+
+                    <TextBlock Width="45"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Unit " />
+                    <TextBox Width="100"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}"
+                             Text="{Binding NewData.Unit, Mode=OneWay}"
+                             TextAlignment="Center" />
+                    <Grid Width="100">
+                        <StackPanel HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource LabelStyle}"
+                                       Text="Qty" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBox Width="100"
+                             PreviewKeyDown="Qty_PreviewKeyDown"
+                             Style="{StaticResource InputStyle}"
+                             Text="{Binding NewData.Qty, Mode=TwoWay}"
+                             TextAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Button Command="{Binding SaveCommand}"
+                    Style="{StaticResource SaveViewButton}" />
+
+            <Button Command="{Binding CancelCommand}"
+                    Style="{StaticResource CancelViewButton}" />
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

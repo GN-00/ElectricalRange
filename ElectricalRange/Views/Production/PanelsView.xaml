@@ -56,6 +56,29 @@
                 </MenuItem.Icon>
             </MenuItem>
 
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemsCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Add Items" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/AddItems.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.FMRCommand}"
+                      Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="FMR" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="/Images/Icons/Invoice.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
             <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ClosingCommand}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
@@ -118,6 +141,14 @@
                             Orientation="Horizontal">
 
                     <Button Padding="0,5,0,-10"
+                            Command="{Binding ItemsCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Items">
+                        <ImageSource>/Images/Icons/Materials.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,5,0,-10"
                             Command="{Binding AddItemsCommand}"
                             CommandParameter="{Binding SelectedItem}"
                             Style="{StaticResource ManagerSubTapsButtons}"
@@ -126,11 +157,10 @@
                     </Button>
 
                     <Button Padding="0,5,0,-10"
-                            Command="{Binding ItemsCommand}"
-                            CommandParameter="{Binding SelectedItem}"
+                            Command="{Binding FMRCommand}"
                             Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Items">
-                        <ImageSource>/Images/Icons/Materials.png</ImageSource>
+                            Tag="FMR">
+                        <ImageSource>/Images/Icons/Invoice.png</ImageSource>
                     </Button>
 
                     <Button Padding="0,5,0,-10"

@@ -23,5 +23,8 @@ namespace ProjectsNow.Data.Production
         [Write(false)]
         public double StockQty { get; set; }
 
+        public int? RequestId { get; set; }
+        public string Unit { get; set; }
+
     }
 }
