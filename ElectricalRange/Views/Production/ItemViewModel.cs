@@ -83,6 +83,21 @@ namespace ProjectsNow.Views.Production
                     ItemsData.Remove(item);
             }
 
+            MaterialsRequest request = new()
+            { 
+                RequestId =ItemData.RequestId.Value,
+                Date = DateTime.Now,    
+                JobOrderId = ItemData.JobOrderId,
+                PanelId = ItemData.PanelId
+            };
+
+            string query = $"SELECT * FROM [Production].[MaterialsRequests] " +
+                           $"WHERE RequestId = {request.Id} " +
+                           $"And JobOrderId = {request.JobOrderId}";
+            MaterialsRequest existingRequest = connection.QueryFirstOrDefault<MaterialsRequest>(query);
+            if (existingRequest == null)
+                _ = connection.Insert(request);
+
             Navigation.ClosePopup();
         }
         private bool CanSave()

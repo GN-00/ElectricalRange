@@ -105,7 +105,8 @@ namespace ProjectsNow.Services
 
                 using (SqlConnection connection = new(Database.ConnectionString))
                 {
-                    string query = $"DELETE FROM [Production].[PanelsItems] WHERE PanelId = {panel.PanelId} AND JobOrderId = {panel.JobOrderId}";
+                    string query = $"DELETE FROM [Production].[PanelsItems] WHERE PanelId = {panel.PanelId} AND JobOrderId = {panel.JobOrderId} " +
+                                   $"AND Type = 'Base'";
                     _ = connection.Execute(query);
                     _ = connection.Insert(excelList);
                 }

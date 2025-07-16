@@ -7,10 +7,13 @@ using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
+using ProjectsNow.Printing;
+using ProjectsNow.Printing.ProductionPages;
 
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
@@ -47,11 +50,11 @@ namespace ProjectsNow.Views.Production
 
             NextRequestCommand = new RelayCommand(NextRequest, CanAccessNextRequest);
             PreviousRequestCommand = new RelayCommand(PreviousRequest, CanAccessPreviousRequest);
-            PrintCommand = new RelayCommand(Print, CanAccessPrint);
+            PrintCommand = new RelayCommand(PrintRequest, CanAccessPrint);
 
             AddItemToGroupCommand = new RelayCommand<CollectionViewGroup>(AddItem, CanAccessAddItem);
             DeleteGroupCommand = new RelayCommand<CollectionViewGroup>(DeleteGroup, CanAccessDeleteGroup);
-            PrintGroupCommand = new RelayCommand<CollectionViewGroup>(Print, CanAccessPrint);
+            PrintGroupCommand = new RelayCommand<CollectionViewGroup>(PrintRequest, CanAccessPrint);
         }
 
         public User UserData { get; }
@@ -317,7 +320,7 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
-        private void Print(CollectionViewGroup group)
+        private void PrintRequest(CollectionViewGroup group)
         {
             if (group == null)
                 return;
@@ -326,8 +329,51 @@ namespace ProjectsNow.Views.Production
             if (groupItem == null)
                 return;
 
+            using SqlConnection connection = new(Database.ConnectionString);
+            string query = $"Select * From [Production].[FactoryMaterialsRequests] " +
+                           $"Where JobOrderId = {groupItem.JobOrderId} " +
+                           $"And RequestId = {groupItem.RequestId.Value}";
+            MaterialsRequest request = connection.QueryFirstOrDefault<MaterialsRequest>(query);
 
-            //Print 
+            request.PanelName = Panels
+                .Where(p => p.PanelId == groupItem.PanelId)
+                .FirstOrDefault().Name;
+
+            request.JobOrderCode = OrderData.Code;
+            request.Customer = OrderData.Customer;
+
+            request.Items = [.. Items
+                .Where(i => i.RequestId == groupItem.RequestId.Value && i.PanelId == groupItem.PanelId)];
+
+            double pagesNumber = request.Items.Count / 13d;
+            if (pagesNumber - Math.Truncate(pagesNumber) != 0)
+                pagesNumber = Math.Truncate(pagesNumber) + 1;
+
+            foreach (var item in request.Items)
+                item.SN = request.Items.IndexOf(item) + 1;
+
+            if (pagesNumber != 0)
+            {
+                request.Pages = (int)pagesNumber;
+                List<FrameworkElement> elements = new();
+                for (int i = 1; i <= pagesNumber; i++)
+                {
+                    request.Page = i;
+                    request.Items = [.. request.Items.Where(p => p.SN > ((i - 1) * 13) && p.SN <= (i * 13))];
+                    FactoryMaterialsRequestPage requestForm = new(request);
+
+                    elements.Add(requestForm);
+                }
+
+                Print.PrintPreview(elements, $"{OrderData.Code.Substring(0, OrderData.Code.IndexOf("/"))}-{request.RequestCode}", ViewData);
+            }
+            else
+            {
+                _ = MessageView.Show("Items",
+                                     "There is no panels!!",
+                                     MessageViewButton.OK,
+                                     MessageViewImage.Warning);
+            }
         }
         private bool CanAccessPrint(CollectionViewGroup group)
         {
@@ -368,7 +414,7 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
-        private void Print()
+        private void PrintRequest()
         {
             //ProductionServices.PrintProductionPanel(request, ViewData);
         }

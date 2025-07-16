@@ -7,6 +7,7 @@ namespace ProjectsNow.Data.Production
     [Table("[Production].[PanelsItems]")]
     public class Item : Base
     {
+
         private string _Code;
         private string _Description;
         private string _Unit;
@@ -15,6 +16,9 @@ namespace ProjectsNow.Data.Production
         public int Id { get; set; }
         public int JobOrderId { get; set; }
         public int PanelId { get; set; }
+
+        [Write(false)]
+        public int SN { get; set; }
         public string Code
         {
             get => _Code;

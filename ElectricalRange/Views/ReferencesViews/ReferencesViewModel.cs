@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
-
+using Microsoft.Data.SqlClient;
+using Microsoft.Win32;
 using ProjectsNow.Attributes;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
@@ -10,21 +11,15 @@ using ProjectsNow.Data.References;
 using ProjectsNow.Data.Users;
 using ProjectsNow.Windows.MessageWindows;
 using ProjectsNow.Windows.ReferencesWindows;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using Microsoft.Win32;
 
 namespace ProjectsNow.Views.ReferencesViews
 {
@@ -52,6 +47,7 @@ namespace ProjectsNow.Views.ReferencesViews
             DeleteCommand = new RelayCommand<Reference>(Delete, CanDelete);
             DiscountCommand = new RelayCommand(UpdateDiscount, CanAccessUpdateDiscount);
             PricesCommand = new RelayCommand(Prices, CanAccessPrices);
+            AddCodesCommand = new RelayCommand(AddCodes);
             CopperCommand = new RelayCommand(Copper, CanAccessCopper);
 
             ClosingCommand = new RelayCommand(Closing, CanAccessClosing);
@@ -101,6 +97,7 @@ namespace ProjectsNow.Views.ReferencesViews
         public RelayCommand<Reference> DeleteCommand { get; }
         public RelayCommand DiscountCommand { get; }
         public RelayCommand PricesCommand { get; }
+        public RelayCommand AddCodesCommand { get; }
         public RelayCommand CopperCommand { get; }
         public RelayCommand ClosingCommand { get; }
 
@@ -319,6 +316,14 @@ namespace ProjectsNow.Views.ReferencesViews
             public string Code { get; set; }
             public decimal Cost { get; set; }
         }
+
+        private class AddExcelRow
+        {
+            public string Code { get; set; }
+            public string  Description { get; set; }
+            public decimal Cost { get; set; }
+        }
+
         private void Prices()
         {
             UpdatePricesGuideWindow updatePricesGuideWindow = new();
@@ -409,6 +414,92 @@ namespace ProjectsNow.Views.ReferencesViews
         private bool CanAccessClosing()
         {
             return AppData.ReferencesListData != null;
+        }
+
+
+        private void AddCodes()
+        {
+            UpdatePricesGuideWindow updatePricesGuideWindow = new();
+            updatePricesGuideWindow.ShowDialog();
+
+            Navigation.OpenLoading(Visibility.Visible, "Working....");
+
+            OpenFileDialog path = new() { Filter = "Excel Files|*.xls;*.xlsx;*.xlsm" };
+            _ = path.ShowDialog();
+
+            string filePath = $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={path.FileName};" +
+                              $@"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+            try
+            {
+                DataTable excelData = new();
+                using (OleDbConnection oleDConnection = new(filePath))
+                {
+                    oleDConnection.Open();
+                    OleDbDataAdapter oleAdpt = new("select Code, Cost, Description from [Sheet1$]", oleDConnection); //here we read data from sheet1  
+                    _ = oleAdpt.Fill(excelData);
+                }
+
+                if (excelData.Rows.Count == 0)
+                {
+                    _ = MessageWindow.Show("Data Error", "No data!", MessageWindowButton.OK, MessageWindowImage.Warning);
+                    return;
+                }
+
+                List<AddExcelRow> excelList = new();
+                for (int i = 0; i < excelData.Rows.Count; i++)
+                {
+                    AddExcelRow excelRow = new();
+                    excelRow.Code = excelData.Rows[i]["Code"].ToString();
+                    excelRow.Description = excelData.Rows[i]["Description"].ToString();
+
+                    excelRow.Cost = Convert.ToDecimal(excelData.Rows[i]["Cost"]);
+                    excelList.Add(excelRow);
+                }
+
+                using SqlConnection connection = new(Database.ConnectionString);
+
+                int itemsUpdateCount = 0;
+                int itemsAddingCount = 0;
+                string updateTable = "";
+                foreach (AddExcelRow row in excelList)
+                {
+                    string code = connection.QueryFirstOrDefault<string>($"Select Code From [Reference].[References] Where Code ='{row.Code}'");
+                    if (code == null)
+                    {
+                        Reference reference = new()
+                        {
+                            Code = row.Code,
+                            Cost = row.Cost,
+                            Description = row.Description,
+                            Unit = "No",
+                            Type = null,
+                            Brand = "Siemens",
+                            Category = "Siemens",
+                            Article1 = null,
+                            Article2 = null,
+                            Discount = 50,
+                            SearchKeys = "Siemens"
+                        };
+                        _ = connection.Insert(reference);
+                        itemsAddingCount++;
+                    }
+                    else
+                    {
+                        itemsUpdateCount++;
+                        updateTable = $"Update [Reference].[References] Set Cost = {row.Cost} Where Code = '{row.Code}'; ";
+                        _ = connection.Execute(updateTable);
+                    }
+                }
+
+                _ = MessageWindow.Show("Data", $" Adding: {itemsAddingCount}\n Update: {itemsUpdateCount} \n references updated!", MessageWindowButton.OK, MessageWindowImage.Information);
+            }
+            catch (Exception exception)
+            {
+                _ = MessageWindow.Show("Error", exception.Message, MessageWindowButton.OK, MessageWindowImage.Warning);
+            }
+
+            Navigation.CloseLoading();
         }
     }
 }
