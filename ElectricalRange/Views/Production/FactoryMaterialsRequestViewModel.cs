@@ -36,7 +36,6 @@ namespace ProjectsNow.Views.Production
 
         private ICollectionView _RequestsCollection;
         private ICollectionView _ItemsCollection;
-
         public FactoryMaterialsRequestViewModel(Order order, IView view)
         {
             ViewData = view;
@@ -52,13 +51,18 @@ namespace ProjectsNow.Views.Production
             PreviousRequestCommand = new RelayCommand(PreviousRequest, CanAccessPreviousRequest);
             PrintCommand = new RelayCommand(PrintRequest, CanAccessPrint);
 
+
             AddItemToGroupCommand = new RelayCommand<CollectionViewGroup>(AddItem, CanAccessAddItem);
+            CopyGroupCommand = new RelayCommand<CollectionViewGroup>(CopyGroup, CanAccessCopyGroup);
             DeleteGroupCommand = new RelayCommand<CollectionViewGroup>(DeleteGroup, CanAccessDeleteGroup);
             PrintGroupCommand = new RelayCommand<CollectionViewGroup>(PrintRequest, CanAccessPrint);
+
+            PasteCommand = new RelayCommand<CollectionViewGroup>(Paste, CanAccessPaste);
         }
 
         public User UserData { get; }
         public Order OrderData { get; }
+        public List<Item> Clipboard { get; set; }
         public string PanelsIndicator
         {
             get => _PanelsIndicator;
@@ -147,8 +151,10 @@ namespace ProjectsNow.Views.Production
         public RelayCommand PreviousRequestCommand { get; }
         public RelayCommand PrintCommand { get; }
         public RelayCommand<CollectionViewGroup> AddItemToGroupCommand { get; }
+        public RelayCommand<CollectionViewGroup> CopyGroupCommand { get; }
         public RelayCommand<CollectionViewGroup> DeleteGroupCommand { get; }
         public RelayCommand<CollectionViewGroup> PrintGroupCommand { get; }
+        public RelayCommand<CollectionViewGroup> PasteCommand { get; }
 
 
         #region Data Filter
@@ -289,6 +295,107 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
+        private void CopyGroup(CollectionViewGroup group)
+        {
+            if (group == null)
+                return;
+
+            Item groupItem = group.Items.OfType<Item>().FirstOrDefault();
+            if (groupItem == null)
+                return;
+
+            Clipboard = [];
+            foreach (Item item in group.Items.OfType<Item>())
+            {
+                if (item.Id == -1)
+                    continue;
+                Item newItem = new()
+                {
+                    Code = item.Code,
+                    Description = item.Description,
+                    Type = item.Type,
+                    Unit = item.Unit,
+                    Qty = item.Qty,
+                    PanelId = item.PanelId,
+                    JobOrderId = item.JobOrderId,
+                    RequestId = groupItem.RequestId
+                };
+                Clipboard.Add(newItem);
+            }
+        }
+        private bool CanAccessCopyGroup(CollectionViewGroup group)
+        {
+            if (group == null)
+                return false;
+
+            return true;
+        }
+
+        private void Paste(CollectionViewGroup group)
+        {
+            if (group == null)
+                return;
+
+            Item groupItem = group.Items.OfType<Item>().FirstOrDefault();
+            if (groupItem == null)
+                return;
+
+            using SqlConnection connection = new(Database.ConnectionString);
+
+            foreach (Item item in Clipboard)
+            {
+                if (item.Id == -1)
+                    continue;
+                Item newItem = new()
+                {
+                    Code = item.Code,
+                    Description = item.Description,
+                    Type = item.Type,
+                    Unit = item.Unit,
+                    Qty = item.Qty,
+                    PanelId = groupItem.PanelId,
+                    JobOrderId = item.JobOrderId,
+                    RequestId = groupItem.RequestId
+                };
+                Items.Add(newItem);
+                _ = connection.Insert(newItem);
+            }
+
+            MaterialsRequest request = new()
+            {
+                RequestId = groupItem.RequestId.Value,
+                Date = DateTime.Now,
+                JobOrderId = groupItem.JobOrderId,
+                PanelId = groupItem.PanelId
+            };
+
+            string query = $"SELECT * FROM [Production].[MaterialsRequests] " +
+                           $"WHERE RequestId = {request.Id} " +
+                           $"And JobOrderId = {request.JobOrderId}";
+            MaterialsRequest existingRequest = connection.QueryFirstOrDefault<MaterialsRequest>(query);
+            if (existingRequest == null)
+                _ = connection.Insert(request);
+
+            Item checkItem = Items.FirstOrDefault(i => i.Id == -1);
+            if (checkItem != null)
+                Items.Remove(checkItem);
+
+            Clipboard = null;
+        }
+        private bool CanAccessPaste(CollectionViewGroup group)
+        {
+            if (Clipboard == null)
+                return false;
+
+            if (group == null)
+                return false;
+
+            Item clipboardItem = Clipboard.FirstOrDefault();
+            if (group.Items.OfType<Item>().Any(i => i.PanelId == clipboardItem.PanelId))
+                return false;
+
+            return true;
+        }
         private void DeleteGroup(CollectionViewGroup group)
         {
             if (group == null)

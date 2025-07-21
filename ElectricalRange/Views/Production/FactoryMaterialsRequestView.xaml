@@ -378,8 +378,20 @@
                                                                     <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteGroupCommand}"
                                                                             CommandParameter="{Binding}"
                                                                             Style="{StaticResource GroupButton}"
-                                                                            ToolTip="Delete Modification">
+                                                                            ToolTip="Delete Request">
                                                                         <ImageSource>/Images/Icons/Error.png</ImageSource>
+                                                                    </Button>
+                                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.CopyGroupCommand}"
+                                                                            CommandParameter="{Binding}"
+                                                                            Style="{StaticResource GroupButton}"
+                                                                            ToolTip="Delete Request">
+                                                                        <ImageSource>/Images/Icons/Copy.png</ImageSource>
+                                                                    </Button>
+                                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PasteCommand}"
+                                                                            CommandParameter="{Binding}"
+                                                                            Style="{StaticResource GroupButton}"
+                                                                            ToolTip="Delete Request">
+                                                                        <ImageSource>/Images/Icons/Paste.png</ImageSource>
                                                                     </Button>
                                                                     <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PrintGroupCommand}"
                                                                             CommandParameter="{Binding}"
