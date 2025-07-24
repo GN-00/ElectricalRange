@@ -1,6 +1,6 @@
 ﻿namespace ProjectsNow.Data
 {
-    public class BillItem
+    public class BillItem : Base
     {
         public int ItemID { get; set; }
         public int PanelID { get; set; }
@@ -9,7 +9,11 @@
         public string Category { get; set; }
         public string Code { get; set; }
         public string PartNumber => $"{Category}{Code}";
-        public string Description { get; set; }
+        public string Description 
+        { 
+            get; 
+            set;
+        }
         public string Unit { get; set; }
         public decimal ItemQty { get; set; }
         public string Brand { get; set; }

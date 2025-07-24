@@ -26,6 +26,11 @@ namespace ProjectsNow.Printing
             DataContext = PanelData;
         }
 
+        public int ItemsCount
+        {
+            get { return ItemsData?.Count ?? 0; }
+        }
+
         public BillItem AddItem
         {
             get { return (BillItem)GetValue(AddItemProperty); }
@@ -188,10 +193,10 @@ namespace ProjectsNow.Printing
             }
 
             //
-            NewCell(item);
-            var lines = EnglishName.GetLines().ToList();
+            NewDescriptionCell(item);
+            var lines = DescriptionTextBlock.GetLines().ToList();
             bool isMultiLine = lines.Count > 1;
-            LastRow.Height = ( isMultiLine ? new GridLength(EnglishName.ActualHeight) : new GridLength(0.6 * cm));
+            LastRow.Height = ( isMultiLine ? new GridLength(DescriptionTextBlock.ActualHeight) : new GridLength(0.6 * cm));
             //
 
             textBlock = new TextBlock()
@@ -292,11 +297,11 @@ namespace ProjectsNow.Printing
 
         private static Grid NameCell { get; set; }
         private static Border NameBorder { get; set; }
-        private static TextBlock EnglishName { get; set; }
+        private static TextBlock DescriptionTextBlock { get; set; }
 
-        private static void NewCell(BillItem item)
+        private static void NewDescriptionCell(BillItem item)
         {
-            EnglishName = new TextBlock()
+            DescriptionTextBlock = new TextBlock()
             {
                 FontWeight = FontWeights.Bold,
                 Text = item.Description,
@@ -311,7 +316,7 @@ namespace ProjectsNow.Printing
             {
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(0, 0, 1, 1),
-                Child = EnglishName,
+                Child = DescriptionTextBlock,
             };
 
             NameCell = new Grid()
@@ -332,7 +337,7 @@ namespace ProjectsNow.Printing
         {
             List<UIElement> elements = new()
             {
-                EnglishName,
+                DescriptionTextBlock,
                 NameCell,
                 NameBorder,
             };

@@ -1,5 +1,7 @@
 ﻿using Dapper;
 
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.AttachedProperties;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
@@ -11,10 +13,8 @@ using ProjectsNow.Enums;
 using ProjectsNow.Printing;
 using ProjectsNow.Printing.QuotationPages;
 
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Printing;
+using System.Security.Cryptography.Xml;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -1276,7 +1276,8 @@ namespace ProjectsNow.Views.QuotationsViews
                 if (panelItems.Count == 0)
                     continue;
 
-                NewPage:
+
+            NewPage:
                 QuotationPanelInfo quotationPanelInfo = new(panel);
                 quotationPanelInfo.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 quotationPanelInfo.Arrange(new Rect(quotationPanelInfo.DesiredSize));
@@ -1299,30 +1300,179 @@ namespace ProjectsNow.Views.QuotationsViews
                     content.Children.Add(quotationPanelInfo);
                 }
 
-                while (totalHeight + 0.7 * cm < MaxPageHeight)
+            NewDescription:
+                if (panelItems.Count == 0)
+                    continue;
+                ////////////////////////////////////////////////////////
+                NewDescriptionCell(panelItems[0]);
+                var lines = DescriptionTextBlock.GetLines().ToList();
+                bool isMultiLine = lines.Count > 1;
+                //////////////////////////////////////////////////////////
+                if (isMultiLine)
                 {
-                    if (panelItems.Count == 0)
-                        break;
+                    if (totalHeight + DescriptionTextBlock.ActualHeight < MaxPageHeight)
+                    {
+                        quotationPanelInfo.AddItem = panelItems[0];
+                        panelItems.Remove(panelItems[0]);
+                        totalHeight += DescriptionTextBlock.ActualHeight;
+                        goto NewDescription;
+                    }
+                    else
+                    {
+                        if (quotationPanelInfo.ItemsCount == 0)
+                        {
+                            content.Children.Remove(quotationPanelInfo);
+                        }
 
-                    quotationPanelInfo.AddItem = panelItems[0];
-                    panelItems.Remove(panelItems[0]);
+                        totalHeight = 0;
+                        DetailsPages.Add(new QuotationPageView(QuotationData, content, Visibility.Visible));
+                        content = new StackPanel() { Margin = new Thickness(-cm, 0, -cm, 0) };
 
-                    totalHeight += 0.6 * cm;
+                        goto NewPage;
+                    }
+                }
+                else
+                {
+                    if (totalHeight + 0.7 * cm < MaxPageHeight)
+                    {
+                        quotationPanelInfo.AddItem = panelItems[0];
+                        panelItems.Remove(panelItems[0]);
+                        totalHeight += 0.6 * cm;
+
+                        goto NewDescription;
+                    }
+                    else
+                    {
+                        totalHeight = 0;
+                        DetailsPages.Add(new QuotationPageView(QuotationData, content, Visibility.Visible));
+                        content = new StackPanel() { Margin = new Thickness(-cm, 0, -cm, 0) };
+
+                        goto NewPage;
+                    }
                 }
 
-                if (panelItems.Count != 0)
-                {
-                    totalHeight = 0;
-                    DetailsPages.Add(new QuotationPageView(QuotationData, content, Visibility.Visible));
-                    content = new StackPanel() { Margin = new Thickness(-cm, 0, -cm, 0) };
 
-                    goto NewPage;
-                }
+
+                //    while (totalHeight + 0.7 * cm < MaxPageHeight)
+                //    {
+                //        if (panelItems.Count == 0)
+                //            break;
+
+                //        if (lines.Count == 0)
+                //            break;
+
+                //        if (isMultiLine)
+                //        {
+                //            if (description == "")
+                //                description += lines[0];
+                //            else
+                //                description += $"\n{lines[0]}";
+
+                //            totalHeight += 17.09;
+                //            lines.Remove(lines[0]);
+                //        }
+                //        else
+                //        {
+                //            quotationPanelInfo.AddItem = panelItems[0];
+                //            panelItems.Remove(panelItems[0]);
+                //            totalHeight += 0.6 * cm;
+                //        }
+                //    }
+
+                //if (isMultiLine)
+                //{
+                //    if (lines.Count == 0)
+                //    {
+                //        panelItems[0].Description = description;
+                //        quotationPanelInfo.AddItem = panelItems[0];
+                //        panelItems.Remove(panelItems[0]);
+                //    }
+                //    if (lines.Count != 0)
+                //    {
+                //        BillItem item = new();
+                //        item.Update(panelItems[0]);
+                //        item.Description = description;
+                //        quotationPanelInfo.AddItem = item;
+                //        panelItems[0].Description = string.Join("\n", lines);
+
+                //        totalHeight = 0;
+                //        DetailsPages.Add(new QuotationPageView(QuotationData, content, Visibility.Visible));
+                //        content = new StackPanel() { Margin = new Thickness(-cm, 0, -cm, 0) };
+
+                //        goto NewPage;
+                //    }
+                //}
+
+
+
+                //if (panelItems.Count != 0)
+                //{
+                //    totalHeight = 0;
+                //    DetailsPages.Add(new QuotationPageView(QuotationData, content, Visibility.Visible));
+                //    content = new StackPanel() { Margin = new Thickness(-cm, 0, -cm, 0) };
+
+                //    goto NewPage;
+                //}
             }
 
             DetailsPages.Add(new QuotationPageView(QuotationData, content));
         }
 
+        private static Grid NameCell { get; set; }
+        private static Border NameBorder { get; set; }
+        private static TextBlock DescriptionTextBlock { get; set; }
+
+        private static void NewDescriptionCell(BillItem item)
+        {
+            DescriptionTextBlock = new TextBlock()
+            {
+                FontWeight = FontWeights.Bold,
+                Text = item.Description,
+                FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
+                FontFamily = new FontFamily("Calibri (Body)"),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5, 0, 5, 0)
+            };
+            NameBorder = new Border()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(0, 0, 1, 1),
+                Child = DescriptionTextBlock,
+            };
+
+            NameCell = new Grid()
+            {
+                Width = 348,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            NameCell.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(348) });
+            Grid.SetColumn(NameBorder, 0);
+
+            NameCell.Children.Add(NameBorder);
+
+            UpdateUI();
+        }
+        static void UpdateUI()
+        {
+            List<UIElement> elements = new()
+            {
+                DescriptionTextBlock,
+                NameCell,
+                NameBorder,
+            };
+
+            foreach (UIElement element in elements)
+            {
+                if (element == null)
+                    continue;
+
+                element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                element.Arrange(new Rect(element.DesiredSize));
+            }
+        }
         private void GetCover()
         {
             CoverPages.Clear();
