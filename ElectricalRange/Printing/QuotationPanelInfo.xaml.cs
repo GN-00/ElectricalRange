@@ -1,7 +1,7 @@
-﻿using ProjectsNow.Data;
+﻿using ProjectsNow.AttachedProperties;
+using ProjectsNow.Data;
 using ProjectsNow.Data.Application;
 
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -47,7 +47,8 @@ namespace ProjectsNow.Printing
 
             BillItem item = e.NewValue as BillItem;
             table.ItemsData.Add(item);
-            table.Details.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.6 * cm) });
+            RowDefinition LastRow = new RowDefinition() { Height = new GridLength(0.6 * cm) };
+            table.Details.RowDefinitions.Add(LastRow);
 
             textBlock = new TextBlock()
             {
@@ -186,10 +187,18 @@ namespace ProjectsNow.Printing
 
             }
 
+            //
+            NewCell(item);
+            var lines = EnglishName.GetLines().ToList();
+            bool isMultiLine = lines.Count > 1;
+            LastRow.Height = ( isMultiLine ? new GridLength(EnglishName.ActualHeight) : new GridLength(0.6 * cm));
+            //
+
             textBlock = new TextBlock()
             {
                 Text = item.Description,
                 FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
                 FontFamily = new FontFamily("Calibri (Body)"),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -279,7 +288,63 @@ namespace ProjectsNow.Printing
             _ = table.Details.Children.Add(border);
             Grid.SetRow(border, table.Details.RowDefinitions.Count - 1);
             Grid.SetColumn(border, 5);
+        }
 
+        private static Grid NameCell { get; set; }
+        private static Border NameBorder { get; set; }
+        private static TextBlock EnglishName { get; set; }
+
+        private static void NewCell(BillItem item)
+        {
+            EnglishName = new TextBlock()
+            {
+                FontWeight = FontWeights.Bold,
+                Text = item.Description,
+                FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
+                FontFamily = new FontFamily("Calibri (Body)"),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5, 0, 5, 0)
+            };
+            NameBorder = new Border()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(0, 0, 1, 1),
+                Child = EnglishName,
+            };
+
+            NameCell = new Grid()
+            {
+                Width = 348,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            NameCell.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(348) });
+            Grid.SetColumn(NameBorder, 0);
+
+            NameCell.Children.Add(NameBorder);
+
+            UpdateUI();
+        }
+
+        static void UpdateUI()
+        {
+            List<UIElement> elements = new()
+            {
+                EnglishName,
+                NameCell,
+                NameBorder,
+            };
+
+            foreach (UIElement element in elements)
+            {
+                if (element == null)
+                    continue;
+
+                element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                element.Arrange(new Rect(element.DesiredSize));
+            }
         }
     }
 }

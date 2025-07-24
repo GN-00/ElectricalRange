@@ -173,6 +173,14 @@
                         <ImageSource>/Images/Icons/Stock.png</ImageSource>
                     </Button>
 
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding CheckItemsListCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Check List">
+                        <ImageSource>/Images/Icons/QuotationsStatus1.png</ImageSource>
+                    </Button>
+
                 </StackPanel>
             </TabItem>
 

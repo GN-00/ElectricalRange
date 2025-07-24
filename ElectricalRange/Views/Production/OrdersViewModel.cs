@@ -1,19 +1,27 @@
 ﻿using ClosedXML.Excel;
+
 using Dapper;
 using Dapper.Contrib.Extensions;
+
 using FastMember;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.Win32;
+
 using ProjectsNow.Attributes;
 using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
+using ProjectsNow.Windows.MessageWindows;
+
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ProjectsNow.Views.Production
@@ -41,6 +49,7 @@ namespace ProjectsNow.Views.Production
             CloseCommand = new RelayCommand<Order>(Close, CanAccessClose);
             DeliveryCommand = new RelayCommand<Order>(Delivery, CanAccessDelivery);
             AddStockCommand = new RelayCommand<Order>(AddStockToOrder, CanAccessAddStockToOrder);
+            CheckItemsListCommand = new RelayCommand<Order>(CheckItemsList, CanAccessCheckItemsList);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
             UpdateCommand = new RelayCommand(GetData);
             AllOrdersCommand = new RelayCommand(AllOrdersData, CanAccessAllOrdersData);
@@ -93,6 +102,7 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> CloseCommand { get; }
         public RelayCommand<Order> DeliveryCommand { get; }
         public RelayCommand<Order> AddStockCommand { get; }
+        public RelayCommand<Order> CheckItemsListCommand { get; }
         public RelayCommand UpdateCommand { get; }
         public RelayCommand AllOrdersCommand { get; }
         public RelayCommand ExportCommand { get; }
@@ -296,6 +306,74 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
+        private void CheckItemsList(Order order)
+        {
+            Navigation.OpenLoading(Visibility.Visible, "Working....");
+
+            OpenFileDialog path = new() { Filter = "Excel Files|*.xls;*.xlsx;*.xlsm" };
+            _ = path.ShowDialog();
+
+            string filePath = $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={path.FileName};" +
+                              $@"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+            try
+            {
+                DataTable excelData = new();
+                using (OleDbConnection OleDbConnection = new(filePath))
+                {
+                    OleDbConnection.Open();
+                    OleDbDataAdapter oleAdpt = new("select Code, Description, Qty from [Sheet1$]", OleDbConnection); //here we read data from sheet1  
+                    _ = oleAdpt.Fill(excelData);
+                }
+
+                if (excelData.Rows.Count == 0)
+                {
+                    _ = MessageWindow.Show("Data Error", "No data!", MessageWindowButton.OK, MessageWindowImage.Warning);
+                    Navigation.CloseLoading();
+                }
+
+                string query = $"SELECT * FROM [Production].[OrdersItems(View)] WHERE JobOrderId = {order.JobOrderId}";
+                using SqlConnection connection = new(Database.ConnectionString);
+                ObservableCollection<CheckItem> orderItems = new ObservableCollection<CheckItem>(connection.Query<CheckItem>(query));
+
+                List<CheckItem> excelList = new();
+                for (int i = 0; i < excelData.Rows.Count; i++)
+                {
+                    CheckItem excelRow = new();
+                    excelRow.Code = excelData.Rows[i]["Code"].ToString();
+                    excelRow.Description = excelData.Rows[i]["Description"].ToString();
+                    excelRow.Design = Convert.ToDouble(excelData.Rows[i]["Qty"]);
+
+                    CheckItem item = orderItems.Where(x => x.Code == excelData.Rows[i]["Code"].ToString()).FirstOrDefault();
+                    if (item != null)
+                        item.Design = excelRow.Design;
+                    else
+                        orderItems.Add(excelRow);
+                }
+
+                List<CheckItem> missingList = [];
+                foreach(CheckItem item in orderItems)
+                {
+                    if (item.Missing > 0)
+                        missingList.Add(item);
+                }
+
+                Navigation.CloseLoading();
+
+            }
+            catch (Exception exception)
+            {
+                Navigation.CloseLoading();
+            }
+        }
+        private bool CanAccessCheckItemsList(Order order)
+        {
+            if (order == null)
+                return false;
+
+            return true;
+        }
+
         private void AllOrdersData()
         {
             IsAllOrder = !IsAllOrder;
@@ -306,7 +384,7 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
-        
+
 
         private class ExcelOrder
         {
