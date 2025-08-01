@@ -1,7 +1,14 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="ViewDataGridStyle" TargetType="DataGrid">
+    <Style x:Key="ViewDataGridStyle"
+           TargetType="DataGrid">
         <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="EnableRowVirtualization" Value="True" />
+        <Setter Property="EnableColumnVirtualization" Value="True" />
 
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -43,7 +50,8 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGridCell}">
                             <Grid Background="{TemplateBinding Background}">
-                                <ContentPresenter Margin="5,0" VerticalAlignment="Center" />
+                                <ContentPresenter Margin="5,0"
+                                                  VerticalAlignment="Center" />
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
@@ -58,7 +66,8 @@
         </Style.Resources>
     </Style>
 
-    <Style x:Key="ViewRowsStyle" TargetType="{x:Type DataGridRow}">
+    <Style x:Key="ViewRowsStyle"
+           TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LightSkyBlue" />
@@ -69,15 +78,18 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeftColumnView" TargetType="{x:Type TextBlock}">
+    <Style x:Key="LeftColumnView"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
-    <Style x:Key="CenterColumnView" TargetType="{x:Type TextBlock}">
+    <Style x:Key="CenterColumnView"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="IndicationStyle" TargetType="{x:Type TextBlock}">
+    <Style x:Key="IndicationStyle"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontWeight" Value="Bold" />

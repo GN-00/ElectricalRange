@@ -56,7 +56,8 @@
                     <TextBlock Text="{Binding Indicator}" Foreground="Black" Style="{StaticResource IndicationStyle}"/>
                 </StackPanel>
             </Grid>
-            <DataGrid ItemsSource="{Binding ItemsCollection}"
+            <DataGrid 
+                ItemsSource="{Binding ItemsCollection}"
                       SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                       Style="{StaticResource ViewDataGridStyle}">

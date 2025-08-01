@@ -183,13 +183,12 @@
                     </TextBlock>
                     <ComboBox Grid.Row="4"
                               Grid.Column="1"
-                              Width="200"
+                              Width="500"
                               IsEditable="True"
                               ItemsSource="{Binding BrandsData}"
                               Text="{Binding NewData.Brand}"
                               SelectedValuePath="Text"
                               SelectedValue="{Binding NewData.Brand}"
-                              DisplayMemberPath="Name"
                               Style="{StaticResource InputComboBoxStyle}">
                     </ComboBox>
 

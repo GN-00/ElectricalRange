@@ -44,12 +44,12 @@ namespace ProjectsNow.DataInput
         {
             TextBox textBox = e.OriginalSource as TextBox;
 
-            if (textBox.Text.Contains(".") && e.Key == Key.Decimal)
+            if (textBox.Text.Contains(".") && (e.Key == Key.Decimal || e.Key == Key.OemPeriod))
             {
                 e.Handled = true;
             }
 
-            if (!textBox.Text.Contains(".") && e.Key == Key.Decimal)
+            if (!textBox.Text.Contains(".") && (e.Key == Key.Decimal || e.Key == Key.OemPeriod))
             {
                 e.Handled = false;
             }
