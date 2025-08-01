@@ -31,7 +31,7 @@ namespace ProjectsNow.Views.PartnersViews
         private string _City;
         private string _Phone;
         private string _VATNumber;
-        private string _Email;
+        private string _CR;
         private ICollectionView _ItemsCollection;
 
         public SuppliersViewModel(ObservableCollection<Supplier> suppliers = null, IView view = null)
@@ -169,14 +169,14 @@ namespace ProjectsNow.Views.PartnersViews
         }
 
         [FilterProperty]
-        public string Email
+        public string CR
         {
-            get => _Email;
+            get => _CR;
             set
             {
-                if (SetValue(ref _Email, value))
+                if (SetValue(ref _CR, value))
                 {
-                    FilterProperty = nameof(Email);
+                    FilterProperty = nameof(CR);
                     ItemsCollection.Refresh();
                 }
             }
