@@ -1,12 +1,17 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
+
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Application;
+using ProjectsNow.Data.References;
 using ProjectsNow.Data.Users;
 using ProjectsNow.Views.Dashboard;
-using Microsoft.Data.SqlClient;
+
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -42,7 +47,7 @@ namespace ProjectsNow.Views.UserViews
 
         public string VersionInfo
         {
-            get => $"{Version} {_VersionInfo}" ;
+            get => $"{Version} {_VersionInfo}";
             set => SetValue(ref _VersionInfo, value);
         }
 
@@ -86,6 +91,14 @@ namespace ProjectsNow.Views.UserViews
                 data = connection.QueryFirstOrDefault<byte[]>(query);
                 AppData.CompanyWatermark = (BitmapSource)new ImageSourceConverter().ConvertFrom(data);
             }
+
+            Task.Run(() =>
+            {
+                using SqlConnection connection = new(Database.ConnectionString);
+                AppData.ReferencesListData =
+                    new ObservableCollection<Reference>(ReferenceController.GetReferences(connection));
+            });
+
 
             if (SettingData != null)
             {

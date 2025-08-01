@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using static ClosedXML.Excel.XLPredefinedFormat;
+using ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews;
 
 namespace ProjectsNow.Services
 {
@@ -201,6 +202,11 @@ namespace ProjectsNow.Services
             orderData.Code =
                  $"{orderData.Number}" +
                  $"/ER-PCAPS/{orderData.Date.Month:00}/{orderData.Date.Year}";
+        }
+
+        internal static void Revisions(CompanyPO order, IView viewData)
+        {
+            Navigation.OpenPopup(new PurchaseOrrderRevisionsView(order, viewData), System.Windows.Controls.Primitives.PlacementMode.Center, true);
         }
     }
 }

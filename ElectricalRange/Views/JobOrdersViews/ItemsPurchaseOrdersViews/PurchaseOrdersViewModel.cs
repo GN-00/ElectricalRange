@@ -50,6 +50,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
             PurchaseOrderStatusCommand = new RelayCommand<CompanyPO>(PurchaseOrderStatus, CanAccessPurchaseOrderStatus);
             DeleteCommand = new RelayCommand<CompanyPO>(Delete, CanDelete);
             PrintCommand = new RelayCommand<CompanyPO>(Print, CanPrint);
+            RevisionsCommand = new RelayCommand<CompanyPO>(Revisions, CanAccessRevisions);
             GetDataCommand = new RelayCommand(GetData);
 
             AttachCommand = new RelayCommand<CompanyPO>(Attach, CanAccessAttach);
@@ -142,6 +143,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         public RelayCommand<CompanyPO> PurchaseOrderStatusCommand { get; }
         public RelayCommand<CompanyPO> DeleteCommand { get; }
         public RelayCommand<CompanyPO> PrintCommand { get; }
+        public RelayCommand<CompanyPO> RevisionsCommand { get; }
         public RelayCommand GetDataCommand { get; }
 
         public RelayCommand<CompanyPO> AttachCommand { get; }
@@ -155,7 +157,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
             using (SqlConnection connection = new(Database.ConnectionString))
             {
                 query = $"Select * From [Purchase].[OrdersView] " +
-                        $"Where JobOrderID = {JobOrderData.ID} " +
+                        $"Where JobOrderID = {JobOrderData.ID}" +
                         $"Order By Number Desc";
                 Orders = new ObservableCollection<CompanyPO>(connection.Query<CompanyPO>(query));
 
@@ -402,6 +404,21 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         private bool CanPrint(CompanyPO order)
         {
             if (order == null)
+                return false;
+
+            return true;
+        }
+
+        private void Revisions(CompanyPO order)
+        {
+            PurchaseOrdersServices.Revisions(order, ViewData);
+        }
+        private bool CanAccessRevisions(CompanyPO order)
+        {
+            if (order == null)
+                return false;
+
+            if (order.Revise == 0)
                 return false;
 
             return true;
