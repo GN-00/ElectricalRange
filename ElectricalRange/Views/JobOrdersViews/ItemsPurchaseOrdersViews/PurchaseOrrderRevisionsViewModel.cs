@@ -127,11 +127,13 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
             string query;
             using SqlConnection connection = new(Database.ConnectionString);
             CompanyPO tempOrder;
-            query = $"Select * From [Purchase].[Orders] " +
+            query = $"Select * From [Purchase].[Orders(Revisions)] " +
                     $"Where ID = {revision.Id} ";
             tempOrder = connection.QueryFirstOrDefault<CompanyPO>(query);
 
             PurchaseOrdersServices.Print(tempOrder, ViewData);
+
+            Navigation.ClosePopup();
         }
         private bool CanInfo(Revision revision)
         {

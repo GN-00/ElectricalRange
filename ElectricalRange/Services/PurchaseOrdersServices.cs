@@ -1,21 +1,17 @@
 ﻿using Dapper;
 
+using Microsoft.Data.SqlClient;
 
 using ProjectsNow.AttachedProperties;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Application;
 using ProjectsNow.Views;
+using ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews;
 
-using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static ClosedXML.Excel.XLPredefinedFormat;
-using ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews;
 
 namespace ProjectsNow.Services
 {
@@ -88,9 +84,15 @@ namespace ProjectsNow.Services
                         $"Where ID = {order.ID} ";
                 OrderData = connection.QueryFirstOrDefault<CompanyPO>(query);
 
-                query = $"Select * From [Purchase].[TransactionsView] " +
-                        $"Where PurchaseOrderID = {OrderData.ID} " +
-                        $"Order By Code";
+                if (order.Revised)
+                    query = $"Select * From [Purchase].[Transactions(Revisions)] " +
+                            $"Where PurchaseOrderID = {OrderData.ID} " +
+                            $"Order By Code";
+                else
+                    query = $"Select * From [Purchase].[TransactionsView] " +
+                            $"Where PurchaseOrderID = {OrderData.ID} " +
+                            $"Order By Code";
+
                 Items = connection.Query<CompanyPOTransaction>(query).ToList();
             }
 
