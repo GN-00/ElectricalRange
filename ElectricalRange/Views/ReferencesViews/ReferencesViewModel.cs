@@ -1,5 +1,10 @@
-﻿using Dapper;
+﻿using ClosedXML.Excel;
+
+using Dapper;
 using Dapper.Contrib.Extensions;
+
+using FastMember;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.Win32;
 using ProjectsNow.Attributes;
@@ -49,6 +54,7 @@ namespace ProjectsNow.Views.ReferencesViews
             PricesCommand = new RelayCommand(Prices, CanAccessPrices);
             AddCodesCommand = new RelayCommand(AddCodes);
             CopperCommand = new RelayCommand(Copper, CanAccessCopper);
+            HistoryCommand = new RelayCommand<Reference>(History, CanAccessHistory);
 
             ClosingCommand = new RelayCommand(Closing, CanAccessClosing);
         }
@@ -99,6 +105,7 @@ namespace ProjectsNow.Views.ReferencesViews
         public RelayCommand PricesCommand { get; }
         public RelayCommand AddCodesCommand { get; }
         public RelayCommand CopperCommand { get; }
+        public RelayCommand<Reference> HistoryCommand { get; }
         public RelayCommand ClosingCommand { get; }
 
         #region Data Filter
@@ -500,6 +507,99 @@ namespace ProjectsNow.Views.ReferencesViews
             }
 
             Navigation.CloseLoading();
+        }
+
+        private class ExcelItem
+        {
+            public string PO { get; set; }
+            public string Code { get; set; }
+            public string Description { get; set; }
+            public double Qty { get; set; }
+            public DateTime Date { get; set; }
+        }
+        private void History(Reference reference)
+        {
+            try
+            {
+                List<ExcelItem> items = [];
+                using SqlConnection connection = new(Database.ConnectionString);
+                string query = $"Select * From [Purchase].[Items(History)] Where Code = '{reference.Code}' Order By Date";
+                items = connection.Query<ExcelItem>(query).ToList();
+
+                if (items.Count == 0)
+                {
+                    _ = MessageView.Show("Items", "There is no items!!", MessageViewButton.OK, MessageViewImage.Warning);
+                    return;
+                }
+
+                string fileName;
+                string worksheetName = $"Purchase Order History";
+                using XLWorkbook workbook = new();
+
+                if (items.Count != 0)
+                {
+                    DataTable table = new();
+                    using (ObjectReader reader = ObjectReader.Create(items))
+                    {
+                        table.Load(reader);
+                    }
+
+                    table.Columns["PO"].SetOrdinal(0);
+                    table.Columns["Code"].SetOrdinal(1);
+                    table.Columns["Description"].SetOrdinal(2);
+                    table.Columns["Qty"].SetOrdinal(3);
+                    table.Columns["Date"].SetOrdinal(4);
+
+                    _ = workbook.Worksheets.Add(table, worksheetName);
+
+                    IXLWorksheet workSheet = workbook.Worksheet(worksheetName);
+
+                    _ = workSheet.Column(1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    _ = workSheet.Column(3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    _ = workSheet.Column(4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    _ = workSheet.Column(5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                    workSheet.Cell(1, 1).Value = "Purchase Order";
+
+                    _ = workSheet.Column(1).AdjustToContents();
+                    _ = workSheet.Column(2).AdjustToContents();
+                    _ = workSheet.Column(3).AdjustToContents();
+                    _ = workSheet.Column(4).AdjustToContents();
+                    _ = workSheet.Column(5).AdjustToContents();
+
+                    workSheet.Cell(1, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    workSheet.Cell(1, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                }
+
+                fileName = $"{DateTime.Now:dd-MM-yyyy} {reference.Code} History.xlsx";
+                fileName = fileName.Replace("/", "-");
+
+                SaveFileDialog saveFileDialog = new()
+                {
+                    FileName = fileName,
+                    DefaultExt = ".xlsx",
+                    Filter = "Excel Worksheets|*.xlsx",
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = MessageView.Show("Error", ex.Message, MessageViewButton.OK, MessageViewImage.Warning);
+            }
+        }
+
+
+        private bool CanAccessHistory(Reference reference)
+        {
+            if (reference == null)
+                return false;
+
+            return true;
         }
     }
 }

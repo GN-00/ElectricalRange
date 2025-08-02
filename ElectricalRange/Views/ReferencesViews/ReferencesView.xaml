@@ -176,12 +176,19 @@
                         <ImageSource>/Images/Icons/Copper.png</ImageSource>
                     </Button>
 
-
                     <Button Padding="0,3,0,-5"
                             Command="{Binding AddCodesCommand}"
                             Style="{StaticResource ManagerSubTapsButtons}"
                             Tag="Update Copper">
                         <ImageSource>/Images/Icons/AddItems.png</ImageSource>
+                    </Button>
+
+                    <Button Padding="0,3,0,-5"
+                            Command="{Binding HistoryCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Item History">
+                        <ImageSource>/Images/Icons/History.png</ImageSource>
                     </Button>
 
                 </StackPanel>
