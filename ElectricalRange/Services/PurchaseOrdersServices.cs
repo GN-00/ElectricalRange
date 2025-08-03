@@ -80,18 +80,32 @@ namespace ProjectsNow.Services
             List<CompanyPOTransaction> Items;
             using (SqlConnection connection = new(Database.ConnectionString))
             {
-                query = $"Select * From [Purchase].[OrdersView] " +
-                        $"Where ID = {order.ID} ";
+                if (order.Revised)
+                {
+                    query = $"Select * From [Purchase].[Orders(Revisions)] " +
+                            $"Where ID = {order.ID} ";
+                }
+                else
+                {
+                    query = $"Select * From [Purchase].[OrdersView] " +
+                            $"Where ID = {order.ID} ";
+                }
+
                 OrderData = connection.QueryFirstOrDefault<CompanyPO>(query);
 
                 if (order.Revised)
+                {
                     query = $"Select * From [Purchase].[Transactions(Revisions)] " +
                             $"Where PurchaseOrderID = {OrderData.ID} " +
                             $"Order By Code";
+                }
                 else
+                {
                     query = $"Select * From [Purchase].[TransactionsView] " +
                             $"Where PurchaseOrderID = {OrderData.ID} " +
                             $"Order By Code";
+                }
+
 
                 Items = connection.Query<CompanyPOTransaction>(query).ToList();
             }
