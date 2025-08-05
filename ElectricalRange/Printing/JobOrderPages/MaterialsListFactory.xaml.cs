@@ -9,7 +9,6 @@ namespace ProjectsNow.Printing.JobOrderPages
         {
             InitializeComponent();
         }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Loaded -= UserControl_Loaded;

@@ -14,7 +14,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition />
-            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
         <Grid>
@@ -103,6 +102,8 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
@@ -145,24 +146,214 @@
                                VerticalAlignment="Center"
                                Text="E" />
                 </Border>
+                <Border Grid.Row="5"
+                        Grid.Column="0"
+                        BorderBrush="Black"
+                        BorderThickness="1,1,1,0" />
+                <Border Grid.Row="6"
+                        Grid.Column="0"
+                        BorderBrush="Black"
+                        BorderThickness="1,1,1,1" />
 
             </Grid>
 
-            <Border Grid.Column="1"
-                    BorderBrush="Black"
-                    BorderThickness="1,0,1,0">
-                <TextBlock Height="100"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           RenderTransformOrigin="0.5,0.5"
-                           Text="The technical information contained in this documentis exclusive property of (ER-PCAPS) Factory and cannot be used or disclosed to third parties of any kind without its written consent."
-                           TextAlignment="Left"
-                           TextWrapping="Wrap">
-                    <TextBlock.RenderTransform>
-                        <RotateTransform Angle="-90" />
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Border Width="40"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,0">
+                    <TextBlock Margin="5,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="12.5"
+                               RenderTransformOrigin="0.5,0.5"
+                               Text="The technical information contained in this document is exclusive property of (ER-PCAPS) Factory and cannot be used or disclosed to third parties of any kind without its written consent."
+                               TextAlignment="Left"
+                               TextWrapping="Wrap">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="-90" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,1">
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="REM." />
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <ContentPresenter Margin="20"
+                                      Content="{Binding DataView}" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            BorderBrush="Black"
+                            BorderThickness="0,1,1,1">
+                        <Image Margin="5"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/Images/Icons/ER.png" />
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            BorderBrush="Black"
+                            BorderThickness="0,1,1,1">
+                        <Grid Margin="5,15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold">
+                                <Run FontSize="16"
+                                     Text="E" /><Run FontSize="11"
+                                     Text="LECTRICAL " />                                <Run FontSize="16"
+                                     Text="R" /><Run FontSize="11"
+                                     Text="ANGE" />
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold">
+                                <Run FontSize="16"
+                                     Text="P" /><Run FontSize="11"
+                                     Text="ROVISION OF " />                                <Run FontSize="16"
+                                     Text="C" /><Run FontSize="11"
+                                     Text="ONTROL" />
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold">
+                                <Run FontSize="11"
+                                     Text="AND" />
+                                <Run FontSize="16"
+                                     Text="P" /><Run FontSize="11"
+                                     Text="OWER" />                                <Run FontSize="16"
+                                     Text="S" /><Run FontSize="11"
+                                     Text="OLUTIONS" />
+                            </TextBlock>
+
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="115" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                BorderBrush="Black"
+                                BorderThickness="0,1,1,1">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="PROJECT NAME" />
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Grid.Column="0"
+                                BorderBrush="Black"
+                                BorderThickness="0,0,1,1">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="CUSTOMER NAME" />
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                BorderBrush="Black"
+                                BorderThickness="0,0,1,1">
+                            <TextBlock Margin="5,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="PANEL NAME" />
+                        </Border>
+
+                        
+                        
+                        <Border Grid.Row="0"
+                                Grid.Column="1"
+                                BorderBrush="Black"
+                                BorderThickness="0,1,1,1">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="{Binding Project}" />
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                BorderBrush="Black"
+                                BorderThickness="0,0,1,1">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="{Binding Customer}" />
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                BorderBrush="Black"
+                                BorderThickness="0,0,1,1">
+                            <TextBlock Margin="5,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Text="{Binding Customer}" />
+                        </Border>
+
+
+                    </Grid>
+
+
+
+                </Grid>
+
+            </Grid>
+
+
+
         </Grid>
     </Grid>
 </UserControl>
