@@ -4,6 +4,7 @@ using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 
 using ProjectsNow.Commands;
+using ProjectsNow.Controllers;
 using ProjectsNow.Data;
 using ProjectsNow.Data.Production;
 using ProjectsNow.Data.Users;
@@ -465,9 +466,12 @@ namespace ProjectsNow.Views.Production
                 List<FrameworkElement> elements = new();
                 for (int i = 1; i <= pagesNumber; i++)
                 {
-                    request.Page = i;
-                    request.Items = [.. request.Items.Where(p => p.SN > ((i - 1) * 13) && p.SN <= (i * 13))];
-                    FactoryMaterialsRequestPage requestForm = new(request);
+                    MaterialsRequest pageRequest = new();
+                    pageRequest.Update(request);
+
+                    pageRequest.Page = i;
+                    pageRequest.Items = [.. request.Items.Where(p => p.SN > ((i - 1) * 13) && p.SN <= (i * 13))];
+                    FactoryMaterialsRequestPage requestForm = new(pageRequest);
 
                     elements.Add(requestForm);
                 }

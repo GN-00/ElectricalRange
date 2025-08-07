@@ -48,7 +48,7 @@ namespace ProjectsNow.Views.Production
                 Code = Item.Code,
                 Description = Item.Description,
                 Qty = Posting,
-                Date = DateTime.Now
+                Date = DateTime.Now,
             };
 
             Item.Update(NewData);

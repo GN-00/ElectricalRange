@@ -43,12 +43,14 @@ namespace ProjectsNow.Views.Production
                         NewData.Code = SelectedReference.Code;
                         NewData.Description = SelectedReference.Description;
                         NewData.Unit = SelectedReference.Unit;
+                        NewData.Note = SelectedReference.Note;
                     }
                     else
                     {
                         NewData.Code =
                             NewData.Description =
-                                 NewData.Unit = null;
+                                 NewData.Unit = 
+                                 NewData.Note = null;
                     }
                 }
             }

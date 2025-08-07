@@ -306,6 +306,17 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
+
+        //private class ExcelItem
+        //{
+        //    public string Code { get; set; }
+        //    public string Quotation { get; set; }
+        //    public string Customer { get; set; }
+        //    public string Project { get; set; }
+        //    public int Panels { get; set; }
+        //    public int Closed { get; set; }
+        //    public string Note { get; set; }
+        //}
         private void CheckItemsList(Order order)
         {
             Navigation.OpenLoading(Visibility.Visible, "Working....");
@@ -332,9 +343,16 @@ namespace ProjectsNow.Views.Production
                     Navigation.CloseLoading();
                 }
 
-                string query = $"SELECT * FROM [Production].[OrdersItems(View)] WHERE JobOrderId = {order.JobOrderId}";
+                string query = $"SELECT * FROM [Production].[OrdersItems(View)] " +
+                               $"WHERE JobOrderId = {order.JobOrderId} " +
+                               $"And Type = 'Base'";
                 using SqlConnection connection = new(Database.ConnectionString);
                 ObservableCollection<CheckItem> orderItems = new ObservableCollection<CheckItem>(connection.Query<CheckItem>(query));
+
+                query = $"SELECT * FROM [Production].[OrdersItems(View)] " +
+                        $"WHERE JobOrderId = {order.JobOrderId} " +
+                        $"And Type = 'FMR'";
+                ObservableCollection<CheckItem> orderRequestItems = new ObservableCollection<CheckItem>(connection.Query<CheckItem>(query));
 
                 List<CheckItem> excelList = new();
                 for (int i = 0; i < excelData.Rows.Count; i++)
@@ -357,6 +375,112 @@ namespace ProjectsNow.Views.Production
                     if (item.Missing > 0)
                         missingList.Add(item);
                 }
+
+                try
+                {
+                    if (missingList.Count == 0)
+                    {
+                        _ = MessageView.Show("Items", "There is no items!!", MessageViewButton.OK, MessageViewImage.Warning);
+                        return;
+                    }
+
+                    string fileName;
+                    string worksheetName;
+                    using XLWorkbook workbook = new();
+
+                    if (missingList.Count != 0)
+                    {
+                        DataTable table = new();
+                        using (ObjectReader reader = ObjectReader.Create(missingList))
+                        {
+                            table.Load(reader);
+                        }
+
+                        table.Columns["Code"].SetOrdinal(0);
+                        table.Columns["Description"].SetOrdinal(1);
+                        table.Columns["Qty"].SetOrdinal(2);
+                        table.Columns["Design"].SetOrdinal(3);
+                        table.Columns["Missing"].SetOrdinal(4);
+
+                        worksheetName = $"Items Notes";
+                        _ = workbook.Worksheets.Add(table, worksheetName);
+
+                        IXLWorksheet workSheet = workbook.Worksheet(worksheetName);
+
+                        _ = workSheet.Column(1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        _ = workSheet.Column(2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        _ = workSheet.Column(3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        _ = workSheet.Column(4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        _ = workSheet.Column(5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                        workSheet.Cell(1, 3).Value = "Factory";
+
+                        _ = workSheet.Column(1).AdjustToContents();
+                        _ = workSheet.Column(2).AdjustToContents();
+                        _ = workSheet.Column(3).AdjustToContents();
+                        _ = workSheet.Column(4).AdjustToContents();
+                        _ = workSheet.Column(5).AdjustToContents();
+
+
+                        workSheet.Cell(1, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        workSheet.Cell(1, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    }
+
+
+                    if (orderRequestItems.Count != 0)
+                    {
+                        DataTable table = new();
+                        using (ObjectReader reader = ObjectReader.Create(orderRequestItems))
+                        {
+                            table.Load(reader);
+                        }
+
+                        table.Columns["Code"].SetOrdinal(0);
+                        table.Columns["Description"].SetOrdinal(1);
+                        table.Columns["Qty"].SetOrdinal(2);
+
+                        worksheetName = $"Factory Request Items";
+                        _ = workbook.Worksheets.Add(table, worksheetName);
+
+                        IXLWorksheet workSheet = workbook.Worksheet(worksheetName);
+
+                        workSheet.Column(4).Delete();
+                        workSheet.Column(4).Delete();
+
+                        _ = workSheet.Column(1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        _ = workSheet.Column(2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        _ = workSheet.Column(3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                        _ = workSheet.Column(1).AdjustToContents();
+                        _ = workSheet.Column(2).AdjustToContents();
+                        _ = workSheet.Column(3).AdjustToContents();
+
+
+
+                        workSheet.Cell(1, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        workSheet.Cell(1, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    }
+
+                    fileName = $"{DateTime.Now:dd-MM-yyyy} JO.{order.Code} Analysis.xlsx";
+                    fileName = fileName.Replace("/", "-");
+
+                    SaveFileDialog saveFileDialog = new()
+                    {
+                        FileName = fileName,
+                        DefaultExt = ".xlsx",
+                        Filter = "Excel Worksheets|*.xlsx",
+                    };
+
+                    if (saveFileDialog.ShowDialog() == true)
+                    {
+                        workbook.SaveAs(saveFileDialog.FileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _ = MessageView.Show("Error", ex.Message, MessageViewButton.OK, MessageViewImage.Warning);
+                }
+
 
                 Navigation.CloseLoading();
 

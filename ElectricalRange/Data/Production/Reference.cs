@@ -8,6 +8,7 @@ namespace ProjectsNow.Data.Production
         private string _Code;
         private string _Description;
         private string _Unit = "No";
+        private string _Note;
 
         [Key]
         public int ReferenceId { get; set; }
@@ -26,6 +27,11 @@ namespace ProjectsNow.Data.Production
         {
             get => _Unit;
             set => SetValue(ref _Unit, value);
+        }
+        public string Note
+        {
+            get => _Note;
+            set => SetValue(ref _Note, value);
         }
     }
 }

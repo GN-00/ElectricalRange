@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Attributes;
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
@@ -12,13 +14,9 @@ using ProjectsNow.Enums;
 using ProjectsNow.Services;
 using ProjectsNow.Views.InquiriesViews;
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -184,8 +182,8 @@ namespace ProjectsNow.Views.QuotationsViews
         {
             get => _SelectedItem;
             set => SetValue(ref _SelectedItem, value)
-                  .UpdateProperties(this, 
-                                    nameof(HasInfoButtons), 
+                  .UpdateProperties(this,
+                                    nameof(HasInfoButtons),
                                     nameof(HasItemsButtons),
                                     nameof(HasMovingButtons),
                                     nameof(HasToolsButtons));
@@ -460,6 +458,18 @@ namespace ProjectsNow.Views.QuotationsViews
         {
             using SqlConnection connection = new(Database.ConnectionString);
             Items = QPanelController.QuotationPanels(connection, QuotationData.Id);
+
+            ResetSN(connection);
+        }
+
+        private void ResetSN(SqlConnection connection)
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Items[i].PanelSN = i + 1;
+            }
+
+            _ = connection.Update(Items);
         }
 
         private void UpdateValues()
@@ -488,6 +498,8 @@ namespace ProjectsNow.Views.QuotationsViews
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateIndicator();
+            using SqlConnection connection = new(Database.ConnectionString);
+            ResetSN(connection);
         }
         private void UpdateIndicator()
         {
@@ -1010,18 +1022,14 @@ namespace ProjectsNow.Views.QuotationsViews
                 {
                     string query = $"Delete From [Quotation].[QuotationsPanels] Where PanelID = {panel.PanelID}; " +
                                    $"Delete From [Quotation].[QuotationsPanelsItems] Where PanelID = {panel.PanelID}; " +
-                                   $"Delete From [Quotation].[QuotationsOptionsPanels] Where PanelID = {panel.PanelID}; " +
-                                   $"Update [Quotation].[QuotationsPanels] Set PanelSN = PanelSN - 1 Where PanelSN > {panel.PanelSN} And QuotationID = {panel.QuotationID}; ";
+                                   $"Delete From [Quotation].[QuotationsOptionsPanels] Where PanelID = {panel.PanelID}; ";
 
                     _ = connection.Execute(query);
-                }
 
-                foreach (QPanel panelData in Items.Where(p => p.PanelSN > panel.PanelSN))
-                {
-                    --panelData.PanelSN;
-                }
+                    _ = Items.Remove(panel);
 
-                _ = Items.Remove(panel);
+                    ResetSN(connection);
+                }
 
                 UpdateValues();
             }

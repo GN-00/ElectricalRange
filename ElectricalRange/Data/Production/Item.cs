@@ -11,6 +11,8 @@ namespace ProjectsNow.Data.Production
         private string _Code;
         private string _Description;
         private string _Unit;
+        private double _Qty;
+        private string _Note;
 
         [Key]
         public int Id { get; set; }
@@ -29,7 +31,11 @@ namespace ProjectsNow.Data.Production
             get => _Description;
             set=> SetValue(ref _Description, value); 
         }
-        public double Qty { get; set; }
+        public double Qty
+        {
+            get => _Qty;
+            set => SetValue(ref _Qty, value);
+        }
         public string Type { get; set; }
 
         [Write(false)]
@@ -48,5 +54,13 @@ namespace ProjectsNow.Data.Production
             set => SetValue(ref _Unit, value);
         }
 
+        public string Note
+        {
+            get => _Note;
+            set => SetValue(ref _Note, value);
+        }
+
+        [Write(false)]
+        public string Remark => Note;
     }
 }
