@@ -57,6 +57,11 @@ namespace ProjectsNow.Windows.JobOrderWindows.Panels_Cancelling_Windows
 
                     newPanel.TransactionID = (int)(decimal)connection.ExecuteScalar(query, newPanel);
                     PanelsTransaction.Add(newPanel);
+
+                    query = $"Update [JobOrder].[Panels] " +
+                            $"Set Status = '{Enums.Statuses.Canceled}'" +
+                            $"Where PanelID = {PanelData.PanelID}";
+                    _ = connection.Execute(query, PanelData);
                 }
 
                 Close();

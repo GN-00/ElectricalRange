@@ -61,7 +61,7 @@ namespace ProjectsNow.Views.Production
 
         private void GetData()
         {
-            string query = "SELECT * FROM [Production].[References] Order By Code";
+            string query = "SELECT * FROM [Production].[References] Order By Type, Sort";
             using SqlConnection connection = new(Database.ConnectionString);
             ReferencesData = new ObservableCollection<Reference>(connection.Query<Reference>(query));
         }
@@ -94,7 +94,7 @@ namespace ProjectsNow.Views.Production
             };
 
             string query = $"SELECT * FROM [Production].[MaterialsRequests] " +
-                           $"WHERE RequestId = {request.Id} " +
+                           $"WHERE RequestId = {request.RequestId} " +
                            $"And JobOrderId = {request.JobOrderId}";
             MaterialsRequest existingRequest = connection.QueryFirstOrDefault<MaterialsRequest>(query);
             if (existingRequest == null)
@@ -126,3 +126,21 @@ namespace ProjectsNow.Views.Production
         }
     }
 }
+
+//SELECT JobOrder.JobOrdersInformation.ID, JobOrder.JobOrdersInformation.Code, JobOrder.JobOrdersInformation.CodeNumber, JobOrder.JobOrdersInformation.CodeMonth, JobOrder.JobOrdersInformation.CodeYear, 
+//                  JobOrder.JobOrdersInformation.Date, JobOrder.JobOrdersInformation.QuotationID, JobOrder.JobOrdersInformation.QuotationCode, JobOrder.JobOrdersInformation.InquiryID, JobOrder.JobOrdersInformation.ProjectName, 
+//                  JobOrder.JobOrdersInformation.CustomerID, JobOrder.JobOrdersInformation.CustomerName, JobOrder.JobOrdersInformation.EstimationName, JobOrder.JobOrdersInformation.VAT, 
+//                  JobOrder.AcknowledgmentsAttachments.Id AS AcknowledgmentAttachmentId
+//FROM     JobOrder.JobOrdersInformation LEFT OUTER JOIN
+//                  JobOrder.AcknowledgmentsAttachments ON JobOrder.JobOrdersInformation.ID = JobOrder.AcknowledgmentsAttachments.JobOrderId LEFT OUTER JOIN
+//                  JobOrder.Panels ON JobOrder.JobOrdersInformation.ID = JobOrder.Panels.JobOrderID
+//WHERE  (JobOrder.Panels.Status = N'New') OR
+//                  (JobOrder.Panels.Status = N'Designing') OR
+//                  (JobOrder.Panels.Status = N'Waiting_Approval') OR
+//                  (JobOrder.Panels.Status = N'Production') OR
+//                  (JobOrder.Panels.Status = N'Hold') OR
+//                  (JobOrder.Panels.Status IS NULL) OR
+//                  (JobOrder.Panels.Status = N'QC')
+//GROUP BY JobOrder.JobOrdersInformation.ID, JobOrder.JobOrdersInformation.Code, JobOrder.JobOrdersInformation.CodeNumber, JobOrder.JobOrdersInformation.CodeMonth, JobOrder.JobOrdersInformation.CodeYear,
+//                  JobOrder.JobOrdersInformation.Date, JobOrder.JobOrdersInformation.QuotationID, JobOrder.JobOrdersInformation.QuotationCode, JobOrder.JobOrdersInformation.InquiryID, JobOrder.JobOrdersInformation.ProjectName,
+//                  JobOrder.JobOrdersInformation.CustomerID, JobOrder.JobOrdersInformation.CustomerName, JobOrder.JobOrdersInformation.EstimationName, JobOrder.JobOrdersInformation.VAT, JobOrder.AcknowledgmentsAttachments.Id

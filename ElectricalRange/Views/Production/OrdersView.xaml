@@ -13,24 +13,20 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
 
-        <ContextMenu x:Key="GridContextMenu"
-                     FontFamily="Times New Roman">
+        <ContextMenu x:Key="GridContextMenu" FontFamily="Times New Roman">
 
-            <MenuItem Command="{Binding ExportCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding ExportCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Export" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Excel.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Excel.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
         </ContextMenu>
 
-        <ContextMenu x:Key="RowsContextMenu"
-                     FontFamily="Times New Roman">
+        <ContextMenu x:Key="RowsContextMenu" FontFamily="Times New Roman">
 
             <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PanelsCommand}"
                       CommandParameter="{Binding}"
@@ -39,8 +35,7 @@
                     <TextBlock Text="Panels" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Enclosure.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Enclosure.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -51,8 +46,7 @@
                     <TextBlock Text="Mark As Site Work" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/ImportAll.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/ImportAll.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -63,19 +57,16 @@
                     <TextBlock Text="Close" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Closing.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Closing.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ExportCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ExportCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Export" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Excel.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Excel.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -103,8 +94,7 @@
 
         <TabControl Style="{StaticResource ViewsTabControlStyle}">
             <TabControl.Resources>
-                <Style BasedOn="{StaticResource TextItemStyle}"
-                       TargetType="TabItem" />
+                <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
             </TabControl.Resources>
 
             <TabItem Width="20"
@@ -150,12 +140,35 @@
                         <ImageSource>/Images/Icons/Excel.png</ImageSource>
                     </Button>
 
+                    <GridSplitter Width="2"
+                                  Margin="5"
+                                  Background="LightGray" />
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding RunningOrdersCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Running">
+                        <ImageSource>/Images/Icons/Default.png</ImageSource>
+                    </Button>
+
+
                     <Button Padding="0,5,0,-10"
                             Command="{Binding AllOrdersCommand}"
                             Style="{StaticResource ManagerSubTapsButtons}"
                             Tag="All Orders">
                         <ImageSource>/Images/Icons/AllFiles.png</ImageSource>
                     </Button>
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding ToDeliverOrdersCommand}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="To Deliver">
+                        <ImageSource>/Images/Icons/Store.png</ImageSource>
+                    </Button>
+
+                    <GridSplitter Width="2"
+                                  Margin="5"
+                                  Background="LightGray" />
 
                     <Button Padding="0,5,0,-10"
                             Command="{Binding SiteWorkCommand}"
@@ -184,8 +197,7 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem HorizontalAlignment="Right"
-                     Header="Filters">
+            <TabItem HorizontalAlignment="Right" Header="Filters">
                 <StackPanel Margin="7,0,0,0"
                             VerticalAlignment="Bottom"
                             Orientation="Horizontal">
@@ -206,8 +218,7 @@
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding Project, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <Button Command="{Binding DeleteFilterCommand}"
-                            Style="{StaticResource FilterButtonStyle}" />
+                    <Button Command="{Binding DeleteFilterCommand}" Style="{StaticResource FilterButtonStyle}" />
 
 
                 </StackPanel>
@@ -215,8 +226,7 @@
 
         </TabControl>
 
-        <Grid Grid.Row="1"
-              Margin="10,10,10,10">
+        <Grid Grid.Row="1" Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="30" />
@@ -228,13 +238,11 @@
                                   RenderingBias="Quality"
                                   ShadowDepth="2" />
             </Grid.Effect>
-            <Grid Grid.Row="1"
-                  Background="LightGray">
+            <Grid Grid.Row="1" Background="LightGray">
                 <StackPanel Margin="20,0"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource IndicationStyle}"
-                               Text="Job Order: " />
+                    <TextBlock Style="{StaticResource IndicationStyle}" Text="Job Order: " />
                     <TextBlock Foreground="Black"
                                Style="{StaticResource IndicationStyle}"
                                Text="{Binding Indicator}" />
@@ -252,8 +260,7 @@
                                   Gesture="LeftDoubleClick" />
                 </DataGrid.InputBindings>
                 <DataGrid.Resources>
-                    <Style BasedOn="{StaticResource ViewRowsStyle}"
-                           TargetType="{x:Type DataGridRow}">
+                    <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
                         <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}" />
                     </Style>
                 </DataGrid.Resources>
@@ -266,8 +273,7 @@
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Canceled}"
-                                                 Value="True">
+                                    <DataTrigger Binding="{Binding Canceled}" Value="True">
                                         <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -307,8 +313,7 @@
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSiteWork}"
-                                                 Value="True">
+                                    <DataTrigger Binding="{Binding IsSiteWork}" Value="True">
                                         <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>
                                 </Style.Triggers>

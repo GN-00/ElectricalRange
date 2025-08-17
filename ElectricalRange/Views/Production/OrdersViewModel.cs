@@ -52,13 +52,16 @@ namespace ProjectsNow.Views.Production
             CheckItemsListCommand = new RelayCommand<Order>(CheckItemsList, CanAccessCheckItemsList);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
             UpdateCommand = new RelayCommand(GetData);
-            AllOrdersCommand = new RelayCommand(AllOrdersData, CanAccessAllOrdersData);
+            RunningOrdersCommand = new RelayCommand(RunningOrders, CanAccessRunningOrders);
+            AllOrdersCommand = new RelayCommand(AllOrders, CanAccessAllOrders);
+            ToDeliverOrdersCommand = new RelayCommand(ToDeliverOrders, CanAccessToDeliverOrders);
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
 
         public User UserData { get; }
-        public bool IsAllOrder { get; set; } = false;
+        //public bool IsAllOrder { get; set; } = false;
+        public Enums.Statuses Status { get; set; } = Enums.Statuses.Running;
         public string Indicator
         {
             get => _Indicator;
@@ -104,7 +107,9 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> AddStockCommand { get; }
         public RelayCommand<Order> CheckItemsListCommand { get; }
         public RelayCommand UpdateCommand { get; }
+        public RelayCommand RunningOrdersCommand { get; }
         public RelayCommand AllOrdersCommand { get; }
+        public RelayCommand ToDeliverOrdersCommand { get; }
         public RelayCommand ExportCommand { get; }
         public RelayCommand DeleteFilterCommand { get; }
 
@@ -172,12 +177,17 @@ namespace ProjectsNow.Views.Production
 
         private bool DataFilter(object item)
         {
-            if (!IsAllOrder)
+            if (Status == Enums.Statuses.Running)
             {
                 if (((Order)item).IsComplete)
                     return false;
             }
 
+            if (Status == Enums.Statuses.Delivered)
+            {
+                if (!((Order)item).IsReadyToDeliver)
+                    return false;
+            }
 
             if (FilterProperty == null)
                 return true;
@@ -498,12 +508,32 @@ namespace ProjectsNow.Views.Production
             return true;
         }
 
-        private void AllOrdersData()
+        private void RunningOrders()
         {
-            IsAllOrder = !IsAllOrder;
+            Status = Enums.Statuses.Running;
             ItemsCollection.Filter = new Predicate<object>(DataFilter);
         }
-        private bool CanAccessAllOrdersData()
+        private bool CanAccessRunningOrders()
+        {
+            return true;
+        }
+
+        private void AllOrders()
+        {
+            Status = Enums.Statuses.All;
+            ItemsCollection.Filter = new Predicate<object>(DataFilter);
+        }
+        private bool CanAccessAllOrders()
+        {
+            return true;
+        }
+        
+        private void ToDeliverOrders()
+        {
+            Status = Enums.Statuses.Delivered;
+            ItemsCollection.Filter = new Predicate<object>(DataFilter);
+        }
+        private bool CanAccessToDeliverOrders()
         {
             return true;
         }

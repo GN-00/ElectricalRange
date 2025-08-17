@@ -426,15 +426,20 @@
                                                 ElementStyle="{StaticResource LeftColumnView}"
                                                 Header="Code" />
 
-                            <DataGridTextColumn Width="400"
+                            <DataGridTextColumn Width="372"
                                                 Binding="{Binding Description}"
                                                 ElementStyle="{StaticResource LeftColumnView}"
                                                 Header="Description" />
 
-                            <DataGridTextColumn Width="133"
+                            <DataGridTextColumn Width="80"
                                                 Binding="{Binding Qty}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
-                                                Header="Qty" />
+                                                Header="U/Qty" />
+
+                            <DataGridTextColumn Width="80"
+                                                Binding="{Binding TotalQty}"
+                                                ElementStyle="{StaticResource CenterColumnView}"
+                                                Header="T/Qty" />
 
                         </DataGrid.Columns>
                     </DataGrid>

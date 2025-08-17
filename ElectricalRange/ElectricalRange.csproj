@@ -12,7 +12,7 @@
 
 	<PropertyGroup>
 		<StartupObject>ProjectsNow.Program</StartupObject>
-		<AssemblyVersion>1.0.7.0</AssemblyVersion>
+		<AssemblyVersion>1.0.8.0</AssemblyVersion>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 
@@ -298,6 +298,12 @@
     </Resource>
     <Resource Include="Images\Vectors\Login.png" />
     <Resource Include="Images\Vectors\Working.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>

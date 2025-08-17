@@ -1,13 +1,10 @@
 ﻿using Dapper.Contrib.Extensions;
 
-using System.CodeDom;
-
 namespace ProjectsNow.Data.Production
 {
     [Table("[Production].[PanelsItems]")]
     public class Item : Base
     {
-
         private string _Code;
         private string _Description;
         private string _Unit;
@@ -26,15 +23,16 @@ namespace ProjectsNow.Data.Production
             get => _Code;
             set => SetValue(ref _Code, value);
         }
-        public string Description 
+        public string Description
         {
             get => _Description;
-            set=> SetValue(ref _Description, value); 
+            set => SetValue(ref _Description, value);
         }
         public double Qty
         {
             get => _Qty;
-            set => SetValue(ref _Qty, value);
+            set => SetValue(ref _Qty, value)
+                  .UpdateProperties(this, "TotalQty");
         }
         public string Type { get; set; }
 
@@ -42,7 +40,7 @@ namespace ProjectsNow.Data.Production
         public double ReceivedQty { get; set; }
 
         [Write(false)]
-        public double Percentage  => (ReceivedQty / Qty) * 100;
+        public double Percentage => (ReceivedQty / Qty) * 100;
 
         [Write(false)]
         public double StockQty { get; set; }
@@ -62,5 +60,12 @@ namespace ProjectsNow.Data.Production
 
         [Write(false)]
         public string Remark => Note;
+
+        [Write(false)]
+        public double TotalQty => Qty * PanelQty;
+
+        [Write(false)]
+        public int PanelQty { get; set; }
+
     }
 }

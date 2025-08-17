@@ -98,7 +98,16 @@ namespace ProjectsNow.Data.Production
         public int ClosedPanels { get; set; }
 
         [Write(false)]
+        public int DeliveredPanels { get; set; }
+
+        [Write(false)]
         public bool IsComplete => Panels == ClosedPanels;
+
+        [Write(false)]
+        public bool IsDelivered => Panels == DeliveredPanels;
+
+        [Write(false)]
+        public bool IsReadyToDeliver => Panels > DeliveredPanels && ClosedPanels > DeliveredPanels;
 
         public DateTime? CloseDate { get; set; }
 

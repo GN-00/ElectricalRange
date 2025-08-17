@@ -52,7 +52,6 @@ namespace ProjectsNow.Views.Production
             PreviousRequestCommand = new RelayCommand(PreviousRequest, CanAccessPreviousRequest);
             PrintCommand = new RelayCommand(PrintRequest, CanAccessPrint);
 
-
             AddItemToGroupCommand = new RelayCommand<CollectionViewGroup>(AddItem, CanAccessAddItem);
             CopyGroupCommand = new RelayCommand<CollectionViewGroup>(CopyGroup, CanAccessCopyGroup);
             DeleteGroupCommand = new RelayCommand<CollectionViewGroup>(DeleteGroup, CanAccessDeleteGroup);
@@ -189,7 +188,7 @@ namespace ProjectsNow.Views.Production
                     $"Order By SN";
             Panels = new ObservableCollection<ProductionPanel>(connection.Query<ProductionPanel>(query));
 
-            query = $"Select * From [Production].[PanelsItems] " +
+            query = $"Select * From [Production].[FactoryMaterialsRequestItems] " +
                     $"Where JobOrderID  = {OrderData.JobOrderId} " +
                     $"And Type = 'FMR'" +
                     $"Order By RequestId, Code";
@@ -237,6 +236,7 @@ namespace ProjectsNow.Views.Production
         private void AddRequest(ProductionPanel panel)
         {
             Item item = new();
+            item.PanelQty = panel.Qty;
             string query;
             using SqlConnection connection = new(Database.ConnectionString);
             query = $"Select RequestId From [Production].[FactoryMaterialsRequestNumber] " +
@@ -280,6 +280,7 @@ namespace ProjectsNow.Views.Production
 
             Item item = new()
             {
+                PanelQty = SelectedPanel.Qty,
                 Type = "FMR",
                 RequestId = groupItem.RequestId,
                 PanelId = groupItem.PanelId,
@@ -312,6 +313,7 @@ namespace ProjectsNow.Views.Production
                     continue;
                 Item newItem = new()
                 {
+                    PanelQty = SelectedPanel.Qty,   
                     Code = item.Code,
                     Description = item.Description,
                     Type = item.Type,
@@ -349,6 +351,7 @@ namespace ProjectsNow.Views.Production
                     continue;
                 Item newItem = new()
                 {
+                    PanelQty = SelectedPanel.Qty,
                     Code = item.Code,
                     Description = item.Description,
                     Type = item.Type,
