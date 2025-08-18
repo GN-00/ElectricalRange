@@ -212,7 +212,8 @@ namespace ProjectsNow.Views.Production
             ItemsCollection = CollectionViewSource.GetDefaultView(Items);
             ItemsCollection.Filter = new Predicate<object>(DataFilter);
             ItemsCollection.SortDescriptions.Add(new SortDescription("RequestId", ListSortDirection.Descending));
-            ItemsCollection.SortDescriptions.Add(new SortDescription("Code", ListSortDirection.Ascending));
+            ItemsCollection.SortDescriptions.Add(new SortDescription("Sort1", ListSortDirection.Ascending));
+            ItemsCollection.SortDescriptions.Add(new SortDescription("Sort2", ListSortDirection.Ascending));
             ItemsCollection.GroupDescriptions.Add(new PropertyGroupDescription("RequestId"));
             ItemsCollection.CollectionChanged += ItemsCollectionChanged;
         }

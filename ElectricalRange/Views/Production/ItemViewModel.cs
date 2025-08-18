@@ -44,13 +44,19 @@ namespace ProjectsNow.Views.Production
                         NewData.Description = SelectedReference.Description;
                         NewData.Unit = SelectedReference.Unit;
                         NewData.Note = SelectedReference.Note;
+                        NewData.Sort1 = SelectedReference.Sort1;
+                        NewData.Sort2 = SelectedReference.Sort2;
                     }
                     else
                     {
                         NewData.Code =
                             NewData.Description =
-                                 NewData.Unit = 
-                                 NewData.Note = null;
+                                 NewData.Unit =
+                                    NewData.Note = null;
+
+                        NewData.Qty = 1;
+                        NewData.Sort1 =
+                            NewData.Sort2 = null;
                     }
                 }
             }
@@ -61,7 +67,7 @@ namespace ProjectsNow.Views.Production
 
         private void GetData()
         {
-            string query = "SELECT * FROM [Production].[References] Order By Type, Sort";
+            string query = "SELECT * FROM [Production].[References] Order By Sort1, Sort2";
             using SqlConnection connection = new(Database.ConnectionString);
             ReferencesData = new ObservableCollection<Reference>(connection.Query<Reference>(query));
         }
@@ -86,9 +92,9 @@ namespace ProjectsNow.Views.Production
             }
 
             MaterialsRequest request = new()
-            { 
-                RequestId =ItemData.RequestId.Value,
-                Date = DateTime.Now,    
+            {
+                RequestId = ItemData.RequestId.Value,
+                Date = DateTime.Now,
                 JobOrderId = ItemData.JobOrderId,
                 PanelId = ItemData.PanelId
             };

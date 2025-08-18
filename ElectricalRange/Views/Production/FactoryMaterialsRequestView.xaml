@@ -39,8 +39,7 @@
                       CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
-                    <TextBlock Foreground="Red"
-                               Text="Delete Item" />
+                    <TextBlock Foreground="Red" Text="Delete Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
                     <Image RenderOptions.BitmapScalingMode="HighQuality"
@@ -68,23 +67,20 @@
 
         <TextBlock Style="{StaticResource TitleStyle}">
             <Run Text="J.O:" />
-            <Run Foreground="{StaticResource Blue}"
-                 Text="{Binding OrderData.Code}" />
+            <Run Foreground="{StaticResource Blue}" Text="{Binding OrderData.Code}" />
             <Run Text="Factory Materials Request" />
         </TextBlock>
 
         <TabControl Style="{StaticResource ViewsTabControlStyle}">
             <TabControl.Resources>
-                <Style BasedOn="{StaticResource TextItemStyle}"
-                       TargetType="TabItem" />
+                <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
             </TabControl.Resources>
 
             <TabItem Width="20"
                      Header="TabItem"
                      Visibility="Hidden" />
 
-            <TabItem Header="Tools"
-                     IsSelected="True">
+            <TabItem Header="Tools" IsSelected="True">
 
                 <Grid>
                     <StackPanel Margin="5,0,0,0"
@@ -132,8 +128,7 @@
                                                                        RenderOptions.BitmapScalingMode="HighQuality"
                                                                        Stretch="Uniform">
                                                                     <Image.Source>
-                                                                        <BitmapImage Rotation="Rotate270"
-                                                                                     UriSource="/Images/Icons/RightGreen.png" />
+                                                                        <BitmapImage Rotation="Rotate270" UriSource="/Images/Icons/RightGreen.png" />
                                                                     </Image.Source>
                                                                 </Image>
                                                             </Border>
@@ -167,8 +162,7 @@
                                                                        RenderOptions.BitmapScalingMode="HighQuality"
                                                                        Stretch="Uniform">
                                                                     <Image.Source>
-                                                                        <BitmapImage Rotation="Rotate90"
-                                                                                     UriSource="/Images/Icons/RightGreen.png" />
+                                                                        <BitmapImage Rotation="Rotate90" UriSource="/Images/Icons/RightGreen.png" />
                                                                     </Image.Source>
                                                                 </Image>
                                                             </Border>
@@ -262,13 +256,11 @@
                                           RenderingBias="Quality"
                                           ShadowDepth="2" />
                     </Grid.Effect>
-                    <Grid Grid.Row="1"
-                          Background="LightGray">
+                    <Grid Grid.Row="1" Background="LightGray">
                         <StackPanel Margin="20,0"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource IndicationStyle}"
-                                       Text="Panel: " />
+                            <TextBlock Style="{StaticResource IndicationStyle}" Text="Panel: " />
                             <TextBlock Foreground="Black"
                                        Style="{StaticResource IndicationStyle}"
                                        Text="{Binding PanelsIndicator}" />
@@ -281,8 +273,7 @@
                               SelectedItem="{Binding SelectedPanel, Mode=TwoWay}"
                               Style="{StaticResource ViewDataGridStyle}">
                         <DataGrid.Resources>
-                            <Style BasedOn="{StaticResource ViewRowsStyle}"
-                                   TargetType="{x:Type DataGridRow}">
+                            <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
                                 <Setter Property="ContextMenu" Value="{StaticResource PanelContextMenu}" />
                             </Style>
                         </DataGrid.Resources>
@@ -307,8 +298,7 @@
                     </DataGrid>
                 </Grid>
 
-                <Grid Grid.Column="1"
-                      Margin="5,50,10,10">
+                <Grid Grid.Column="1" Margin="5,50,10,10">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="30" />
@@ -320,13 +310,11 @@
                                           RenderingBias="Quality"
                                           ShadowDepth="2" />
                     </Grid.Effect>
-                    <Grid Grid.Row="1"
-                          Background="LightGray">
+                    <Grid Grid.Row="1" Background="LightGray">
                         <StackPanel Margin="20,0"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource IndicationStyle}"
-                                       Text="Item: " />
+                            <TextBlock Style="{StaticResource IndicationStyle}" Text="Item: " />
                             <TextBlock Foreground="Black"
                                        Style="{StaticResource IndicationStyle}"
                                        Text="{Binding ItemsIndicator}" />
@@ -349,15 +337,13 @@
                                                               Foreground="Black"
                                                               IsExpanded="True">
                                                         <Expander.Header>
-                                                            <Grid Width="750"
-                                                                  Height="40">
+                                                            <Grid Width="750" Height="40">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition />
                                                                     <ColumnDefinition />
                                                                     <ColumnDefinition />
                                                                 </Grid.ColumnDefinitions>
-                                                                <StackPanel VerticalAlignment="Center"
-                                                                            Orientation="Horizontal">
+                                                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                                                     <TextBlock Margin="5,0,5,0"
                                                                                FontWeight="Bold"
                                                                                Text="{Binding Path=Name, StringFormat='Form Id: {0}'}" />
@@ -414,8 +400,7 @@
                             </GroupStyle>
                         </DataGrid.GroupStyle>
                         <DataGrid.Resources>
-                            <Style BasedOn="{StaticResource ViewRowsStyle}"
-                                   TargetType="{x:Type DataGridRow}">
+                            <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
                                 <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
                             </Style>
                         </DataGrid.Resources>
@@ -432,12 +417,12 @@
                                                 Header="Description" />
 
                             <DataGridTextColumn Width="80"
-                                                Binding="{Binding Qty}"
+                                                Binding="{Binding Qty, StringFormat=N2}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="U/Qty" />
 
                             <DataGridTextColumn Width="80"
-                                                Binding="{Binding TotalQty}"
+                                                Binding="{Binding TotalQty, StringFormat=N2}"
                                                 ElementStyle="{StaticResource CenterColumnView}"
                                                 Header="T/Qty" />
 

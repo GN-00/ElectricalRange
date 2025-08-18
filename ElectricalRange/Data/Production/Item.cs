@@ -67,5 +67,11 @@ namespace ProjectsNow.Data.Production
         [Write(false)]
         public int PanelQty { get; set; }
 
+        [Write(false)]
+        public double? Sort1 { get; set; }
+
+        [Write(false)]
+        public double? Sort2 { get; set; }
+
     }
 }

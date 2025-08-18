@@ -9,6 +9,8 @@ namespace ProjectsNow.Data.Production
         private string _Description;
         private string _Unit = "No";
         private string _Note;
+        private double? _Sort1;
+        private double? _Sort2;
 
         [Key]
         public int ReferenceId { get; set; }
@@ -32,6 +34,18 @@ namespace ProjectsNow.Data.Production
         {
             get => _Note;
             set => SetValue(ref _Note, value);
+        }
+
+        public double? Sort1
+        {
+            get => _Sort1;
+            set => SetValue(ref _Sort1, value);
+        }
+
+        public double? Sort2
+        {
+            get => _Sort2;
+            set => SetValue(ref _Sort2, value);
         }
     }
 }
