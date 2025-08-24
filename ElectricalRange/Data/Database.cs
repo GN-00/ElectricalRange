@@ -18,6 +18,8 @@ namespace ProjectsNow.Data
         public static JobOrder Store => new() { ID = 0, Code = "Stock", CustomerName = "-", ProjectName = "-", CodeYear = 0 };
         public static string FactoryStoreName => "Stock Transfer";
 
+        public static readonly string PSConnectionString = @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsStore;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
+
         public static string ConnectionString
         {
             get

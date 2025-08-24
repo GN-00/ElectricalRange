@@ -7,25 +7,17 @@
     <CornerRadius x:Key="NormalRadius">1</CornerRadius>
     <Thickness x:Key="NormalThickness">2</Thickness>
 
-    <SolidColorBrush x:Key="MyBlue"
-                     Color="#FF376CDC" />
-    <SolidColorBrush x:Key="MyPurple"
-                     Color="#FF9211E8" />
+    <SolidColorBrush x:Key="MyBlue" Color="#FF376CDC" />
+    <SolidColorBrush x:Key="MyPurple" Color="#FF9211E8" />
 
-    <SolidColorBrush x:Key="NormalForeground"
-                     Color="Black" />
+    <SolidColorBrush x:Key="NormalForeground" Color="Black" />
 
-    <SolidColorBrush x:Key="PrimaryBackground"
-                     Color="#F5F5F5" />
-    <SolidColorBrush x:Key="SecondaryBackground"
-                     Color="White" />
+    <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5" />
+    <SolidColorBrush x:Key="SecondaryBackground" Color="White" />
 
-    <SolidColorBrush x:Key="NormalBorder"
-                     Color="LightGray" />
-    <SolidColorBrush x:Key="SelectedBorder"
-                     Color="LightBlue" />
-    <SolidColorBrush x:Key="MouseOverBorder"
-                     Color="LightBlue" />
+    <SolidColorBrush x:Key="NormalBorder" Color="LightGray" />
+    <SolidColorBrush x:Key="SelectedBorder" Color="LightBlue" />
+    <SolidColorBrush x:Key="MouseOverBorder" Color="LightBlue" />
 
 
 
@@ -41,4 +33,37 @@
                       ShadowDepth="1"
                       Color="Black" />
 
+
+
+    <!--  GN  -->
+    <System:Double x:Key="GN.FontSize">16</System:Double>
+    <FontFamily x:Key="GN.Font">Cambria</FontFamily>
+    <FontWeight x:Key="GN.Weight">Bold</FontWeight>
+
+    <SolidColorBrush x:Key="GN.Primary" Color="#F5F5F5" />
+    <SolidColorBrush x:Key="GN.Secondary" Color="White" />
+
+    <SolidColorBrush x:Key="GN.Blue" Color="#FF376CDC" />
+
+    <LinearGradientBrush x:Key="GN.Gray" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="LightGray" />
+        <GradientStop Offset="0.5" Color="DarkGray" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GN.GradientBlue">
+        <GradientStop Color="#FF87ADEB" />
+        <GradientStop Offset="1" Color="#FF414EBD" />
+    </LinearGradientBrush>
+
+    <DropShadowEffect x:Key="GN.Shadow"
+                      BlurRadius="5"
+                      Direction="-90"
+                      Opacity="0.8"
+                      ShadowDepth="1"
+                      Color="Black" />
+
+
+    <SolidColorBrush x:Key="GN.SelectionBrush" Color="#3a9bdc" />
+    <SolidColorBrush x:Key="GN.IsMouseOver" Color="#3a9bdc" />
+    <SolidColorBrush x:Key="GN.Focused" Color="#1260cc" />
 </ResourceDictionary>

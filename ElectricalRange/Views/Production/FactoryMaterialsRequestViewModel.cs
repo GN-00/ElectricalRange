@@ -191,7 +191,7 @@ namespace ProjectsNow.Views.Production
             query = $"Select * From [Production].[FactoryMaterialsRequestItems] " +
                     $"Where JobOrderID  = {OrderData.JobOrderId} " +
                     $"And Type = 'FMR'" +
-                    $"Order By RequestId, Code";
+                    $"Order By Sort1, Sort2";
             Items = new ObservableCollection<Item>(connection.Query<Item>(query));
 
             query = $"Select * From [Production].[FactoryMaterialsRequests] " +

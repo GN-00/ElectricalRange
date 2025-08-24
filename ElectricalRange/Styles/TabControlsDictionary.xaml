@@ -52,4 +52,14 @@
         </Setter>
     </Style>
 
+
+    <Style x:Key="GN.TabStyle" TargetType="{x:Type TabControl}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Margin" Value="0,50,2,0" />
+        <Setter Property="Background" Value="#e0e0e0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
 </ResourceDictionary>

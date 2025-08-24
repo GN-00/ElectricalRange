@@ -159,4 +159,33 @@
         </Setter>
     </Style>
 
+
+    <ControlTemplate x:Key="GN.TabItemTemplete" TargetType="{x:Type TabItem}">
+        <Border Name="Border" CornerRadius="5,5,0,0">
+            <ContentPresenter x:Name="ContentSite"
+                              Margin="10,0,10,0"
+                              VerticalAlignment="Center"
+                              ContentSource="Header" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource GN.Primary}" />
+                <Setter TargetName="Border" Property="TextElement.Foreground" Value="{DynamicResource GN.Blue}" />
+                <Setter TargetName="Border" Property="TextElement.FontSize" Value="18" />
+                <Setter TargetName="Border" Property="TextElement.FontWeight" Value="Bold" />
+                <Setter Property="Button.Effect" Value="{DynamicResource GN.Shadow}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                <Setter TargetName="Border" Property="TextElement.Foreground" Value="Black" />
+                <Setter TargetName="Border" Property="TextElement.FontSize" Value="15" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="GN.TextTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template" Value="{StaticResource GN.TabItemTemplete}" />
+    </Style>
+
 </ResourceDictionary>

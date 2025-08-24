@@ -18,4 +18,18 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="GN.MenuItemStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="TextBlock.Margin" Value="5,0" />
+        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+        <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
+        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource GN.Font}" />
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
