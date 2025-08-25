@@ -18,6 +18,7 @@ namespace ProjectsNow.Data.Library
         public string Code { get; set; }
         public string Description { get; set; }
         public int Qty { get; set; }
+        public string ItemTable { get; set; }
         public string Note { get; set; }
 
 

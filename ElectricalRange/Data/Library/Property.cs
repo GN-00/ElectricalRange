@@ -42,10 +42,10 @@ namespace ProjectsNow.Data.Library
         }
 
         private readonly BitmapImage green =
-            new(new Uri(@"/Images/Green.png", UriKind.Relative));
+            new(new Uri(@"/Images/Icons/Green.png", UriKind.Relative));
 
         private readonly BitmapImage gray =
-            new(new Uri(@"/Images/Gray.png", UriKind.Relative));
+            new(new Uri(@"/Images/Icons/Gray.png", UriKind.Relative));
 
 
         private List<string> _valuse;

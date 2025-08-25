@@ -3,6 +3,9 @@ using Dapper.Contrib.Extensions;
 
 using Microsoft.Data.SqlClient;
 
+using ProjectsNow.Data.Quotations;
+using ProjectsNow.Data.References;
+using ProjectsNow.Enums;
 using ProjectsNow.Views;
 
 using System.Collections.ObjectModel;
@@ -13,6 +16,7 @@ namespace ProjectsNow.Data.Library
     public class Group : Base
     {
         private string _image;
+        private string _family;
         private string _label;
         private string _description;
         private List<Category> _categories;
@@ -38,6 +42,11 @@ namespace ProjectsNow.Data.Library
             set => SetValue(ref _image, value)
                   .UpdateProperties(this, nameof(GroupImage));
         }
+        public string Family
+        {
+            get => _family;
+            set => SetValue(ref _family, value);
+        }
         public string Label
         {
             get => _label;
@@ -61,7 +70,7 @@ namespace ProjectsNow.Data.Library
             set => SetValue(ref _categories, value);
         }
         public List<ItemType> ItemsTypes { get; set; }
-        public ObservableCollection<DesignItem> Items { get; set; }
+        public ObservableCollection<QItem> Items { get; set; }
         public bool IsReset { get; private set; } = false;
 
         public void GetData(Selection selection = null)
@@ -208,6 +217,9 @@ namespace ProjectsNow.Data.Library
                 Qty = Qty,
             };
 
+            if (SelectionData.GroupId != "Setlak Enclosure")
+                return;
+
             foreach (Category category in Categories)
             {
                 foreach (Property property in category.Properties)
@@ -235,29 +247,47 @@ namespace ProjectsNow.Data.Library
             string value;
             string query;
             int groupNumber = 1;
-            using SqlConnection connection = new(Database.PSConnectionString);
 
-            if (SelectionData.Id != 0)
+            int detailsCounter;
+            int enclosureCounter;
+            int accessoriesCounter;
+
+            if (Family == "Enclosure")
             {
-                query = $"Delete From {DesignItem.Table} Where SelectionId = {SelectionData.Id}";
-                _ = connection.Execute(query);
-                _ = connection.Update(SelectionData);
-
-                var deleteItems = new List<DesignItem>(Items.Where(x => x.SelectionId == SelectionData.Id));
-                groupNumber = deleteItems.First().LabelNumber;
-                foreach (var item in deleteItems)
-                {
-                    Items.Remove(item);
-                }
+                detailsCounter = 0;
+                enclosureCounter = 0;
+                accessoriesCounter = 0;
             }
             else
             {
-                var groupItems = Items.Where(x => x.LabelName == Label);
-                if (groupItems.Any())
-                    groupNumber = groupItems.Max(i => i.LabelNumber) + 1;
-
-                _ = connection.Insert(SelectionData);
+                detailsCounter = Items.Where(x => x.ItemTable == Tables.Details.ToString()).Count();
+                enclosureCounter = Items.Where(x => x.ItemTable == Tables.Enclosure.ToString()).Count();
+                accessoriesCounter = Items.Where(x => x.ItemTable == Tables.Accessories.ToString()).Count();
             }
+
+            using SqlConnection psConnection = new(Database.PSConnectionString);
+
+            //if (SelectionData.Id != 0)
+            //{
+            //    query = $"Delete From {DesignItem.Table} Where SelectionId = {SelectionData.Id}";
+            //    _ = connection.Execute(query);
+            //    _ = connection.Update(SelectionData);
+
+            //    var deleteItems = new List<DesignItem>(Items.Where(x => x.SelectionId == SelectionData.Id));
+            //    groupNumber = deleteItems.First().LabelNumber;
+            //    foreach (var item in deleteItems)
+            //    {
+            //        Items.Remove(item);
+            //    }
+            //}
+            //else
+            //{
+            //    var groupItems = Items.Where(x => x.LabelName == Label);
+            //    if (groupItems.Any())
+            //        groupNumber = groupItems.Max(i => i.LabelNumber) + 1;
+
+            //    _ = connection.Insert(SelectionData);
+            //}
 
             foreach (var type in ItemsTypes)
             {
@@ -280,20 +310,47 @@ namespace ProjectsNow.Data.Library
                         $"And ItemType = '{type.Id}' " +
                         $"And GroupId = '{Id}'";
 
-                var items = connection.Query<DesignItem>(query);
+                var items = psConnection.Query<DesignItem>(query);
 
+                using SqlConnection connection = new(Database.PSConnectionString);
                 if (items != null)
                 {
-                    foreach(var item in items)
+                    QItem itemToAdd;
+                    Reference reference;
+                    foreach (var item in items)
                     {
-                        item.SelectionId = SelectionData.Id;
-                        item.PanelId = PanelId;
-                        item.SN = Items.Count + 1;
-                        item.LabelName = Label;
-                        item.LabelNumber = groupNumber;
-                        item.Qty *= Qty;
-                        item.Note = item.ItemType;
-                        Items.Add(item);
+                        reference = connection.QueryFirstOrDefault<Reference>($"Select * From [Reference].[References(View)] Where Code = '{item.Code}'");
+
+                        if (reference == null)
+                            continue;
+
+                        itemToAdd = new QItem()
+                        {
+                            PanelID = PanelId,
+                            Article1 = reference.Article1,
+                            Article2 = reference.Article2,
+                            Category = reference.Category,
+                            Code = reference.Code,
+                            Description = reference.Description,
+                            Unit = reference.Unit,
+                            ItemQty = item.Qty,
+                            Brand = reference.Brand,
+                            Remarks = reference.Remarks,
+                            ItemCost = reference.Cost,
+                            ItemDiscount = reference.Discount,
+                            ItemType = reference.ItemType,
+                            ItemTable = item.ItemTable,
+                            SelectionGroup = SelectionGroups.SmartEnclosure.ToString(),
+                        };
+
+                        if (itemToAdd.ItemTable == Tables.Details.ToString())
+                            itemToAdd.ItemSort = ++detailsCounter;
+                        else if (itemToAdd.ItemTable == Tables.Enclosure.ToString())
+                            itemToAdd.ItemSort = ++enclosureCounter;
+                        else
+                            itemToAdd.ItemSort = ++accessoriesCounter;
+
+                        Items.Insert(itemToAdd.ItemSort - 1, itemToAdd);
                         _ = connection.Insert(item);
                     }
                 }
@@ -304,17 +361,17 @@ namespace ProjectsNow.Data.Library
 
         public void Delete()
         {
-            string query;
-            using SqlConnection connection = new(Database.PSConnectionString);
+            //string query;
+            //using SqlConnection connection = new(Database.PSConnectionString);
 
-            query = $"Delete From {DesignItem.Table} Where SelectionId = {SelectionData.Id}";
-            _ = connection.Execute(query);
+            //query = $"Delete From {DesignItem.Table} Where SelectionId = {SelectionData.Id}";
+            //_ = connection.Execute(query);
 
-            var delete = new List<DesignItem>(Items.Where(x => x.SelectionId == SelectionData.Id));
-            foreach (var item in delete)
-            {
-                Items.Remove(item);
-            }
+            //var delete = new List<DesignItem>(Items.Where(x => x.SelectionId == SelectionData.Id));
+            //foreach (var item in delete)
+            //{
+            //    Items.Remove(item);
+            //}
         }
 
         public void Reset()

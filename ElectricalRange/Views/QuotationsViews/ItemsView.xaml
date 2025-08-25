@@ -22,132 +22,110 @@
     </UserControl.InputBindings>
     <UserControl.Resources>
 
-        <ContextMenu x:Key="GridContextMenu"
-                     FontFamily="Times New Roman">
+        <ContextMenu x:Key="GridContextMenu" FontFamily="Times New Roman">
 
             <MenuItem Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="New Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AddItem.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/AddItem.png" />
                 </MenuItem.Icon>
 
-                <MenuItem Command="{Binding AddStandardCommand}"
-                          Style="{StaticResource MenuItemStyle}">
+                <MenuItem Command="{Binding AddStandardCommand}" Style="{StaticResource MenuItemStyle}">
                     <MenuItem.Header>
                         <TextBlock Text="Standard" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/BarCode.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/BarCode.png" />
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Command="{Binding AddCustomCommand}"
-                          Style="{StaticResource MenuItemStyle}">
+                <MenuItem Command="{Binding AddCustomCommand}" Style="{StaticResource MenuItemStyle}">
                     <MenuItem.Header>
                         <TextBlock Text="Custom" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/Technical.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Technical.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Command="{Binding AddItemsCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding AddItemsCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="New Items" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AddItems.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/AddItems.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
             <Separator Visibility="{Binding HasToolsButtons}" />
 
-            <MenuItem Command="{Binding DetailsCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding DetailsCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Details" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/PostItems.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/PostItems.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Command="{Binding EnclosureCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding EnclosureCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Enclosure" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Enclosure.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Enclosure.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Command="{Binding AccessoriesCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding AccessoriesCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Accessories" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Accessories.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Accessories.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
         </ContextMenu>
 
-        <ContextMenu x:Key="RowsContextMenu"
-                     FontFamily="Times New Roman">
+        <ContextMenu x:Key="RowsContextMenu" FontFamily="Times New Roman">
 
             <MenuItem Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="New Item" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AddItem.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/AddItem.png" />
                 </MenuItem.Icon>
 
-                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddStandardCommand}"
-                          Style="{StaticResource MenuItemStyle}">
+                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddStandardCommand}" Style="{StaticResource MenuItemStyle}">
                     <MenuItem.Header>
                         <TextBlock Text="Standard" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/BarCode.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/BarCode.png" />
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCustomCommand}"
-                          Style="{StaticResource MenuItemStyle}">
+                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddCustomCommand}" Style="{StaticResource MenuItemStyle}">
                     <MenuItem.Header>
                         <TextBlock Text="Custom" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/Technical.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Technical.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemsCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AddItemsCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="New Items" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/AddItems.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/AddItems.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -160,8 +138,7 @@
                     <TextBlock Text="Info" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Info.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Info.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -174,8 +151,7 @@
                     <TextBlock Text="Insert Up" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/InsertUp.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/InsertUp.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -186,8 +162,7 @@
                     <TextBlock Text="Insert Down" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/InsertDown.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/InsertDown.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -200,8 +175,7 @@
                     <TextBlock Text="Move Up" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/MoveUp.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/MoveUp.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -212,8 +186,7 @@
                     <TextBlock Text="Move Down" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/MoveDown.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/MoveDown.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -226,8 +199,7 @@
                     <TextBlock Text="Copy" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Copy.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Copy.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -237,47 +209,39 @@
                       CommandParameter="{Binding}"
                       Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
-                    <TextBlock Foreground="Red"
-                               Text="Delete" />
+                    <TextBlock Foreground="Red" Text="Delete" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/DeleteItem.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/DeleteItem.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
             <Separator Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.HasToolsButtons}" />
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Details" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/PostItems.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/PostItems.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EnclosureCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EnclosureCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Enclosure" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Enclosure.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Enclosure.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AccessoriesCommand}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.AccessoriesCommand}" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Accessories" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Accessories.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Accessories.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -288,8 +252,7 @@
                     <TextBlock Text="Change Table" />
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/Images/Icons/Change.png" />
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Change.png" />
                 </MenuItem.Icon>
 
                 <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ToDetailsCommand}"
@@ -299,8 +262,7 @@
                         <TextBlock Text="To Details" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/PostItems.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/PostItems.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ToEnclosureCommand}"
@@ -310,8 +272,7 @@
                         <TextBlock Text="To Enclosure" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/Enclosure.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Enclosure.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.ToAccessoriesCommand}"
@@ -321,8 +282,7 @@
                         <TextBlock Text="To Accessories" />
                     </MenuItem.Header>
                     <MenuItem.Icon>
-                        <Image RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/Accessories.png" />
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Accessories.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -347,8 +307,7 @@
 
         <TextBlock Style="{StaticResource TitleStyle}">
             <Run Text="Panel:" />
-            <Run Foreground="{StaticResource Blue}"
-                 Text="{Binding PanelData.PanelNameInfo, Mode=OneWay}" />
+            <Run Foreground="{StaticResource Blue}" Text="{Binding PanelData.PanelNameInfo, Mode=OneWay}" />
         </TextBlock>
 
         <TextBlock Margin="0,35,0,0"
@@ -365,22 +324,19 @@
                    FontWeight="Bold"
                    Style="{StaticResource TitleStyle}">
             <Run Text="Panel Qty:" />
-            <Run Foreground="{StaticResource Blue}"
-                 Text="{Binding PanelData.PanelQty, Mode=OneWay}" />
+            <Run Foreground="{StaticResource Blue}" Text="{Binding PanelData.PanelQty, Mode=OneWay}" />
         </TextBlock>
 
         <TabControl Style="{StaticResource ViewsTabControlStyle}">
             <TabControl.Resources>
-                <Style BasedOn="{StaticResource TextItemStyle}"
-                       TargetType="TabItem" />
+                <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
             </TabControl.Resources>
 
             <TabItem Width="20"
                      Header="TabItem"
                      Visibility="Hidden" />
 
-            <TabItem Header="Tools"
-                     IsSelected="True">
+            <TabItem Header="Tools" IsSelected="True">
                 <StackPanel Margin="10,0,0,0"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
@@ -552,13 +508,13 @@
                         <ImageSource>/Images/Icons/BarCode.png</ImageSource>
                     </Button>
 
-                    <!--<Button Command="{Binding DigitalLibraryCommand}"
-                            Tag="Library"
+                    <Button Padding="0,5,0,-5"
+                            Command="{Binding DigitalLibraryCommand}"
                             FontSize="11"
-                            Padding="0,5,0,-5"
-                            Style="{StaticResource ManagerSubTapsButtons}">
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Library">
                         <ImageSource>/Images/Icons/DigitalLibrary.png</ImageSource>
-                    </Button>-->
+                    </Button>
 
                     <Button Padding="0,5,0,-5"
                             Command="{Binding AddEnclosureCommand}"
@@ -579,8 +535,7 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem HorizontalAlignment="Right"
-                     Header="Filters">
+            <TabItem HorizontalAlignment="Right" Header="Filters">
                 <StackPanel Margin="7,0,0,0"
                             VerticalAlignment="Bottom"
                             Orientation="Horizontal">
@@ -613,16 +568,14 @@
                              Style="{StaticResource FilterInputStyle}"
                              Text="{Binding ItemDiscount, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <Button Command="{Binding DeleteFilterCommand}"
-                            Style="{StaticResource FilterButtonStyle}" />
+                    <Button Command="{Binding DeleteFilterCommand}" Style="{StaticResource FilterButtonStyle}" />
                 </StackPanel>
             </TabItem>
 
         </TabControl>
 
 
-        <Grid Grid.Row="1"
-              Margin="10,10,10,10">
+        <Grid Grid.Row="1" Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="60" />
@@ -634,11 +587,9 @@
                                   RenderingBias="Quality"
                                   ShadowDepth="2" />
             </Grid.Effect>
-            <Grid Grid.Row="1"
-                  Background="LightGray">
+            <Grid Grid.Row="1" Background="LightGray">
                 <Grid.Resources>
-                    <Style x:Key="LableStyle"
-                           TargetType="{x:Type TextBlock}">
+                    <Style x:Key="LableStyle" TargetType="{x:Type TextBlock}">
                         <Setter Property="SnapsToDevicePixels" Value="True" />
                         <Setter Property="FontSize" Value="16" />
                         <Setter Property="FontWeight" Value="Bold" />
@@ -776,8 +727,7 @@
                                   Gesture="LeftDoubleClick" />
                 </DataGrid.InputBindings>
                 <DataGrid.Resources>
-                    <Style BasedOn="{StaticResource ViewRowsStyle}"
-                           TargetType="{x:Type DataGridRow}">
+                    <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
                         <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}" />
                     </Style>
                 </DataGrid.Resources>

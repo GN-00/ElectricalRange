@@ -23,6 +23,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using ProjectsNow.Views.LibraryViews;
 
 namespace ProjectsNow.Views.QuotationsViews
 {
@@ -642,13 +643,10 @@ namespace ProjectsNow.Views.QuotationsViews
 
         private void DigitalLibrary()
         {
-            //Navigation.OpenPopup(new Estimator.Views.SelectGroupView(PanelData.Id, Items), PlacementMode.Center, true);
+            Navigation.OpenPopup(new SelectGroupView(PanelData.Id, Items), PlacementMode.Center, true);
         }
         private bool CanAccessDigitalLibrary()
         {
-            //if (!UserData.AccessReferences)
-            //    return false;
-
             return true;
         }
 

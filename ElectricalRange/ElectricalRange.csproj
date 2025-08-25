@@ -17,11 +17,30 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Images\GroupIcons\BreakerNS.png" />
+	  <None Remove="Images\GroupIcons\BreakerNSX.png" />
+	  <None Remove="Images\GroupIcons\BreakerNW.png" />
+	  <None Remove="Images\GroupIcons\Motor.png" />
 	  <None Remove="Images\Icons\DigitalLibrary.png" />
 	  <None Remove="Images\Vectors\Closing.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Images\GroupIcons\BreakerNS.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\GroupIcons\BreakerNSX.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\GroupIcons\BreakerNW.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\GroupIcons\Motor.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\GroupIcons\SetlakEnclosure.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="logo.ico">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
