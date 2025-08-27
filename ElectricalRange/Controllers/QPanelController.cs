@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Data;
 using ProjectsNow.Data.Quotations;
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Microsoft.Data.SqlClient;
 
 namespace ProjectsNow.Controllers
 {
@@ -88,6 +88,77 @@ namespace ProjectsNow.Controllers
 
             ObservableCollection<QPanel> records = new(connection.Query<QPanel>(query));
             return records;
+        }
+
+        public static void UpdateEnclosure(QPanel panelData, Data.Library.Group group)
+        {
+            int i;
+            int j;
+            string value;
+
+            panelData.EnclosureType = group.Description;
+
+            // Get Height
+            var checkHeight = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Height");
+            if (checkHeight != null)
+            {
+                i = checkHeight.i;
+                j = checkHeight.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("H", "");
+                panelData.EnclosureHeight = decimal.Parse(value);
+            }
+
+
+            // Get Width
+            var checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("W", "");
+                panelData.EnclosureWidth = decimal.Parse(value);
+            }
+
+
+            // Get Depth
+            var checkDepth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Depth");
+            if (checkDepth != null)
+            {
+                i = checkDepth.i;
+                j = checkDepth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("D", "");
+                panelData.EnclosureDepth = decimal.Parse(value);
+            }
+
+
+            // Get IP
+            var checkIP = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "IP");
+            if (checkIP != null)
+            {
+                i = checkIP.i;
+                j = checkIP.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureIP = value;
+            }
+
+
+            //Get Installation
+            var checkInstallation = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Type");
+            if (checkInstallation != null)
+            {
+                i = checkInstallation.i;
+                j = checkInstallation.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureInstallation = value;
+            }
+
+
+            //panelData.EnclosureName = $"Universal NSYCRN{panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
+            //_ = connection.Update(panelData);
+
         }
     }
 }

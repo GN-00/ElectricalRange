@@ -3,6 +3,7 @@ using Dapper.Contrib.Extensions;
 
 using Microsoft.Data.SqlClient;
 
+using ProjectsNow.Controllers;
 using ProjectsNow.Data.Quotations;
 using ProjectsNow.Data.References;
 using ProjectsNow.Enums;
@@ -24,6 +25,7 @@ namespace ProjectsNow.Data.Library
 
         public string Id { get; set; }
         public int PanelId { get; set; }
+        public QPanel PanelData { get; set; }
         public int Sort { get; set; }
         public int Qty
         {
@@ -94,6 +96,7 @@ namespace ProjectsNow.Data.Library
             Id = group.Id;
             Label = group.Label;
             Description = group.Description;
+            Family = group.Family;
             Image = group.Image;
             GroupView = group.GroupView;
 
@@ -246,8 +249,6 @@ namespace ProjectsNow.Data.Library
             int j;
             string value;
             string query;
-            int groupNumber = 1;
-
             int detailsCounter;
             int enclosureCounter;
             int accessoriesCounter;
@@ -312,7 +313,7 @@ namespace ProjectsNow.Data.Library
 
                 var items = psConnection.Query<DesignItem>(query);
 
-                using SqlConnection connection = new(Database.PSConnectionString);
+                using SqlConnection connection = new(Database.ConnectionString);
                 if (items != null)
                 {
                     QItem itemToAdd;
@@ -351,10 +352,13 @@ namespace ProjectsNow.Data.Library
                             itemToAdd.ItemSort = ++accessoriesCounter;
 
                         Items.Insert(itemToAdd.ItemSort - 1, itemToAdd);
-                        _ = connection.Insert(item);
+                        //_ = connection.Insert(item);
                     }
                 }
             }
+
+            if (Family == "Enclosure")
+                QPanelController.UpdateEnclosure(PanelData, this);
 
             Navigation.ClosePopup();
         }

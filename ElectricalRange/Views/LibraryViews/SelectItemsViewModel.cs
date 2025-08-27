@@ -21,11 +21,12 @@ namespace ProjectsNow.Views.LibraryViews
         private ICollectionView _ItemsCollection;
         private bool _isRefreshing;
 
-        public SelectItemsViewModel(string groupId, int panelId, ObservableCollection<QItem> items, Selection selection = null)
+        public SelectItemsViewModel(string groupId, QPanel panel, ObservableCollection<QItem> items, Selection selection = null)
         {
             Items = items;
             Id = groupId;
-            PanelId = panelId;
+            PanelData = panel;
+            PanelId = PanelData.PanelID;
             GetData(selection);
             CreateCollectionView();
 

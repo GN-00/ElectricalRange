@@ -643,7 +643,7 @@ namespace ProjectsNow.Views.QuotationsViews
 
         private void DigitalLibrary()
         {
-            Navigation.OpenPopup(new SelectGroupView(PanelData.Id, Items), PlacementMode.Center, true);
+            Navigation.OpenPopup(new SelectGroupView(PanelData, Items), PlacementMode.Center, true);
         }
         private bool CanAccessDigitalLibrary()
         {

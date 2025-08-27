@@ -8,10 +8,10 @@ namespace ProjectsNow.Views.LibraryViews
 {
     public partial class SelectItemsView : UserControl, IPopup
     {
-        public SelectItemsView(string groupId, int panelId, ObservableCollection<QItem> items, Selection selection = null)
+        public SelectItemsView(string groupId, QPanel panel, ObservableCollection<QItem> items, Selection selection = null)
         {
             InitializeComponent();
-            DataContext = new SelectItemsViewModel(groupId, panelId, items, selection);
+            DataContext = new SelectItemsViewModel(groupId, panel, items, selection);
         }
     }
 }

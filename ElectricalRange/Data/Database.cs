@@ -29,10 +29,11 @@ namespace ProjectsNow.Data
                     //return @"Data Source=DESKTOP-RKKR1NS\TRYDB;Initial Catalog=ERIDB;Integrated Security=False;User ID=sa;Password=2468;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
                     return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
                 }
-                else if (AppData.ComputerName == "GN00")
+                else if (AppData.ComputerName == "GN-00")
                 {
-                    //return @"Data Source=GN00\GN;Initial Catalog=ProjectsNow;Integrated Security=False;User ID=sa;Password=Wing00Gundam;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
-                    return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
+                    return @"Server=localhost\SQLEXPRESS;Database=ProjectsNow;Trusted_Connection=True;TrustServerCertificate=True;";
+                    //return @"Data Source=GN-00\SQLEXPRESS01;Initial Catalog=ProjectsNow;Integrated Security=False;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+                    //return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
                 }
                 else
                 {

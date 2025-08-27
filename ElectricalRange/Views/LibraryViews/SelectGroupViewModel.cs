@@ -4,7 +4,6 @@ using Microsoft.Data.SqlClient;
 
 using ProjectsNow.Commands;
 using ProjectsNow.Data;
-using ProjectsNow.Data.Library;
 using ProjectsNow.Data.Quotations;
 
 using System.Collections.ObjectModel;
@@ -14,11 +13,11 @@ namespace ProjectsNow.Views.LibraryViews
 {
     internal class SelectGroupViewModel : ViewModelBase
     {
-        public int PanelId { get; }
+        public QPanel PanelData { get; }
         public ObservableCollection<QItem> ItemsData { get; set; }
-        public SelectGroupViewModel(int panelId, ObservableCollection<QItem> items)
+        public SelectGroupViewModel(QPanel panel, ObservableCollection<QItem> items)
         {
-            PanelId = panelId;
+            PanelData = panel;
             ItemsData = items;
             GetData();
 
@@ -103,7 +102,7 @@ namespace ProjectsNow.Views.LibraryViews
             }
 
             //Navigation.ClosePopup();
-            Navigation.OpenPopup(new SelectItemsView(SelectedId, PanelId, ItemsData), System.Windows.Controls.Primitives.PlacementMode.Center, true);
+            Navigation.OpenPopup(new SelectItemsView(SelectedId, PanelData, ItemsData), System.Windows.Controls.Primitives.PlacementMode.Center, true);
         }
 
         public void Reset()
