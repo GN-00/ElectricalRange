@@ -155,9 +155,9 @@ namespace ProjectsNow.Controllers
                 panelData.EnclosureInstallation = value;
             }
 
-
-            //panelData.EnclosureName = $"Universal NSYCRN{panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
-            //_ = connection.Update(panelData);
+            panelData.EnclosureName = $"{panelData.EnclosureType} {panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
+            SqlConnection connection = new(Database.ConnectionString);
+            _ = connection.Update(panelData);
 
         }
     }

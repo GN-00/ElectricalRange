@@ -202,6 +202,7 @@
 
             <TextBlock VerticalAlignment="Center"
                        FontSize="20"
+                       FontWeight="Bold"
                        Style="{StaticResource TitleStyle}"
                        Text="{Binding Description}" />
 

@@ -193,7 +193,7 @@ namespace ProjectsNow.Data.Library
                         selection += $"Property{filter.i}{filter.j} Like '%{value}%' And ";
                 }
 
-               selection = selection[..^5];
+                selection = selection[..^5];
 
                 query = $"Select Property{i}{j} From [Estimator].[ItemsProperties] " + /*{GroupView}*/
                         $"Where  GroupId = '{Id}' " +
@@ -220,8 +220,8 @@ namespace ProjectsNow.Data.Library
                 Qty = Qty,
             };
 
-            if (SelectionData.GroupId != "Setlak Enclosure")
-                return;
+            //if (SelectionData.GroupId != "Setlak Enclosure")
+            //    return;
 
             foreach (Category category in Categories)
             {
@@ -253,19 +253,13 @@ namespace ProjectsNow.Data.Library
             int enclosureCounter;
             int accessoriesCounter;
 
-            if (Family == "Enclosure")
-            {
-                detailsCounter = 0;
-                enclosureCounter = 0;
-                accessoriesCounter = 0;
-            }
-            else
-            {
-                detailsCounter = Items.Where(x => x.ItemTable == Tables.Details.ToString()).Count();
-                enclosureCounter = Items.Where(x => x.ItemTable == Tables.Enclosure.ToString()).Count();
-                accessoriesCounter = Items.Where(x => x.ItemTable == Tables.Accessories.ToString()).Count();
-            }
+            int newDetailsCounter;
+            int newEnclosureCounter;
+            int newAccessoriesCounter;
 
+            ObservableCollection<QItem> newItems = new();
+
+            using SqlConnection connection = new(Database.ConnectionString);
             using SqlConnection psConnection = new(Database.PSConnectionString);
 
             //if (SelectionData.Id != 0)
@@ -313,7 +307,6 @@ namespace ProjectsNow.Data.Library
 
                 var items = psConnection.Query<DesignItem>(query);
 
-                using SqlConnection connection = new(Database.ConnectionString);
                 if (items != null)
                 {
                     QItem itemToAdd;
@@ -341,24 +334,71 @@ namespace ProjectsNow.Data.Library
                             ItemDiscount = reference.Discount,
                             ItemType = reference.ItemType,
                             ItemTable = item.ItemTable,
-                            SelectionGroup = SelectionGroups.SmartEnclosure.ToString(),
                         };
 
-                        if (itemToAdd.ItemTable == Tables.Details.ToString())
-                            itemToAdd.ItemSort = ++detailsCounter;
-                        else if (itemToAdd.ItemTable == Tables.Enclosure.ToString())
-                            itemToAdd.ItemSort = ++enclosureCounter;
-                        else
-                            itemToAdd.ItemSort = ++accessoriesCounter;
+                        if (Family == "Enclosure")
+                            itemToAdd.SelectionGroup = SelectionGroups.SmartEnclosure.ToString();
 
-                        Items.Insert(itemToAdd.ItemSort - 1, itemToAdd);
-                        //_ = connection.Insert(item);
+                        newItems.Add(itemToAdd);
                     }
                 }
             }
 
+            detailsCounter = Items.Where(x => x.ItemTable == Tables.Details.ToString()).Count();
+            enclosureCounter = Items.Where(x => x.ItemTable == Tables.Enclosure.ToString()).Count();
+            accessoriesCounter = Items.Where(x => x.ItemTable == Tables.Accessories.ToString()).Count();
+
+            newDetailsCounter = newItems.Where(x => x.ItemTable == Tables.Details.ToString()).Count();
+            newEnclosureCounter = newItems.Where(x => x.ItemTable == Tables.Enclosure.ToString()).Count();
+            newAccessoriesCounter = newItems.Where(x => x.ItemTable == Tables.Accessories.ToString()).Count();
+
             if (Family == "Enclosure")
+            {
+                detailsCounter = 0;
+                enclosureCounter = 0;
+                accessoriesCounter = 0;
+
+                foreach (var item in Items)
+                {
+                    if (item.ItemTable == Tables.Details.ToString())
+                        item.ItemSort += newDetailsCounter;
+                    else if (item.ItemTable == Tables.Enclosure.ToString())
+                        item.ItemSort += newEnclosureCounter;
+                    else
+                        item.ItemSort += newAccessoriesCounter;
+                }
+
                 QPanelController.UpdateEnclosure(PanelData, this);
+            }
+
+            foreach (var item in newItems)
+            {
+                if (item.ItemTable == Tables.Details.ToString())
+                    item.ItemSort = ++detailsCounter;
+                else if (item.ItemTable == Tables.Enclosure.ToString())
+                    item.ItemSort = ++enclosureCounter;
+                else
+                    item.ItemSort = ++accessoriesCounter;
+
+                Items.Insert(item.ItemSort, item);
+                _ = connection.Insert(item);
+            }
+
+            detailsCounter = 0;
+            enclosureCounter = 0;
+            accessoriesCounter = 0;
+
+            foreach (var item in Items)
+            {
+                if (item.ItemTable == Tables.Details.ToString())
+                    item.ItemSort = detailsCounter++;
+                else if (item.ItemTable == Tables.Enclosure.ToString())
+                    item.ItemSort = enclosureCounter++;
+                else
+                    item.ItemSort = accessoriesCounter++;
+            }
+
+            _ = connection.Update(Items);
 
             Navigation.ClosePopup();
         }

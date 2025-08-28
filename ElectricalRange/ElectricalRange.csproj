@@ -10,8 +10,6 @@
     <RootNamespace>ProjectsNow</RootNamespace>
   </PropertyGroup>
 
-
-
 	<PropertyGroup>
 		<StartupObject>ProjectsNow.Program</StartupObject>
 		<AssemblyVersion>1.0.8.0</AssemblyVersion>

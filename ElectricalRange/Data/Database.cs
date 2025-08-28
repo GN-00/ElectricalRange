@@ -32,7 +32,6 @@ namespace ProjectsNow.Data
                 else if (AppData.ComputerName == "GN-00")
                 {
                     return @"Server=localhost\SQLEXPRESS;Database=ProjectsNow;Trusted_Connection=True;TrustServerCertificate=True;";
-                    //return @"Data Source=GN-00\SQLEXPRESS01;Initial Catalog=ProjectsNow;Integrated Security=False;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
                     //return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
                 }
                 else
