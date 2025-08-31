@@ -49,6 +49,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
 
             PrintCommand = new RelayCommand(Print, CanPrint);
             AddItemCommand = new RelayCommand(AddItem, CanAddItem);
+            EditItemCommand = new RelayCommand<CompanyPOTransaction>(EditItem, CanEditItem);
             DeleteItemCommand = new RelayCommand<CompanyPOTransaction>(DeleteItem, CanDeleteItem);
 
             SaveCommand = new RelayCommand(Save, CanAccessSave);
@@ -196,6 +197,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         public bool IsNew => NewData.ID == 0;
 
         public RelayCommand AddItemCommand { get; }
+        public RelayCommand<CompanyPOTransaction> EditItemCommand { get; }
         public RelayCommand<CompanyPOTransaction> DeleteItemCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CreateCommand { get; }
@@ -292,6 +294,19 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         }
         private bool CanAddItem()
         {
+            return CanAccessEdit();
+        }
+
+        private void EditItem(CompanyPOTransaction item)
+        {
+            Navigation.OpenPopup(new ItemView(item, Items, true, JobOrderItems), System.Windows.Controls.Primitives.PlacementMode.Center, true);
+            Navigation.ClosePopupEvent += UpdateNetPrice;
+        }
+        private bool CanEditItem(CompanyPOTransaction item)
+        {
+            if (item == null)
+                return false;
+
             return CanAccessEdit();
         }
 

@@ -21,8 +21,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="LabelStyle"
-               TargetType="{x:Type TextBlock}">
+        <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Foreground" Value="{StaticResource MyBlue}" />
             <Setter Property="TextAlignment" Value="Right" />
@@ -44,8 +43,7 @@
             <RowDefinition />
             <RowDefinition Height="55" />
         </Grid.RowDefinitions>
-        <Grid Margin="5,5,5,0"
-              Background="White">
+        <Grid Margin="5,5,5,0" Background="White">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="5"
                                   Direction="-90"
@@ -64,10 +62,8 @@
 
             <c:PopupControls />
 
-            <StackPanel Margin="25,55,0,10"
-                        Orientation="Vertical">
-                <StackPanel Margin="0,15,0,0"
-                            Orientation="Horizontal">
+            <StackPanel Margin="25,55,0,10" Orientation="Vertical">
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
                     <TextBlock Width="100"
                                Style="{StaticResource LabelStyle}"
                                Text="Part Number " />
@@ -94,10 +90,8 @@
                              Style="{StaticResource InputStyle}"
                              Text="{Binding NewData.Description, Mode=OneWay}" />
                 </StackPanel>
-                <StackPanel Margin="0,15,0,0"
-                            Orientation="Horizontal">
-                    <TextBlock Width="410"
-                               Visibility="Hidden" />
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Width="410" Visibility="Hidden" />
 
                     <TextBlock Width="45"
                                Style="{StaticResource LabelStyle}"
@@ -111,8 +105,7 @@
                         <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource LabelStyle}"
-                                       Text="Qty" />
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Qty" />
                         </StackPanel>
                     </Grid>
                     <TextBox Width="100"
@@ -121,17 +114,15 @@
                              Text="{Binding NewData.Qty, Mode=TwoWay}"
                              TextAlignment="Center" />
                 </StackPanel>
-                <StackPanel Margin="0,15,0,0"
-                            Orientation="Horizontal">
-                    <TextBlock Width="355"
-                               Visibility="Hidden" />
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Width="355" Visibility="Hidden" />
                     <TextBlock Width="100"
                                Style="{StaticResource LabelStyle}"
                                Text="Unit Cost " />
                     <TextBox Width="100"
                              PreviewKeyDown="Cost_PreviewKeyDown"
                              Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.Cost, Mode=TwoWay}"
+                             Text="{Binding NewData.Cost, Mode=TwoWay, StringFormat=N2}"
                              TextAlignment="Center" />
 
                     <TextBlock Width="95"
@@ -140,7 +131,7 @@
                     <TextBox Width="100"
                              IsReadOnly="True"
                              Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.TotalCost, Mode=OneWay}"
+                             Text="{Binding NewData.TotalCost, Mode=OneWay, StringFormat=N2}"
                              TextAlignment="Center" />
                 </StackPanel>
 
@@ -153,11 +144,9 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
 
-            <Button Command="{Binding SaveCommand}"
-                    Style="{StaticResource SaveViewButton}" />
+            <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveViewButton}" />
 
-            <Button Command="{Binding CancelCommand}"
-                    Style="{StaticResource CancelViewButton}" />
+            <Button Command="{Binding CancelCommand}" Style="{StaticResource CancelViewButton}" />
 
         </StackPanel>
 

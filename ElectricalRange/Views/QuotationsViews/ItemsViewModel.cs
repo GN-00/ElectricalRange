@@ -647,6 +647,18 @@ namespace ProjectsNow.Views.QuotationsViews
         }
         private bool CanAccessDigitalLibrary()
         {
+            if (QuotationData == null)
+                return false;
+
+            if (QuotationData.QuotationStatus != Statuses.Running.ToString())
+                return false;
+
+            if (UserData.EmployeeId != QuotationData.EstimationID)
+                return false;
+
+            if (!UserData.ModifyQuotations)
+                return false;
+
             return true;
         }
 

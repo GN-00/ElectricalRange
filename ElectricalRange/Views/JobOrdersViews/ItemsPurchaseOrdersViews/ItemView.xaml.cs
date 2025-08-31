@@ -8,10 +8,10 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
 {
     public partial class ItemView : UserControl, IPopup
     {
-        public ItemView(CompanyPOTransaction item, ObservableCollection<CompanyPOTransaction> items)
+        public ItemView(CompanyPOTransaction item, ObservableCollection<CompanyPOTransaction> items, bool isEditing = false, ObservableCollection<ItemPurchased> jobOrderItems = null)
         {
             InitializeComponent();
-            DataContext = new ItemViewModel(item, items);
+            DataContext = new ItemViewModel(item, items, isEditing, jobOrderItems);
         }
 
         private void Qty_PreviewKeyDown(object sender, KeyEventArgs e)
