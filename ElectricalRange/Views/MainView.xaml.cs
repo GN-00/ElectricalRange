@@ -1,8 +1,10 @@
-﻿using System.Net;
+﻿using ProjectsNow.Data.Application;
+using ProjectsNow.Views.UserViews;
+
+using System.Net;
 using System.Reflection;
 using System.Windows;
-using ProjectsNow.Data.Application;
-using ProjectsNow.Views.UserViews;
+
 using Velopack;
 using Velopack.Sources;
 
@@ -59,6 +61,22 @@ namespace ProjectsNow.Views
             {
                 loginView.LoginViewModel.VersionInfo = "App is up to date.";
                 return;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (wind.Width == 1300)
+            {
+                wind.Width = /*grid.Width =*/ 1857;
+                wind.Height /*= grid.Height */= 1000;
+            }
+            else
+            {
+                wind.Width =
+                /*grid.Width =*/ 1300;
+                wind.Height =
+                /*grid.Height =*/ 700;
             }
         }
     }

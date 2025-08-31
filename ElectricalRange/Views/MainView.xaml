@@ -1,4 +1,5 @@
-﻿<Window x:Class="ProjectsNow.Views.MainView"
+﻿
+<Window x:Class="ProjectsNow.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:ProjectsNow.Controls"
@@ -8,6 +9,7 @@
         Title="Projects Now"
         Width="1300"
         Height="700"
+        Name="wind"
         BorderBrush="Gray"
         BorderThickness="1"
         Icon="/logo.ico"
@@ -18,10 +20,8 @@
         WindowStyle="None"
         mc:Ignorable="d">
     <Window.InputBindings>
-        <KeyBinding Key="Esc"
-                    Command="{Binding BackCommand}" />
-        <KeyBinding Key="Home"
-                    Command="{Binding HomeCommand}" />
+        <KeyBinding Key="Esc" Command="{Binding BackCommand}" />
+        <KeyBinding Key="Home" Command="{Binding HomeCommand}" />
         <KeyBinding Key="LWin"
                     Command="{Binding HomeCommand}"
                     Modifiers="Ctrl" />
@@ -29,48 +29,53 @@
                     Command="{Binding HomeCommand}"
                     Modifiers="Ctrl" />
     </Window.InputBindings>
-    <Grid>
-        <Popup x:Name="popup"
-               AllowsTransparency="True"
-               IsOpen="{Binding OpenPopup, Mode=TwoWay}"
-               Placement="MousePoint"
-               StaysOpen="False">
-            <ContentControl Content="{Binding PopupView}"
-                            Focusable="False" />
-        </Popup>
-        <Controls:ViewControls DataContext="{Binding}" />
-        <Grid Height="23"
-              VerticalAlignment="Bottom"
-              Background="{StaticResource LinearGradientGray}"
-              TextBlock.FontFamily="Times New Roman">
-            <TextBlock Margin="10,0,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"
-                       Text="{Binding Username}" />
-            <StackPanel HorizontalAlignment="Center"
-                        Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center"
+    <Viewbox Stretch="Uniform" StretchDirection="Both">
+        <Grid x:Name="grid" Width="1300" Height="700">
+            <Button Width="100"
+                    Height="100"
+                    Panel.ZIndex="100000"
+                    Click="Button_Click">
+                
+            </Button>
+            <Popup x:Name="popup"
+                   AllowsTransparency="True"
+                   IsOpen="{Binding OpenPopup, Mode=TwoWay}"
+                   Placement="MousePoint"
+                   StaysOpen="False">
+                <ContentControl Content="{Binding PopupView}" Focusable="False" />
+            </Popup>
+            <Controls:ViewControls DataContext="{Binding}" />
+            <Grid Height="23"
+                  VerticalAlignment="Bottom"
+                  Background="{StaticResource LinearGradientGray}"
+                  TextBlock.FontFamily="Times New Roman">
+                <TextBlock Margin="10,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
                            FontWeight="Bold"
-                           Text="Electrical Range " />
-                <TextBlock VerticalAlignment="Center"
-                           FontWeight="Bold"
-                           Text="{Binding Version}" />
-            </StackPanel>
+                           Text="{Binding Username}" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Text="Electrical Range " />
+                    <TextBlock VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Text="{Binding Version}" />
+                </StackPanel>
 
-            <TextBlock Margin="0,0,10,0"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       FontFamily="Times New Roman"
-                       FontWeight="Bold"
-                       Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dddd - dd / MM / yyyy'}" />
+                <TextBlock Margin="0,0,10,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontFamily="Times New Roman"
+                           FontWeight="Bold"
+                           Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='dddd - dd / MM / yyyy'}" />
+            </Grid>
+            <ContentControl VerticalAlignment="Top"
+                            Content="{Binding CurrentView}"
+                            Focusable="False" />
+            <Controls:LoadingControl DataContext="{Binding}" IsEnabled="{Binding OpenPopup}" />
+            <Controls:LoadingControl DataContext="{Binding}" IsEnabled="{Binding IsLoading}" />
         </Grid>
-        <ContentControl VerticalAlignment="Top"
-                        Content="{Binding CurrentView}"
-                        Focusable="False" />
-        <Controls:LoadingControl DataContext="{Binding}"
-                                 IsEnabled="{Binding OpenPopup}" />
-        <Controls:LoadingControl DataContext="{Binding}"
-                                 IsEnabled="{Binding IsLoading}" />
-    </Grid>
+    </Viewbox>
+
 </Window>
