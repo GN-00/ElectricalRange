@@ -498,8 +498,8 @@ namespace ProjectsNow.Views.QuotationsViews
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateIndicator();
-            using SqlConnection connection = new(Database.ConnectionString);
-            ResetSN(connection);
+            //using SqlConnection connection = new(Database.ConnectionString);
+            //ResetSN(connection);
         }
         private void UpdateIndicator()
         {

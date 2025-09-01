@@ -2,6 +2,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace ProjectsNow.Controls
@@ -45,7 +46,7 @@ namespace ProjectsNow.Controls
 
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
-            Window window = Window.GetWindow((Button)sender);
+            Window window = Window.GetWindow((ToggleButton)sender);
 
             if (window.WindowState == WindowState.Maximized)
             {

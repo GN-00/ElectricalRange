@@ -305,5 +305,10 @@ namespace ProjectsNow.Data.Quotations
         [Write(false)]
         public decimal PanelsEstimatedPrice { get; set; }
 
+        public override string ToString()
+        {
+            return PanelSN.ToString();
+        }
+
     }
 }

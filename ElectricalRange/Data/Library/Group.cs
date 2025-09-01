@@ -313,6 +313,9 @@ namespace ProjectsNow.Data.Library
                     Reference reference;
                     foreach (var item in items)
                     {
+                        if (item.Code == null)
+                            continue;
+
                         reference = connection.QueryFirstOrDefault<Reference>($"Select * From [Reference].[References(View)] Where Code = '{item.Code}'");
 
                         if (reference == null)

@@ -155,6 +155,16 @@ namespace ProjectsNow.Controllers
                 panelData.EnclosureInstallation = value;
             }
 
+            //Get Location
+            var checkLocation = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Location");
+            if (checkLocation != null)
+            {
+                i = checkLocation.i;
+                j = checkLocation.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureLocation = value;
+            }
+
             panelData.EnclosureName = $"{panelData.EnclosureType} {panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
             SqlConnection connection = new(Database.ConnectionString);
             _ = connection.Update(panelData);
