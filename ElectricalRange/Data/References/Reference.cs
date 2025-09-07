@@ -10,6 +10,7 @@ namespace ProjectsNow.Data.References
         private string _SearchKeys = "";
         private string _Category;
         private string _Code;
+        private string _SupplierCode;
         private string _Description;
         private string _Brand;
         private string _Unit = "No";
@@ -37,6 +38,12 @@ namespace ProjectsNow.Data.References
         {
             get => _Code;
             set => SetValue(ref _Code, value);
+        }
+
+        public string SupplierCode
+        {
+            get => _SupplierCode;
+            set => SetValue(ref _SupplierCode, value);
         }
         public string Description
         {

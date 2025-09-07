@@ -91,9 +91,17 @@
                              Text="{Binding NewData.Description, Mode=OneWay}" />
                 </StackPanel>
                 <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
-                    <TextBlock Width="410" Visibility="Hidden" />
+
+                    <TextBlock Width="100"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Supplier Code" />
+                    <TextBox Width="250"
+                             IsReadOnly="True"
+                             Style="{StaticResource InputStyle}"
+                             Text="{Binding NewData.SupplierCode, Mode=OneWay}" />
 
                     <TextBlock Width="45"
+                               Margin="60,0,0,0"
                                Style="{StaticResource LabelStyle}"
                                Text="Unit " />
                     <TextBox Width="100"

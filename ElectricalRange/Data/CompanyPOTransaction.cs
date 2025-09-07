@@ -9,6 +9,7 @@ namespace ProjectsNow.Data
     {
         private string _Category;
         private string _Code;
+        private string _SupplierCode;
         private string _Description;
         private string _Unit;
         private decimal _Qty;
@@ -34,6 +35,13 @@ namespace ProjectsNow.Data
         {
             get => _Code;
             set => SetValue(ref _Code, value);
+        }
+
+        [Write(false)]
+        public string SupplierCode
+        {
+            get => _SupplierCode;
+            set => SetValue(ref _SupplierCode, value);
         }
         public string Description
         {
