@@ -106,7 +106,7 @@ namespace ProjectsNow.Controllers
                 j = checkHeight.j;
                 value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
                 value = value.Replace("H", "");
-                panelData.EnclosureHeight = decimal.Parse(value);
+                panelData.EnclosureHeight = decimal.Parse(value) / 10;
             }
 
 
@@ -118,7 +118,7 @@ namespace ProjectsNow.Controllers
                 j = checkWidth.j;
                 value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
                 value = value.Replace("W", "");
-                panelData.EnclosureWidth = decimal.Parse(value);
+                panelData.EnclosureWidth = decimal.Parse(value) / 10;
             }
 
 
@@ -130,7 +130,7 @@ namespace ProjectsNow.Controllers
                 j = checkDepth.j;
                 value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
                 value = value.Replace("D", "");
-                panelData.EnclosureDepth = decimal.Parse(value);
+                panelData.EnclosureDepth = decimal.Parse(value) / 10;
             }
 
 
@@ -164,6 +164,129 @@ namespace ProjectsNow.Controllers
                 value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
                 panelData.EnclosureLocation = value;
             }
+
+            panelData.EnclosureName = $"{panelData.EnclosureType} {panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
+            SqlConnection connection = new(Database.ConnectionString);
+            _ = connection.Update(panelData);
+
+        }
+
+        public static void UpdateCubical(QPanel panelData, Data.Library.Group group)
+        {
+            int i;
+            int j;
+            string value;
+
+            panelData.EnclosureType = group.Description;
+
+            // Get Height
+            var checkHeight = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Height");
+            if (checkHeight != null)
+            {
+                i = checkHeight.i;
+                j = checkHeight.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("H", "");
+                panelData.EnclosureHeight = decimal.Parse(value) / 10;
+            }
+
+            // Get Depth
+            var checkDepth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Depth");
+            if (checkDepth != null)
+            {
+                i = checkDepth.i;
+                j = checkDepth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("D", "");
+                panelData.EnclosureDepth = decimal.Parse(value) / 10;
+            }
+
+            // Get IP
+            var checkIP = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "IP");
+            if (checkIP != null)
+            {
+                i = checkIP.i;
+                j = checkIP.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureIP = value;
+            }
+
+
+            //Get Installation
+            var checkInstallation = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Type");
+            if (checkInstallation != null)
+            {
+                i = checkInstallation.i;
+                j = checkInstallation.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureInstallation = value;
+            }
+
+            //Get Location
+            var checkLocation = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Location");
+            if (checkLocation != null)
+            {
+                i = checkLocation.i;
+                j = checkLocation.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                panelData.EnclosureLocation = value;
+            }
+
+
+            // Get Width
+            decimal totalWidth = 0;
+            var checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width 40");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("Width ", "");
+                totalWidth += decimal.Parse(value) * 40;
+            }
+
+            checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width 60");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("Width ", "");
+                totalWidth += decimal.Parse(value) * 60;
+            }
+
+            checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width 80");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("Width ", "");
+                totalWidth += decimal.Parse(value) * 80;
+            }
+
+            checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width 100");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("Width ", "");
+                totalWidth += decimal.Parse(value) * 100;
+            }
+
+            checkWidth = group.Categories[0].Properties.FirstOrDefault(x => x.Id == "Width 120");
+            if (checkWidth != null)
+            {
+                i = checkWidth.i;
+                j = checkWidth.j;
+                value = (string)group.SelectionData.GetType().GetProperty($"Property{i}{j}").GetValue(group.SelectionData);
+                value = value.Replace("Width ", "");
+                totalWidth += decimal.Parse(value) * 120;
+            }
+
+            panelData.EnclosureWidth = totalWidth;
+
 
             panelData.EnclosureName = $"{panelData.EnclosureType} {panelData.EnclosureHeight}{panelData.Weight}/{panelData.EnclosureDepth} IP{panelData.EnclosureIP} {panelData.EnclosureLocation}";
             SqlConnection connection = new(Database.ConnectionString);

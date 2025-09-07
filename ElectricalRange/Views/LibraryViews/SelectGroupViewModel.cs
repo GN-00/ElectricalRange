@@ -32,7 +32,7 @@ namespace ProjectsNow.Views.LibraryViews
             using SqlConnection connection = new(Database.PSConnectionString);
 
             query = $"Select Id, Description From [Estimator].[Groups] " +
-                    $"Order By Id";
+                    $"Order By Sort";
             Groups = connection.Query<GroupInfo>(query).ToList();
 
             query = $"Select Family From [Estimator].[Groups] " +

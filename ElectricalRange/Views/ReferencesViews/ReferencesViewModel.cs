@@ -344,6 +344,7 @@ namespace ProjectsNow.Views.ReferencesViews
             string filePath = $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={path.FileName};" +
                               $@"Extended Properties='Excel 8.0;HDR=Yes;'";
 
+            int errorIndex = 0;
             try
             {
                 DataTable excelData = new();
@@ -368,6 +369,8 @@ namespace ProjectsNow.Views.ReferencesViews
 
                     excelRow.Cost = Convert.ToDecimal(excelData.Rows[i]["Cost"]);
                     excelList.Add(excelRow);
+
+                    errorIndex++;
                 }
 
                 int itemsCount = 0;
@@ -381,6 +384,7 @@ namespace ProjectsNow.Views.ReferencesViews
                         reference.Cost = row.Cost;
                         updateTable += $"Update [Reference].[References] Set Cost = {reference.Cost} Where ReferenceID = {reference.ReferenceID}; ";
                     }
+
                 }
 
                 using (SqlConnection connection = new(Database.ConnectionString))
@@ -392,7 +396,7 @@ namespace ProjectsNow.Views.ReferencesViews
             }
             catch (Exception exception)
             {
-                _ = MessageWindow.Show("Error", exception.Message, MessageWindowButton.OK, MessageWindowImage.Warning);
+                _ = MessageWindow.Show($"Error-{errorIndex}", exception.Message, MessageWindowButton.OK, MessageWindowImage.Warning);
             }
 
             Navigation.CloseLoading();

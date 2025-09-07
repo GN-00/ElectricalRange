@@ -8,6 +8,7 @@ namespace ProjectsNow.Data.Library
         public string Id { get; }
         public int i { get; }
         public int j { get; }
+        public string Type { get; }
 
 
         private string _selected = null;

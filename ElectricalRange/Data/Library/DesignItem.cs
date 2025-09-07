@@ -17,7 +17,7 @@ namespace ProjectsNow.Data.Library
         public int LabelNumber { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public int Qty { get; set; }
+        public double Qty { get; set; }
         public string ItemTable { get; set; }
         public string Note { get; set; }
 

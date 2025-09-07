@@ -6,9 +6,7 @@
              VerticalAlignment="Top"
              Panel.ZIndex="1000"
              mc:Ignorable="d">
-    <Grid Height="40"
-          Width="auto"
-          HorizontalAlignment="Right"
+    <Grid Height="20"
           Background="Transparent"
           MouseDown="Drag_MouseMove">
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
@@ -16,8 +14,8 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Width" Value="40" />
-                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="20" />
                         <EventSetter Event="Click" Handler="Minimize_Click" />
                         <Setter Property="Template">
                             <Setter.Value>
@@ -43,8 +41,8 @@
                 </Button.Resources>
             </Button>
             <ToggleButton x:Name="MaximizeButton"
-                          Width="40"
-                          Height="40"
+                          Width="20"
+                          Height="20"
                           Background="Transparent"
                           Click="Maximize_Click">
                 <ToggleButton.Template>
@@ -87,8 +85,8 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#FF1FACE6" />
-                        <Setter Property="Width" Value="40" />
-                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="20" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -118,8 +116,8 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Purple" />
-                        <Setter Property="Width" Value="40" />
-                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="20" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -149,8 +147,8 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="DarkRed" />
-                        <Setter Property="Width" Value="40" />
-                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="20" />
                         <EventSetter Event="Click" Handler="Close_Click" />
                         <Setter Property="Template">
                             <Setter.Value>

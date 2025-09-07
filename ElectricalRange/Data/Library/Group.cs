@@ -59,6 +59,7 @@ namespace ProjectsNow.Data.Library
             get => _description;
             set => SetValue(ref _description, value);
         }
+        public int CubicalNumber { get; set; }
         public BitmapImage GroupImage
         {
             get => new(new Uri($"/Images/GroupIcons/{Image}.png", UriKind.Relative));
@@ -134,7 +135,7 @@ namespace ProjectsNow.Data.Library
                             $"Where GroupId = '{Id}' " +
                             $"And CategoryId = '{category.Id}' " +
                             $"And PropertyId = '{property.Id}' ";
-                    property.LinkedProperties = connection.Query<Linked>(query).ToList();
+                    property.LinkedProperties = [.. connection.Query<Linked>(query)];
 
                     query = $"Select Property{i}{j} From [Estimator].[ItemsProperties] " + /*{GroupView}*/
                             $"Where GroupId = '{Id}' " +
@@ -212,7 +213,7 @@ namespace ProjectsNow.Data.Library
         {
             bool isReady = true;
             string message = "Please Select:";
-            //Navigation.ClosePopup(); //For Testing Only
+            Navigation.ClosePopup(); //For Testing Only
 
             SelectionData ??= new()
             {
@@ -236,6 +237,25 @@ namespace ProjectsNow.Data.Library
                     {
                         typeof(Selection).GetProperty($"Property{property.i}{property.j}").SetValue(SelectionData, property.Selected);
                     }
+                }
+            }
+
+            bool isCalculation = ItemsTypes.Any(x => x.Type == "Calculation");
+            if (isCalculation)
+            {
+                int sum = 0;
+                foreach (Category category in Categories)
+                {
+                    foreach (Property property in category.Properties.Where(x => x.Type == "Calculation"))
+                    {
+                        sum += int.Parse(property.Selected);
+                    }
+                }
+
+                if (sum == 0)
+                {
+                    MessageView.Show("Error", "Can't Calculate = 0", MessageViewButton.OK, MessageViewImage.Warning);
+                    return;
                 }
             }
 
@@ -286,26 +306,75 @@ namespace ProjectsNow.Data.Library
 
             foreach (var type in ItemsTypes)
             {
-                string selection = "";
-                foreach (var link in type.LinkedProperties)
-                {
-                    i = link.i;
-                    j = link.j;
+                List<DesignItem> items;
 
-                    value = Categories[i - 1].Properties[j - 1].Selected;
-                    if (value != null)
-                        selection += $"Property{i}{j} Like '%{value}%' And ";
+                //if (type.LinkedProperties.Count == 0)
+                //    continue;
+
+                if (type.Type == "Calculation")
+                {
+                    query = $"Select * From [Estimator].[CalculationItems] " +
+                            $"Where GroupId = '{Id}' " +
+                            $"And ItemType = '{type.Id}'";
+
+                    List<CalculationItem> calculationItems = [.. psConnection.Query<CalculationItem>(query)];
+
+                    items = [];
+                    DesignItem item = new DesignItem()
+                    {
+                        Code = calculationItems.FirstOrDefault().Code,
+                        Description = calculationItems.FirstOrDefault().Description,
+                        ItemTable = calculationItems.FirstOrDefault().ItemTable,
+                    };
+
+                    foreach (var calculationItem in calculationItems)
+                    {
+                        if (calculationItem.Condition == null)
+                        {
+                            if (calculationItem.Value == null)
+                                item.Qty += Convert.ToDouble((string)SelectionData.GetType().GetProperty($"Property{calculationItem.i}{calculationItem.j}").GetValue(SelectionData));
+                            else
+                                item.Qty += Convert.ToDouble(calculationItem.Value);
+                        }
+                        else
+                        {
+                            if (calculationItem.ConditionValue == (string)SelectionData.GetType().GetProperty($"Property{calculationItem.n}{calculationItem.m}").GetValue(SelectionData))
+                            {
+                                if (calculationItem.Value == null)
+                                    item.Qty += Convert.ToDouble((string)SelectionData.GetType().GetProperty($"Property{calculationItem.i}{calculationItem.j}").GetValue(SelectionData));
+                                else
+                                    item.Qty += Convert.ToDouble(calculationItem.Value);
+                            }
+                        }
+                    }
+
+                    items.Add(item);
+
+                }
+                else
+                {
+                    string selection = "";
+                    foreach (var link in type.LinkedProperties)
+                    {
+                        i = link.i;
+                        j = link.j;
+
+                        value = Categories[i - 1].Properties[j - 1].Selected;
+                        if (value != null)
+                            selection += $"Property{i}{j} Like '%{value}%' And ";
+                    }
+
+                    selection = selection[..^5];
+
+                    query = $"Select * From [Estimator].[ItemsProperties] " +
+                            $"Where {selection} " +
+                            $"And Code Is Not NULL " +
+                            $"And ItemType = '{type.Id}' " +
+                            $"And GroupId = '{Id}'";
+
+                    items = [.. psConnection.Query<DesignItem>(query)];
                 }
 
-                selection = selection[..^5];
-
-                query = $"Select * From [Estimator].[ItemsProperties] " +
-                        $"Where {selection} " +
-                        $"And Code Is Not NULL " +
-                        $"And ItemType = '{type.Id}' " +
-                        $"And GroupId = '{Id}'";
-
-                var items = psConnection.Query<DesignItem>(query);
 
                 if (items != null)
                 {
@@ -316,7 +385,8 @@ namespace ProjectsNow.Data.Library
                         if (item.Code == null)
                             continue;
 
-                        reference = connection.QueryFirstOrDefault<Reference>($"Select * From [Reference].[References(View)] Where Code = '{item.Code}'");
+                        query = $"Select * From [Reference].[References(View)] Where Code = '{item.Code}'";
+                        reference = connection.QueryFirstOrDefault<Reference>(query);
 
                         if (reference == null)
                             continue;
@@ -330,7 +400,7 @@ namespace ProjectsNow.Data.Library
                             Code = reference.Code,
                             Description = reference.Description,
                             Unit = reference.Unit,
-                            ItemQty = item.Qty,
+                            ItemQty = (decimal)item.Qty,
                             Brand = reference.Brand,
                             Remarks = reference.Remarks,
                             ItemCost = reference.Cost,
@@ -372,6 +442,25 @@ namespace ProjectsNow.Data.Library
                 }
 
                 QPanelController.UpdateEnclosure(PanelData, this);
+            }
+
+            if (Family == "Cubical")
+            {
+                detailsCounter = 0;
+                enclosureCounter = 0;
+                accessoriesCounter = 0;
+
+                foreach (var item in Items)
+                {
+                    if (item.ItemTable == Tables.Details.ToString())
+                        item.ItemSort += newDetailsCounter;
+                    else if (item.ItemTable == Tables.Enclosure.ToString())
+                        item.ItemSort += newEnclosureCounter;
+                    else
+                        item.ItemSort += newAccessoriesCounter;
+                }
+
+                QPanelController.UpdateCubical(PanelData, this);
             }
 
             foreach (var item in newItems)
