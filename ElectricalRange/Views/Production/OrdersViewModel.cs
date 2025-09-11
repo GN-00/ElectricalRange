@@ -497,6 +497,7 @@ namespace ProjectsNow.Views.Production
             }
             catch (Exception exception)
             {
+                var s = exception.Message;
                 Navigation.CloseLoading();
             }
         }
