@@ -7,9 +7,11 @@
              Loaded="UserControl_Loaded"
              Style="{StaticResource ViewStyle}"
              mc:Ignorable="d">
-    <Grid>
-        <Image RenderOptions.BitmapScalingMode="HighQuality"
-               Source="/Images/Vectors/Login.png"
+    <Grid Background="{StaticResource LinearGray}">
+        <Image Margin="20,20,380,40"
+               Effect="{StaticResource Shadow}"
+               RenderOptions.BitmapScalingMode="HighQuality"
+               Source="/Images/Vectors/meta.png"
                Stretch="Fill" />
 
         <TextBlock Margin="10"
