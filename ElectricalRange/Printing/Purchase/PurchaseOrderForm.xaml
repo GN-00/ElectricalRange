@@ -232,7 +232,7 @@
                                FontSize="16"
                                FontWeight="Bold"
                                Foreground="White"
-                               Text="Item Code" />
+                               Text="Code" />
                 </Border>
 
                 <!--  NEW: Supplier Code  -->
@@ -246,7 +246,7 @@
                                FontSize="16"
                                FontWeight="Bold"
                                Foreground="White"
-                               Text="Supplier Code" />
+                               Text="Reference" />
                 </Border>
 
                 <Border Grid.Row="0"
