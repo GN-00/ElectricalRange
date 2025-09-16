@@ -7,7 +7,7 @@ namespace ProjectsNow.Views.ReferencesViews
         public ReferencesView()
         {
             InitializeComponent();
-            DataContext = new ReferencesViewModel();
+            DataContext = new ReferencesViewModel(this);
         }
     }
 }

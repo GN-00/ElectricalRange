@@ -15,8 +15,9 @@ namespace ProjectsNow.Views.ReferencesViews
 {
     internal class ReferenceViewModel : ViewModelBase
     {
-        public ReferenceViewModel(Reference reference, ObservableCollection<Reference> references)
+        public ReferenceViewModel(Reference reference, ObservableCollection<Reference> references, IView view)
         {
+            ViewData = view;
             NewData = new Reference();
             NewData.Update(reference);
             ReferenceData = reference;
@@ -26,6 +27,7 @@ namespace ProjectsNow.Views.ReferencesViews
 
             SaveCommand = new RelayCommand(Save, CanSave);
             CancelCommand = new RelayCommand(Cancel, CanCancel);
+            SupplierCodesCommand = new RelayCommand(SupplierCodes, CanSupplierCodes);
         }
 
         public Reference NewData { get; private set; }
@@ -37,6 +39,7 @@ namespace ProjectsNow.Views.ReferencesViews
         public ObservableCollection<string> BrandsData { get; private set; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CancelCommand { get; }
+        public RelayCommand SupplierCodesCommand { get; }
 
         public void GetData()
         {
@@ -146,6 +149,15 @@ namespace ProjectsNow.Views.ReferencesViews
             Navigation.ClosePopup();
         }
         private bool CanCancel()
+        {
+            return true;
+        }
+
+        private void SupplierCodes()
+        {
+            Navigation.To(new SupplierCodesView(ReferenceData), ViewData);
+        }
+        private bool CanSupplierCodes()
         {
             return true;
         }

@@ -42,8 +42,9 @@ namespace ProjectsNow.Views.ReferencesViews
         private ObservableCollection<Reference> _Items;
 
         private ICollectionView _ItemsView;
-        public ReferencesViewModel()
+        public ReferencesViewModel(IView view)
         {
+            ViewData = view;
             UserData = Navigation.UserData;
             GetData();
 
@@ -262,7 +263,7 @@ namespace ProjectsNow.Views.ReferencesViews
         private void Add()
         {
             Reference reference = new();
-            Navigation.OpenPopup(new ReferenceView(reference, Items), PlacementMode.Center, true);
+            Navigation.To(new ReferenceView(reference, Items),ViewData);
         }
         private bool CanAdd()
         {
@@ -271,7 +272,7 @@ namespace ProjectsNow.Views.ReferencesViews
 
         private void Edit(Reference reference)
         {
-            Navigation.OpenPopup(new ReferenceView(reference, Items), PlacementMode.Center, true);
+            Navigation.To(new ReferenceView(reference, Items),ViewData);
         }
         private bool CanEdit(Reference reference)
         {

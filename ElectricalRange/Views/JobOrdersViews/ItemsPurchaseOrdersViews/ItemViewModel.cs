@@ -1,4 +1,5 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
 
 using Microsoft.Data.SqlClient;
 
@@ -15,6 +16,8 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
     internal class ItemViewModel : ViewModelBase
     {
         private Reference _SelectedReference;
+        private ObservableCollection<SupplierReference> _SupplierCodesData;
+
         public ItemViewModel(CompanyPOTransaction item, ObservableCollection<CompanyPOTransaction> items, bool isEditing = false, ObservableCollection<ItemPurchased> jobOrderItems = null)
         {
             IsEditing = isEditing;
@@ -34,6 +37,11 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         public CompanyPOTransaction ItemData { get; private set; }
         public ObservableCollection<CompanyPOTransaction> ItemsData { get; private set; }
         public ObservableCollection<Reference> ReferencesData { get; private set; }
+        public ObservableCollection<SupplierReference> SupplierCodesData
+        {
+            get => _SupplierCodesData;
+            set => SetValue(ref _SupplierCodesData, value);
+        }
         public ObservableCollection<ItemPurchased> JobOrderItems { get; set; }
         public Reference SelectedReference
         {
@@ -52,6 +60,10 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
                         {
                             NewData.Cost = ItemData.Cost;
                         }
+
+                        string query = $"SELECT * FROM [Reference].[SuppliersCodes] WHERE Code = '{NewData.Code}'";
+                        using SqlConnection connection = new(Database.ConnectionString);
+                        SupplierCodesData = new ObservableCollection<SupplierReference>(connection.Query<SupplierReference>(query));
                     }
                     else
                     {
@@ -82,6 +94,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
 
         private void Save()
         {
+            using SqlConnection connection = new(Database.ConnectionString);
             if (NewData.ID != 0)
             {
                 if (JobOrderItems != null)
@@ -95,7 +108,6 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
                         checkItem.InOrderQty += NewData.Qty;
                 }
 
-                using (SqlConnection connection = new(Database.ConnectionString))
                 {
                     _ = connection.Update(NewData);
                 }
@@ -125,6 +137,21 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
                     {
                         ItemsData.Add(NewData);
                     }
+                }
+            }
+
+            if (NewData.SupplierCode != null && NewData.Code != null)
+            {
+                string query = $"SELECT * FROM [Reference].[SuppliersCodes] WHERE Code = '{NewData.Code}' AND SupplierCode = '{NewData.SupplierCode}'";
+                SupplierReference supplierReference = connection.QueryFirstOrDefault<SupplierReference>(query);
+                if (supplierReference == null)
+                {
+                    supplierReference = new SupplierReference()
+                    {
+                        Code = NewData.Code,
+                        SupplierCode = NewData.SupplierCode,
+                    };
+                    _ = connection.Insert(supplierReference);
                 }
             }
 

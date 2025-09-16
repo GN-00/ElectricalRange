@@ -95,10 +95,14 @@
                     <TextBlock Width="100"
                                Style="{StaticResource LabelStyle}"
                                Text="Supplier Code" />
-                    <TextBox Width="250"
-                             IsReadOnly="True"
-                             Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.SupplierCode, Mode=OneWay}" />
+                    <ComboBox Width="250"
+                              DisplayMemberPath="SupplierCode"
+                              IsEditable="True"
+                              IsEnabled="True"
+                              ItemsSource="{Binding SupplierCodesData}"
+                              SelectedValuePath="Text"
+                              Style="{StaticResource InputComboBoxStyle}"
+                              Text="{Binding NewData.SupplierCode}" />
 
                     <TextBlock Width="45"
                                Margin="60,0,0,0"

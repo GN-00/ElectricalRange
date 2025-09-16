@@ -37,7 +37,6 @@ namespace ProjectsNow.Data
             set => SetValue(ref _Code, value);
         }
 
-        [Write(false)]
         public string SupplierCode
         {
             get => _SupplierCode;

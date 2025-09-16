@@ -240,6 +240,12 @@ namespace ProjectsNow.Data.Library
                 }
             }
 
+            if (!isReady)
+            {
+                MessageView.Show("Error", message, MessageViewButton.OK, MessageViewImage.Warning);
+                return;
+            }
+
             bool isCalculation = ItemsTypes.Any(x => x.Type == "Calculation");
             if (isCalculation)
             {
@@ -257,12 +263,6 @@ namespace ProjectsNow.Data.Library
                     MessageView.Show("Error", "Can't Calculate = 0", MessageViewButton.OK, MessageViewImage.Warning);
                     return;
                 }
-            }
-
-            if (!isReady)
-            {
-                MessageView.Show("Error", message, MessageViewButton.OK, MessageViewImage.Warning);
-                return;
             }
 
             int i;
