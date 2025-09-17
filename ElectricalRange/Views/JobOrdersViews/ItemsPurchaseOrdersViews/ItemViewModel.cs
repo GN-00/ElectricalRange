@@ -61,7 +61,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
                             NewData.Cost = ItemData.Cost;
                         }
 
-                        string query = $"SELECT * FROM [Reference].[SuppliersCodes] WHERE Code = '{NewData.Code}'";
+                        string query = $"SELECT * FROM [Reference].[SuppliersCodes] WHERE Code = '{NewData.Code}' Order By SupplierCode";
                         using SqlConnection connection = new(Database.ConnectionString);
                         SupplierCodesData = new ObservableCollection<SupplierReference>(connection.Query<SupplierReference>(query));
                     }

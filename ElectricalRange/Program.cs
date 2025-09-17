@@ -28,5 +28,5 @@ namespace ProjectsNow
 
 
 //If you want to go with Release the app, you can use the following commands: 
-//vpk pack -u ERI -v 1.2.0 -p.\ElectricalRange\bin\Release\net8.0-windows -e 'Electrical Range.exe' --icon ".\ElectricalRange\logo.ico"
+//vpk pack -u ERI -v 1.2.1 -p.\ElectricalRange\bin\Release\net8.0-windows -e 'Electrical Range.exe' --icon ".\ElectricalRange\logo.ico"
 
