@@ -447,9 +447,11 @@ namespace ProjectsNow.Views.Production
                            $"And RequestId = {groupItem.RequestId.Value}";
             MaterialsRequest request = connection.QueryFirstOrDefault<MaterialsRequest>(query);
 
-            request.PanelName = Panels
+            ProductionPanel panel = Panels
                 .Where(p => p.PanelId == groupItem.PanelId)
-                .FirstOrDefault().Name;
+                .FirstOrDefault();
+            request.PanelName = panel.Name;
+            request.PanelQty = panel.Qty;
 
             request.JobOrderCode = OrderData.Code;
             request.Customer = OrderData.Customer;

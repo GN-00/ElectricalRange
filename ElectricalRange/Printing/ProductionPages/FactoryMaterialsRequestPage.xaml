@@ -163,8 +163,11 @@
                     <TextBlock HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontSize="18"
-                               FontWeight="Bold"
-                               Text="Panel" />
+                               FontWeight="Bold">
+                        <Run Text="Panel (Qty:" />
+                        <Run Text="{Binding PanelQty}" />
+                        <Run Text=")" />
+                    </TextBlock>
                 </Border>
 
                 <Border Grid.Column="1"

@@ -23,6 +23,9 @@ namespace ProjectsNow.Data.Production
         public string PanelName { get; set; }
 
         [Write(false)]
+        public int PanelQty { get; set; }
+
+        [Write(false)]
         public string RequestCode => $"Part-{RequestId}";
         [Write(false)]
         public int Page { get; set; }

@@ -211,7 +211,7 @@ namespace ProjectsNow.Services
                 warrantyDetailsForm.SetPage(pagesNumber, pagesNumber);
                 elements.Add(warrantyDetailsForm);
 
-                Print.PrintPreview(elements, $"Invoice-{warranty.Code}", checkPoint);
+                Print.PrintPreview(elements, $"Warranty-{warranty.Code}", checkPoint);
             }
             else
             {

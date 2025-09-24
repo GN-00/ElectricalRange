@@ -1,7 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
 
-using System;
-
 namespace ProjectsNow.Data.JobOrders
 {
     [Table("[JobOrder].[Warranties]")]
@@ -224,6 +222,17 @@ namespace ProjectsNow.Data.JobOrders
         public DateTime LastDelivery { get; set; }
 
         [Write(false)]
-        public DateTime EndDate => LastDelivery.AddYears(Duration);
+        public DateTime EndDate
+        {
+            get
+            {
+                if (DurationUnit == "Day")
+                    return LastDelivery.AddDays(Duration);
+                else if (DurationUnit == "Month")
+                    return LastDelivery.AddMonths(Duration);
+                else
+                    return LastDelivery.AddYears(Duration);
+            }
+        }
     }
 }

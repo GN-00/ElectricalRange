@@ -8,10 +8,9 @@
              Style="{StaticResource ViewStyle}"
              mc:Ignorable="d">
     <Grid Background="{StaticResource LinearGray}">
-        <Image Margin="20,20,380,40"
-               Effect="{StaticResource Shadow}"
+        <Image Effect="{StaticResource Shadow}"
                RenderOptions.BitmapScalingMode="HighQuality"
-               Source="/Images/Vectors/meta.png"
+               Source="/Images/Vectors/Login.png"
                Stretch="Fill" />
 
         <TextBlock Margin="10"
