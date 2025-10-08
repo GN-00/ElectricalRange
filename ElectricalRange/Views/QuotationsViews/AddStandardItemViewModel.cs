@@ -235,8 +235,8 @@ namespace ProjectsNow.Views.QuotationsViews
             }
 
             SearchKeysData = SearchKey.GetKeys(connection);
-            Articles1Data = ReferenceController.GetArticle1(connection);
-            Articles2Data = ReferenceController.GetArticle2(connection);
+            Articles1Data = ReferenceController.GetArticle1Old(connection);
+            Articles2Data = ReferenceController.GetArticle2Old(connection);
             RemarksData = ReferenceController.GetRemarks(connection);
         }
         private void CreateCollectionView()
@@ -355,8 +355,8 @@ namespace ProjectsNow.Views.QuotationsViews
                     ReferenceController.GetReferences(connection);
 
             SearchKeysData = SearchKey.GetKeys(connection);
-            Articles1Data = ReferenceController.GetArticle1(connection);
-            Articles2Data = ReferenceController.GetArticle2(connection);
+            Articles1Data = ReferenceController.GetArticle1Old(connection);
+            Articles2Data = ReferenceController.GetArticle2Old(connection);
             RemarksData = ReferenceController.GetRemarks(connection);
         }
         private bool CanUpdate()

@@ -155,19 +155,19 @@
                                     Orientation="Horizontal">
                             <ComboBox Width="220"
                                       Margin="0,0,10,0"
+                                      DisplayMemberPath="Article"
                                       IsEditable="True"
                                       ItemsSource="{Binding ArticlesData1}"
                                       SelectedValue="{Binding NewData.Article1}"
-                                      SelectedValuePath="Text"
-                                      Style="{StaticResource InputComboBoxStyle}"
-                                      Text="{Binding NewData.Article1}" />
+                                      SelectedValuePath="Article"
+                                      Style="{StaticResource InputComboBoxStyle}" />
                             <ComboBox Width="220"
+                                      DisplayMemberPath="Article"
                                       IsEditable="True"
                                       ItemsSource="{Binding ArticlesData2}"
                                       SelectedValue="{Binding NewData.Article2}"
-                                      SelectedValuePath="Text"
-                                      Style="{StaticResource InputComboBoxStyle}"
-                                      Text="{Binding NewData.Article2}" />
+                                      SelectedValuePath="Article"
+                                      Style="{StaticResource InputComboBoxStyle}" />
                         </StackPanel>
 
                         <TextBlock Grid.Row="3"
@@ -177,10 +177,11 @@
                         <ComboBox Grid.Row="3"
                                   Grid.Column="1"
                                   Width="200"
+                                  DisplayMemberPath="Name"
                                   IsEditable="True"
                                   ItemsSource="{Binding CategoriesData}"
                                   SelectedValue="{Binding NewData.Category}"
-                                  SelectedValuePath="Text"
+                                  SelectedValuePath="Name"
                                   Style="{StaticResource InputComboBoxStyle}"
                                   Text="{Binding NewData.Category}" />
 
@@ -191,12 +192,12 @@
                         <ComboBox Grid.Row="4"
                                   Grid.Column="1"
                                   Width="500"
+                                  DisplayMemberPath="Name"
                                   IsEditable="True"
                                   ItemsSource="{Binding BrandsData}"
                                   SelectedValue="{Binding NewData.Brand}"
-                                  SelectedValuePath="Text"
-                                  Style="{StaticResource InputComboBoxStyle}"
-                                  Text="{Binding NewData.Brand}" />
+                                  SelectedValuePath="Name"
+                                  Style="{StaticResource InputComboBoxStyle}" />
 
                         <TextBlock Grid.Row="5"
                                    Grid.Column="0"
@@ -209,9 +210,8 @@
                                   IsTextSearchEnabled="True"
                                   PreviewKeyDown="Unit_PreviewKeyDown"
                                   SelectedValue="{Binding NewData.Unit}"
-                                  SelectedValuePath="Text"
-                                  Style="{StaticResource InputComboBoxStyle}"
-                                  Text="{Binding NewData.Unit}">
+                                  SelectedValuePath="Content"
+                                  Style="{StaticResource InputComboBoxStyle}">
                             <ComboBoxItem>No</ComboBoxItem>
                             <ComboBoxItem>MTR</ComboBoxItem>
                             <ComboBoxItem>Kg</ComboBoxItem>

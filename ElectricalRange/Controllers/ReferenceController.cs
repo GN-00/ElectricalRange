@@ -19,7 +19,23 @@ namespace ProjectsNow.Controllers
             return records;
         }
 
-        public static ObservableCollection<string> GetArticle1(SqlConnection connection)
+        public static ObservableCollection<Article1> GetArticle1(SqlConnection connection)
+        {
+            ObservableCollection<Article1> records =
+                new(connection.Query<Article1>("Select Article From [Quotation].[Articles] Order By Sort"));
+
+            return records;
+        }
+
+        public static ObservableCollection<Article2> GetArticle2(SqlConnection connection)
+        {
+            ObservableCollection<Article2> records =
+               new(connection.Query<Article2>("Select Article From [Reference].[Articles2] Order By Article"));
+
+            return records;
+        }
+
+        public static ObservableCollection<string> GetArticle1Old(SqlConnection connection)
         {
             ObservableCollection<string> records =
                 new(connection.Query<string>("Select Article From [Quotation].[Articles] Order By Sort"));
@@ -27,10 +43,10 @@ namespace ProjectsNow.Controllers
             return records;
         }
 
-        public static ObservableCollection<string> GetArticle2(SqlConnection connection)
+        public static ObservableCollection<string> GetArticle2Old(SqlConnection connection)
         {
             ObservableCollection<string> records =
-               new(connection.Query<string>("Select Article2 From [Quotation].[QuotationsPanelsItems] Group By Article2 Order By Article2"));
+               new(connection.Query<string>("Select Article From [Reference].[Articles2] Order By Article"));
 
             return records;
         }

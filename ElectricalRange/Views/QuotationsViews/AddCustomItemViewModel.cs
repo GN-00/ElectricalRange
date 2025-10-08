@@ -124,8 +124,8 @@ namespace ProjectsNow.Views.QuotationsViews
         private void GetData()
         {
             using SqlConnection connection = new(Database.ConnectionString);
-            Articles1Data = ReferenceController.GetArticle1(connection);
-            Articles2Data = ReferenceController.GetArticle2(connection);
+            Articles1Data = ReferenceController.GetArticle1Old(connection);
+            Articles2Data = ReferenceController.GetArticle2Old(connection);
         }
 
         private void Standard()

@@ -97,6 +97,8 @@ namespace ProjectsNow.Views.UserViews
                 using SqlConnection connection = new(Database.ConnectionString);
                 AppData.ReferencesListData =
                     new ObservableCollection<Reference>(ReferenceController.GetReferences(connection));
+
+
             });
 
 

@@ -35,8 +35,8 @@ namespace ProjectsNow.Views.QuotationsViews
                             ReferenceController.GetReferences(connection);
                 }
 
-                Article1List = ReferenceController.GetArticle1(connection);
-                Article2List = ReferenceController.GetArticle2(connection);
+                Article1List = ReferenceController.GetArticle1Old(connection);
+                Article2List = ReferenceController.GetArticle2Old(connection);
                 ItemsTables = new List<string>()
                 {
                     Enums.Tables.Details.ToString(),

@@ -1,15 +1,15 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Commands;
 using ProjectsNow.Controllers;
 using ProjectsNow.Data;
+using ProjectsNow.Data.Application;
 using ProjectsNow.Data.References;
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 
 namespace ProjectsNow.Views.ReferencesViews
 {
@@ -33,10 +33,10 @@ namespace ProjectsNow.Views.ReferencesViews
         public Reference NewData { get; private set; }
         public Reference ReferenceData { get; private set; }
         public ObservableCollection<Reference> ReferencesData { get; private set; }
-        public ObservableCollection<string> CategoriesData { get; private set; }
-        public ObservableCollection<string> ArticlesData1 { get; private set; }
-        public ObservableCollection<string> ArticlesData2 { get; private set; }
-        public ObservableCollection<string> BrandsData { get; private set; }
+        public ObservableCollection<Data.References.Category> CategoriesData { get; private set; }
+        public ObservableCollection<Article1> ArticlesData1 { get; private set; }
+        public ObservableCollection<Article2> ArticlesData2 { get; private set; }
+        public ObservableCollection<Brand> BrandsData { get; private set; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CancelCommand { get; }
         public RelayCommand SupplierCodesCommand { get; }
@@ -44,17 +44,29 @@ namespace ProjectsNow.Views.ReferencesViews
         public void GetData()
         {
             string query;
-            using SqlConnection connection = new(Database.ConnectionString);
-            query = "Select Brand From [Reference].[References] " +
-                    "where Brand Is Not Null Group By Brand Order By Brand";
-            BrandsData = new ObservableCollection<string>(connection.Query<string>(query));
+            SqlConnection connection = new(Database.ConnectionString);
+            if (AppData.BrandsData == null)
+            {
+                query = "Select Name From [Reference].[Brands] " +
+                        "Order By Name";
+                AppData.BrandsData = new ObservableCollection<Data.References.Brand>(connection.Query<Data.References.Brand>(query));
+            }
 
-            query = "Select Category From [Reference].[References] " +
-                    "where Category Is Not Null Group By Category Order By Category";
-            CategoriesData = new ObservableCollection<string>(connection.Query<string>(query));
+            if (AppData.CategoriesData == null)
+            {
+                query = "Select Name From [Reference].[Categories] " +
+                        "Order By Name";
+                AppData.CategoriesData = new ObservableCollection<Data.References.Category>(connection.Query<Data.References.Category>(query));
+            }
 
-            ArticlesData1 = ReferenceController.GetArticle1(connection);
-            ArticlesData2 = ReferenceController.GetArticle2(connection);
+            AppData.Articles1Data ??= ReferenceController.GetArticle1(connection);
+
+            AppData.Articles2Data ??= ReferenceController.GetArticle2(connection);
+
+            BrandsData = AppData.BrandsData;
+            CategoriesData = AppData.CategoriesData;
+            ArticlesData1 = AppData.Articles1Data;
+            ArticlesData2 = AppData.Articles2Data;
         }
 
         private void Save()
@@ -109,7 +121,7 @@ namespace ProjectsNow.Views.ReferencesViews
                 if (keys != null)
                     UpdateKeys(keys);
 
-                Navigation.ClosePopup();
+                Navigation.Back();
             }
             else
             {
@@ -146,7 +158,7 @@ namespace ProjectsNow.Views.ReferencesViews
         }
         private void Cancel()
         {
-            Navigation.ClosePopup();
+            Navigation.Back();
         }
         private bool CanCancel()
         {
