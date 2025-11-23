@@ -33,28 +33,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            Margin="0,0"
-                            BorderBrush="{StaticResource SecondaryBackground}"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="15,15,0,0">
-                        <Image Name="Image"
-                               Width="30"
-                               Height="30"
-                               Margin="5"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="{TemplateBinding Tag}" />
+                    <Border
+                        Name="Border"
+                        Margin="0,0"
+                        BorderBrush="{StaticResource SecondaryBackground}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="15,15,0,0">
+                        <Image
+                            Name="Image"
+                            Width="30"
+                            Height="30"
+                            Margin="5"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="{TemplateBinding Tag}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondaryBackground}" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Image" Property="Height" Value="45" />
@@ -78,27 +81,30 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            Margin="0,0"
-                            BorderBrush="{StaticResource SecondaryBackground}"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="15,15,0,0">
-                        <Image Name="Image"
-                               Width="40"
-                               Height="40"
-                               Margin="5"
-                               Source="{TemplateBinding Tag}" />
+                    <Border
+                        Name="Border"
+                        Margin="0,0"
+                        BorderBrush="{StaticResource SecondaryBackground}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="15,15,0,0">
+                        <Image
+                            Name="Image"
+                            Width="40"
+                            Height="40"
+                            Margin="5"
+                            Source="{TemplateBinding Tag}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondaryBackground}" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Image" Property="Height" Value="65" />
@@ -124,14 +130,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            BorderBrush="White"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="5,5,0,0">
-                        <ContentPresenter x:Name="ContentSite"
-                                          Margin="10,0,10,0"
-                                          VerticalAlignment="Center"
-                                          ContentSource="Header" />
+                    <Border
+                        Name="Border"
+                        BorderBrush="White"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="5,5,0,0">
+                        <ContentPresenter
+                            x:Name="ContentSite"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            ContentSource="Header" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -140,11 +148,12 @@
                             <Setter TargetName="Border" Property="TextElement.FontSize" Value="18" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -162,10 +171,11 @@
 
     <ControlTemplate x:Key="GN.TabItemTemplete" TargetType="{x:Type TabItem}">
         <Border Name="Border" CornerRadius="5,5,0,0">
-            <ContentPresenter x:Name="ContentSite"
-                              Margin="10,0,10,0"
-                              VerticalAlignment="Center"
-                              ContentSource="Header" />
+            <ContentPresenter
+                x:Name="ContentSite"
+                Margin="10,0,10,0"
+                VerticalAlignment="Center"
+                ContentSource="Header" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSelected" Value="True">

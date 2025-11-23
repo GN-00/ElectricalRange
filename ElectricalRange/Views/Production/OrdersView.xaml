@@ -70,6 +70,53 @@
                 </MenuItem.Icon>
             </MenuItem>
 
+
+
+            <MenuItem Style="{StaticResource MenuItemStyle}">
+                <MenuItem.Header>
+                    <TextBlock Text="Copy" />
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Copy.png" />
+                </MenuItem.Icon>
+
+                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.CopyJobOrderNumberCommand}"
+                          CommandParameter="{Binding}"
+                          Style="{StaticResource MenuItemStyle}">
+                    <MenuItem.Header>
+                        <TextBlock Text="Job Order Number" />
+                    </MenuItem.Header>
+                    <MenuItem.Icon>
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Copy.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.CopyCustomerNameCommand}"
+                          CommandParameter="{Binding}"
+                          Style="{StaticResource MenuItemStyle}">
+                    <MenuItem.Header>
+                        <TextBlock Text="Customer Name" />
+                    </MenuItem.Header>
+                    <MenuItem.Icon>
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Copy.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.CopyProjectNameCommand}"
+                          CommandParameter="{Binding}"
+                          Style="{StaticResource MenuItemStyle}">
+                    <MenuItem.Header>
+                        <TextBlock Text="Project Name" />
+                    </MenuItem.Header>
+                    <MenuItem.Icon>
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Copy.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+            </MenuItem>
+
+
+
         </ContextMenu>
 
     </UserControl.Resources>
@@ -192,6 +239,15 @@
                             Style="{StaticResource ManagerSubTapsButtons}"
                             Tag="Check List">
                         <ImageSource>/Images/Icons/QuotationsStatus1.png</ImageSource>
+                    </Button>
+
+
+                    <Button Padding="0,5,0,-10"
+                            Command="{Binding SummaryCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            Style="{StaticResource ManagerSubTapsButtons}"
+                            Tag="Summary">
+                        <ImageSource>/Images/Icons/Invoicing.png</ImageSource>
                     </Button>
 
                 </StackPanel>

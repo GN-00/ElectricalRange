@@ -1,12 +1,12 @@
 ﻿<Window
-    x:Class="ProjectsNow.Windows.JobOrderWindows.AcknowledgementWindow"
+    x:Class="ProjectsNow.Windows.JobOrderWindows.SiteAcknowledgementWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Terms &amp; Conditions"
     Width="970"
-    Height="460"
+    Height="530"
     BorderBrush="DimGray"
     BorderThickness="1"
     Closing="Window_Closing"
@@ -168,9 +168,9 @@
 
 
         <Grid
-            Height="350"
-            Margin="136,50,0,0"
-            VerticalAlignment="Top"
+            Height="425"
+            Margin="136,0,0,0"
+            VerticalAlignment="Center"
             Background="#FFF1F1F1">
             <Grid.Effect>
                 <DropShadowEffect
@@ -184,9 +184,9 @@
 
         <TabControl
             x:Name="Tabs"
-            Height="350"
-            Margin="5,50,0,0"
-            VerticalAlignment="Top"
+            Height="425"
+            Margin="5,0,0,0"
+            VerticalAlignment="Center"
             Background="White"
             BorderBrush="Transparent"
             BorderThickness="0"
@@ -268,7 +268,7 @@
 
                         <TabControl
                             Width="780"
-                            Height="260"
+                            Height="334"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Left"
                             Background="White"
@@ -533,7 +533,7 @@
                     <StackPanel Orientation="Vertical">
 
                         <Border
-                            Height="320"
+                            Height="400"
                             Margin="10"
                             BorderBrush="Gray"
                             BorderThickness="2"
@@ -806,7 +806,7 @@
                 <StackPanel Orientation="Vertical">
 
                     <Border
-                        Height="320"
+                        Height="400"
                         Margin="10"
                         BorderBrush="Gray"
                         BorderThickness="2"
@@ -1141,7 +1141,7 @@
 
                 <StackPanel Orientation="Vertical">
                     <Border
-                        Height="320"
+                        Height="400"
                         Margin="10"
                         BorderBrush="Gray"
                         BorderThickness="2"
@@ -1170,7 +1170,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="Blue"
-                                    Text="• After PO direct before start shop drawing deduction will be: " />
+                                    Text="• After PO direct before start preparing engineering documentation deduction will be:  " />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
@@ -1180,7 +1180,7 @@
                                     LostFocus="Cancellation1_LostFocus"
                                     PreviewKeyDown="Cancellation_PreviewKeyDown"
                                     Style="{StaticResource InputStyle}"
-                                    Text="{Binding Cancellation1}"
+                                    Text="{Binding SiteCancellation1}"
                                     TextAlignment="Center" />
                                 <TextBlock
                                     HorizontalAlignment="Left"
@@ -1195,7 +1195,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="Blue"
-                                    Text="• After shop drawing approval before start fabrication deduction will be: " />
+                                    Text="• After engineering documentation submission and before start of material purchasing deduction will be:" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
@@ -1205,7 +1205,7 @@
                                     LostFocus="Cancellation2_LostFocus"
                                     PreviewKeyDown="Cancellation_PreviewKeyDown"
                                     Style="{StaticResource InputStyle}"
-                                    Text="{Binding Cancellation2}"
+                                    Text="{Binding SiteCancellation2}"
                                     TextAlignment="Center" />
                                 <TextBlock
                                     HorizontalAlignment="Left"
@@ -1220,7 +1220,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="Blue"
-                                    Text="• During fabrication panels (less than 50% job done), the deduction will be: " />
+                                    Text="• After purchasing materials (if required) and before start the mobilization at site deduction will be:" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
@@ -1230,7 +1230,7 @@
                                     LostFocus="Cancellation3_LostFocus"
                                     PreviewKeyDown="Cancellation_PreviewKeyDown"
                                     Style="{StaticResource InputStyle}"
-                                    Text="{Binding Cancellation3}"
+                                    Text="{Binding SiteCancellation3}"
                                     TextAlignment="Center" />
                                 <TextBlock
                                     HorizontalAlignment="Left"
@@ -1245,7 +1245,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="Blue"
-                                    Text="• During fabrication panels (more than 50% job done), the deduction will be: " />
+                                    Text="• After start the mobilization at site and before start working at site deduction will be:" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
@@ -1255,7 +1255,32 @@
                                     LostFocus="Cancellation4_LostFocus"
                                     PreviewKeyDown="Cancellation_PreviewKeyDown"
                                     Style="{StaticResource InputStyle}"
-                                    Text="{Binding Cancellation4}"
+                                    Text="{Binding SiteCancellation4}"
+                                    TextAlignment="Center" />
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="% of the total amount of PO (with VAT)." />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="Blue"
+                                    Text="• After start working at site deduction will be:" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox
+                                    x:Name="Cancellation5"
+                                    Width="60"
+                                    Margin="10,0,5,0"
+                                    LostFocus="Cancellation5_LostFocus"
+                                    PreviewKeyDown="Cancellation_PreviewKeyDown"
+                                    Style="{StaticResource InputStyle}"
+                                    Text="{Binding SiteCancellation5}"
                                     TextAlignment="Center" />
                                 <TextBlock
                                     HorizontalAlignment="Left"
@@ -1386,3 +1411,4 @@
 
     </Grid>
 </Window>
+

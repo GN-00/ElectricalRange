@@ -321,5 +321,37 @@ namespace ProjectsNow.Data.JobOrders
             get => _Cancellation4;
             set => SetValue(ref _Cancellation4, value);
         }
+
+        private decimal _SiteCancellation1 = 0;
+        public decimal SiteCancellation1
+        {
+            get => _SiteCancellation1;
+            set => SetValue(ref _SiteCancellation1, value);
+        }
+        private decimal _SiteCancellation2 = 25;
+        public decimal SiteCancellation2
+        {
+            get => _SiteCancellation2;
+            set => SetValue(ref _SiteCancellation2, value);
+        }
+        private decimal _SiteCancellation3 = 60;
+        public decimal SiteCancellation3
+        {
+            get => _SiteCancellation3;
+            set => SetValue(ref _SiteCancellation3, value);
+        }
+        private decimal _SiteCancellation4 = 80;
+        public decimal SiteCancellation4
+        {
+            get => _SiteCancellation4;
+            set => SetValue(ref _SiteCancellation4, value);
+        }
+
+        private decimal _SiteCancellation5 = 100;
+        public decimal SiteCancellation5
+        {
+            get => _SiteCancellation5;
+            set => SetValue(ref _SiteCancellation5, value);
+        }
     }
 }

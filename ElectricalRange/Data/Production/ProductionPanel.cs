@@ -1,4 +1,6 @@
-﻿namespace ProjectsNow.Data.Production
+﻿using Dapper.Contrib.Extensions;
+
+namespace ProjectsNow.Data.Production
 {
     public class ProductionPanel : Base
     {
@@ -9,6 +11,13 @@
         public int SN { get; set; }
         public string Name { get; set; }
         public int Qty { get; set; }
+
+        [Write(false)]
+        public int SummaryQty
+        {
+            get => _SummaryQty;
+            set => SetValue(ref _SummaryQty, value);
+        }
         public int ClosedQty { get; set; }
         public int DeliveredQty { get; set; }
         public DateTime Date { get; set; }
@@ -76,6 +85,8 @@
         }
 
         private double _ReceivedItems;
+        private int _SummaryQty;
+
         public double ReceivedItems
         {
             get => _ReceivedItems;

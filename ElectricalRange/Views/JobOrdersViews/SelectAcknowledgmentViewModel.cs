@@ -1,5 +1,7 @@
 ﻿using Dapper;
 
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.JobOrders;
@@ -7,13 +9,15 @@ using ProjectsNow.Data.Users;
 using ProjectsNow.Printing;
 using ProjectsNow.Windows.JobOrderWindows;
 
-using Microsoft.Data.SqlClient;
 using System.Windows;
 
 namespace ProjectsNow.Views.JobOrdersViews
 {
     internal class SelectAcknowledgmentViewModel : ViewModelBase
     {
+        private string _ReportType = "Factory";
+        private bool _IsSite = false;
+
         public SelectAcknowledgmentViewModel(JobOrder jobOrder, IView checkPoint)
         {
             ViewData = checkPoint;
@@ -28,11 +32,27 @@ namespace ProjectsNow.Views.JobOrdersViews
             ReadAttachmentCommand = new RelayCommand<JobOrder>(ReadAttachment, CanAccessReadAttachment);
         }
 
+
+        public bool IsSite
+        {
+            get => _IsSite;
+            set {
+                SetValue(ref _IsSite, value);
+                if (_IsSite)
+                    ReportType = "Site";
+                else
+                    ReportType = "Factory";
+            }
+        }
+        public string ReportType
+        {
+            get => _ReportType;
+            set => SetValue(ref _ReportType, value);
+        }
         public User UserData => Navigation.UserData;
         public JobOrder JobOrderData { get; }
         public RelayCommand PrintCommand { get; }
         public RelayCommand EditCommand { get; }
-
         public RelayCommand<JobOrder> AttachCommand { get; }
         public RelayCommand<JobOrder> DeleteAttachmentCommand { get; }
         public RelayCommand<JobOrder> DownloadAttachmentCommand { get; }
@@ -52,23 +72,39 @@ namespace ProjectsNow.Views.JobOrdersViews
                 acknowledgementInformationData = connection.QueryFirstOrDefault<AcknowledgmentInformation>(query);
             }
 
-            OrderAcknowledgement acknowledgementForm = new()
+            if (IsSite)
             {
-                AcknowledgementInformationData = acknowledgementInformationData
-            };
-
-            if (result == MessageBoxResult.Yes)
+                SiteOrderAcknowledgement acknowledgementForm = new()
+                {
+                    AcknowledgementInformationData = acknowledgementInformationData
+                };
+                if (result == MessageBoxResult.Yes)
+                {
+                    acknowledgementForm.BackgroundImage.Visibility = Visibility.Visible;
+                }
+                FrameworkElement element = acknowledgementForm;
+                Printing.Print.PrintPreview(element, $"Order Acknowledgement-{JobOrderData.Code}", ViewData);
+            }
+            else
             {
-                acknowledgementForm.BackgroundImage.Visibility = Visibility.Visible;
+                OrderAcknowledgement acknowledgementForm = new()
+                {
+                    AcknowledgementInformationData = acknowledgementInformationData
+                };
+                if (result == MessageBoxResult.Yes)
+                {
+                    acknowledgementForm.BackgroundImage.Visibility = Visibility.Visible;
+                }
+                FrameworkElement element = acknowledgementForm;
+                Printing.Print.PrintPreview(element, $"Order Acknowledgement-{JobOrderData.Code}", ViewData);
             }
 
-            FrameworkElement element = acknowledgementForm;
-            Printing.Print.PrintPreview(element, $"Order Acknowledgement-{JobOrderData.Code}", ViewData);
         }
         private bool CanAccessPrint()
         {
             return true;
         }
+
 
         private void Edit()
         {
@@ -83,12 +119,24 @@ namespace ProjectsNow.Views.JobOrdersViews
                     acknowledgement = connection.QueryFirstOrDefault<Acknowledgment>(query);
                 }
 
-                AcknowledgementWindow acknowledgementWindow = new()
+                if (IsSite)
                 {
-                    UserData = Navigation.UserData,
-                    AcknowledgementData = acknowledgement,
-                };
-                _ = acknowledgementWindow.ShowDialog();
+                    SiteAcknowledgementWindow acknowledgementWindow = new()
+                    {
+                        UserData = Navigation.UserData,
+                        AcknowledgementData = acknowledgement,
+                    };
+                    _ = acknowledgementWindow.ShowDialog();
+                }
+                else
+                {
+                    AcknowledgementWindow acknowledgementWindow = new()
+                    {
+                        UserData = Navigation.UserData,
+                        AcknowledgementData = acknowledgement,
+                    };
+                    _ = acknowledgementWindow.ShowDialog();
+                }
             }
         }
         private bool CanAccessEdit()

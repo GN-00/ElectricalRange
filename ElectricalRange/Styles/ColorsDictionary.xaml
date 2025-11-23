@@ -1,6 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
 
     <FontFamily x:Key="MyFont">Times New Roman</FontFamily>
     <System:Double x:Key="NormalFontSize">18</System:Double>
@@ -26,12 +27,13 @@
         <GradientStop Offset="0.5" Color="DarkGray" />
     </LinearGradientBrush>
 
-    <DropShadowEffect x:Key="Shadow"
-                      BlurRadius="5"
-                      Direction="-90"
-                      Opacity="0.8"
-                      ShadowDepth="1"
-                      Color="Black" />
+    <DropShadowEffect
+        x:Key="Shadow"
+        BlurRadius="5"
+        Direction="-90"
+        Opacity="0.8"
+        ShadowDepth="1"
+        Color="Black" />
 
 
 
@@ -55,12 +57,13 @@
         <GradientStop Offset="1" Color="#FF414EBD" />
     </LinearGradientBrush>
 
-    <DropShadowEffect x:Key="GN.Shadow"
-                      BlurRadius="5"
-                      Direction="-90"
-                      Opacity="0.8"
-                      ShadowDepth="1"
-                      Color="Black" />
+    <DropShadowEffect
+        x:Key="GN.Shadow"
+        BlurRadius="5"
+        Direction="-90"
+        Opacity="0.8"
+        ShadowDepth="1"
+        Color="Black" />
 
 
     <SolidColorBrush x:Key="GN.SelectionBrush" Color="#3a9bdc" />

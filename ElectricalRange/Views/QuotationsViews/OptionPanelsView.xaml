@@ -25,7 +25,7 @@
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
-        
+
         <ContextMenu x:Key="RowContextMenu">
             <MenuItem Command="{Binding 
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, 
@@ -70,7 +70,7 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="5" Opacity="0.5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
             </Grid.Effect>
-            
+
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Quotation Panels"
                            Margin="10,7.5"

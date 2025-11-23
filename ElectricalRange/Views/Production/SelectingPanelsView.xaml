@@ -1,11 +1,11 @@
 ﻿<UserControl
-    x:Class="ProjectsNow.Views.JobOrdersViews.WarrantyPanelsView"
+    x:Class="ProjectsNow.Views.Production.SelectingPanelsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:CN="clr-namespace:ProjectsNow.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="540"
+    Width="681"
     Height="500"
     BorderBrush="{StaticResource Blue}"
     BorderThickness="1"
@@ -110,6 +110,7 @@
 
                 <DataGrid
                     ContextMenu="{StaticResource GridContextMenu}"
+                    IsReadOnly="False"
                     ItemsSource="{Binding ItemsCollection}"
                     SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -121,22 +122,31 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="70"
+                            Width="80"
                             Binding="{Binding SN}"
                             ElementStyle="{StaticResource CenterColumnView}"
-                            Header="SN" />
-                      
-                        <DataGridTextColumn
-                            Width="300"
-                            Binding="{Binding NameInfo}"
-                            ElementStyle="{StaticResource LeftColumnView}"
-                            Header="Name" />
+                            Header="SN"
+                            IsReadOnly="True" />
 
                         <DataGridTextColumn
-                            Width="70"
-                            Binding="{Binding Qty}"
+                            Width="300"
+                            Binding="{Binding Name}"
+                            ElementStyle="{StaticResource LeftColumnView}"
+                            Header="Name"
+                            IsReadOnly="True" />
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding Qty, StringFormat=N2}"
                             ElementStyle="{StaticResource CenterColumnView}"
-                            Header="Qty" />
+                            Header="Qty"
+                            IsReadOnly="True" />
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding SummaryQty, StringFormat=N2}"
+                            ElementStyle="{StaticResource CenterColumnView}"
+                            Header="Select" />
 
                         <DataGridTemplateColumn Width="60">
                             <DataGridTemplateColumn.HeaderTemplate>

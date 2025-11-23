@@ -28,14 +28,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            BorderBrush="White"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="5,5,0,0">
-                        <ContentPresenter x:Name="ContentSite"
-                                          Margin="10,0,10,0"
-                                          VerticalAlignment="Center"
-                                          ContentSource="Header" />
+                    <Border
+                        Name="Border"
+                        BorderBrush="White"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="5,5,0,0">
+                        <ContentPresenter
+                            x:Name="ContentSite"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            ContentSource="Header" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -44,11 +46,12 @@
                             <Setter TargetName="Border" Property="TextElement.FontSize" Value="18" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -68,30 +71,33 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            Margin="0,0"
-                            BorderBrush="{StaticResource SecondaryBackground}"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="15,15,0,0">
+                    <Border
+                        Name="Border"
+                        Margin="0,0"
+                        BorderBrush="{StaticResource SecondaryBackground}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="15,15,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Image Name="image"
-                                   Width="30"
-                                   Height="30"
-                                   Margin="5"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="{TemplateBinding Tag}" />
-                            <TextBlock Name="text"
-                                       Grid.Column="1"
-                                       Margin="10,0,20,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="20"
-                                       Text="{TemplateBinding Header}" />
+                            <Image
+                                Name="image"
+                                Width="30"
+                                Height="30"
+                                Margin="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="{TemplateBinding Tag}" />
+                            <TextBlock
+                                Name="text"
+                                Grid.Column="1"
+                                Margin="10,0,20,0"
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Text="{TemplateBinding Header}" />
                         </Grid>
 
                     </Border>
@@ -100,11 +106,12 @@
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondaryBackground}" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="text" Property="FontSize" Value="24" />
@@ -129,19 +136,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            BorderThickness="0"
-                            CornerRadius="5,0,0,5">
-                        <TextBlock Name="TB"
-                                   Width="150"
-                                   Margin="0,0,5,0"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="18"
-                                   SnapsToDevicePixels="True"
-                                   Text="{TemplateBinding Header}"
-                                   TextAlignment="Center"
-                                   TextWrapping="Wrap" />
+                    <Border
+                        Name="Border"
+                        BorderThickness="0"
+                        CornerRadius="5,0,0,5">
+                        <TextBlock
+                            Name="TB"
+                            Width="150"
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            SnapsToDevicePixels="True"
+                            Text="{TemplateBinding Header}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -175,19 +184,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            BorderThickness="0"
-                            CornerRadius="5,0,0,5">
-                        <TextBlock Name="TB"
-                                   Width="180"
-                                   Margin="0,0,5,0"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="18"
-                                   SnapsToDevicePixels="True"
-                                   Text="{TemplateBinding Header}"
-                                   TextAlignment="Center"
-                                   TextWrapping="Wrap" />
+                    <Border
+                        Name="Border"
+                        BorderThickness="0"
+                        CornerRadius="5,0,0,5">
+                        <TextBlock
+                            Name="TB"
+                            Width="180"
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            SnapsToDevicePixels="True"
+                            Text="{TemplateBinding Header}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">

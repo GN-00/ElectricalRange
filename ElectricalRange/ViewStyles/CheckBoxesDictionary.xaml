@@ -11,26 +11,29 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <BulletDecorator HorizontalAlignment="Center" Background="Transparent">
                         <BulletDecorator.Bullet>
-                            <Border x:Name="Border"
+                            <Border
+                                x:Name="Border"
+                                Width="25"
+                                Height="25"
+                                Background="Transparent"
+                                BorderBrush="{StaticResource ViewsNormalBorder}"
+                                BorderThickness="{StaticResource ViewsThickness}"
+                                CornerRadius="5">
+                                <Path
+                                    x:Name="CheckMark"
                                     Width="25"
                                     Height="25"
-                                    Background="Transparent"
-                                    BorderBrush="{StaticResource ViewsNormalBorder}"
-                                    BorderThickness="{StaticResource ViewsThickness}"
-                                    CornerRadius="5">
-                                <Path x:Name="CheckMark"
-                                      Width="25"
-                                      Height="25"
-                                      Data="M0 0 M2.5 10 l5,5 l10,-10"
-                                      SnapsToDevicePixels="False"
-                                      Stroke="Black"
-                                      StrokeThickness="3" />
+                                    Data="M0 0 M2.5 10 l5,5 l10,-10"
+                                    SnapsToDevicePixels="False"
+                                    Stroke="Black"
+                                    StrokeThickness="3" />
                             </Border>
                         </BulletDecorator.Bullet>
-                        <ContentPresenter Margin="4,0,0,0"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
-                                          RecognizesAccessKey="True" />
+                        <ContentPresenter
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True" />
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="false">
@@ -67,26 +70,29 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <BulletDecorator HorizontalAlignment="Center" Background="Transparent">
                         <BulletDecorator.Bullet>
-                            <Border x:Name="Border"
+                            <Border
+                                x:Name="Border"
+                                Width="25"
+                                Height="25"
+                                Background="Transparent"
+                                BorderBrush="{StaticResource ViewsNormalBorder}"
+                                BorderThickness="{StaticResource ViewsThickness}"
+                                CornerRadius="5">
+                                <Path
+                                    x:Name="CheckMark"
                                     Width="25"
                                     Height="25"
-                                    Background="Transparent"
-                                    BorderBrush="{StaticResource ViewsNormalBorder}"
-                                    BorderThickness="{StaticResource ViewsThickness}"
-                                    CornerRadius="5">
-                                <Path x:Name="CheckMark"
-                                      Width="25"
-                                      Height="25"
-                                      Data="M0 0 M2.5 10 l5,5 l10,-10"
-                                      SnapsToDevicePixels="False"
-                                      Stroke="Black"
-                                      StrokeThickness="3" />
+                                    Data="M0 0 M2.5 10 l5,5 l10,-10"
+                                    SnapsToDevicePixels="False"
+                                    Stroke="Black"
+                                    StrokeThickness="3" />
                             </Border>
                         </BulletDecorator.Bullet>
-                        <ContentPresenter Margin="4,0,0,0"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
-                                          RecognizesAccessKey="True" />
+                        <ContentPresenter
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True" />
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="false">

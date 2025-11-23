@@ -17,14 +17,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border Name="Border"
-                            BorderBrush="White"
-                            BorderThickness="0,0,0,0"
-                            CornerRadius="5,5,0,0">
-                        <ContentPresenter x:Name="ContentSite"
-                                          Margin="10,0,10,0"
-                                          VerticalAlignment="Center"
-                                          ContentSource="Header" />
+                    <Border
+                        Name="Border"
+                        BorderBrush="White"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="5,5,0,0">
+                        <ContentPresenter
+                            x:Name="ContentSite"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            ContentSource="Header" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -33,11 +35,12 @@
                             <Setter TargetName="Border" Property="TextElement.FontSize" Value="18" />
                             <Setter TargetName="Border" Property="Border.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="Gray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="Gray" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>

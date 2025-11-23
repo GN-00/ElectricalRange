@@ -22,6 +22,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ProjectsNow.Views.Production
@@ -50,6 +51,10 @@ namespace ProjectsNow.Views.Production
             DeliveryCommand = new RelayCommand<Order>(Delivery, CanAccessDelivery);
             AddStockCommand = new RelayCommand<Order>(AddStockToOrder, CanAccessAddStockToOrder);
             CheckItemsListCommand = new RelayCommand<Order>(CheckItemsList, CanAccessCheckItemsList);
+            CopyJobOrderNumberCommand = new RelayCommand<Order>(CopyJobOrderNumber, CanAccessCopyJobOrderNumber);
+            CopyCustomerNameCommand = new RelayCommand<Order>(CopyCustomerName, CanAccessCopyCustomerName);
+            CopyProjectNameCommand = new RelayCommand<Order>(CopyProjectName, CanAccessCopyProjectName);
+            SummaryCommand = new RelayCommand<Order>(Summary, CanAccessSummary);
             ExportCommand = new RelayCommand(Export, CanAccessExport);
             UpdateCommand = new RelayCommand(GetData);
             RunningOrdersCommand = new RelayCommand(RunningOrders, CanAccessRunningOrders);
@@ -106,6 +111,10 @@ namespace ProjectsNow.Views.Production
         public RelayCommand<Order> DeliveryCommand { get; }
         public RelayCommand<Order> AddStockCommand { get; }
         public RelayCommand<Order> CheckItemsListCommand { get; }
+        public RelayCommand<Order> CopyJobOrderNumberCommand { get; }
+        public RelayCommand<Order> CopyCustomerNameCommand { get; }
+        public RelayCommand<Order> CopyProjectNameCommand { get; }
+        public RelayCommand<Order> SummaryCommand { get; }
         public RelayCommand UpdateCommand { get; }
         public RelayCommand RunningOrdersCommand { get; }
         public RelayCommand AllOrdersCommand { get; }
@@ -705,6 +714,55 @@ namespace ProjectsNow.Views.Production
         }
         private bool CanAccessExport()
         {
+            return true;
+        }
+
+
+        private void CopyJobOrderNumber(Order order)
+        {
+            Clipboard.SetText(order.Code);
+        }
+        private bool CanAccessCopyJobOrderNumber(Order order)
+        {
+            if (order == null)
+                return false;
+
+            return true;
+        }
+
+        private void CopyCustomerName(Order order)
+        {
+            Clipboard.SetText(order.Customer);
+        }
+        private bool CanAccessCopyCustomerName(Order order)
+        {
+            if (order == null)
+                return false;
+
+            return true;
+        }
+
+        private void CopyProjectName(Order order)
+        {
+            Clipboard.SetText(order.Project);
+        }
+        private bool CanAccessCopyProjectName(Order order)
+        {
+            if (order == null)
+                return false;
+
+            return true;
+        }
+
+        private void Summary(Order order)
+        {
+            Navigation.OpenPopup(new SelectingPanelsView(order, ViewData), PlacementMode.Center, true);
+        }
+        private bool CanAccessSummary(Order order)
+        {
+            if (order == null)
+                return false;
+
             return true;
         }
     }

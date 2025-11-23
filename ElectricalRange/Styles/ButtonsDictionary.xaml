@@ -14,17 +14,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
-                        <Image Margin="5"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="{TemplateBinding Content}"
-                               Stretch="Uniform" />
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <Image
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="{TemplateBinding Content}"
+                            Stretch="Uniform" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -47,17 +49,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
-                        <Image Margin="2.5"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="{TemplateBinding Content}"
-                               Stretch="Uniform" />
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <Image
+                            Margin="2.5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="{TemplateBinding Content}"
+                            Stretch="Uniform" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -80,15 +84,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="{TemplateBinding Content}" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="{TemplateBinding Content}" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -99,11 +105,12 @@
                 <Setter Property="Background" Value="DarkGray" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="15"
-                                          Direction="-45"
-                                          Opacity="0.5"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="-45"
+                            Opacity="0.5"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -127,24 +134,27 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="border"
-                            Background="{StaticResource PrimaryBackground}"
-                            CornerRadius="5">
+                    <Border
+                        Name="border"
+                        Background="{StaticResource PrimaryBackground}"
+                        CornerRadius="5">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="70*" />
                                 <RowDefinition Height="30*" />
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0"
-                                   Margin="10,20"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="{TemplateBinding Content}"
-                                   Stretch="Uniform" />
-                            <TextBlock Grid.Row="1"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Text="{TemplateBinding ToolTip}"
-                                       TextWrapping="Wrap" />
+                            <Image
+                                Grid.Row="0"
+                                Margin="10,20"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="{TemplateBinding Content}"
+                                Stretch="Uniform" />
+                            <TextBlock
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{TemplateBinding ToolTip}"
+                                TextWrapping="Wrap" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -153,11 +163,12 @@
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="Button.Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      Direction="-90"
-                                                      Opacity="0.8"
-                                                      ShadowDepth="1"
-                                                      Color="DarkGray" />
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="-90"
+                                        Opacity="0.8"
+                                        ShadowDepth="1"
+                                        Color="DarkGray" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -179,19 +190,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="10,5,5,5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Electrical Range;component/Images/Icons/Save.png" />
-                            <ContentPresenter Margin="0,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="10,5,5,5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Electrical Range;component/Images/Icons/Save.png" />
+                            <ContentPresenter
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -203,11 +217,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="15"
-                                          Direction="-45"
-                                          Opacity="0.5"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="-45"
+                            Opacity="0.5"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -226,19 +241,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="10,5,5,5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Electrical Range;component/Images/Icons/Accept.png" />
-                            <ContentPresenter Margin="0,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="10,5,5,5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Electrical Range;component/Images/Icons/Accept.png" />
+                            <ContentPresenter
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -250,11 +268,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="15"
-                                          Direction="-45"
-                                          Opacity="0.5"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="-45"
+                            Opacity="0.5"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -301,15 +320,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="Gray"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Gray"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Electrical Range;component/Images/Icons/Error.png" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Electrical Range;component/Images/Icons/Error.png" />
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
@@ -323,11 +344,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="15"
-                                          Direction="-45"
-                                          Opacity="50"
-                                          ShadowDepth="1"
-                                          Color="Red" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="-45"
+                            Opacity="50"
+                            ShadowDepth="1"
+                            Color="Red" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -344,15 +366,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="{TemplateBinding Content}" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="{TemplateBinding Content}" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -363,11 +387,12 @@
                 <Setter Property="Background" Value="DarkGray" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="15"
-                                          Direction="-45"
-                                          Opacity="0.5"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="-45"
+                            Opacity="0.5"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -383,14 +408,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="Gray"
-                            CornerRadius="5">
-                        <Image Margin="3"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Images/Icons/DeleteFilter.png"
-                               Stretch="Uniform" />
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Gray"
+                        CornerRadius="5">
+                        <Image
+                            Margin="3"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="/Images/Icons/DeleteFilter.png"
+                            Stretch="Uniform" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -418,11 +445,12 @@
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <Rectangle Margin="-2"
-                                       SnapsToDevicePixels="true"
-                                       Stroke="Red"
-                                       StrokeDashArray="3 3"
-                                       StrokeThickness="1" />
+                            <Rectangle
+                                Margin="-2"
+                                SnapsToDevicePixels="true"
+                                Stroke="Red"
+                                StrokeDashArray="3 3"
+                                StrokeThickness="1" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -433,21 +461,23 @@
                 <Setter Property="VerticalAlignment" Value="Stretch" />
             </Style>
 
-            <TextBlock x:Key="OffContent"
-                       Style="{StaticResource ToggleButtonContentTextbox}"
-                       Text="Off" />
+            <TextBlock
+                x:Key="OffContent"
+                Style="{StaticResource ToggleButtonContentTextbox}"
+                Text="Off" />
             <Style x:Key="OnContentControl" TargetType="ContentControl">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <TextBlock FontFamily="Wingdings 2"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       Foreground="White"
-                                       Style="{StaticResource ToggleButtonContentTextbox}"
-                                       Text="" />
+                            <TextBlock
+                                FontFamily="Wingdings 2"
+                                FontSize="24"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Style="{StaticResource ToggleButtonContentTextbox}"
+                                Text="" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -460,10 +490,11 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <TextBlock FontSize="24"
-                                       Foreground="White"
-                                       Style="{StaticResource ToggleButtonContentTextbox}"
-                                       Text="" />
+                            <TextBlock
+                                FontSize="24"
+                                Foreground="White"
+                                Style="{StaticResource ToggleButtonContentTextbox}"
+                                Text="" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -489,34 +520,38 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <Border x:Name="BackgroundEllipse1"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="3"
-                                    Width="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                    Height="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                    HorizontalAlignment="Left"
-                                    Background="{StaticResource ToggleButtonTrueBackground}"
-                                    CornerRadius="7" />
-                            <Border x:Name="BackgroundEllipse2"
-                                    Grid.Row="0"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="3"
-                                    Width="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                    Height="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                    HorizontalAlignment="Right"
-                                    Background="{StaticResource ToggleButtonFalseBackground}"
-                                    CornerRadius="7" />
-                            <Border x:Name="BackgroundBorder"
-                                    Grid.Row="0"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                    Background="{StaticResource ToggleButtonTrueBackground}" />
-                            <Border Grid.RowSpan="2"
-                                    Grid.ColumnSpan="3"
-                                    BorderThickness="2"
-                                    CornerRadius="7">
+                            <Border
+                                x:Name="BackgroundEllipse1"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                Width="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                Height="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource ToggleButtonTrueBackground}"
+                                CornerRadius="7" />
+                            <Border
+                                x:Name="BackgroundEllipse2"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                Width="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                Height="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                HorizontalAlignment="Right"
+                                Background="{StaticResource ToggleButtonFalseBackground}"
+                                CornerRadius="7" />
+                            <Border
+                                x:Name="BackgroundBorder"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                Background="{StaticResource ToggleButtonTrueBackground}" />
+                            <Border
+                                Grid.RowSpan="2"
+                                Grid.ColumnSpan="3"
+                                BorderThickness="2"
+                                CornerRadius="7">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="{DynamicResource Border.BorderBrush}" />
                                 </Border.BorderBrush>
@@ -528,28 +563,31 @@
                                 <ColumnDefinition Width="{Binding ElementName=MainRow, Path=ActualHeight}" />
                             </Grid.ColumnDefinitions>
                             <Border x:Name="AnimationSizeBorder" Grid.Column="0" />
-                            <ContentControl Grid.Column="0"
-                                            Focusable="False"
-                                            Style="{StaticResource OnContentControl}" />
+                            <ContentControl
+                                Grid.Column="0"
+                                Focusable="False"
+                                Style="{StaticResource OnContentControl}" />
                         </Grid>
                         <Grid HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{Binding ElementName=MainRow, Path=ActualHeight}" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <ContentControl Grid.Column="1"
-                                            Focusable="False"
-                                            Style="{StaticResource OffContentControl}" />
+                            <ContentControl
+                                Grid.Column="1"
+                                Focusable="False"
+                                Style="{StaticResource OffContentControl}" />
                         </Grid>
                         <Grid Background="Transparent">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Width="{Binding ElementName=AnimationSizeBorder, Path=ActualWidth}" />
-                                <Border x:Name="ForegroundEllipse"
-                                        Width="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                        Height="{Binding ElementName=MainRow, Path=ActualHeight}"
-                                        HorizontalAlignment="Right"
-                                        Background="{StaticResource ToggleButtonTrueForeground}"
-                                        CornerRadius="7" />
+                                <Border
+                                    x:Name="ForegroundEllipse"
+                                    Width="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                    Height="{Binding ElementName=MainRow, Path=ActualHeight}"
+                                    HorizontalAlignment="Right"
+                                    Background="{StaticResource ToggleButtonTrueForeground}"
+                                    CornerRadius="7" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -579,19 +617,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="10,5,5,5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Images/Icons/Back.png" />
-                            <ContentPresenter Margin="10,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="10,5,5,5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Images/Icons/Back.png" />
+                            <ContentPresenter
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -606,11 +647,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
-                                          Direction="-90"
-                                          Opacity="0.8"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="-90"
+                            Opacity="0.8"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -630,18 +672,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="Gray"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Gray"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/GN.Base;component/Images/Error.png" />
-                            <ContentPresenter Margin="5,0,0,0"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/GN.Base;component/Images/Error.png" />
+                            <ContentPresenter
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -657,11 +702,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
-                                          Direction="-90"
-                                          Opacity="0.8"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="-90"
+                            Opacity="0.8"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -681,19 +727,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="10,5,5,5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Images/Icons/Accept.png" />
-                            <ContentPresenter Margin="5,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="10,5,5,5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Images/Icons/Accept.png" />
+                            <ContentPresenter
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -708,11 +757,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
-                                          Direction="-90"
-                                          Opacity="0.8"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="-90"
+                            Opacity="0.8"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -732,19 +782,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="5">
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ButtonImage"
-                                   Margin="10,5,5,5"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Source="/Images/Icons/Save.png" />
-                            <ContentPresenter Margin="0,0,0,0"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center" />
+                            <Image
+                                x:Name="ButtonImage"
+                                Margin="10,5,5,5"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="/Images/Icons/Save.png" />
+                            <ContentPresenter
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -759,11 +812,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
-                                          Direction="-90"
-                                          Opacity="0.8"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="-90"
+                            Opacity="0.8"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -784,15 +838,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Margin="0,0,0,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="DarkGray"
-                            BorderThickness="0"
-                            CornerRadius="25">
-                        <ContentPresenter Grid.Column="0"
-                                          Margin="{TemplateBinding Padding}"
-                                          Content="{TemplateBinding Content}"
-                                          RenderOptions.BitmapScalingMode="HighQuality" />
+                    <Border
+                        Margin="0,0,0,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkGray"
+                        BorderThickness="0"
+                        CornerRadius="25">
+                        <ContentPresenter
+                            Grid.Column="0"
+                            Margin="{TemplateBinding Padding}"
+                            Content="{TemplateBinding Content}"
+                            RenderOptions.BitmapScalingMode="HighQuality" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -806,11 +862,12 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Button.Effect">
                     <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
-                                          Direction="-90"
-                                          Opacity="0.8"
-                                          ShadowDepth="1"
-                                          Color="Black" />
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="-90"
+                            Opacity="0.8"
+                            ShadowDepth="1"
+                            Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

@@ -69,6 +69,12 @@ namespace ProjectsNow.Data.JobOrders
         public decimal Cancellation3 { get; set; }
         public decimal Cancellation4 { get; set; }
 
+        public decimal SiteCancellation1 { get; set; }
+        public decimal SiteCancellation2 { get; set; }
+        public decimal SiteCancellation3 { get; set; }
+        public decimal SiteCancellation4 { get; set; }
+        public decimal SiteCancellation5 { get; set; }
+
         public decimal QuotationCost { get; set; }
         public decimal VAT { get; set; }
         public decimal Discount { get; set; }
