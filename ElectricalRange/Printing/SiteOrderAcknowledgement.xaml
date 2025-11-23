@@ -80,7 +80,7 @@
         </StackPanel>
 
         <StackPanel
-            Margin="2cm,7.5cm,2cm,0"
+            Margin="2cm,7.5cm,0cm,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Orientation="Vertical">
@@ -283,7 +283,7 @@
                     HorizontalAlignment="Left"
                     FontSize="16"
                     Text="7-Cancellation Policy: " />
-                <StackPanel Margin="33,0,0,0" Orientation="Vertical">
+                <StackPanel Margin="10,0,0,0" Orientation="Vertical">
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontSize="16"
