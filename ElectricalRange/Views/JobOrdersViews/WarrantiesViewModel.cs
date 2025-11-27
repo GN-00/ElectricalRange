@@ -1,29 +1,19 @@
-﻿using ClosedXML.Excel;
-using FastMember;
+﻿using Dapper;
+
+using Microsoft.Data.SqlClient;
+
 using ProjectsNow.Attributes;
 using ProjectsNow.Commands;
 using ProjectsNow.Data;
 using ProjectsNow.Data.JobOrders;
 using ProjectsNow.Data.Users;
 using ProjectsNow.Services;
-using ProjectsNow.Views.FinanceView;
-
-using System.Collections.Generic;
 
 using System.Collections.ObjectModel;
-
 using System.Collections.Specialized;
-
 using System.ComponentModel;
-
-using Microsoft.Data.SqlClient;
-
 using System.Reflection;
-
 using System.Windows.Data;
-
-using System;
-using Dapper;
 
 namespace ProjectsNow.Views.JobOrdersViews
 {
