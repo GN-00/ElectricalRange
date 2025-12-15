@@ -400,6 +400,7 @@ namespace ProjectsNow.Views.Production
                     if (missingList.Count == 0)
                     {
                         _ = MessageView.Show("Items", "There is no items!!", MessageViewButton.OK, MessageViewImage.Warning);
+                        Navigation.CloseLoading();
                         return;
                     }
 
