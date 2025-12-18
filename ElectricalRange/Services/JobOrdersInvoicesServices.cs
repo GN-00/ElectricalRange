@@ -225,7 +225,8 @@ namespace ProjectsNow.Services
 
             if (invoice.IsPercentageInvoice)
             {
-                PercentageInvoice(invoice, panels, result, checkPoint);
+                //PercentageInvoice(invoice, panels, result, checkPoint);
+                //Services.JobOrdersInvoicesService.PercentageInvoice(invoice, panels, result, checkPoint);
                 return;
             }
 
@@ -839,6 +840,8 @@ namespace ProjectsNow.Services
                 _ = MessageWindow.Show("Items", "There is no panels!!", MessageWindowButton.OK, MessageWindowImage.Warning);
             }
         }
+
+
         public static void PrintInvoiceJO7059_7_22(string invoiceNumber, IView checkPoint = null)
         {
             MessageBoxResult result = MessageWindow.Show("Printing",

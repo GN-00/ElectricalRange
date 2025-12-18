@@ -42,7 +42,7 @@ namespace ProjectsNow.Printing.Finance
                 DetailsArea.Visibility = Visibility.Visible;
 
 
-            for (int i = PanelsData.Count + 1; i <= 16; i++)
+            for (int i = PanelsData.Count + 1; i <= 19; i++)
             {
                 InvoiceTable.RowDefinitions[i].Height = new GridLength(0);
             }
@@ -68,9 +68,9 @@ namespace ProjectsNow.Printing.Finance
                 var total = Math.Truncate(GrossPrice * 100) / 100d;
                 var vat = Math.Truncate(VATValue * 100) / 100d;
 
-                InvoiceTable.RowDefinitions[17].Height = new GridLength(20);
-                InvoiceTable.RowDefinitions[18].Height = new GridLength(20);
-                InvoiceTable.RowDefinitions[19].Height = new GridLength(20);
+                InvoiceTable.RowDefinitions[20].Height = new GridLength(20);
+                InvoiceTable.RowDefinitions[21].Height = new GridLength(20);
+                InvoiceTable.RowDefinitions[22].Height = new GridLength(20);
                 for (int i = 1; i <= 6; i++)
                 {
                     ((Grid)FindName($"Total{i}")).Visibility = Visibility.Visible;
