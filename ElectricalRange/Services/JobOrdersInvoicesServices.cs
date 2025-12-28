@@ -225,8 +225,7 @@ namespace ProjectsNow.Services
 
             if (invoice.IsPercentageInvoice)
             {
-                //PercentageInvoice(invoice, panels, result, checkPoint);
-                //Services.JobOrdersInvoicesService.PercentageInvoice(invoice, panels, result, checkPoint);
+                PercentageInvoice(invoice, panels, result, checkPoint);
                 return;
             }
 

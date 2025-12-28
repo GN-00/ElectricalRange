@@ -12,7 +12,7 @@
 
 	<PropertyGroup>
 		<StartupObject>ProjectsNow.Program</StartupObject>
-		<AssemblyVersion>1.2.6.0</AssemblyVersion>
+		<AssemblyVersion>1.2.7.0</AssemblyVersion>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 
@@ -23,9 +23,16 @@
 	  <None Remove="Images\GroupIcons\Motor.png" />
 	  <None Remove="Images\GroupIcons\SetlakCubical.png" />
 	  <None Remove="Images\Icons\DigitalLibrary.png" />
+	  <None Remove="Images\Icons\ImportItems.png" />
 	  <None Remove="Images\Icons\Maximize1.png" />
 	  <None Remove="Images\Vectors\Closing.png" />
 	  <None Remove="Images\Vectors\meta.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Images\Icons\ImportItems.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>

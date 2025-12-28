@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews.PurchaseOrderView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Style="{StaticResource ViewStyle}"
-             mc:Ignorable="d">
+﻿<UserControl
+    x:Class="ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews.PurchaseOrderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource ViewStyle}"
+    mc:Ignorable="d">
     <UserControl.Resources>
 
         <ContextMenu x:Key="GridContextMenu">
@@ -27,9 +28,10 @@
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/AddItem.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditItemCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditItemCommand}"
+                CommandParameter="{Binding}"
+                Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Text="Edit Item" />
                 </MenuItem.Header>
@@ -37,9 +39,10 @@
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/Icons/Edit.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteItemCommand}"
-                      CommandParameter="{Binding}"
-                      Style="{StaticResource MenuItemStyle}">
+            <MenuItem
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteItemCommand}"
+                CommandParameter="{Binding}"
+                Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Header>
                     <TextBlock Foreground="Red" Text="Delete Item" />
                 </MenuItem.Header>
@@ -56,25 +59,28 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="InputStyle"
-               BasedOn="{StaticResource TextBoxStyle}"
-               TargetType="{x:Type TextBox}">
+        <Style
+            x:Key="InputStyle"
+            BasedOn="{StaticResource TextBoxStyle}"
+            TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="350" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="InputStyleDatePicker"
-               BasedOn="{StaticResource DatePickerStyle}"
-               TargetType="{x:Type DatePicker}">
+        <Style
+            x:Key="InputStyleDatePicker"
+            BasedOn="{StaticResource DatePickerStyle}"
+            TargetType="{x:Type DatePicker}">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="InputComboBoxStyle"
-               BasedOn="{StaticResource ComboBoxStyle}"
-               TargetType="{x:Type ComboBox}">
+        <Style
+            x:Key="InputComboBoxStyle"
+            BasedOn="{StaticResource ComboBoxStyle}"
+            TargetType="{x:Type ComboBox}">
             <Setter Property="Width" Value="300" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -87,22 +93,25 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Height="150"
-              VerticalAlignment="Center"
-              Background="{StaticResource LinearGradientGray}">
+        <Grid
+            Height="150"
+            VerticalAlignment="Center"
+            Background="{StaticResource LinearGradientGray}">
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="10,7.5,0,0"
-                           Style="{StaticResource TitleStyle}"
-                           Text="Purchase Order " />
+                <TextBlock
+                    Margin="10,7.5,0,0"
+                    Style="{StaticResource TitleStyle}"
+                    Text="Purchase Order " />
             </StackPanel>
 
             <Grid.Effect>
-                <DropShadowEffect BlurRadius="5"
-                                  Direction="-90"
-                                  Opacity="0.5"
-                                  RenderingBias="Quality"
-                                  ShadowDepth="2" />
+                <DropShadowEffect
+                    BlurRadius="5"
+                    Direction="-90"
+                    Opacity="0.5"
+                    RenderingBias="Quality"
+                    ShadowDepth="2" />
             </Grid.Effect>
         </Grid>
 
@@ -111,66 +120,83 @@
                 <Style BasedOn="{StaticResource TextItemStyle}" TargetType="TabItem" />
             </TabControl.Resources>
 
-            <TabItem Width="20"
-                     Header="TabItem"
-                     Visibility="Hidden" />
+            <TabItem
+                Width="20"
+                Header="TabItem"
+                Visibility="Hidden" />
 
             <TabItem Header="Tool" IsSelected="True">
-                <StackPanel Margin="20,0,0,0"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
+                <StackPanel
+                    Margin="20,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding CreateCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Create">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding CreateCommand}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Create">
                         <ImageSource>/Images/Icons/Running.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding SaveCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Save">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding SaveCommand}"
+                        CommandParameter="{Binding SelectedItem}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Save">
                         <ImageSource>/Images/Icons/Save.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding AddItemCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Add Item">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding AddItemCommand}"
+                        CommandParameter="{Binding SelectedItem}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Add Item">
                         <ImageSource>/Images/Icons/AddItem.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding EditItemCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Edit Item">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding EditItemCommand}"
+                        CommandParameter="{Binding SelectedItem}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Edit Item">
                         <ImageSource>/Images/Icons/Edit.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding DeleteItemCommand}"
-                            CommandParameter="{Binding SelectedItem}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Delete Item">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding DeleteItemCommand}"
+                        CommandParameter="{Binding SelectedItem}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Delete Item">
                         <ImageSource>/Images/Icons/DeleteItem.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding StatusCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Status">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding StatusCommand}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Status">
                         <ImageSource>/Images/Icons/MoneyReports.png</ImageSource>
                     </Button>
 
-                    <Button Padding="0,5,0,-5"
-                            Command="{Binding PrintCommand}"
-                            Style="{StaticResource ManagerSubTapsButtons}"
-                            Tag="Print">
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding PrintCommand}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Print">
                         <ImageSource>/Images/Icons/Printer.png</ImageSource>
+                    </Button>
+
+                    <Button
+                        Padding="0,5,0,-5"
+                        Command="{Binding ImportCommand}"
+                        Style="{StaticResource ManagerSubTapsButtons}"
+                        Tag="Import">
+                        <ImageSource>/Images/Icons/download1.png</ImageSource>
                     </Button>
 
                 </StackPanel>
@@ -186,19 +212,21 @@
 
             <Grid Margin="10" Background="White">
                 <Grid.Effect>
-                    <DropShadowEffect BlurRadius="5"
-                                      Direction="-90"
-                                      Opacity="0.5"
-                                      RenderingBias="Quality"
-                                      ShadowDepth="2" />
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Direction="-90"
+                        Opacity="0.5"
+                        RenderingBias="Quality"
+                        ShadowDepth="2" />
                 </Grid.Effect>
 
-                <TextBlock Margin="0,15"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           FontSize="18"
-                           Style="{StaticResource LabelStyle}"
-                           Text="{Binding NewData.Estimator}" />
+                <TextBlock
+                    Margin="0,15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    Style="{StaticResource LabelStyle}"
+                    Text="{Binding NewData.Estimator}" />
 
                 <Grid Margin="10,10,10,10" TextBlock.FontSize="14">
                     <Grid.ColumnDefinitions>
@@ -219,24 +247,27 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Code" />
-                    <TextBox Grid.Row="0"
-                             Grid.Column="1"
-                             Width="200"
-                             IsReadOnly="True"
-                             Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.Code, Mode=OneWay}" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Code" />
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="200"
+                        IsReadOnly="True"
+                        Style="{StaticResource InputStyle}"
+                        Text="{Binding NewData.Code, Mode=OneWay}" />
 
-                    <TextBlock Grid.Column="1"
-                               Width="auto"
-                               Margin="220,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               FontWeight="Bold"
-                               Text="{Binding NewData.Status}">
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="auto"
+                        Margin="220,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="{Binding NewData.Status}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -261,130 +292,149 @@
                         </TextBlock.Style>
                     </TextBlock>
 
-                    <TextBlock Grid.Row="1"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Supplier" />
-                    <ComboBox Grid.Row="1"
-                              Grid.Column="1"
-                              DisplayMemberPath="Name"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding SuppliersData}"
-                              SelectedItem="{Binding SelectedSupplier, Mode=OneWayToSource}"
-                              SelectedValue="{Binding NewData.SupplierID}"
-                              SelectedValuePath="ID"
-                              Style="{StaticResource InputComboBoxStyle}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Supplier" />
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding SuppliersData}"
+                        SelectedItem="{Binding SelectedSupplier, Mode=OneWayToSource}"
+                        SelectedValue="{Binding NewData.SupplierID}"
+                        SelectedValuePath="ID"
+                        Style="{StaticResource InputComboBoxStyle}" />
 
-                    <TextBlock Grid.Row="2"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Contact" />
-                    <ComboBox Grid.Row="2"
-                              Grid.Column="1"
-                              DisplayMemberPath="Name"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding ContactsData}"
-                              SelectedItem="{Binding SelectedContact, Mode=OneWayToSource}"
-                              SelectedValue="{Binding NewData.SupplierAttentionID}"
-                              SelectedValuePath="ID"
-                              Style="{StaticResource InputComboBoxStyle}" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Contact" />
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding ContactsData}"
+                        SelectedItem="{Binding SelectedContact, Mode=OneWayToSource}"
+                        SelectedValue="{Binding NewData.SupplierAttentionID}"
+                        SelectedValuePath="ID"
+                        Style="{StaticResource InputComboBoxStyle}" />
 
-                    <TextBlock Grid.Row="3"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Quotation" />
-                    <TextBox Grid.Row="3"
-                             Grid.Column="1"
-                             Width="175"
-                             IsEnabled="{Binding IsEditing}"
-                             Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.QuotationCode, Mode=TwoWay}" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Quotation" />
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Width="175"
+                        IsEnabled="{Binding IsEditing}"
+                        Style="{StaticResource InputStyle}"
+                        Text="{Binding NewData.QuotationCode, Mode=TwoWay}" />
 
 
-                    <TextBlock Grid.Row="4"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Date" />
-                    <DatePicker Grid.Row="4"
-                                Grid.Column="1"
-                                Width="175"
-                                DisplayDate="{Binding NewData.Date, StringFormat=dd/MM/yyyy}"
-                                IsEnabled="{Binding IsEditing}"
-                                SelectedDate="{Binding NewData.Date, StringFormat=dd/MM/yyyy}"
-                                Style="{StaticResource InputStyleDatePicker}" />
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Date" />
+                    <DatePicker
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Width="175"
+                        DisplayDate="{Binding NewData.Date, StringFormat=dd/MM/yyyy}"
+                        IsEnabled="{Binding IsEditing}"
+                        SelectedDate="{Binding NewData.Date, StringFormat=dd/MM/yyyy}"
+                        Style="{StaticResource InputStyleDatePicker}" />
 
-                    <TextBlock Grid.Row="5"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Payment" />
-                    <ComboBox Grid.Row="5"
-                              Grid.Column="1"
-                              Width="175"
-                              IsEditable="True"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding PaymentData}"
-                              SelectedValuePath="Text"
-                              Style="{StaticResource InputComboBoxStyle}"
-                              Text="{Binding NewData.Payment}" />
+                    <TextBlock
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Payment" />
+                    <ComboBox
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Width="175"
+                        IsEditable="True"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding PaymentData}"
+                        SelectedValuePath="Text"
+                        Style="{StaticResource InputComboBoxStyle}"
+                        Text="{Binding NewData.Payment}" />
 
-                    <TextBlock Grid.Row="6"
-                               Grid.Column="0"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Delivery To" />
+                    <TextBlock
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Delivery To" />
 
-                    <TextBlock Grid.Row="7"
-                               Grid.Column="0"
-                               HorizontalAlignment="Right"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Place" />
-                    <ComboBox Grid.Row="7"
-                              Grid.Column="1"
-                              IsEditable="True"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding DeliveryPlacesData}"
-                              SelectedValuePath="Text"
-                              Style="{StaticResource InputComboBoxStyle}"
-                              Text="{Binding NewData.DeliverToPlace}" />
+                    <TextBlock
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Place" />
+                    <ComboBox
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        IsEditable="True"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding DeliveryPlacesData}"
+                        SelectedValuePath="Text"
+                        Style="{StaticResource InputComboBoxStyle}"
+                        Text="{Binding NewData.DeliverToPlace}" />
 
-                    <TextBlock Grid.Row="8"
-                               Grid.Column="0"
-                               HorizontalAlignment="Right"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Address" />
-                    <ComboBox Grid.Row="8"
-                              Grid.Column="1"
-                              IsEditable="True"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding DeliveryAddressesData}"
-                              SelectedValuePath="Text"
-                              Style="{StaticResource InputComboBoxStyle}"
-                              Text="{Binding NewData.DeliveryAddress}" />
+                    <TextBlock
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Address" />
+                    <ComboBox
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        IsEditable="True"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding DeliveryAddressesData}"
+                        SelectedValuePath="Text"
+                        Style="{StaticResource InputComboBoxStyle}"
+                        Text="{Binding NewData.DeliveryAddress}" />
 
-                    <TextBlock Grid.Row="9"
-                               Grid.Column="0"
-                               HorizontalAlignment="Right"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Person" />
-                    <ComboBox Grid.Row="9"
-                              Grid.Column="1"
-                              IsEditable="True"
-                              IsEnabled="{Binding IsEditing}"
-                              ItemsSource="{Binding DeliveryPersonsData}"
-                              SelectedValuePath="Text"
-                              Style="{StaticResource InputComboBoxStyle}"
-                              Text="{Binding NewData.DeliverToPerson}" />
+                    <TextBlock
+                        Grid.Row="9"
+                        Grid.Column="0"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Person" />
+                    <ComboBox
+                        Grid.Row="9"
+                        Grid.Column="1"
+                        IsEditable="True"
+                        IsEnabled="{Binding IsEditing}"
+                        ItemsSource="{Binding DeliveryPersonsData}"
+                        SelectedValuePath="Text"
+                        Style="{StaticResource InputComboBoxStyle}"
+                        Text="{Binding NewData.DeliverToPerson}" />
 
-                    <TextBlock Grid.Row="10"
-                               Grid.Column="0"
-                               HorizontalAlignment="Right"
-                               Style="{StaticResource LabelStyle}"
-                               Text="Note" />
-                    <TextBox Grid.Row="10"
-                             Grid.Column="1"
-                             Width="300"
-                             IsEnabled="{Binding IsEditing}"
-                             Style="{StaticResource InputStyle}"
-                             Text="{Binding NewData.Note, Mode=TwoWay}" />
+                    <TextBlock
+                        Grid.Row="10"
+                        Grid.Column="0"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Note" />
+                    <TextBox
+                        Grid.Row="10"
+                        Grid.Column="1"
+                        Width="300"
+                        IsEnabled="{Binding IsEditing}"
+                        Style="{StaticResource InputStyle}"
+                        Text="{Binding NewData.Note, Mode=TwoWay}" />
 
 
                     <!--<TextBlock Text="Price Details"
@@ -447,11 +497,12 @@
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.Effect>
-                    <DropShadowEffect BlurRadius="5"
-                                      Direction="-90"
-                                      Opacity="0.5"
-                                      RenderingBias="Quality"
-                                      ShadowDepth="2" />
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Direction="-90"
+                        Opacity="0.5"
+                        RenderingBias="Quality"
+                        ShadowDepth="2" />
                 </Grid.Effect>
                 <Grid Grid.Row="1" Background="LightGray">
                     <Grid.ColumnDefinitions>
@@ -460,19 +511,22 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Margin="20,0"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
+                    <StackPanel
+                        Margin="20,0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IndicationStyle}" Text="Item: " />
-                        <TextBlock Foreground="Black"
-                                   Style="{StaticResource IndicationStyle}"
-                                   Text="{Binding Indicator}" />
+                        <TextBlock
+                            Foreground="Black"
+                            Style="{StaticResource IndicationStyle}"
+                            Text="{Binding Indicator}" />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1"
-                                Margin="20,0"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="20,0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
                         <TextBlock Text="Net Price: ">
                             <TextBlock.Resources>
                                 <Style BasedOn="{StaticResource IndicationStyle}" TargetType="TextBlock">
@@ -484,15 +538,17 @@
                                 </Style>
                             </TextBlock.Resources>
                         </TextBlock>
-                        <TextBlock Foreground="Black"
-                                   Style="{StaticResource IndicationStyle}"
-                                   Text="{Binding NewData.NetPrice, StringFormat=N2}" />
+                        <TextBlock
+                            Foreground="Black"
+                            Style="{StaticResource IndicationStyle}"
+                            Text="{Binding NewData.NetPrice, StringFormat=N2}" />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2"
-                                Margin="20,0"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
+                    <StackPanel
+                        Grid.Column="2"
+                        Margin="20,0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
 
                         <StackPanel.Resources>
                             <Style TargetType="StackPanel">
@@ -506,15 +562,17 @@
                         <TextBlock Style="{StaticResource IndicationStyle}" Text="VAT " />
                         <TextBlock Style="{StaticResource IndicationStyle}" Text="{Binding NewData.VAT}" />
                         <TextBlock Style="{StaticResource IndicationStyle}" Text="%: " />
-                        <TextBlock Foreground="Black"
-                                   Style="{StaticResource IndicationStyle}"
-                                   Text="{Binding NewData.VATValue, StringFormat=N2}" />
+                        <TextBlock
+                            Foreground="Black"
+                            Style="{StaticResource IndicationStyle}"
+                            Text="{Binding NewData.VATValue, StringFormat=N2}" />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="3"
-                                Margin="20,0"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
+                    <StackPanel
+                        Grid.Column="3"
+                        Margin="20,0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
                         <StackPanel.Resources>
                             <Style TargetType="StackPanel">
                                 <Style.Triggers>
@@ -525,18 +583,20 @@
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Style="{StaticResource IndicationStyle}" Text="Gross Price: " />
-                        <TextBlock Foreground="Black"
-                                   Style="{StaticResource IndicationStyle}"
-                                   Text="{Binding NewData.GrossPrice, StringFormat=N2}" />
+                        <TextBlock
+                            Foreground="Black"
+                            Style="{StaticResource IndicationStyle}"
+                            Text="{Binding NewData.GrossPrice, StringFormat=N2}" />
                     </StackPanel>
                 </Grid>
 
 
-                <DataGrid ContextMenu="{StaticResource GridContextMenu}"
-                          ItemsSource="{Binding ItemsCollection}"
-                          SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                          Style="{StaticResource ViewDataGridStyle}">
+                <DataGrid
+                    ContextMenu="{StaticResource GridContextMenu}"
+                    ItemsSource="{Binding ItemsCollection}"
+                    SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    Style="{StaticResource ViewDataGridStyle}">
                     <DataGrid.Resources>
                         <Style BasedOn="{StaticResource ViewRowsStyle}" TargetType="{x:Type DataGridRow}">
                             <Setter Property="ContextMenu" Value="{StaticResource RowsContextMenu}" />
@@ -544,30 +604,35 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Width="200"
-                                            Binding="{Binding Code}"
-                                            ElementStyle="{StaticResource LeftColumnView}"
-                                            Header="Code" />
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding Code}"
+                            ElementStyle="{StaticResource LeftColumnView}"
+                            Header="Code" />
 
-                        <DataGridTextColumn Width="302"
-                                            Binding="{Binding Description}"
-                                            ElementStyle="{StaticResource LeftColumnView}"
-                                            Header="Description" />
+                        <DataGridTextColumn
+                            Width="302"
+                            Binding="{Binding Description}"
+                            ElementStyle="{StaticResource LeftColumnView}"
+                            Header="Description" />
 
-                        <DataGridTextColumn Width="80"
-                                            Binding="{Binding Qty}"
-                                            ElementStyle="{StaticResource CenterColumnView}"
-                                            Header="Qty" />
+                        <DataGridTextColumn
+                            Width="80"
+                            Binding="{Binding Qty}"
+                            ElementStyle="{StaticResource CenterColumnView}"
+                            Header="Qty" />
 
-                        <DataGridTextColumn Width="130"
-                                            Binding="{Binding Cost, StringFormat=N2}"
-                                            ElementStyle="{StaticResource CenterColumnView}"
-                                            Header="Unit Net Price" />
+                        <DataGridTextColumn
+                            Width="130"
+                            Binding="{Binding Cost, StringFormat=N2}"
+                            ElementStyle="{StaticResource CenterColumnView}"
+                            Header="Unit Net Price" />
 
-                        <DataGridTextColumn Width="130"
-                                            Binding="{Binding TotalCost, StringFormat=N2}"
-                                            ElementStyle="{StaticResource CenterColumnView}"
-                                            Header="Net Price" />
+                        <DataGridTextColumn
+                            Width="130"
+                            Binding="{Binding TotalCost, StringFormat=N2}"
+                            ElementStyle="{StaticResource CenterColumnView}"
+                            Header="Net Price" />
 
                     </DataGrid.Columns>
                 </DataGrid>

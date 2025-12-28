@@ -26,8 +26,8 @@ namespace ProjectsNow.Data
             {
                 if (AppData.ComputerName == "DESKTOP-RKKR1NS")
                 {
-                    return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
-                    //return @"Data Source=DESKTOP-RKKR1NS\TRYDB;Initial Catalog=ERIDB;Integrated Security=False;User ID=sa;Password=2468;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+                    //return @"Server=tcp:erserver.database.windows.net,1433;Initial Catalog=ProjectsNow;Persist Security Info=False;User ID=erpcaps2022;Password=Wing00Gundam;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
+                    return @"Data Source=DESKTOP-RKKR1NS\TRYDB;Initial Catalog=ERIDB;Integrated Security=False;User ID=sa;Password=2468;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
                     //return @"Server=mssql-203172-0.cloudclusters.net,10002;Initial Catalog=PN;Persist Security Info=False;User ID=Hassan;Password=H-h-2468-2468;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=0";
                 }
                 //else if (AppData.ComputerName == "GN-00")

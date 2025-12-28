@@ -15,6 +15,11 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using ProjectsNow.Windows.ReferencesWindows;
+using Microsoft.Win32;
+using System.Data;
+using System.Data.OleDb;
+using ProjectsNow.Windows.MessageWindows;
 
 namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
 {
@@ -52,6 +57,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
             EditItemCommand = new RelayCommand<CompanyPOTransaction>(EditItem, CanEditItem);
             DeleteItemCommand = new RelayCommand<CompanyPOTransaction>(DeleteItem, CanDeleteItem);
 
+            ImportCommand = new RelayCommand(Import, CanImport);
             SaveCommand = new RelayCommand(Save, CanAccessSave);
             CreateCommand = new RelayCommand(Create, CanAccessCreate);
             StatusCommand = new RelayCommand(Status, CanAccessStatus);
@@ -199,6 +205,7 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
         public RelayCommand AddItemCommand { get; }
         public RelayCommand<CompanyPOTransaction> EditItemCommand { get; }
         public RelayCommand<CompanyPOTransaction> DeleteItemCommand { get; }
+        public RelayCommand ImportCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CreateCommand { get; }
         public RelayCommand StatusCommand { get; }
@@ -448,6 +455,76 @@ namespace ProjectsNow.Views.JobOrdersViews.ItemsPurchaseOrdersViews
             if (NewData.ID == 0)
                 return false;
 
+            return CanAccessEdit();
+        }
+
+        private void Import()
+        {
+            PurchaseOrderImportItemsWindow purchaseOrderImportItemsWindow = new();
+            purchaseOrderImportItemsWindow.ShowDialog();
+
+            Navigation.OpenLoading(Visibility.Visible, "Working....");
+
+            OpenFileDialog path = new() { Filter = "Excel Files|*.xls;*.xlsx;*.xlsm" };
+            _ = path.ShowDialog();
+
+            string filePath = $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={path.FileName};" +
+                              $@"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+            int errorIndex = 0;
+            try
+            {
+                DataTable excelData = new();
+                using (OleDbConnection connection = new(connectionString: filePath))
+                {
+                    connection.Open();
+                    OleDbDataAdapter oleAdpt = new("select Category, Code, Description, Unit, Qty, Cost from [Sheet1$]", connection); //here we read data from sheet1  
+                    _ = oleAdpt.Fill(excelData);
+                }
+
+                if (excelData.Rows.Count == 0)
+                {
+                    _ = MessageWindow.Show("Data Error", "No data!", MessageWindowButton.OK, MessageWindowImage.Warning);
+                    return;
+                }
+
+                List<CompanyPOTransaction> excelList = new();
+                for (int i = 0; i < excelData.Rows.Count; i++)
+                {
+                    CompanyPOTransaction excelRow = new();
+                    excelRow.PurchaseOrderID = NewData.ID;
+                    excelRow.Category = excelData.Rows[i]["Category"].ToString();
+                    excelRow.Code = excelData.Rows[i]["Code"].ToString();
+                    excelRow.Description = excelData.Rows[i]["Description"].ToString();
+                    excelRow.Unit = excelData.Rows[i]["Unit"].ToString();
+                    excelRow.Qty = Convert.ToDecimal(excelData.Rows[i]["Qty"]);
+                    excelRow.Cost = Convert.ToDecimal(excelData.Rows[i]["Cost"]);
+                    excelList.Add(excelRow);
+
+                    errorIndex++;
+                }
+
+                foreach (var row in excelList)
+                {
+                    Items.Add(row);
+                }
+
+                using (SqlConnection connection = new(Database.ConnectionString))
+                {
+                    _ = connection.Insert(excelList);
+                }
+
+                _ = MessageWindow.Show("Data", $"({excelList.Count}) Items added!", MessageWindowButton.OK, MessageWindowImage.Information);
+            }
+            catch (Exception exception)
+            {
+                _ = MessageWindow.Show($"Error-{errorIndex}", exception.Message, MessageWindowButton.OK, MessageWindowImage.Warning);
+            }
+
+            Navigation.CloseLoading();
+        }
+        private bool CanImport()
+        {
             return CanAccessEdit();
         }
 
